@@ -57,6 +57,9 @@ cor(manifest, latent)
 
 beta<-.5#effect size
 var <- c(.1,.5,2.5)#variation
+#From greg's study (https://www.pnas.org/doi/10.1073/pnas.1510459112), his mean to std dev are
+#mean change =???2.33, SE = 0.55, SD=2.4 (so effect size = to var)
+
 png("analyses/figs/simdat.png", width=1600,height=1600, res=200)
 
 par(mfrow=c(length(var),4))
