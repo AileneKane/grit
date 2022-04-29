@@ -16,6 +16,8 @@ library(ggplot2)
 library(gridExtra)
 library(scales)
 library(ggthemes)
+library(brms)
+library(rstan)
 # set working directory
 setwd("~/GitHub/grit/analyses")
 
@@ -68,14 +70,25 @@ logdat.feb<-logdat.feb[-which(is.na(logdat.feb$Trees.)),]
 logdat.feb$loggersn<-as.factor(logdat.feb$loggersn)
 logdat.feb$Trees.<-as.factor(logdat.feb$Trees.)
 boxplot(logdat.feb$tmin~logdat.feb$Trees.)
+logdat$date<-as.factor(logdat$date)
 
-tminm<-lmer(tmin~Trees.+(1|loggersn), data=logdat.feb)
-
-tmaxm<-lm(tmax~Trees., data=logdat.feb)
+tminm<-lmer(tmin~Trees.+(1|date)+(1|loggersn), data=logdat)
+tmaxm<-lmer(tmax~Trees.+(1|date)+(1|loggersn), data=logdat)
+logdat$trange<-logdat$tmax-logdat$tmin
+trange<-lmer(trange~Trees.+(1|date)+(1|loggersn), data=logdat)
+summary(trange)
 summary(tmaxm)
+summary(tminm)
+logdat$doy<-yday(logdat$Date)
+logdat$trees<-0
+logdat$trees[which(logdat$Trees.=="Y")]<-1
+logdat2022<-subset(logdat,select=c(loggersn,doy,yr,tmin,tmax,trange,trees),yr==2022)
 
+tminmod <- brm(tmin ~ trees +s(doy) + (1|loggersn),
+         data=logdat2022, cores = 2,
+         iter = 4000, warmup = 1000, thin = 10)
 
-
+save(tmin, file="analyses/output/k.brms.Rda")
 
 # Time series of average daily temperature, with smoother curve
 logdat<-logdat[-which(is.na(logdat$Trees.)),]
@@ -115,4 +128,4 @@ tmax+ scale_color_manual(labels = c("No trees","Trees"),
   theme(axis.text=element_text(size=14),axis.title=element_text(size=16,face="bold"))
 dev.off()
 
-
+logdat[which(logdat$tmax==(max(logdat$tmax))),]
