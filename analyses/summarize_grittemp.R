@@ -18,6 +18,7 @@ library(scales)
 library(ggthemes)
 library(brms)
 library(rstan)
+
 # set working directory
 setwd("~/GitHub/grit/analyses")
 
@@ -103,12 +104,12 @@ ggplot(logdat,aes(x = date,y = tmin)) +
 tmin<- qplot(Date,tmin, data = logdat, colour = Trees.) +
   geom_smooth(method="gam")+
   geom_point(aes(color=Trees.)) +
-  labs(title = "Tmin", y= "Minimum Temoerature ( ºC )", x = "Date")
+  labs(title = "Tmin", y= "Minimum Temperature ( ºC )", x = "Date")
 
 tmax<- qplot(Date,tmax, data = logdat, colour = Trees.) +
   geom_smooth(method="gam")+
   geom_point(aes(color=Trees.)) +
-  labs(title = "Tmax", y= "Maximum Temoerature ( ºC )", x = "Date")
+  labs(title = "Tmax", y= "Maximum Temperature ( ºC )", x = "Date")
 
 png(file="figs/tmin.png",width = 1000, height =800)
 #pdf(file="figs/tmin.pdf",width = 10, height =8)
