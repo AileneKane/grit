@@ -18,7 +18,8 @@ library(scales)
 library(ggthemes)
 library(brms)
 library(rstan)
-
+library(dplyr)
+library(lme4)
 # set working directory
 setwd("~/GitHub/grit/analyses")
 
@@ -53,6 +54,24 @@ loggerdat$yr<-as.character(paste("20",substr(loggerdat$date,7,8),sep=""))
 loggerdat$day<-as.character(substr(loggerdat$date,4,5),sep="")
 loggerdat$Date<-as.Date(paste(loggerdat$yr,loggerdat$mon,loggerdat$day,sep="-"))
 colnames(loggerdat)[3]<-"tmax"
+
+#Now add in BT logger data
+btdat<-read.csv("../data/BT_temp_data/GRIT_loggers_AllBTdat_06_30_07_26_18_UTC_1.csv")
+btdat<-btdat[,1:18]
+btdat$date<-as.character(btdat$Date)
+btdat %>% separate(date, c("mon", "day","yr"),"/")
+btdat %>% separate(yr, c("yr", "time")," ")
+
+
+btdat$date<-substr(btdat$Date,1,9)
+btmins<-aggregate()
+colnames(dat)[2:3]<-c("date.time","temp_c")
+dat$date<-substr(dat$date.time,1,8)
+tmins<-aggregate(dat$temp_c,by=list(dat$date),min,na.rm=TRUE)
+colnames(tmins)<-c("date","tmin")
+tmaxs<-aggregate(dat$temp_c,by=list(dat$date),max,na.rm=TRUE)
+colnames(tmaxs)<-c("date","tmax")
+tmntmx<-cbind(tmins,tmaxs$tmax)
 
 #get a sense of how much data for each logger
 #table(loggerdat$mon,loggerdat$loggersn)
@@ -89,7 +108,7 @@ tminmod <- brm(tmin ~ trees +s(doy) + (1|loggersn),
          data=logdat2022, cores = 2,
          iter = 4000, warmup = 1000, thin = 10)
 
-save(tmin, file="analyses/output/k.brms.Rda")
+save(tminmod, file="analyses/output/k.brms.Rda")
 
 # Time series of average daily temperature, with smoother curve
 logdat<-logdat[-which(is.na(logdat$Trees.)),]
@@ -130,3 +149,5 @@ tmax+ scale_color_manual(labels = c("No trees","Trees"),
 dev.off()
 
 logdat[which(logdat$tmax==(max(logdat$tmax))),]
+
+table(logdat$Trees.,logdat$mon)
