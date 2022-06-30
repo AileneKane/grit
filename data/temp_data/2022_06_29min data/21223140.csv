@@ -1,0 +1,10 @@
+﻿"Plot Title: 21223140"
+"#","Date Time, GMT-07:00","Temp, °C (LGR S/N: 21223140, SEN S/N: 21223140)","Coupler Detached (LGR S/N: 21223140)","Coupler Attached (LGR S/N: 21223140)","Host Connected (LGR S/N: 21223140)","Stopped (LGR S/N: 21223140)","End Of File (LGR S/N: 21223140)"
+1,06/29/22 10:31:02 AM,15.951,,,,,
+2,06/29/22 10:31:18 AM,,Logged,,,,
+3,06/29/22 10:46:02 AM,15.473,,,,,
+4,06/29/22 11:01:02 AM,15.378,,,,,
+5,06/29/22 11:16:02 AM,15.569,,,,,
+6,06/29/22 11:22:41 AM,,,Logged,,,
+7,06/29/22 11:22:47 AM,,,,Logged,,
+8,06/29/22 11:23:02 AM,,,,,Logged,Logged
