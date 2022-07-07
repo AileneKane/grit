@@ -58,13 +58,15 @@ colnames(loggerdat)[3]<-"tmax"
 #Now add in BT logger data
 btdat<-read.csv("../data/BT_temp_data/GRIT_loggers_AllBTdat_06_30_07_26_18_UTC_1.csv")
 btdat<-btdat[,1:18]
+colnames(btdat)[3:18]<-substr(colnames(btdat)[3:18],50,nchar(colnames(btdat)[3:18]))
 btdat$date<-as.character(btdat$Date)
-btdat %>% separate(date, c("mon", "day","yr"),"/")
-btdat %>% separate(yr, c("yr", "time")," ")
+btdat<-btdat %>% separate(date, c("mon", "day","yr"),"/")
+btdat<-btdat %>% separate(yr, c("yr", "time")," ")
+btdat$Date2<-as.factor(as.Date(paste(btdat$yr,btdat$mon,btdat$day,sep="-")))
 
 
-btdat$date<-substr(btdat$Date,1,9)
-btmins<-aggregate()
+btmins<-aggregate(cbind("21302946","21302947","21302950","21302953","21302957",
+                        "21302967" ,"21302974","21302976","21302977","21302980", "21302959","21302964")~Date2,data=btdat,FUN=min)
 colnames(dat)[2:3]<-c("date.time","temp_c")
 dat$date<-substr(dat$date.time,1,8)
 tmins<-aggregate(dat$temp_c,by=list(dat$date),min,na.rm=TRUE)
