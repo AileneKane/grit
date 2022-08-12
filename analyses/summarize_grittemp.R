@@ -27,7 +27,7 @@ tempdatdir<-"../data/temp_data/"
 
 #Read in data on hobo locatoins
 locs<-read.csv("../data/HoboLocations_PoleLocations.csv", header=TRUE)
-locs<-locs[,1:16]
+locs<-locs[,1:18]
 
 #Get Daily min and max temperatures for each logger
 tempdatfolders<-list.files(tempdatdir)
@@ -120,17 +120,17 @@ ggplot(logdat,aes(x = date,y = tmin)) +
   geom_smooth(colour = "red",size = 5) +
   scale_y_continuous(limits = range(logdat$tmin), breaks = seq(5,30,5)) +
   ggtitle ("Daily minimum temperature") +
-  xlab("Date") +  ylab ("Minimum Temperature ( ºC )")
+  xlab("Date") +  ylab ("Minimum Temperature ( ?C )")
 
 tmin<- qplot(Date,tmin, data = logdat, colour = Trees.) +
   geom_smooth(method="gam")+
   geom_point(aes(color=Trees.)) +
-  labs(title = "Tmin", y= "Minimum Temperature ( ºC )", x = "Date")
+  labs(title = "Tmin", y= "Minimum Temperature ( ?C )", x = "Date")
 
 tmax<- qplot(Date,tmax, data = logdat, colour = Trees.) +
   geom_smooth(method="gam")+
   geom_point(aes(color=Trees.)) +
-  labs(title = "Tmax", y= "Maximum Temperature ( ºC )", x = "Date")
+  labs(title = "Tmax", y= "Maximum Temperature ( ?C )", x = "Date")
 
 png(file="figs/tmin.png",width = 1000, height =800)
 #pdf(file="figs/tmin.pdf",width = 10, height =8)
