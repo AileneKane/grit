@@ -17,18 +17,17 @@ setwd("~/GitHub/grit/analyses")
 
 #Read in data on all temp logger locations
 locs<-read.csv("../data/HoboLocations_PoleLocations.csv", header=TRUE)
-locs<-locs[,1:18]
+source("sourced_files/clean_locs.R")
 
 #read in data inputs from people (w/ surface temp loggers) from temperature blitz day (August 8, 2022 from 8am-4pm)
 surflogs<-read.csv("../data/TempBlitzFormData.csv", header=TRUE)
 
 source("sourced_files/clean_tempblitzformdata.R")
 
-surfloglocs<-unique(surflogs$Utility.Pole..)
 
 surfsns<-unique(surflogs$Utility.Pole.Temperature.Logger..)
 #merge the location data with the surf logger locations, using the logger sn
-allloglocdat<-left_join(surflogs,locs)
+tblocdat<-left_join(surflogs,locs, copy=TRUE, keep = FALSE)
   
 #now pull the temp data from Jul at those locations
 tempdatdir<-"../data/temp_data/2022_08_10"
