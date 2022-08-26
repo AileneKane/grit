@@ -1,129 +1,127 @@
-Timestamp,Username,Your Temperature Logger #,Your Name,Start time (hh:mm AM/PM),Your Temperature Logger Location,Your temperature logger is located in:,Utility Pole #,Utility Pole Temperature Logger # ,End time (hh:mm AM/PM),Any other relevant notes?
-2022/06/28 7:11:01 PM MDT,ailene.ettinger@gmail.com,Test,Ailene,Test,Sidewalk (Paved Surface),Sun,7,Xxxxc,,
-2022/06/29 11:39:59 AM MDT,stephanie.passantino@gmail.com,21302968,Steph Schmid,10:20 AM,Woodchips,NA (if it is a cloudy day),TP32717,BT21302974 / 21223140,10:39AM,Utility pole logger started at 10:23AM for every minute 
-2022/06/29 12:09:50 PM MDT,ena113@uw.edu,21302968,Eileen Arata,10:54 AM,Grass,NA (if it is a cloudy day),TP15041,21223109,11:09 AM,Utility pole logger (installed) not BT
-2022/06/29 12:46:05 PM MDT,ena113@uw.edu,21302981,Eileen Arata,11:30 AM,Grass,NA (if it is a cloudy day),TP6262,"BT 21302967, 21223116",11:45 AM,
-2022/06/29 12:54:02 PM MDT,stephanie.passantino@gmail.com,21302968,Steph Schmid,11:40 AM,Sidewalk (Paved Surface),NA (if it is a cloudy day),S Tacoma Way & 47th St,21223106,11:55,"Utility pole number missing, some sun was out during 15 minute interval "
-2022/06/29 1:12:55 PM MDT,ena113@uw.edu,21302981,Eileen Arata,11:57 AM,Sidewalk (Paved Surface),Sun,TP13987,"BT 21302977, 21223102",12:12 PM,
-2022/06/29 1:23:21 PM MDT,stephanie.passantino@gmail.com,21302968,Steph Schmid ,12:08 PM,Sidewalk (Paved Surface),NA (if it is a cloudy day),TP13988,BT21302976 / 21223131,12:23 PM,Some sun (add 'partly cloudy' as option)
-2022/06/29 1:33:35 PM MDT,ena113@uw.edu,21302981,Eileen Arata,12:18 PM,Sidewalk (Paved Surface),Sun,TP15706,"BT 21302946, 21223101",12:33 PM,
-2022/06/29 2:59:08 PM MDT,stephanie.passantino@gmail.com,21302968,Steph Schmid ,1:43PM,Grass,NA (if it is a cloudy day),106074,BT21302957 / 2401795,1:59 PM,
-2022/06/29 3:02:00 PM MDT,ena113@uw.edu,21302981,Eileen Arata,1:46 PM,Sidewalk (Paved Surface),NA (if it is a cloudy day),TP6335,BT 21302953,2:01 PM,
-2022/06/29 3:12:04 PM MDT,ailene_kane@me.com,21302980,Ailene,1:48 PM,Sidewalk (Paved Surface),NA (if it is a cloudy day),Tp6336,Bt21302947,2:08,2 Screws  removed from shield
-2022/06/29 3:18:09 PM MDT,stephanie.passantino@gmail.com,21302968,Steph Schmid,2:05 PM,Grass,NA (if it is a cloudy day),TP6340,B721302950,2:17pm,Some sun 
-2022/06/30 11:14:42 AM MDT,ailene_kane@me.com,2130218,Ailene,10:03,Sidewalk (Paved Surface),Sun,Tp9879,BT21302964,10:14am,
-2022/06/30 1:15:46 PM MDT,ailene_kane@me.com,21302981,Ailene,12:13,Sidewalk (Paved Surface),Sun,A1353316,By21302960,12:16,Outside Pacific southern
-2022/06/30 1:20:04 PM MDT,ailene_kane@me.com,21302981,Ailene,12:18,Bare soil,Shade,No number,Bt21302962,12:21,Outside taco time
-2022/08/11 9:46:37 AM MDT,emily.heber@tnc.org,21302958,Emily Heber,8:40,Grass,Shade,TP6262,21302967,8;46,
-2022/08/11 9:56:14 AM MDT,rhebert@cityoftacoma.org,21302954,Ryan and Zoee ,8:51,Grass,Sun,TP6340,B721302950,8:56,"Main arterial,  trees on a slope across the street,  lots of pavement,  very few trees, small business and homes mixed."
-2022/08/11 9:56:21 AM MDT,emily.heber@tnc.org,21302958,Emily,8:50,Grass,Shade,TPU927,21223106,8:56,Edge of grass and sidewalk
-2022/08/11 9:58:20 AM MDT,michael.yadrick@gmail.com,MX2201 21302978,Michael Yadrick,852,Grass,Sun,TP23269,211223121,857,
-2022/08/11 10:00:53 AM MDT,lowell@tacomatreefoundation.org,21302973,Lowell Wyse ,8:55 AM,Sidewalk (Paved Surface),Sun,Tp20171,21223123,9:00 AM,Sprinklers running in planting strip 
-2022/08/11 10:03:09 AM MDT,rhebert@cityoftacoma.org,21302954,Zoee and ryan,8:58,Sidewalk (Paved Surface),Sun,Tp6336,Bt21302942,9:03 AM,Trees across the 5 lane street. Right behind the pole is a 3 story apartment building. Down the right of way are a few street trees
-2022/08/11 10:05:37 AM MDT,michael.yadrick@gmail.com,MX2201 21302978,Michael Yadrick,900,Grass,Shade,TP254408,21223112,905,
-2022/08/11 10:07:14 AM MDT,emily.heber@tnc.org,21302958,Emily,9:00,Grass,Sun,Tp21036,21223138,,
-2022/08/11 10:09:18 AM MDT,rhebert@cityoftacoma.org,21302954,Ryan and Zoee,9:04,Sidewalk (Paved Surface),Sun,TP6335,B121302953,9:09,"Sweetgum trees in planting strip, busy road nearby,  multistory apt behind,  utility lines above (trees will eventually be topped), mall entrance across the street "
-2022/08/11 10:10:12 AM MDT,ailene_kane@me.com,21302965,Ailene,9:07,Grass,Sun,Tp34216,21223115,9:13,
-2022/08/11 10:10:45 AM MDT,lowell@tacomatreefoundation.org,21302973,Lowell,9:05 AM,Sidewalk (Paved Surface),Sun,No number visible ,21223134,9:10,
-2022/08/11 10:11:48 AM MDT,michael.yadrick@gmail.com,MX2201 21302978,Michael Yadrick,906,Grass,Sun,TP14329,21223132,911,
-2022/08/11 10:15:21 AM MDT,hannah.kett@tnc.org,21302949,Hannah,9:09,Grass,Sun,A1353202,BT21302971,9:15,The pole temp lagger is shaded and the ground one is not. 
-2022/08/11 10:15:25 AM MDT,rhebert@cityoftacoma.org,21302954,Ryan and Zoee ,9:12 AM,Grass,Sun,Tp27040,Bt21302957,9:17,"Surrounded by street trees, behind the logger is a 2 story apartment building, on the corner of a busy 5 lane road and a two lane road."
-2022/08/11 10:16:10 AM MDT,emily.heber@tnc.org,21302958,Emily Heber,9:09,Grass,Sun,Tp21035,21223122,9:15 AM,
-2022/08/11 10:16:18 AM MDT,ailene_kane@me.com,21302965,Ailene,9:15,Grass,Sun,To24409,21223120,9:20,
-2022/08/11 10:18:39 AM MDT,michael.yadrick@gmail.com,MX2201 21302978,Michael Yadrick,913,Sidewalk (Paved Surface),Sun,TP9179,21223119,918,
-2022/08/11 10:18:46 AM MDT,lowell@tacomatreefoundation.org,21302973,Lowell,9:13 AM,Grass,Sun,Tp34225,21223139,9:18 AM,
-2022/08/11 10:24:04 AM MDT,emily.heber@tnc.org,21302958,Emily Heber,9:18 AM,Grass,Shade,Tp5817,21223108,9:23,
-2022/08/11 10:25:31 AM MDT,hannah.kett@tnc.org,21302949,Hannah Kett,9:18,Grass,Shade,A1571921 / TP21374,BT21302955,9:25,Currently shaded by blackberry shrub
-2022/08/11 10:25:32 AM MDT,michael.yadrick@gmail.com,MX2201 21302978,Michael Yadrick,919,Sidewalk (Paved Surface),Sun,TO9182,21223111,925,
-2022/08/11 10:28:33 AM MDT,ailene_kane@me.com,21302965,Ailene,9:25,Sidewalk (Paved Surface),Sun,112048503,21223130,9:31,
-2022/08/11 10:31:36 AM MDT,lowell@tacomatreefoundation.org,21302973,Lowell,9:26 AM,Sidewalk (Paved Surface),Sun,Tp13307,212236136,9:31,
-2022/08/11 10:32:14 AM MDT,michael.yadrick@gmail.com,MX2201 21302978,Michael Yadrick,927,Sidewalk (Paved Surface),Shade,TP2499,21223124,932,
-2022/08/11 10:34:29 AM MDT,ailene_kane@me.com,21302965,Ailene,9:33,Sidewalk (Paved Surface),Shade,52-1,21223103,9:38,
-2022/08/11 10:34:29 AM MDT,hannah.kett@tnc.org,21302949,Hannah Kett,9:28,Grass,Sun,A1353781,BT21302966,9:34,
-2022/08/11 10:42:17 AM MDT,hannah.kett@tnc.org,21302949,Hannah Kett,9:36,Grass,Shade,Tp21897 / A1353217,Bt21302944,9:42,
-2022/08/11 10:54:11 AM MDT,hannah.kett@tnc.org,21302949,Hannah Kett,9:48,Weeds!,Shade,Tp21629 / A1353774,Bt21302951,9:54,Very weedy where the lagger is 
-2022/08/11 11:18:08 AM MDT,hannah.kett@tnc.org,21302949,Hannah Kett,10:12,Bare soil,Shade,Tp21631 / a1353441,BT21302961,10:18,
-2022/08/11 12:38:44 PM MDT,danoperson@hotmail.com,21302978,Danny Person,11:33 AM,Sidewalk (Paved Surface),Sun,Tp20171,21223123,11:38 AM,
-2022/08/11 12:40:49 PM MDT,james.hong@tnc.org,21302973,James and Olivia ,11:35 AM,Grass,Shade,Tp6262,21223116,11:40 AM,
-2022/08/11 12:47:49 PM MDT,emily.heber@tnc.org,21302965,Emily Heber,11:41 AM,Grass,Sun,Tp23269,21223121,11:47 AM,
-2022/08/11 12:48:48 PM MDT,mariana.gonzalez@tnc.org,21302949,Mariana,11:43,Grass,Sun,TP3890,21223133,11:48,
-2022/08/11 12:49:00 PM MDT,danoperson@hotmail.com,21302978,Danny Person,11:43 AM,Sidewalk (Paved Surface),Sun,None available ,21223134,11:48 AM,
-2022/08/11 12:49:31 PM MDT,james.hong@tnc.org,21302973,James and Olivia ,11:44 AM,Grass,Sun,No visible pole #. Has an in memory of Joseph s misrules sign. Across speedy auto glass. ,21223106,11:49 AM,
-2022/08/11 12:49:58 PM MDT,courtney.baxter@tnc.org,21302958,Courtney Baxter,11:45 AM,Sidewalk (Paved Surface),Sun,TP10504,21223129,11:50 AM,
-2022/08/11 12:50:44 PM MDT,joshua.rubenstein@tnc.org,21302954,"Joshua Rubenstein, Austin Gobel",11:48am,Sidewalk (Paved Surface),Sun,Tp6336,2116267 bt21302947,11:53am,
-2022/08/11 12:55:19 PM MDT,ailene_kane@me.com,21302943,Ailene,11:54,Grass,Sun,Tp32717,Bt21202973,12pm,
-2022/08/11 12:55:40 PM MDT,emily.heber@tnc.org,21302965,Emily Heber,11:50 AM,Grass,Shade,TP24408,21223112,11:55 AM,
-2022/08/11 12:56:30 PM MDT,mariana.gonzalez@tnc.org,21302949,Mariana,11:52,Grass,Sun,NA- Fife and 54th St,21223104,11:57,
-2022/08/11 12:56:54 PM MDT,danoperson@hotmail.com,21302978,Danny Person,11:51 AM,Grass,Sun,Tp34216,21223115,11:56 AM,
-2022/08/11 12:57:07 PM MDT,joshua.rubenstein@tnc.org,MX2201 21302954,Joshua Rubenstein,11:55am,Sidewalk (Paved Surface),Shade,TP6335,BT21302953,12:00pm,
-2022/08/11 12:57:46 PM MDT,courtney.baxter@tnc.org,21302958,Courtney Baxter,11:52 AM,Sidewalk (Paved Surface),Sun,TP3972,21223126,11:57 AM,
-2022/08/11 12:59:23 PM MDT,ailene_kane@me.com,21302943,Ailene,,,,,,,Session ending at 12pm  became short part way through
-2022/08/11 1:02:32 PM MDT,emily.heber@tnc.org,21302965,Emily Heber,11:57 AM,Sidewalk (Paved Surface),Sun,TP14329,21223132,12:02 PM,
-2022/08/11 1:03:33 PM MDT,danoperson@hotmail.com,21302978,Danny Person,11:58 AM,Grass,Sun,Tp34225,21223139,12:03 PM,
-2022/08/11 1:04:42 PM MDT,joshua.rubenstein@tnc.org,MX2201 21302954,Joshua Rubenstein,12:02,Grass,Shade,TP27040,2401795 BT21302957,12:07,
-2022/08/11 1:04:59 PM MDT,courtney.baxter@tnc.org,21302958,Courtney Baxter,11:59 AM,Sidewalk (Paved Surface),Shade,14998,21223110,12:04 PM,
-2022/08/11 1:05:36 PM MDT,ailene_kane@me.com,21302943,Ailene,12:03,Grass,Shade,Tp15041,21223109,12:08,Mix of sun and shade
-2022/08/11 1:06:17 PM MDT,stephanie.passantino@gmail.com,21302949,Steph Schmid,12:01,Sidewalk (Paved Surface),Shade,52/1 ,21223103,12:06pm,
-2022/08/11 1:06:44 PM MDT,james.hong@tnc.org,21302973,James and Olivia ,12:01 PM,Sidewalk (Paved Surface),Sun,Tp13987,21223102,12:06 PM,
-2022/08/11 1:07:23 PM MDT,james.hong@tnc.org,21302973,James and Olivia ,12:01 PM,Sidewalk (Paved Surface),Sun,Tp13987,21223102,12:06 PM,
-2022/08/11 1:09:28 PM MDT,emily.heber@tnc.org,21302965,Emily heber,12:04,Sidewalk (Paved Surface),Shade,Tp9179,21223119,12:09,
-2022/08/11 1:09:48 PM MDT,lowell@tacomatreefoundation.com,21302948,Lowell,12:06,Grass,Sun,Tp20080,21223135,12:11,Surface is grass but right next to dirt 
-2022/08/11 1:11:19 PM MDT,danoperson@hotmail.com,21302978,Danny Person,12:05 PM,Grass,Sun,Tp24409,21223120,12:10 PM,
-2022/08/11 1:11:59 PM MDT,courtney.baxter@tnc.org,21302958,Courtney Baxter,12:06,Rocks and dirt,Sun,32711,21223125,12:11,
-2022/08/11 1:13:13 PM MDT,joshua.rubenstein@tnc.org,Mx2201 21302954,"Joshua Rubenstein, Austin Gobel",12:11pm,Grass,Sun,TP 6340,BT21302950,12:16,
-2022/08/11 1:13:51 PM MDT,stephanie.passantino@gmail.com,21302949,Steph Schmid,12:08,Sidewalk (Paved Surface),Sun,112049... 50/3,21223130,12:13,
-2022/08/11 1:14:23 PM MDT,james.hong@tnc.org,21302973,James and Olivia ,12:08 PM,Sidewalk (Paved Surface),Sun,Tp13988,21223131,12:13pm,
-2022/08/11 1:17:48 PM MDT,courtney.baxter@tnc.org,21302958,Courtney Baxter,12:12 PM,Grass,Shade,TP20001,21223107,12:17 PM,
-2022/08/11 1:18:14 PM MDT,emily.heber@tnc.org,21302965,Emily Heber,12:12 PM,Sidewalk (Paved Surface),Shade,TP9182,21223111,12:18 PM,"Temperature logger started in shade, but the shadow moved and was in sun for half the time"
-2022/08/11 1:20:27 PM MDT,eugenejulius@gmail.com,21302948,Penny,12:16 AM,Sidewalk (Paved Surface),Shade,A1346792,21223128,12:21,
-2022/08/11 1:23:11 PM MDT,stephanie.passantino@gmail.com,21302949,Steph Schmid,12:18pm,Sidewalk (Paved Surface),Sun,Tp13307,21223136,12:23pm,
-2022/08/11 1:24:58 PM MDT,emily.heber@tnc.org,21302965,Emily Heber,12:19 PM,Sidewalk (Paved Surface),Sun,TP24199,21223124,12:24 PM,
-2022/08/11 1:30:38 PM MDT,james.hong@tnc.org,21302973,James and olivia,12:25 PM,Rocks and pebbles ,Sun,Tp5817,21223108,12:30 PM,
-2022/08/11 1:34:20 PM MDT,eugenejulius@gmail.com,21302948,Penny,12:30,Grass,Sun,TP3890,21223133,12:35,
-2022/08/11 1:38:06 PM MDT,james.hong@tnc.org,21302973,James and Olivia ,12:32pm,Grass,Sun,Tp21035,21223122,12:37 PM,
-2022/08/11 1:44:50 PM MDT,james.hong@tnc.org,21302973,James and olivia,12:39 PM,Sidewalk (Paved Surface),Sun,Tp21036,21223138,12:44 PM,
-2022/08/11 1:55:52 PM MDT,james.hong@tnc.org,21302973,James and olivia,12:54 PM,Bare soil,Shade,Tp32717,21223140,1:00 PM,
-2022/08/11 3:26:37 PM MDT,courtney.baxter@tnc.org,21302973,Courtney Baxter,2:21 PM,Sidewalk (Paved Surface),Sun,TP13307,21223136,2:26 PM,
-2022/08/11 3:34:59 PM MDT,courtney.baxter@tnc.org,21302973,Courtney Baxter,2:29 PM,Sidewalk (Paved Surface),Sun,112049 50/3 (on Google it says 11049 50/3),21223130,2:34 PM,
-2022/08/11 3:35:12 PM MDT,eugenejulius@gmail.com,21302954,Penny,14:32,Grass,Sun,Tp5817,21223108,12:37,
-2022/08/11 3:39:22 PM MDT,james.hong@tnc.org,21302958,James and hannah,2:34 PM,Grass,Sun,Tp23269,21223121,2:39 PM,
-2022/08/11 3:41:40 PM MDT,eugenejulius@gmail.com,21302954,Penny,14:38,Grass,Sun,TP21035,21223122,14:43,
-2022/08/11 3:42:01 PM MDT,courtney.baxter@tnc.org,21302973,Courtney Baxter,2:36 PM,Sidewalk (Paved Surface),Sun,52/1,21223103,2:41 PM,
-2022/08/11 3:46:54 PM MDT,james.hong@tnc.org,21302958,James and hannah,2:40,Grass,Sun,Tp24408,21223112,2:46pm,Logger in grass which is giving partial shade
-2022/08/11 3:47:08 PM MDT,stephanie.passantino@gmail.com,21302945,Steph Schmid,2:42pm,Sidewalk (Paved Surface),Sun,A1341128,2122329,2:47pm,
-2022/08/11 3:47:41 PM MDT,tiffanymcguyer@gmail.com,21302949,Tiffany & Amy,2:46 PM,Grass,Sun,TP20171,21223123,2:51 PM,
-2022/08/11 3:47:53 PM MDT,eugenejulius@gmail.com,21302954,Penny,14:45,Pebbles and some grass,Shade,Tp21036,21223138,14:50,
-2022/08/11 3:49:35 PM MDT,johansaj@plu.edu,21302978,Autumn Johansen ,2:44 PM,Bare soil,Sun,TP21631,BT21302961,2:49 PM,Partial shade from shrub. 
-2022/08/11 3:50:50 PM MDT,luiszepeda.chavez@gmail.com,21402965,Luis & Josh,2:49,Bare soil,Sun,TP10073,21223137,2:54,Meter and a half from pole due to blackberries
-2022/08/11 3:50:52 PM MDT,courtney.baxter@tnc.org,21302973,Courtney Baxter,2:45,Grass,Sun,"The one not on Google maps, 54th and Fife",21223104,2:50 PM,
-2022/08/11 3:53:18 PM MDT,james.hong@tnc.org,21302958,James and hannah,2:47,Sidewalk (Paved Surface),Shade,Tp14329,21223132,2:53pm,
-2022/08/11 3:55:07 PM MDT,johansaj@plu.edu,21302978,Autumn Johansen ,2:44 PM,Bare soil,Sun,TP21631,BT21302961,2:49 PM,Partial shade from shrub. 
-2022/08/11 3:55:52 PM MDT,stephanie.passantino@gmail.com,21302945,Steph Schmid,2:51pm,Sidewalk (Paved Surface),Sun,TP3972,21223126,2:56pm,
-2022/08/11 3:56:51 PM MDT,eugenejulius@gmail.com,21302954,Penny,14:52,Sidewalk (Paved Surface),Shade,Tpu827,21223106,14:57,"The pole did not have a number, but had a small metal disc embedded in out with the tpu number on "
-2022/08/11 3:56:54 PM MDT,luiszepeda.chavez@gmail.com,21302965,Luis & Josh,2:55,Grass,Sun,TP9241,21223113,3:00,
-2022/08/11 3:57:40 PM MDT,tiffanymcguyer@gmail.com,21302949,Tiffany and Amy,2:57 PM,Sidewalk (Paved Surface),Sun,No Num,21223134,3:02 PM,
-2022/08/11 3:59:02 PM MDT,courtney.baxter@tnc.org,21302973,Courtney Baxter,2:53 PM,Grass,Sun,TP3800,21223133,2:58 PM,
-2022/08/11 4:00:28 PM MDT,johansaj@plu.edu,21302978,Autumn Johansen,2:55 PM,Grass,Sun,TP21898,BT21302966,3:00 PM,Partial shade due to pole. 
-2022/08/11 4:01:04 PM MDT,james.hong@tnc.org,21302958,James and hannah,2:55pm,Sidewalk (Paved Surface),Sun,Tp9179,21223119,3:01 PM,
-2022/08/11 4:01:32 PM MDT,eugenejulius@gmail.com,21302954,Penny,14:59,Grass,Sun,A1340985,2122316,15:04,
-2022/08/11 4:02:47 PM MDT,acook2@cityoftacoma.org,21302954,Allison Cook,3:00PM,Grass,Sun,Tp6340,B721302950,3:05,
-2022/08/11 4:02:54 PM MDT,stephanie.passantino@gmail.com,21302945,Steph Schmid,5:57pm,Sidewalk (Paved Surface),Sun,14998,21223110,3:02pm,
-2022/08/11 4:06:05 PM MDT,tiffanymcguyer@gmail.com,21302949,Tiffany & Amy,3:05 PM,Grass,Sun,Tp34216,21223115,3:10 PM,
-2022/08/11 4:06:36 PM MDT,johansaj@plu.edu,21302978,Autumn Johansen,3:01 PM,Grass,Shade,TP21879,Bt21302944,3:06pm,
-2022/08/11 4:08:29 PM MDT,james.hong@tnc.org,21302958,James and hannah,3:03 PM,Sidewalk (Paved Surface),Sun,Tp9182,21223111,3:08 PM,
-2022/08/11 4:09:09 PM MDT,Cooka88@gmail.com,21302954,Allison cook,3:06pm,Sidewalk (Paved Surface),Sun,Tp6336,21162467,3:11pm,
-2022/08/11 4:09:48 PM MDT,luiszepeda.chavez@gmail.com,21302965,Luis & Josh,3:08,Sidewalk (Paved Surface),Sun,Tp13988,21223131,3:12,
-2022/08/11 4:09:54 PM MDT,stephanie.passantino@gmail.com,21302945,Steph Schmid,3:05 PM,Grass,Sun,32711/ A0572122,21223125,3:09pm,
-2022/08/11 4:10:28 PM MDT,eugenejulius@gmail.com,21302954,PENNY,15:07,Mulched soil,Shade,Tp32717,21223140,15:12,
-2022/08/11 4:12:30 PM MDT,courtney.baxter@tnc.org,21302973,Courtney Baxter,3:07 PM,Sidewalk (Paved Surface),Sun,A1346792,21223128,3:12 PM,
-2022/08/11 4:13:04 PM MDT,tiffanymcguyer@gmail.com,21302949,Tiffany & Amy,3:12 PM,Grass,Sun,Tp34225,21223139,3:17 PM,
-2022/08/11 4:14:11 PM MDT,Cooka88@gmail.com,21302954,Allison Cook,3:12PM,Sidewalk (Paved Surface),Shade,Tp6335,21302953,3:17PM,Building shade 
-2022/08/11 4:15:16 PM MDT,stephanie.passantino@gmail.com,21302945,Steph Schmid,3:10,Grass,Sun,Tp20001,21223107,3:15pm,
-2022/08/11 4:17:19 PM MDT,james.hong@tnc.org,21302958,James and hannah,3:12 PM,Sidewalk (Paved Surface),Sun,Tp24199,2122324,3:17 PM,Started in sun. But shade move in to Cover logger. 
-2022/08/11 4:20:42 PM MDT,tiffanymcguyer@gmail.com,21302949,Tiffany & Amy,3:20 PM,Grass,Sun,Tp24409,21223120,3:25 PM,
-2022/08/11 4:21:26 PM MDT,luiszepeda.chavez@gmail.com,21302965,Luis & Josh,3:16 PM,Sidewalk (Paved Surface),Sun,TP15706,2122301,3:21pm,
-2022/08/11 4:22:08 PM MDT,courtney.baxter@tnc.org,21302973,Courtney Baxter,3:16 PM,Dirt and dead grass,Shade,TP20080,21223135,3:22 PM,
-2022/08/11 4:22:21 PM MDT,Cooka88@gmail.com,21302954,Allison Cook,3:20pm,Grass,Sun,Tp6325,21302963,3:25pm,Some shrubs around it
-2022/08/11 4:24:51 PM MDT,johansaj@plu.edu,21302978,Autumn Johansen,3:19 PM,Grass,Sun,TP25239,BT21302971,3:23 PM,
-2022/08/11 4:29:43 PM MDT,luiszepeda.chavez@gmail.com,2130965,Luis & Josh,3:24 PM,Sidewalk (Paved Surface),Sun,TP13987,21223102,3:29,
-2022/08/11 4:32:25 PM MDT,johansaj@plu.edu,21302978,Autumn Johansen,3:26 PM,Grass,Shade,TP21629,BT21302951,3:32 PM,
+Timestamp,Username,Your Temperature Logger #,Your Name,Start time (hh:mm AM/PM),Your Temperature Logger Location,Your temperature logger is located in:,Utility Pole #,Utility Pole Temperature Logger # ,End time (hh:mm AM/PM),Any other relevant notes?,WptNo
+2022/06/29 11:39:59 AM MDT,stephanie.passantino@gmail.com,21302968,Steph Schmid,10:20:00 AM,Woodchips,NA (if it is a cloudy day),TP32717,BT21302974 / 21223140,10:39:00 AM,Utility pole logger started at 10:23AM for every minute ,45
+2022/06/29 12:09:50 PM MDT,ena113@uw.edu,21302968,Eileen Arata,10:54:00 AM,Grass,NA (if it is a cloudy day),TP15041,21223109,11:09:00 AM,Utility pole logger (installed) not BT,17
+2022/06/29 12:46:05 PM MDT,ena113@uw.edu,21302981,Eileen Arata,11:30:00 AM,Grass,NA (if it is a cloudy day),TP6262,"BT 21302967, 21223116",11:45:00 AM,,46
+2022/06/29 12:54:02 PM MDT,stephanie.passantino@gmail.com,21302968,Steph Schmid,11:40:00 AM,Sidewalk (Paved Surface),NA (if it is a cloudy day),TPU927,21223106,11:55:00 AM,"Utility pole number missing, some sun was out during 15 minute interval ",18
+2022/06/29 1:12:55 PM MDT,ena113@uw.edu,21302981,Eileen Arata,11:57:00 AM,Sidewalk (Paved Surface),Sun,TP13987,"BT 21302977, 21223102",12:12:00 PM,,47
+2022/06/29 1:23:21 PM MDT,stephanie.passantino@gmail.com,21302968,Steph Schmid ,12:08:00 PM,Sidewalk (Paved Surface),NA (if it is a cloudy day),TP13988,BT21302976 / 21223131,12:23:00 PM,Some sun (add 'partly cloudy' as option),48
+2022/06/29 1:33:35 PM MDT,ena113@uw.edu,21302981,Eileen Arata,12:18:00 PM,Sidewalk (Paved Surface),Sun,TP15706,"BT 21302946, 21223101",12:33:00 PM,,49
+2022/06/29 2:59:08 PM MDT,stephanie.passantino@gmail.com,21302968,Steph Schmid ,1:43:00 PM,Grass,NA (if it is a cloudy day),106074,BT21302957 / 2401795,1:59:00 PM,,43
+2022/06/29 3:02:00 PM MDT,ena113@uw.edu,21302981,Eileen Arata,1:46:00 PM,Sidewalk (Paved Surface),NA (if it is a cloudy day),TP6335,21302953,2:01:00 PM,,54
+2022/06/29 3:12:04 PM MDT,ailene_kane@me.com,21302980,Ailene,1:48:00 PM,Sidewalk (Paved Surface),NA (if it is a cloudy day),Tp6336,Bt21302947,2:08:00 PM,2 Screws  removed from shield,44
+2022/06/29 3:18:09 PM MDT,stephanie.passantino@gmail.com,21302968,Steph Schmid,2:05:00 PM,Grass,NA (if it is a cloudy day),TP6340,B721302950,2:17:00 PM,Some sun ,52
+2022/06/30 11:14:42 AM MDT,ailene_kane@me.com,2130218,Ailene,10:03:00 AM,Sidewalk (Paved Surface),Sun,Tp9879,BT21302964,10:14:00 AM,,50
+2022/06/30 1:15:46 PM MDT,ailene_kane@me.com,21302981,Ailene,12:13:00 PM,Sidewalk (Paved Surface),Sun,A1353316,By21302960,12:16:00 PM,Outside Pacific southern,?
+2022/06/30 1:20:04 PM MDT,ailene_kane@me.com,21302981,Ailene,12:18:00 PM,Bare soil,Shade,No number,Bt21302962,12:21:00 PM,Outside taco time,62
+2022/08/11 9:46:37 AM MDT,emily.heber@tnc.org,21302958,Emily Heber,8:40:00 AM,Grass,Shade,TP6262,21302967,8:46:00 AM,,46
+2022/08/11 9:56:14 AM MDT,rhebert@cityoftacoma.org,21302954,Ryan and Zoee ,8:51:00 AM,Grass,Sun,TP6340,B721302950,8:56:00 AM,"Main arterial,  trees on a slope across the street,  lots of pavement,  very few trees, small business and homes mixed.",52
+2022/08/11 9:56:21 AM MDT,emily.heber@tnc.org,21302958,Emily,8:50:00 AM,Grass,Shade,TPU927,21223106,8:56:00 AM,Edge of grass and sidewalk,18
+2022/08/11 9:58:20 AM MDT,michael.yadrick@gmail.com,21302978,Michael Yadrick,8:52:00 AM,Grass,Sun,TP23269,21223121,8:57:00 AM,,23
+2022/08/11 10:00:53 AM MDT,lowell@tacomatreefoundation.org,21302973,Lowell Wyse ,8:55:00 AM,Sidewalk (Paved Surface),Sun,Tp20171,21223123,9:00:00 AM,Sprinklers running in planting strip ,16
+2022/08/11 10:03:09 AM MDT,rhebert@cityoftacoma.org,21302954,Zoee and ryan,8:58:00 AM,Sidewalk (Paved Surface),Sun,Tp6336,Bt21302947,9:03:00 AM,Trees across the 5 lane street. Right behind the pole is a 3 story apartment building. Down the right of way are a few street trees,44
+2022/08/11 10:05:37 AM MDT,michael.yadrick@gmail.com,21302978,Michael Yadrick,9:00:00 AM,Grass,Shade,TP24408,21223112,9:05:00 AM,,24
+2022/08/11 10:07:14 AM MDT,emily.heber@tnc.org,21302958,Emily,9:00:00 AM,Grass,Sun,Tp21036,21223138,9:05:00 AM,,38
+2022/08/11 10:09:18 AM MDT,rhebert@cityoftacoma.org,21302954,Ryan and Zoee,9:04:00 AM,Sidewalk (Paved Surface),Sun,TP6335,21302953,9:09:00 AM,"Sweetgum trees in planting strip, busy road nearby,  multistory apt behind,  utility lines above (trees will eventually be topped), mall entrance across the street ",54
+2022/08/11 10:10:12 AM MDT,ailene_kane@me.com,21302965,Ailene,9:07:00 AM,Grass,Sun,Tp34216,21223115,9:13:00 AM,,13
+2022/08/11 10:10:45 AM MDT,lowell@tacomatreefoundation.org,21302973,Lowell,9:05:00 AM,Sidewalk (Paved Surface),Sun,23134NO,21223134,9:10:00 AM,,15
+2022/08/11 10:11:48 AM MDT,michael.yadrick@gmail.com,21302978,Michael Yadrick,9:06:00 AM,Grass,Sun,TP14329,21223132,9:11:00 AM,,35?
+2022/08/11 10:15:21 AM MDT,hannah.kett@tnc.org,21302949,Hannah,9:09:00 AM,Grass,Sun,A1353202,BT21302971,9:15:00 AM,The pole temp lagger is shaded and the ground one is not. ,60
+2022/08/11 10:15:25 AM MDT,rhebert@cityoftacoma.org,21302954,Ryan and Zoee ,9:12:00 AM,Grass,Sun,Tp27040,Bt21302957,9:17:00 AM,"Surrounded by street trees, behind the logger is a 2 story apartment building, on the corner of a busy 5 lane road and a two lane road.",43
+2022/08/11 10:16:10 AM MDT,emily.heber@tnc.org,21302958,Emily Heber,9:09:00 AM,Grass,Sun,Tp21035,21223122,9:15:00 AM,,19
+2022/08/11 10:16:18 AM MDT,ailene_kane@me.com,21302965,Ailene,9:15:00 AM,Grass,Sun,To24409,21223120,9:20:00 AM,,10
+2022/08/11 10:18:39 AM MDT,michael.yadrick@gmail.com,21302978,Michael Yadrick,9:13:00 AM,Sidewalk (Paved Surface),Sun,TP9179,21223119,9:18:00 AM,,25
+2022/08/11 10:18:46 AM MDT,lowell@tacomatreefoundation.org,21302973,Lowell,9:13:00 AM,Grass,Sun,Tp34225,21223139,9:18:00 AM,,12
+2022/08/11 10:24:04 AM MDT,emily.heber@tnc.org,21302958,Emily Heber,9:18:00 AM,Grass,Shade,Tp5817,21223108,9:23:00 AM,,20
+2022/08/11 10:25:31 AM MDT,hannah.kett@tnc.org,21302949,Hannah Kett,9:18:00 AM,Grass,Shade,A1571921 / TP21374,BT21302955,9:25:00 AM,Currently shaded by blackberry shrub,57
+2022/08/11 10:25:32 AM MDT,michael.yadrick@gmail.com,21302978,Michael Yadrick,9:20:00 AM,Sidewalk (Paved Surface),Sun,TO9182,21223111,9:25:00 AM,,26?
+2022/08/11 10:28:33 AM MDT,ailene_kane@me.com,21302965,Ailene,9:25:00 AM,Sidewalk (Paved Surface),Sun,11049503,21223130,9:31:00 AM,,9
+2022/08/11 10:31:36 AM MDT,lowell@tacomatreefoundation.org,21302973,Lowell,9:26:00 AM,Sidewalk (Paved Surface),Sun,Tp13307,21223136,9:31:00 AM,,39
+2022/08/11 10:32:14 AM MDT,michael.yadrick@gmail.com,21302978,Michael Yadrick,9:27:00 AM,Sidewalk (Paved Surface),Shade,TP24199,21223124,9:32:00 AM,,27
+2022/08/11 10:34:29 AM MDT,ailene_kane@me.com,21302965,Ailene,9:33:00 AM,Sidewalk (Paved Surface),Shade,52-1,21223103,9:38:00 AM,,7
+2022/08/11 10:34:29 AM MDT,hannah.kett@tnc.org,21302949,Hannah Kett,9:28:00 AM,Grass,Sun,A1353781,BT21302966,9:34:00 AM,,58?
+2022/08/11 10:42:17 AM MDT,hannah.kett@tnc.org,21302949,Hannah Kett,9:36:00 AM,Grass,Shade,Tp21897 / A1353217,Bt21302944,9:42:00 AM,,59
+2022/08/11 10:54:11 AM MDT,hannah.kett@tnc.org,21302949,Hannah Kett,9:48:00 AM,Grass,Shade,Tp21629 / A1353774,Bt21302951,9:54:00 AM,Very weedy where the lagger is ,55
+2022/08/11 11:18:08 AM MDT,hannah.kett@tnc.org,21302949,Hannah Kett,10:12:00 AM,Bare soil,Shade,Tp21631 / a1353441,BT21302961,10:18:00 AM,,56
+2022/08/11 12:38:44 PM MDT,danoperson@hotmail.com,21302978,Danny Person,11:33:00 AM,Sidewalk (Paved Surface),Sun,Tp20171,21223123,11:38:00 AM,,16
+2022/08/11 12:40:49 PM MDT,james.hong@tnc.org,21302973,James and Olivia ,11:35:00 AM,Grass,Shade,Tp6262,21223116,11:40:00 AM,,46
+2022/08/11 12:47:49 PM MDT,emily.heber@tnc.org,21302965,Emily Heber,11:41:00 AM,Grass,Sun,Tp23269,21223121,11:47:00 AM,,23
+2022/08/11 12:48:48 PM MDT,mariana.gonzalez@tnc.org,21302949,Mariana,11:43:00 AM,Grass,Sun,TP3890,21223133,11:48:00 AM,,5
+2022/08/11 12:49:00 PM MDT,danoperson@hotmail.com,21302978,Danny Person,11:43:00 AM,Sidewalk (Paved Surface),Sun,23134NO,21223134,11:48:00 AM,,15
+2022/08/11 12:49:31 PM MDT,james.hong@tnc.org,21302973,James and Olivia ,11:44:00 AM,Grass,Sun,No visible pole #. Has an in memory of Joseph s misrules sign. Across speedy auto glass. ,21223106,11:49:00 AM,,18
+2022/08/11 12:49:58 PM MDT,courtney.baxter@tnc.org,21302958,Courtney Baxter,11:45:00 AM,Sidewalk (Paved Surface),Sun,TP10504,21223129,11:50:00 AM,,33?
+2022/08/11 12:50:44 PM MDT,joshua.rubenstein@tnc.org,21302954,"Joshua Rubenstein, Austin Gobel",11:48:00 AM,Sidewalk (Paved Surface),Sun,Tp6336,2116267 bt21302947,11:53:00 AM,,44
+2022/08/11 12:55:19 PM MDT,ailene_kane@me.com,21302943,Ailene,11:54:00 AM,Grass,Sun,Tp32717,Bt21202973,12:00:00 PM,,?
+2022/08/11 12:55:40 PM MDT,emily.heber@tnc.org,21302965,Emily Heber,11:50:00 AM,Grass,Shade,TP24408,21223112,11:55:00 AM,,24
+2022/08/11 12:56:30 PM MDT,mariana.gonzalez@tnc.org,21302949,Mariana,11:52:00 AM,Grass,Sun,FIFE54,21223104,11:57:00 AM,,6
+2022/08/11 12:56:54 PM MDT,danoperson@hotmail.com,21302978,Danny Person,11:51:00 AM,Grass,Sun,Tp34216,21223115,11:56:00 AM,,13
+2022/08/11 12:57:07 PM MDT,joshua.rubenstein@tnc.org,21302954,Joshua Rubenstein,11:55:00 AM,Sidewalk (Paved Surface),Shade,TP6335,21302953,12:00:00 PM,,54
+2022/08/11 12:57:46 PM MDT,courtney.baxter@tnc.org,21302958,Courtney Baxter,11:52:00 AM,Sidewalk (Paved Surface),Sun,TP3972,21223126,11:57:00 AM,,32
+2022/08/11 1:02:32 PM MDT,emily.heber@tnc.org,21302965,Emily Heber,11:57:00 AM,Sidewalk (Paved Surface),Sun,TP14329,21223132,12:02:00 PM,,35?
+2022/08/11 1:03:33 PM MDT,danoperson@hotmail.com,21302978,Danny Person,11:58:00 AM,Grass,Sun,Tp34225,21223139,12:03:00 PM,,12
+2022/08/11 1:04:42 PM MDT,joshua.rubenstein@tnc.org,21302954,Joshua Rubenstein,12:02:00 PM,Grass,Shade,TP27040,2401795 BT21302957,12:07:00 PM,,43
+2022/08/11 1:04:59 PM MDT,courtney.baxter@tnc.org,21302958,Courtney Baxter,11:59:00 AM,Sidewalk (Paved Surface),Shade,14998,21223110,12:04:00 PM,,30
+2022/08/11 1:05:36 PM MDT,ailene_kane@me.com,21302943,Ailene,12:03:00 PM,Grass,Shade,Tp15041,21223109,12:08:00 PM,Mix of sun and shade,17
+2022/08/11 1:06:17 PM MDT,stephanie.passantino@gmail.com,21302949,Steph Schmid,12:01:00 PM,Sidewalk (Paved Surface),Shade,52/1 ,21223103,12:06:00 PM,,7
+2022/08/11 1:06:44 PM MDT,james.hong@tnc.org,21302973,James and Olivia ,12:01:00 PM,Sidewalk (Paved Surface),Sun,Tp13987,21223102,12:06:00 PM,,47
+2022/08/11 1:07:23 PM MDT,james.hong@tnc.org,21302973,James and Olivia ,12:01:00 PM,Sidewalk (Paved Surface),Sun,Tp13987,21223102,12:06:00 PM,,47
+2022/08/11 1:09:28 PM MDT,emily.heber@tnc.org,21302965,Emily heber,12:04:00 PM,Sidewalk (Paved Surface),Shade,Tp9179,21223119,12:09:00 PM,,25
+2022/08/11 1:09:48 PM MDT,lowell@tacomatreefoundation.com,21302948,Lowell,12:06:00 PM,Grass,Sun,Tp20080,21223135,12:11:00 PM,Surface is grass but right next to dirt ,1
+2022/08/11 1:11:19 PM MDT,danoperson@hotmail.com,21302978,Danny Person,12:05:00 PM,Grass,Sun,Tp24409,21223120,12:10:00 PM,,10
+2022/08/11 1:11:59 PM MDT,courtney.baxter@tnc.org,21302958,Courtney Baxter,12:06:00 PM,Rocks and dirt,Sun,32711,21223125,12:11:00 PM,,29
+2022/08/11 1:13:13 PM MDT,joshua.rubenstein@tnc.org,21302954,"Joshua Rubenstein, Austin Gobel",12:11:00 PM,Grass,Sun,TP 6340,BT21302950,12:16:00 PM,,52
+2022/08/11 1:13:51 PM MDT,stephanie.passantino@gmail.com,21302949,Steph Schmid,12:08:00 PM,Sidewalk (Paved Surface),Sun,11049503,21223130,12:13:00 PM,,9
+2022/08/11 1:14:23 PM MDT,james.hong@tnc.org,21302973,James and Olivia ,12:08:00 PM,Sidewalk (Paved Surface),Sun,Tp13988,21223131,12:13:00 PM,,48
+2022/08/11 1:17:48 PM MDT,courtney.baxter@tnc.org,21302958,Courtney Baxter,12:12:00 PM,Grass,Shade,TP20001,21223107,12:17:00 PM,,28
+2022/08/11 1:18:14 PM MDT,emily.heber@tnc.org,21302965,Emily Heber,12:12:00 PM,Sidewalk (Paved Surface),Shade,TP9182,21223111,12:18:00 PM,"Temperature logger started in shade, but the shadow moved and was in sun for half the time",26?
+2022/08/11 1:20:27 PM MDT,eugenejulius@gmail.com,21302948,Penny,12:16:00 PM,Sidewalk (Paved Surface),Shade,A1346792,21223128,12:21:00 PM,,2
+2022/08/11 1:23:11 PM MDT,stephanie.passantino@gmail.com,21302949,Steph Schmid,12:18:00 PM,Sidewalk (Paved Surface),Sun,Tp13307,21223136,12:23:00 PM,,39
+2022/08/11 1:24:58 PM MDT,emily.heber@tnc.org,21302965,Emily Heber,12:19:00 PM,Sidewalk (Paved Surface),Sun,TP24199,21223124,12:24:00 PM,,27
+2022/08/11 1:30:38 PM MDT,james.hong@tnc.org,21302973,James and olivia,12:25:00 PM,Rocks and pebbles ,Sun,Tp5817,21223108,12:30:00 PM,,20
+2022/08/11 1:34:20 PM MDT,eugenejulius@gmail.com,21302948,Penny,12:30:00 PM,Grass,Sun,TP3890,21223133,12:35:00 PM,,5
+2022/08/11 1:38:06 PM MDT,james.hong@tnc.org,21302973,James and Olivia ,12:32:00 PM,Grass,Sun,Tp21035,21223122,12:37:00 PM,,19
+2022/08/11 1:44:50 PM MDT,james.hong@tnc.org,21302973,James and olivia,12:39:00 PM,Sidewalk (Paved Surface),Sun,Tp21036,21223138,12:44:00 PM,,38
+2022/08/11 1:55:52 PM MDT,james.hong@tnc.org,21302973,James and olivia,12:54:00 PM,Bare soil,Shade,Tp32717,21223140,1:00:00 PM,,45
+2022/08/11 3:26:37 PM MDT,courtney.baxter@tnc.org,21302973,Courtney Baxter,2:21:00 PM,Sidewalk (Paved Surface),Sun,TP13307,21223136,2:26:00 PM,,39
+2022/08/11 3:34:59 PM MDT,courtney.baxter@tnc.org,21302973,Courtney Baxter,2:29:00 PM,Sidewalk (Paved Surface),Sun,11049503,21223130,2:34:00 PM,,9
+2022/08/11 3:35:12 PM MDT,eugenejulius@gmail.com,21302954,Penny,2:32:00 PM,Grass,Sun,Tp5817,21223108,2:37:00 PM,,20
+2022/08/11 3:39:22 PM MDT,james.hong@tnc.org,21302958,James and hannah,2:34:00 PM,Grass,Sun,Tp23269,21223121,2:39:00 PM,,23
+2022/08/11 3:41:40 PM MDT,eugenejulius@gmail.com,21302954,Penny,2:38:00 PM,Grass,Sun,TP21035,21223122,2:43:00 PM,,19
+2022/08/11 3:42:01 PM MDT,courtney.baxter@tnc.org,21302973,Courtney Baxter,2:36:00 PM,Sidewalk (Paved Surface),Sun,52/1,21223103,2:41:00 PM,,7
+2022/08/11 3:46:54 PM MDT,james.hong@tnc.org,21302958,James and hannah,2:40:00 PM,Grass,Sun,Tp24408,21223112,2:46:00 PM,Logger in grass which is giving partial shade,24
+2022/08/11 3:47:08 PM MDT,stephanie.passantino@gmail.com,21302945,Steph Schmid,2:42:00 PM,Sidewalk (Paved Surface),Sun,A1341128,21223129,2:47:00 PM,,33
+2022/08/11 3:47:41 PM MDT,tiffanymcguyer@gmail.com,21302949,Tiffany & Amy,2:46:00 PM,Grass,Sun,TP20171,21223123,2:51:00 PM,,16
+2022/08/11 3:47:53 PM MDT,eugenejulius@gmail.com,21302954,Penny,2:45:00 PM,Pebbles and some grass,Shade,Tp21036,21223138,2:50:00 PM,,38
+2022/08/11 3:49:35 PM MDT,johansaj@plu.edu,21302978,Autumn Johansen ,2:44:00 PM,Bare soil,Sun,TP21631,21302961,2:49:00 PM,Partial shade from shrub. ,56
+2022/08/11 3:50:50 PM MDT,luiszepeda.chavez@gmail.com,21402965,Luis & Josh,2:49:00 PM,Bare soil,Sun,TP10073,21223137,2:54:00 PM,Meter and a half from pole due to blackberries,21
+2022/08/11 3:50:52 PM MDT,courtney.baxter@tnc.org,21302973,Courtney Baxter,2:45:00 PM,Grass,Sun,FIFE54,21223104,2:50:00 PM,,6
+2022/08/11 3:53:18 PM MDT,james.hong@tnc.org,21302958,James and hannah,2:47:00 PM,Sidewalk (Paved Surface),Shade,Tp14329,21223132,2:53:00 PM,,35?
+2022/08/11 3:55:07 PM MDT,johansaj@plu.edu,21302978,Autumn Johansen ,2:44:00 PM,Bare soil,Sun,TP21631,21302961,2:49:00 PM,Partial shade from shrub. ,56
+2022/08/11 3:55:52 PM MDT,stephanie.passantino@gmail.com,21302945,Steph Schmid,2:51:00 PM,Sidewalk (Paved Surface),Sun,TP3972,21223126,2:56:00 PM,,32
+2022/08/11 3:56:51 PM MDT,eugenejulius@gmail.com,21302954,Penny,2:52:00 PM,Sidewalk (Paved Surface),Shade,TPU827,21223106,2:57:00 PM,"The pole did not have a number, but had a small metal disc embedded in out with the tpu number on ",18?
+2022/08/11 3:56:54 PM MDT,luiszepeda.chavez@gmail.com,21302965,Luis & Josh,2:55:00 PM,Grass,Sun,TP9241,21223113,3:00:00 PM,,22
+2022/08/11 3:57:40 PM MDT,tiffanymcguyer@gmail.com,21302949,Tiffany and Amy,2:57:00 PM,Sidewalk (Paved Surface),Sun,23134NO,21223134,3:02:00 PM,,15
+2022/08/11 3:59:02 PM MDT,courtney.baxter@tnc.org,21302973,Courtney Baxter,2:53:00 PM,Grass,Sun,TP3800,21223133,2:58:00 PM,,5?
+2022/08/11 4:00:28 PM MDT,johansaj@plu.edu,21302978,Autumn Johansen,2:55:00 PM,Grass,Sun,TP21898,21302966,3:00:00 PM,Partial shade due to pole. ,58
+2022/08/11 4:01:04 PM MDT,james.hong@tnc.org,21302958,James and hannah,2:55:00 PM,Sidewalk (Paved Surface),Sun,Tp9179,21223119,3:01:00 PM,,25
+2022/08/11 4:01:32 PM MDT,eugenejulius@gmail.com,21302954,Penny,2:59:00 PM,Grass,Sun,A1340985,21223116,3:04:00 PM,,46
+2022/08/11 4:02:47 PM MDT,acook2@cityoftacoma.org,21302954,Allison Cook,3:00:00 PM,Grass,Sun,Tp6340,21302950,3:05:00 PM,,52
+2022/08/11 4:02:54 PM MDT,stephanie.passantino@gmail.com,21302945,Steph Schmid,2:57:00 PM,Sidewalk (Paved Surface),Sun,14998,21223110,3:02:00 PM,,30
+2022/08/11 4:06:05 PM MDT,tiffanymcguyer@gmail.com,21302949,Tiffany & Amy,3:05:00 PM,Grass,Sun,Tp34216,21223115,3:10:00 PM,,13
+2022/08/11 4:06:36 PM MDT,johansaj@plu.edu,21302978,Autumn Johansen,3:01:00 PM,Grass,Shade,TP21879,21302944,3:06:00 PM,,59
+2022/08/11 4:08:29 PM MDT,james.hong@tnc.org,21302958,James and hannah,3:03:00 PM,Sidewalk (Paved Surface),Sun,Tp9182,21223111,3:08:00 PM,,26?
+2022/08/11 4:09:09 PM MDT,Cooka88@gmail.com,21302954,Allison cook,3:06:00 PM,Sidewalk (Paved Surface),Sun,Tp6336,21162467,3:11:00 PM,,44
+2022/08/11 4:09:48 PM MDT,luiszepeda.chavez@gmail.com,21302965,Luis & Josh,3:08:00 PM,Sidewalk (Paved Surface),Sun,Tp13988,21223131,3:12:00 PM,,48
+2022/08/11 4:09:54 PM MDT,stephanie.passantino@gmail.com,21302945,Steph Schmid,3:05:00 PM,Grass,Sun,32711/ A0572122,21223125,3:09:00 PM,,29
+2022/08/11 4:10:28 PM MDT,eugenejulius@gmail.com,21302954,PENNY,3:07:00 PM,Mulched soil,Shade,Tp32717,21223140,3:12:00 PM,,45
+2022/08/11 4:12:30 PM MDT,courtney.baxter@tnc.org,21302973,Courtney Baxter,3:07:00 PM,Sidewalk (Paved Surface),Sun,A1346792,21223128,3:12:00 PM,,2
+2022/08/11 4:13:04 PM MDT,tiffanymcguyer@gmail.com,21302949,Tiffany & Amy,3:12:00 PM,Grass,Sun,Tp34225,21223139,3:17:00 PM,,12
+2022/08/11 4:14:11 PM MDT,Cooka88@gmail.com,21302954,Allison Cook,3:12:00 PM,Sidewalk (Paved Surface),Shade,Tp6335,21302953,3:17:00 PM,Building shade ,54
+2022/08/11 4:15:16 PM MDT,stephanie.passantino@gmail.com,21302945,Steph Schmid,3:10:00 PM,Grass,Sun,Tp20001,21223107,3:15:00 PM,,28
+2022/08/11 4:17:19 PM MDT,james.hong@tnc.org,21302958,James and hannah,3:12:00 PM,Sidewalk (Paved Surface),Sun,Tp24199,21223124,3:17:00 PM,Started in sun. But shade move in to Cover logger. ,27
+2022/08/11 4:20:42 PM MDT,tiffanymcguyer@gmail.com,21302949,Tiffany & Amy,3:20:00 PM,Grass,Sun,Tp24409,21223120,3:25:00 PM,,10
+2022/08/11 4:21:26 PM MDT,luiszepeda.chavez@gmail.com,21302965,Luis & Josh,3:16:00 PM,Sidewalk (Paved Surface),Sun,TP15706,21223101,3:21:00 PM,,49
+2022/08/11 4:22:08 PM MDT,courtney.baxter@tnc.org,21302973,Courtney Baxter,3:16:00 PM,Dirt and dead grass,Shade,TP20080,21223135,3:22:00 PM,,1
+2022/08/11 4:22:21 PM MDT,Cooka88@gmail.com,21302954,Allison Cook,3:20:00 PM,Grass,Sun,Tp6325,21302963,3:25:00 PM,Some shrubs around it,51
+2022/08/11 4:24:51 PM MDT,johansaj@plu.edu,21302978,Autumn Johansen,3:19:00 PM,Grass,Sun,TP25239,21302971,3:23:00 PM,,60
+2022/08/11 4:29:43 PM MDT,luiszepeda.chavez@gmail.com,21302965,Luis & Josh,3:24:00 PM,Sidewalk (Paved Surface),Sun,TP13987,21223102,3:29:00 PM,,47
+2022/08/11 4:32:25 PM MDT,johansaj@plu.edu,21302978,Autumn Johansen,3:26:00 PM,Grass,Shade,TP21629,21302951,3:32:00 PM,,55
