@@ -64,4 +64,5 @@ surflogs$Hobo_SN[surflogs$Hobo_SN=="21302963"]<-"BT21302953"
 #remove row with no data
 surflogs<-surflogs[!surflogs$Hobo_SN=="",]
 
+write.csv(surflogs,"output/TempBlitzFormData_cleaned.csv", row.names = FALSE)
 
