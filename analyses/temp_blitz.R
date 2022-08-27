@@ -28,7 +28,12 @@ source("sourced_files/clean_tempblitzformdata.R")
 surfsns<-unique(surflogs$Utility.Pole.Temperature.Logger..)
 #merge the location data with the surf logger locations, using the logger sn
 tblocdat<-left_join(surflogs,locs, copy=TRUE, keep = FALSE)
-  
+
+
+
+
+##below code does not work.....
+
 #now pull the temp data from Jul at those locations
 tempdatdir<-"../data/temp_data/2022_08_10"
 focalsnfiles<-paste(focalsns,".csv", sep="")

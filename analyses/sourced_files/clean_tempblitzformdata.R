@@ -54,3 +54,15 @@ surflogs$Hobo_SN[surflogs$Hobo_SN=="B121302953"]<-"BT21302953"
 surflogs$Hobo_SN[surflogs$Hobo_SN=="BT21302971"]<-"BT2130297"
 surflogs$Hobo_SN[surflogs$Hobo_SN=="21223119"]<-"21123119"
 surflogs$Hobo_SN[surflogs$Hobo_SN=="2122329"]<-"21223129"
+surflogs$Hobo_SN[surflogs$Hobo_SN=="21223119"]<-"21123119"
+surflogs$Hobo_SN[surflogs$Hobo_SN=="2122316"]<-"21223116"
+surflogs$Hobo_SN[surflogs$Hobo_SN=="21302953"]<- "BT21302953"
+surflogs$Hobo_SN[surflogs$Hobo_SN=="2122324"]<-"21223124"
+surflogs$Hobo_SN[surflogs$Hobo_SN=="2122301"]<-"BT21302946"
+surflogs$Hobo_SN[surflogs$Hobo_SN=="21302963"]<-"BT21302953"
+
+#remove row with no data
+surflogs<-surflogs[!surflogs$Hobo_SN=="",]
+
+write.csv(surflogs,"output/TempBlitzFormData_cleaned.csv", row.names = FALSE)
+
