@@ -13,6 +13,7 @@ options(stringsAsFactors = FALSE)
 library(dplyr)
 library(lme4)
 library(tidyr)
+library(car)
 # set working directory
 setwd("~/GitHub/grit/analyses")
 
@@ -146,15 +147,25 @@ asldat_long$temp_c<-as.numeric(asldat_long$temp_c)
 asldat_long$Trees.<-as.factor(asldat_long$Trees.)
 cols<-c("gray","darkgreen")
 shapes<-c(24,21)
+png("figs/tempblitzdat.png", width=4, height=6, units="in", res=220)
+
 plot(asldat_long$hour,asldat_long$temp_c, 
      pch=shapes[as.factor(asldat_long$temptype)],bg=cols[as.factor(asldat_long$Trees.)],
      xlab="Time of day (hr)",ylab=c("Temperature (C)"), bty="l")
-
+dev.off()
 #fit some models
 m1<-lm(temp_c~Trees.*temptype, data=asldat_long)
 m2<-lm(temp_c~Trees.*temptype+hour, data=asldat_long)
 m3<-lm(temp_c~Trees.*temptype+hour +surftype, data=asldat_long)
 m4<-lm(temp_c~Trees.*temptype+hour +surftype+sunshade, data=asldat_long)
+m4a<-lm(temp_c~Trees.+temptype+hour +surftype+sunshade, data=asldat_long)
+m5<-lm(temp_c~Trees.+temptype+hour+surftype+sunshade+Trees.:temptype+Trees.:hour, data=asldat_long)
+m6<-lm(temp_c~Trees.+temptype+hour+surftype+sunshade+Trees.:temptype+Trees.:hour + Trees.:surftype, data=asldat_long)
 
-AIC(m1,m2,m3,m4)
+AIC(m1,m2,m3,m4,m5,m6)#m4 wins based on AIC
 summary(m4)
+plot(m4)
+Anova(m4)
+anova(m4)
+
+#next step is to add in the amount of trees (basal area)- not just yes/no for trees
