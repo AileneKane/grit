@@ -12,6 +12,7 @@ options(stringsAsFactors = FALSE)
 # load libraries
 library(dplyr)
 library(lme4)
+library(tidyr)
 # set working directory
 setwd("~/GitHub/grit/analyses")
 
@@ -21,89 +22,139 @@ source("sourced_files/clean_locs.R")
 
 #read in data inputs from people (w/ surface temp loggers) from temperature blitz day (August 8, 2022 from 8am-4pm)
 surflogs<-read.csv("../data/TempBlitzFormData.csv", header=TRUE)
-
 source("sourced_files/clean_tempblitzformdata.R")
 
+#read in surface temperature logger data (exported from hoblink website)
+surftemps<-read.csv("../data/BT_temp_data/tempblitz/Temperature_blitz_2022_08_31_20_14_42_PDT_surfacetemploggers.csv", header=TRUE)
+source("sourced_files/clean_surftemps.R")
 
-surfsns<-unique(surflogs$Utility.Pole.Temperature.Logger..)
 #merge the location data with the surf logger locations, using the logger sn
 tblocdat<-left_join(surflogs,locs, copy=TRUE, keep = FALSE)
+surfsns<-sort(unique(tblocdat$Your.Temperature.Logger..))
 
+#First, build the surface logger dataset by reading in temperature data from surface temperature loggers used by volunteers
+surftimes<-subset(tblocdat, select=c(Your.Temperature.Logger..,End.time..hh.mm.AM.PM.,Hobo_SN))
+colnames(surftimes)<-c("surfloggersn","time","Hobo_SN")
 
+#merge in surftemp data
+surftempdat<-NULL
 
-
-##below code does not work.....
-
-#now pull the temp data from Jul at those locations
-tempdatdir<-"../data/temp_data/2022_08_10"
-focalsnfiles<-paste(focalsns,".csv", sep="")
-#for now, skip the blue tooth loggers
-focalsnfiles<-focalsnfiles[-which(substr(focalsnfiles,1,2)=="BT")]
-
-loggerdat<-NULL
-
-for(i in focalsnfiles){
-    dat<-read.csv(paste(tempdatdir,"/",i,sep=""), skip=1,header=TRUE)
-    colnames(dat)[2:3]<-c("date.time","temp_c")
-    dat$date<-substr(dat$date.time,1,8)
-    tmins<-aggregate(dat$temp_c,by=list(dat$date),min,na.rm=TRUE)
-    colnames(tmins)<-c("date","tmin")
-    tmaxs<-aggregate(dat$temp_c,by=list(dat$date),max,na.rm=TRUE)
-    colnames(tmaxs)<-c("date","tmax")
-    tmntmx<-cbind(tmins,tmaxs$tmax)
-    tmntmx$loggersn<-as.factor(substr(i,1,8))
-    loggerdat<-rbind(loggerdat,as.data.frame(tmntmx))
+for(i in surfsns){
+   #select the times for which this temp loggers was aligned with an air temp logger
+  thissurftime<-surftimes[surftimes$surfloggersn==i,]
+  thissurftime$time<-as.character(thissurftime$time)
+  #skip 
+  if(length(unique(colnames(surftemps)==i))==1){next}
+  thissurftemp<-as.data.frame(cbind(surftemps$Date,surftemps$time,surftemps[,which(colnames(surftemps)==i)]))
+  colnames(thissurftemp)<-c("date","time",paste(i))
+  thissurftemp$time<-as.character(thissurftemp$time)
+  #get rid of weird space
+  thissurftemp$time[grep(" 8:",thissurftemp$time,)]<-gsub(" 8:","8:",thissurftemp$time[grep(" 8:",thissurftemp$time,)])
+  thissurftemp$time[grep(" 9:",thissurftemp$time,)]<-gsub(" 9:","9:",thissurftemp$time[grep(" 9:",thissurftemp$time,)])
+  allthisdat<-left_join(thissurftime,thissurftemp,by="time")
+  colnames(allthisdat)[5]<-"surftemp_c"
+  surftempdat<-rbind(surftempdat,allthisdat)
   }
 
-#now merge the logger info (i.e. trees or not, locations), with the logger data:
-colnames(locs)[2]<-"loggersn"
-colnames(loggerdat)[3]<-"tmax"
+#now put together all relevant air temperature data on 8/11/22
+airtempdat<-NULL
 
-logdatlocs<-left_join(loggerdat,locs)
-#colnames(logdatlocs)[3]<-"tmax"
-
-logdatlocs$type<-"cpark"
-logdatlocs$type[logdatlocs$loggersn=="21223131"]<-"ano trees"
-logdatlocs$type[logdatlocs$loggersn=="21223102"]<-"btrees"
-
-#get max temp for each logger
-
-maxtemps<-aggregate(logdatlocs$tmax, by=list(logdatlocs$loggersn,logdatlocs$Location,logdatlocs$Trees.), max)
-colnames(maxtemps)<-c("SN","Location","Trees","Temp_C")
-maxtemps$order<-c(3,1,2)
-maxtemps<-maxtemps[order(maxtemps$order),]# all on on July 31
-
-#on the hottest measurements:
-png("figs/STacomamaxtemps.png", width=4, height=6, units="in", res=220)
-
-barplot(maxtemps$Temp_C, ylim=c(30,38),col=c("gray","seagreen3","darkgreen"),
-        names.arg=c("No trees","Trees","Forested Park"), ylab="Temperature (C)", xlab="Location",
-        main="Maximum temperature, July 2022", xpd=FALSE)
-abline(h=30)
-mtext ("(Occurred on July 31)", side=3, line=0)
-dev.off()
-maxtemps$Temp_C
-maxtemps$Temp_C[1]-maxtemps$Temp_C[3]#difference between no trees and park# 0.855
-maxtemps$Temp_C[1]-maxtemps$Temp_C[2]#difference between no trees and and trees
-
-boxplot(logdatlocs$tmax~logdatlocs$type)
-boxplot(logdatlocs$tmin~logdatlocs$type)
-summary(lm(logdatlocs$tmin~logdatlocs$type))
-summary(lm(logdatlocs$tmax~logdatlocs$type))
-logdatlocs$month<-substr(logdatlocs$date,1,2)
-augdat<-logdatlocs[logdatlocs$month=="07",]
-maxmod<-lmer(tmax~-1+type+ (1|as.factor(augdat$date)), dat=augdat)
-minmod<-lmer(tmin~-1+type+ (1|as.factor(augdat$date)), dat=augdat)
-png("figs/STacomaaugmaxtemps.png", width=4, height=6, units="in", res=220)
-
-maxplot<-barplot(fixef(maxmod), ylim=c(20,28),col=c("gray","seagreen3","darkgreen"),
-        names.arg=c("No trees","Trees","Forested Park"), ylab="Temperature (C)",xlab="Location",
-        main="Daily maximum temperatures", xpd=FALSE)
-abline(h=20)
-for(i in 1:length(fixef(maxmod))){
-arrows(maxplot[i],fixef(maxmod)[i]-summary(maxmod)$coef[i,2],maxplot[i],fixef(maxmod)[i]+summary(maxmod)$coef[i,2], length=.1, angle=90, code=3)
+airsns<-sort(unique(surftempdat$Hobo_SN))
+for(j in airsns){
+if(substr(j,1,2)=="BT"){
+  tempdatdir<-"../data/BT_temp_data/tempblitz"
+  focalsn<-substr(j,3,nchar(j))
+  tempfiles<-list.files(tempdatdir)
+  tempfiles<-tempfiles[which(substr(tempfiles,nchar(tempfiles)-3,nchar(tempfiles))==".csv")]
+  focalsnfile<-tempfiles[grep(focalsn,tempfiles)]
+  if(length(focalsnfile)>1){focalsnfile<-focalsnfile[2]}
+  dat<-read.csv(paste(tempdatdir,"/",focalsnfile,sep=""), skip=1,header=TRUE)
+  colnames(dat)[2:3]<-c("date.time","airtemp_c")
+  dat<-dat[,-1]
+  dat$date<-substr(dat$date,1,10)
+  dat$time<-substr(dat$date.time,12,20)
+  #head(dat)
+  dat<-dat[dat$date=="08/11/2022",]
+  if(dim(dat[grep("08/11/2022",dat$date.time),])[1]==0){next}
+    #tempdatdir<-"../data/temp_data/2022_08_12"
+    #focalsn<-j
+    
+  }
+if(substr(j,1,2)!="BT"){
+  tempdatdir<-"../data/temp_data/2022_08_10"
+  focalsn<-j
+tempfiles<-list.files(tempdatdir)
+tempfiles<-tempfiles[which(substr(tempfiles,nchar(tempfiles)-3,nchar(tempfiles))==".csv")]
+#if no data file exists with this sn, try a different folder
+if(length(tempfiles[grep(focalsn,tempfiles)])==0){
+  tempdatdir<-"../data/temp_data/2022_08_12"
+  focalsn<-j
+  tempfiles<-list.files(tempdatdir)
+  tempfiles<-tempfiles[which(substr(tempfiles,nchar(tempfiles)-3,nchar(tempfiles))==".csv")]
 }
-mtext ("July 2022", side=3, line=0)
-dev.off()
-fixef(maxmod)[1]-fixef(maxmod)[3]#difference between no trees and park
-fixef(maxmod)[1]-fixef(maxmod)[2]#difference between no trees and and trees
+focalsnfile<-tempfiles[grep(focalsn,tempfiles)]
+dat<-read.csv(paste(tempdatdir,"/",tempfiles[grep(focalsnfile,tempfiles)],sep=""), skip=1,header=TRUE)
+colnames(dat)[2:3]<-c("date.time","airtemp_c")
+#if no data from temp blitz in this datafile, try a different folder
+if(dim(dat[grep("08/11/2022",dat$date.time),])[1]==0){
+  tempdatdir<-"../data/temp_data/2022_08_12"
+  focalsn<-j
+  tempfiles<-list.files(tempdatdir)
+  tempfiles<-tempfiles[which(substr(tempfiles,nchar(tempfiles)-3,nchar(tempfiles))==".csv")]
+  focalsnfile<-tempfiles[grep(focalsn,tempfiles)]
+  dat<-read.csv(paste(tempdatdir,"/",tempfiles[grep(focalsnfile,tempfiles)],sep=""), skip=1,header=TRUE)
+  colnames(dat)[2:3]<-c("date.time","airtemp_c")
+  }
+dat<-dat[,-1]
+dat$date<-substr(dat$date,1,8)
+dat$time<-substr(dat$date.time,10,20)
+dat$time<-format(strptime(dat$time, "%I:%M:%S %p"), "%H:%M:%S")
+#head(dat)
+dat<-dat[dat$date=="08/11/22",]
+}
+dat$Hobo_SN<-paste(j)
+adat<-subset(dat,select=c(Hobo_SN,time, airtemp_c))
+airtempdat<-rbind(airtempdat,adat)
+}
+#get time in same format
+airtempdat$time<-format(strptime(airtempdat$time, "%H:%M:%S"), "%H:%M")
+surftempdat$time<-format(strptime(surftempdat$time, "%H:%M"), "%H:%M")
+
+#now merge air temp into surf temp
+airsurdat<-left_join(surftempdat,airtempdat)
+locdat2 <- tblocdat %>% 
+  select(Hobo_SN, Location, Latitude, Longitude, Elevation, Trees.,surftype, sunshade)%>% 
+  distinct(Location, .keep_all= TRUE)
+asldat<-left_join(airsurdat,locdat2, by="Hobo_SN", copy=TRUE)
+asldat<-asldat[-(which(is.na(asldat$airtemp_c))),]
+asldat<-asldat[-which(asldat$Hobo_SN=="21223113"),]
+
+#need to figure out why row45 is NA...for now, remove it
+asldat<-asldat[-(which(is.na(asldat$Latitude))),]
+
+asldat_long<-gather(asldat, temptype, temp_c, surftemp_c:airtemp_c,factor_key=TRUE)
+asldat_long$trees.temptype<-paste(asldat_long$Trees.,asldat_long$temptype, sep=".")
+
+#remove data from one logger that failed to accurately record temperature:
+#Make some plots
+boxplot(as.numeric(surftemp_c)~Trees., data=asldat)
+boxplot(as.numeric(airtemp_c)~Trees., data=asldat)
+boxplot(as.numeric(temp_c)~trees.temptype, data=asldat_long)
+
+asldat_long$hour<-as.integer(substr(asldat_long$time,1,2))
+asldat_long$temp_c<-as.numeric(asldat_long$temp_c)
+asldat_long$Trees.<-as.factor(asldat_long$Trees.)
+cols<-c("gray","darkgreen")
+shapes<-c(24,21)
+plot(asldat_long$hour,asldat_long$temp_c, 
+     pch=shapes[as.factor(asldat_long$temptype)],bg=cols[as.factor(asldat_long$Trees.)],
+     xlab="Time of day (hr)",ylab=c("Temperature (C)"), bty="l")
+
+#fit some models
+m1<-lm(temp_c~Trees.*temptype, data=asldat_long)
+m2<-lm(temp_c~Trees.*temptype+hour, data=asldat_long)
+m3<-lm(temp_c~Trees.*temptype+hour +surftype, data=asldat_long)
+m4<-lm(temp_c~Trees.*temptype+hour +surftype+sunshade, data=asldat_long)
+
+AIC(m1,m2,m3,m4)
+summary(m4)

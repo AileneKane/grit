@@ -79,10 +79,10 @@ boxplot(logdatlocs$tmin~logdatlocs$type)
 summary(lm(logdatlocs$tmin~logdatlocs$type))
 summary(lm(logdatlocs$tmax~logdatlocs$type))
 logdatlocs$month<-substr(logdatlocs$date,1,2)
-augdat<-logdatlocs[logdatlocs$month=="07",]
-maxmod<-lmer(tmax~-1+type+ (1|as.factor(augdat$date)), dat=augdat)
-minmod<-lmer(tmin~-1+type+ (1|as.factor(augdat$date)), dat=augdat)
-png("figs/STacomaaugmaxtemps.png", width=4, height=6, units="in", res=220)
+juldat<-logdatlocs[logdatlocs$month=="07",]
+maxmod<-lmer(tmax~-1+type+ (1|as.factor(juldat$date)), dat=juldat)
+minmod<-lmer(tmin~-1+type+ (1|as.factor(juldat$date)), dat=juldat)
+png("figs/STacomajulmaxtemps.png", width=4, height=6, units="in", res=220)
 
 maxplot<-barplot(fixef(maxmod), ylim=c(20,28),col=c("gray","seagreen3","darkgreen"),
         names.arg=c("No trees","Trees","Forested Park"), ylab="Temperature (C)",xlab="Location",
