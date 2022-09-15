@@ -25,9 +25,13 @@ source("sourced_files/clean_locs.R")
 surflogs<-read.csv("../data/TempBlitzFormData.csv", header=TRUE)
 source("sourced_files/clean_tempblitzformdata.R")
 
-#read in surface temperature logger data (exported from hoblink website)
+#read in surface temperature logger data (exported from hobolink website)
 surftemps<-read.csv("../data/BT_temp_data/tempblitz/Temperature_blitz_2022_08_31_20_14_42_PDT_surfacetemploggers.csv", header=TRUE)
 source("sourced_files/clean_surftemps.R")
+
+#Read in tree data 
+treedat<-read.csv("../data/HoboLocations_TreeData.csv", header=TRUE)
+source("sourced_files/summarize_grittreedat.R")
 
 #merge the location data with the surf logger locations, using the logger sn
 tblocdat<-left_join(surflogs,locs, copy=TRUE, keep = FALSE)
@@ -123,9 +127,11 @@ surftempdat$time<-format(strptime(surftempdat$time, "%H:%M"), "%H:%M")
 
 #now merge air temp into surf temp
 airsurdat<-left_join(surftempdat,airtempdat)
+
 locdat2 <- tblocdat %>% 
-  select(Hobo_SN, Location, Latitude, Longitude, Elevation, Trees.,surftype, sunshade)%>% 
+  select(Hobo_SN, Location, Latitude, Longitude, Elevation, Trees.,surftype, sunshade, impervious) %>% 
   distinct(Location, .keep_all= TRUE)
+
 asldat<-left_join(airsurdat,locdat2, by="Hobo_SN", copy=TRUE)
 asldat<-asldat[-(which(is.na(asldat$airtemp_c))),]
 asldat<-asldat[-which(asldat$Hobo_SN=="21223113"),]
@@ -133,39 +139,124 @@ asldat<-asldat[-which(asldat$Hobo_SN=="21223113"),]
 #need to figure out why row45 is NA...for now, remove it
 asldat<-asldat[-(which(is.na(asldat$Latitude))),]
 
+#Merge in tree data
 asldat_long<-gather(asldat, temptype, temp_c, surftemp_c:airtemp_c,factor_key=TRUE)
 asldat_long$trees.temptype<-paste(asldat_long$Trees.,asldat_long$temptype, sep=".")
-
+asldat_long2<-left_join(asldat_long,sumba,copy=TRUE)
+#check that locations with trees have more bai:
+boxplot(as.numeric(asldat_long2$TotalBA_cm2)~Trees., data=asldat_long2)
 #remove data from one logger that failed to accurately record temperature:
 #Make some plots
 boxplot(as.numeric(surftemp_c)~Trees., data=asldat)
 boxplot(as.numeric(airtemp_c)~Trees., data=asldat)
 boxplot(as.numeric(temp_c)~trees.temptype, data=asldat_long)
 
-asldat_long$hour<-as.integer(substr(asldat_long$time,1,2))
-asldat_long$temp_c<-as.numeric(asldat_long$temp_c)
-asldat_long$Trees.<-as.factor(asldat_long$Trees.)
+asldat_long2$hour<-as.integer(substr(asldat_long2$time,1,2))
+asldat_long2$temp_c<-as.numeric(asldat_long2$temp_c)
+asldat_long2$Trees.<-as.factor(asldat_long2$Trees.)
+asldat_long2$TotalBA_cm2<-as.numeric(asldat_long2$TotalBA_cm2)
+asldat_long2$TotalBA_m2<-asldat_long2$TotalBA_cm2/10000
+asldat_long2$Hobo_SN <-as.factor(asldat_long2$Hobo_SN)
 cols<-c("gray","darkgreen")
 shapes<-c(24,21)
-png("figs/tempblitzdat.png", width=4, height=6, units="in", res=220)
+png("figs/tempblitzdat_surfair.png", width=10, height=6, units="in", res=220)
+par(mfrow=c(1,2))
+plot(asldat_long2$hour[asldat_long2$temptype=="airtemp_c"],asldat_long2$temp_c[asldat_long2$temptype=="airtemp_c"], 
+     pch=21,bg=cols[as.factor(asldat_long2$Trees.)],
+     ylim=c(15,55),cex=1.5,
+     cex.axis=1.5,cex.lab=1.5,cex.main=1.5,
+     xlab="Time of day (hr)",ylab=c("Temperature (C)"), main="Air temperature",bty="l")
+legend("topleft",legend=c("Trees","No Trees"),pch=24, pt.bg=rev(cols))
 
-plot(asldat_long$hour,asldat_long$temp_c, 
-     pch=shapes[as.factor(asldat_long$temptype)],bg=cols[as.factor(asldat_long$Trees.)],
-     xlab="Time of day (hr)",ylab=c("Temperature (C)"), bty="l")
+plot(asldat_long2$hour[asldat_long2$temptype=="surftemp_c"],asldat_long2$temp_c[asldat_long2$temptype=="surftemp_c"], 
+     pch=24,bg=cols[as.factor(asldat_long2$Trees.)],
+     ylim=c(15,55),cex=1.5,
+     cex.axis=1.5,cex.lab=1.5,cex.main=1.5,
+     xlab="Time of day (hr)",ylab="Temperature (C)", main="Surface temperature", bty="l")
 dev.off()
+cols<-c("gray","darkgreen")
+shapes<-c(24,21)
+png("figs/tempblitzdat_BA.png", width=10, height=6, units="in", res=220)
+par(mfrow=c(1,2))
+
+plot(asldat_long2$TotalBA_cm2[asldat_long2$temptype=="surftemp_c"],asldat_long2$temp_c[asldat_long2$temptype=="surftemp_c"], 
+     pch=24,bg=cols[as.factor(asldat_long2$Trees.)],
+     xlab="Tree abundance (total basal area, cm2)",ylab="Temperature (C)", main="Surface temp", bty="l")
+legend("topright",legend=c("Trees","No Trees"),pch=24, pt.bg=rev(cols))
+plot(asldat_long2$TotalBA_cm2[asldat_long2$temptype=="airtemp_c"],asldat_long2$temp_c[asldat_long2$temptype=="airtemp_c"], 
+     pch=21,bg=cols[as.factor(asldat_long2$Trees.)],
+     xlab="Tree abundance (total basal area, cm2)",ylab=c("Temperature (C)"), main="Air temp",bty="l")
+dev.off()
+
+asldat_long2<-asldat_long2[-which(is.na(asldat_long2$TotalBA_cm2)),]
 #fit some models
-m1<-lm(temp_c~Trees.*temptype, data=asldat_long)
-m2<-lm(temp_c~Trees.*temptype+hour, data=asldat_long)
-m3<-lm(temp_c~Trees.*temptype+hour +surftype, data=asldat_long)
-m4<-lm(temp_c~Trees.*temptype+hour +surftype+sunshade, data=asldat_long)
-m4a<-lm(temp_c~Trees.+temptype+hour +surftype+sunshade, data=asldat_long)
-m5<-lm(temp_c~Trees.+temptype+hour+surftype+sunshade+Trees.:temptype+Trees.:hour, data=asldat_long)
-m6<-lm(temp_c~Trees.+temptype+hour+surftype+sunshade+Trees.:temptype+Trees.:hour + Trees.:surftype, data=asldat_long)
+m1<-lm(temp_c~Trees.*temptype, data=asldat_long2)
+m1a<-lm(temp_c~TotalBA_m2*temptype, data=asldat_long2)
 
-AIC(m1,m2,m3,m4,m5,m6)#m4 wins based on AIC
-summary(m4)
-plot(m4)
-Anova(m4)
-anova(m4)
+m2<-lm(temp_c~Trees.*temptype+hour, data=asldat_long2)
+m2a<-lm(temp_c~TotalBA_m2*temptype+hour, data=asldat_long2)
 
-#next step is to add in the amount of trees (basal area)- not just yes/no for trees
+m3<-lm(temp_c~Trees.*temptype+hour +surftype, data=asldat_long2)
+m3a<-lm(temp_c~TotalBA_m2*temptype+hour +surftype, data=asldat_long2)
+m3b<-lm(temp_c~TotalBA_m2*temptype+hour +impervious, data=asldat_long2)
+
+m4<-lm(temp_c~Trees.*temptype+hour +surftype+sunshade, data=asldat_long2)
+m4a<-lm(temp_c~TotalBA_m2*temptype+hour +surftype+sunshade, data=asldat_long2)
+m4b<-lm(temp_c~TotalBA_m2*temptype+hour  +impervious+sunshade, data=asldat_long2)
+
+m5<-lm(temp_c~Trees.+temptype+hour+surftype+sunshade+Trees.:temptype+Trees.:hour, data=asldat_long2)
+m5a<-lm(temp_c~TotalBA_m2+temptype+hour+surftype+sunshade+TotalBA_m2:temptype+TotalBA_m2:hour, data=asldat_long2)
+m5b<-lm(temp_c~TotalBA_m2+temptype+hour+impervious+sunshade+TotalBA_m2:temptype+TotalBA_m2:hour, data=asldat_long2)
+
+m6<-lm(temp_c~Trees.+temptype+hour+surftype+sunshade+Trees.:temptype+Trees.:hour + Trees.:surftype, data=asldat_long2)
+m6a<-lm(temp_c~TotalBA_m2+temptype+hour+surftype+sunshade+TotalBA_m2:temptype+TotalBA_m2:hour + TotalBA_m2:surftype, data=asldat_long2)
+m6b<-lm(temp_c~TotalBA_m2+temptype+hour +impervious+sunshade+Trees.:temptype+TotalBA_m2:hour + TotalBA_m2:impervious, data=asldat_long2)
+
+
+m7<-lm(temp_c~Trees.+temptype+hour+surftype+surftype:temptype+sunshade+Trees.:temptype+Trees.:hour + Trees.:surftype, data=asldat_long2)
+m7a<-lm(temp_c~TotalBA_m2+temptype+hour+surftype+surftype:temptype+sunshade+TotalBA_m2:temptype+TotalBA_m2:hour + TotalBA_m2:surftype, data=asldat_long2)
+m7b<-lm(temp_c~TotalBA_m2+temptype+hour +impervious +impervious:temptype+sunshade+TotalBA_m2:temptype+TotalBA_m2:hour + TotalBA_m2:impervious, data=asldat_long2)
+
+m8b<-lm(temp_c~TotalBA_m2+temptype+hour +impervious +impervious:temptype+sunshade+TotalBA_m2:temptype+TotalBA_m2:hour + TotalBA_m2:impervious+impervious:hour, data=asldat_long2)
+m9b<-lm(temp_c~TotalBA_m2+temptype+hour +impervious +impervious:temptype+sunshade+TotalBA_m2:temptype + TotalBA_m2:impervious+impervious:hour, data=asldat_long2)
+m10b<-lm(temp_c~TotalBA_m2+temptype+hour +impervious +impervious:temptype+sunshade+TotalBA_m2:temptype + TotalBA_m2:impervious+impervious:hour+impervious:sunshade, data=asldat_long2)
+m11b<-lm(temp_c~TotalBA_m2+temptype+hour +impervious +impervious:temptype+sunshade+TotalBA_m2:temptype + TotalBA_m2:impervious+impervious:hour+impervious:sunshade+impervious:sunshade:hour, data=asldat_long2)
+m12b<-lm(temp_c~TotalBA_m2+temptype+hour +impervious +impervious:temptype+sunshade+TotalBA_m2:temptype + impervious:hour+impervious:sunshade+impervious:sunshade:hour, data=asldat_long2)
+mm12b<-lmer(temp_c~TotalBA_m2+temptype+hour +impervious +impervious:temptype+sunshade+TotalBA_m2:temptype + impervious:hour+impervious:sunshade+impervious:sunshade:hour+(1|Hobo_SN), data=asldat_long2)
+
+AIC(m1,m2,m3,m4,m5,m6,m1a,m2a,m3a,m3b, m4a,m4b, m5a,m5b,m6a,m6b, m7, m7a, m7b, m8b, m9b,m10b, m11b, m12b, mm12b)#m4a wins based on AIC
+summary(mm12b)
+cbind(coef(m12b), fixef(mm12b))
+plot(mm12b)
+summary(m12b)
+
+#plot conditional effects
+# 
+# interplot(
+#   mm12b,
+#   "TotalBA_m2",
+#  "temptype", data=asldat_long2)
+# 
+# interplot(m =  mm12b, var1 ="temptype", var2 = "TotalBA_m2", )
+# 
+
+png("figs/tempblitzdat_BA_mod.png", width=10, height=6, units="in", res=220)
+par(mfrow=c(1,2))
+
+plot(asldat_long2$TotalBA_m2[asldat_long2$temptype=="airtemp_c"],asldat_long2$temp_c[asldat_long2$temptype=="airtemp_c"], 
+     pch=24,bg=cols[as.factor(asldat_long2$Trees.)],
+     ylim=c(15,55),cex=1.5,
+     cex.axis=1.5,cex.lab=1.5,cex.main=1.5,
+     xlab="Tree abundance",ylab=c("Temperature (C)"), main="Air temperature",bty="l")
+abline(coef(m12b)[1]+coef(m12b)[3]+coef(m12b)[10],coef(m12b)[2]+coef(m12b)[8], lwd=2)#effect of trees in sun, impervious surface
+
+plot(asldat_long2$TotalBA_m2[asldat_long2$temptype=="surftemp_c"],asldat_long2$temp_c[asldat_long2$temptype=="surftemp_c"], 
+     pch=24,bg=cols[as.factor(asldat_long2$Trees.)],
+     ylim=c(15,55),cex=1.5,
+     cex.axis=1.5,cex.lab=1.5,cex.main=1.5,
+     xlab="Tree abundance",ylab="Temperature (C)", main="Surface temperature", bty="l")
+
+abline(coef(m12b)[1]+coef(m12b)[10],coef(m12b)[2], lwd=2)#effect of trees in sun, impervious surface
+
+dev.off()
+

@@ -89,16 +89,18 @@ surflogs$Your.Temperature.Logger..[surflogs$Your.Temperature.Logger..=="2130965"
 surflogs$Your.Temperature.Logger..[surflogs$Your.Temperature.Logger..=="21402965"]<-"21302965"
 
 #combine some categories in surftype
-surflogs$surftype[surflogs$surftype=="Weeds!"]<-"veg"
-surflogs$surftype[surflogs$surftype=="Grass"]<-"veg"
-surflogs$surftype[surflogs$surftype=="Pebbles and some grass"]<-"veg"
-surflogs$surftype[surflogs$surftype=="Sidewalk (Paved Surface)"]<-"pavement"
-surflogs$surftype[surflogs$surftype=="Rocks and dirt"]<-"soil"
-surflogs$surftype[surflogs$surftype=="Rocks and pebbles "]<-"soil"
-surflogs$surftype[surflogs$surftype=="Dirt and dead grass"]<-"soil"
-surflogs$surftype[surflogs$surftype=="Mulched soil"]<-"soil"
-surflogs$surftype[surflogs$surftype=="Bare soil"]<-"soil"
-
+surflogs$surftype[surflogs$surftype=="Weeds!"]<-"1veg"
+surflogs$surftype[surflogs$surftype=="Grass"]<-"1veg"
+surflogs$surftype[surflogs$surftype=="Pebbles and some grass"]<-"1veg"
+surflogs$surftype[surflogs$surftype=="Sidewalk (Paved Surface)"]<-"3pavement"
+surflogs$surftype[surflogs$surftype=="Rocks and dirt"]<-"2soil"
+surflogs$surftype[surflogs$surftype=="Rocks and pebbles "]<-"2soil"
+surflogs$surftype[surflogs$surftype=="Dirt and dead grass"]<-"2soil"
+surflogs$surftype[surflogs$surftype=="Mulched soil"]<-"2soil"
+surflogs$surftype[surflogs$surftype=="Bare soil"]<-"2soil"
+#pervious vs impervious
+surflogs$impervious<-"No"
+surflogs$impervious[surflogs$surftype=="3pavement"]<-"Yes"
 #remove row with no data
 surflogs<-surflogs[!surflogs$Hobo_SN=="",]
 

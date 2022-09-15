@@ -58,7 +58,7 @@ logdatlocs$type[logdatlocs$loggersn=="21223102"]<-"btrees"
 
 maxtemps<-aggregate(logdatlocs$tmax, by=list(logdatlocs$loggersn,logdatlocs$Location,logdatlocs$Trees.), max)
 colnames(maxtemps)<-c("SN","Location","Trees","Temp_C")
-maxtemps$order<-c(3,1,2)
+maxtemps$order<-c(1,3,2)
 maxtemps<-maxtemps[order(maxtemps$order),]# all on on July 31
 
 #on the hottest measurements:
