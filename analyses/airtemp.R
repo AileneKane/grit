@@ -21,50 +21,22 @@ setwd("~/GitHub/grit/analyses")
 locs<-read.csv("../data/HoboLocations_PoleLocations.csv", header=TRUE)
 source("sourced_files/clean_locs.R")
 
-#read in data inputs from people (w/ surface temp loggers) from temperature blitz day (August 8, 2022 from 8am-4pm)
-surflogs<-read.csv("../data/TempBlitzFormData.csv", header=TRUE)
-source("sourced_files/clean_tempblitzformdata.R")
-
-#read in surface temperature logger data (exported from hobolink website)
-surftemps<-read.csv("../data/BT_temp_data/tempblitz/Temperature_blitz_2022_08_31_20_14_42_PDT_surfacetemploggers.csv", header=TRUE)
-source("sourced_files/clean_surftemps.R")
-
 #Read in tree data 
 treedat<-read.csv("../data/HoboLocations_TreeData.csv", header=TRUE)
 source("sourced_files/summarize_grittreedat.R")
 
 #merge the location data with the surf logger locations, using the logger sn
-tblocdat<-left_join(surflogs,locs, copy=TRUE, keep = FALSE)
-surfsns<-sort(unique(tblocdat$Your.Temperature.Logger..))
+#tblocdat<-left_join(surflogs,locs, copy=TRUE, keep = FALSE)
+#surfsns<-sort(unique(tblocdat$Your.Temperature.Logger..))
 
 #First, build the surface logger dataset by reading in temperature data from surface temperature loggers used by volunteers
-surftimes<-subset(tblocdat, select=c(Your.Temperature.Logger..,End.time..hh.mm.AM.PM.,Hobo_SN))
-colnames(surftimes)<-c("surfloggersn","time","Hobo_SN")
-
-#merge in surftemp data
-surftempdat<-NULL
-
-for(i in surfsns){
-   #select the times for which this temp loggers was aligned with an air temp logger
-  thissurftime<-surftimes[surftimes$surfloggersn==i,]
-  thissurftime$time<-as.character(thissurftime$time)
-  #skip 
-  if(length(unique(colnames(surftemps)==i))==1){next}
-  thissurftemp<-as.data.frame(cbind(surftemps$Date,surftemps$time,surftemps[,which(colnames(surftemps)==i)]))
-  colnames(thissurftemp)<-c("date","time",paste(i))
-  thissurftemp$time<-as.character(thissurftemp$time)
-  #get rid of weird space
-  thissurftemp$time[grep(" 8:",thissurftemp$time,)]<-gsub(" 8:","8:",thissurftemp$time[grep(" 8:",thissurftemp$time,)])
-  thissurftemp$time[grep(" 9:",thissurftemp$time,)]<-gsub(" 9:","9:",thissurftemp$time[grep(" 9:",thissurftemp$time,)])
-  allthisdat<-left_join(thissurftime,thissurftemp,by="time")
-  colnames(allthisdat)[5]<-"surftemp_c"
-  surftempdat<-rbind(surftempdat,allthisdat)
-  }
+#surftimes<-subset(tblocdat, select=c(Your.Temperature.Logger..,End.time..hh.mm.AM.PM.,Hobo_SN))
+#colnames(surftimes)<-c("surfloggersn","time","Hobo_SN")
 
 #now put together all relevant air temperature data on 8/11/22
 airtempdat<-NULL
 
-airsns<-sort(unique(surftempdat$Hobo_SN))
+airsns<-sort(unique(locs$Hobo_SN))
 for(j in airsns){
 if(substr(j,1,2)=="BT"){
   tempdatdir<-"../data/BT_temp_data/tempblitz"
