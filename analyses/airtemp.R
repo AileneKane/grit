@@ -14,6 +14,7 @@ library(dplyr)
 library(lme4)
 library(tidyr)
 library(car)
+library(scales)
 # set working directory
 setwd("~/GitHub/grit/analyses")
 
@@ -94,14 +95,14 @@ alldat<-alldat[-(which(is.na(alldat$Longitude))),]
 #Merge in tree data
 alldat2<-left_join(alldat,sumba,copy=TRUE)
 #check that locations with trees have more bai:
-boxplot(as.numeric(aldat2$TotalBA_cm2)~Trees., data=aldat)
+boxplot(as.numeric(alldat2$TotalBA_cm2)~Trees., data=alldat)
 #Make some plots
-boxplot(as.numeric(airtemp_c)~Trees., data=aldat)
+boxplot(as.numeric(airtemp_c)~Trees., data=alldat)
 alldat2$airtemp_c<-as.numeric(alldat2$airtemp_c)
 alldat2$hour<-as.integer(substr(alldat2$time,1,2))
 alldat2$Trees.<-as.factor(alldat2$Trees.)
 alldat2$TotalBA_cm2<-as.numeric(alldat2$TotalBA_cm2)
-aldat2$TotalBA_m2<-aldat2$TotalBA_cm2/10000
+alldat2$TotalBA_m2<-alldat2$TotalBA_cm2/10000
 alldat2$Hobo_SN <-as.factor(alldat2$Hobo_SN)
 alldat2$month<-as.factor(as.character(substr(alldat2$date,1,2)))
 alldat2$year<-as.factor(as.character(paste("20",substr(alldat2$date,7,8), sep="")))
@@ -119,49 +120,72 @@ juldat[which(juldat$airtemp_c==max(juldat$airtemp_c)),]
 head(jundat[jundat$date=="06/27/22",])
 #Fit some models
 junm1<-lm(airtemp_c~Trees.*day, data=jundat)
-junm1a<-lm(airtemp_c~TotalBA_cm2*day, data=jundat)
+junm1a<-lm(airtemp_c~TotalBA_m2*day, data=jundat)
 
 junm2<-lm(airtemp_c~Trees.*hour, data=jundat)
-junm2a<-lm(airtemp_c~TotalBA_cm2*hour, data=jundat)
+junm2a<-lm(airtemp_c~TotalBA_m2*hour, data=jundat)
 
 junm3<-lm(airtemp_c~Trees.*hour+Elevation, data=jundat)
-junm3a<-lm(airtemp_c~TotalBA_cm2*hour+Elevation, data=jundat)
+junm3a<-lm(airtemp_c~TotalBA_m2*hour+Elevation, data=jundat)
 
 AIC(junm1,junm2,junm3,junm1a,junm2a,junm3a)
+summary(junm3a)
+summary(junm3)
 
+#Fit some mixed effects models
+junmm1<-lmer(airtemp_c~Trees.*day + (1|Hobo_SN), data=jundat)
+junmm1a<-lmer(airtemp_c~TotalBA_m2*day+ (1|Hobo_SN), data=jundat)
 
-cols<-c("gray","darkgreen")
-shapes<-c(24,21)
-png("figs/tempblitzdat_surfair.png", width=10, height=6, units="in", res=220)
-par(mfrow=c(1,2))
-plot(asldat_long2$hour[asldat_long2$temptype=="airtemp_c"],asldat_long2$temp_c[asldat_long2$temptype=="airtemp_c"], 
-     pch=21,bg=cols[as.factor(asldat_long2$Trees.)],
-     ylim=c(15,55),cex=1.5,
+junmm2<-lmer(airtemp_c~Trees.*hour+ (1|Hobo_SN), data=jundat)
+junmm2a<-lmer(airtemp_c~TotalBA_m2*hour+ (1|Hobo_SN), data=jundat)
+
+junmm3<-lmer(airtemp_c~Trees.*hour+Elevation+ (1|Hobo_SN), data=jundat)
+junmm3a<-lmer(airtemp_c~TotalBA_m2*hour+Elevation+ (1|Hobo_SN), data=jundat)
+
+AIC(junmm1,junmm2,junmm3,junmm1a,junmm2a,junmm3a)
+summary(junmm3a)
+summary(junm1a)
+jundat$dom<- as.numeric(substr(jundat$date,4,5))
+
+cols<-c("gray","seagreen3")
+
+png("figs/airtempbvsBA.png", width=10, height=6, units="in", res=220)
+plot(jundat$dom,jundat$airtemp_c, 
+     pch=21,bg=alpha(cols[as.factor(jundat$Trees.)],.5),
+     ylim=c(10,40),cex=1.5,
      cex.axis=1.5,cex.lab=1.5,cex.main=1.5,
-     xlab="Time of day (hr)",ylab=c("Temperature (C)"), main="Air temperature",bty="l")
-legend("topleft",legend=c("Trees","No Trees"),pch=24, pt.bg=rev(cols))
-
-plot(asldat_long2$hour[asldat_long2$temptype=="surftemp_c"],asldat_long2$temp_c[asldat_long2$temptype=="surftemp_c"], 
-     pch=24,bg=cols[as.factor(asldat_long2$Trees.)],
-     ylim=c(15,55),cex=1.5,
-     cex.axis=1.5,cex.lab=1.5,cex.main=1.5,
-     xlab="Time of day (hr)",ylab="Temperature (C)", main="Surface temperature", bty="l")
-dev.off()
-cols<-c("gray","darkgreen")
-shapes<-c(24,21)
-png("figs/tempblitzdat_BA.png", width=10, height=6, units="in", res=220)
-par(mfrow=c(1,2))
-
-plot(asldat_long2$TotalBA_cm2[asldat_long2$temptype=="surftemp_c"],asldat_long2$temp_c[asldat_long2$temptype=="surftemp_c"], 
-     pch=24,bg=cols[as.factor(asldat_long2$Trees.)],
-     xlab="Tree abundance (total basal area, cm2)",ylab="Temperature (C)", main="Surface temp", bty="l")
-legend("topright",legend=c("Trees","No Trees"),pch=24, pt.bg=rev(cols))
-plot(asldat_long2$TotalBA_cm2[asldat_long2$temptype=="airtemp_c"],asldat_long2$temp_c[asldat_long2$temptype=="airtemp_c"], 
-     pch=21,bg=cols[as.factor(asldat_long2$Trees.)],
-     xlab="Tree abundance (total basal area, cm2)",ylab=c("Temperature (C)"), main="Air temp",bty="l")
+     xlab="Day of the month",ylab=c("Temperature (C)"), main="June Air temperature",bty="l")
+legend("topleft",legend=c("Trees","No Trees"),pch=21, pt.bg=rev(cols))
 dev.off()
 
-asldat_long2<-asldat_long2[-which(is.na(asldat_long2$TotalBA_cm2)),]
+domnames<-c("",1,"",2,"",3,"",4,"",5,"",6,"",7,"",8,"",9,"",
+           10,"",11,"",12,"",13,"",14,"",15,"",16,"",17,"",18,"",19,"",
+           20,"",21,"",22,"",23,"",24,"",25,"",26,"",27,"",28,"",29,"",30)
+png("figs/airtempvdayJuneboxplot.png", width=10, height=6, units="in", res=220)
+
+x<-boxplot(airtemp_c ~ Trees.+dom, beside=TRUE,data = jundat,
+           col = cols, xaxs = n, names=FALSE,
+           xlab="Day in June", ylab="Air Temperature (C)")
+
+axis(1,seq(from =4, to=30, by=4), at=seq(from =8,to=60, by=8))
+
+legend("topleft", legend = c("Trees","No Trees"),fill = rev(cols), bty="n")
+
+dev.off()
+
+png("figs/airtempvdaynightboxplot.png", width=8, height=8, units="in", res=220)
+
+x<-boxplot(airtemp_c ~ Trees.+day, beside=TRUE,data = jundat,
+           col = cols, xaxs = n, names=c("No Trees","Trees","No Trees","Trees"),
+           xlab="", ylab="Air Temperature (C)")
+axis(1,c("Night","Day"), at=c(1.5,4), tick=FALSE, line=2)
+legend("topleft", legend = c("Trees","No Trees"),fill = rev(cols), bty="n")
+
+dev.off()
+
+
+
+jundat2<-jundat[-which(is.na(jundat$TotalBA_m2)),]
 summary(mm12b)
 cbind(coef(m12b), fixef(mm12b))
 plot(mm12b)
@@ -177,23 +201,14 @@ summary(m12b)
 # interplot(m =  mm12b, var1 ="temptype", var2 = "TotalBA_m2", )
 # 
 
-png("figs/tempblitzdat_BA_mod.png", width=10, height=6, units="in", res=220)
-par(mfrow=c(1,2))
+png("figs/temp_BA_mod.png", width=10, height=6, units="in", res=220)
 
-plot(asldat_long2$TotalBA_m2[asldat_long2$temptype=="airtemp_c"],asldat_long2$temp_c[asldat_long2$temptype=="airtemp_c"], 
-     pch=24,bg=cols[as.factor(asldat_long2$Trees.)],
-     ylim=c(15,55),cex=1.5,
+plot(jundat2$TotalBA_m2,jundat2$airtemp_c, 
+     pch=21,bg=alpha(cols[as.factor(jundat2$Trees.)], .5),
+     ylim=c(5,40),cex=1.5,
      cex.axis=1.5,cex.lab=1.5,cex.main=1.5,
-     xlab="Tree abundance",ylab=c("Temperature (C)"), main="Air temperature",bty="l")
-abline(coef(m12b)[1]+coef(m12b)[3]+coef(m12b)[10],coef(m12b)[2]+coef(m12b)[8], lwd=2)#effect of trees in sun, impervious surface
-
-plot(asldat_long2$TotalBA_m2[asldat_long2$temptype=="surftemp_c"],asldat_long2$temp_c[asldat_long2$temptype=="surftemp_c"], 
-     pch=24,bg=cols[as.factor(asldat_long2$Trees.)],
-     ylim=c(15,55),cex=1.5,
-     cex.axis=1.5,cex.lab=1.5,cex.main=1.5,
-     xlab="Tree abundance",ylab="Temperature (C)", main="Surface temperature", bty="l")
-
-abline(coef(m12b)[1]+coef(m12b)[10],coef(m12b)[2], lwd=2)#effect of trees in sun, impervious surface
+     xlab="Tree abundance (basal area)",ylab=c("Temperature (C)"), main="",bty="l")
+abline(a=coef(junm3a)[1]+5, b=coef(junm3a)[2], lwd=2)#effect of trees in sun, impervious surface
 
 dev.off()
 
