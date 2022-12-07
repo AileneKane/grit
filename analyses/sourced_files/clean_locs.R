@@ -10,5 +10,9 @@ locs$Pole_No[grep("Tp",locs$Pole_No)]<-gsub("Tp","TP",locs$Pole_No[grep("Tp",loc
 #clean Hobo_SN column
 locs$Hobo_SN[grep("Bt",locs$Hobo_SN)]<-gsub("Bt","BT",locs$Hobo_SN[grep("Bt",locs$Hobo_SN)])
 locs$Hobo_SN[grep("BT ",locs$Hobo_SN)]<-gsub("BT ","BT",locs$Hobo_SN[grep("BT ",locs$Hobo_SN)])
+locs$Hobo_SN[locs$Hobo_SN=="B121302952"]<-"BT21302952"
+locs$Hobo_SN[locs$Hobo_SN=="BT31302979"]<-"BT21302979"
+
+
 locs$Hobo_SN[locs$Pole_No=="TP25887"]<-"NEEDTOFIX"
 

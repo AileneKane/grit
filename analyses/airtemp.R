@@ -1,10 +1,10 @@
 #######################################################
-### Script to look at temp blitz data (Aug 11, 2022)###
+### Script to look at GRIT airtemp data ###
 ################# August 24, 2022 #####################
 ################ ailene.ettinger@tnc.org ##############
 #######################################################
 
-
+#Currently, this script looks at pulls together all temperature data from from March through August 2022
 # housekeeping
 rm(list=ls()) 
 options(stringsAsFactors = FALSE)
@@ -25,110 +25,111 @@ source("sourced_files/clean_locs.R")
 treedat<-read.csv("../data/HoboLocations_TreeData.csv", header=TRUE)
 source("sourced_files/summarize_grittreedat.R")
 
-#merge the location data with the surf logger locations, using the logger sn
-#tblocdat<-left_join(surflogs,locs, copy=TRUE, keep = FALSE)
-#surfsns<-sort(unique(tblocdat$Your.Temperature.Logger..))
-
-#First, build the surface logger dataset by reading in temperature data from surface temperature loggers used by volunteers
-#surftimes<-subset(tblocdat, select=c(Your.Temperature.Logger..,End.time..hh.mm.AM.PM.,Hobo_SN))
-#colnames(surftimes)<-c("surfloggersn","time","Hobo_SN")
-
-#now put together all relevant air temperature data on 8/11/22
+#Put together all air temperature data that we have
 airtempdat<-NULL
-
-airsns<-sort(unique(locs$Hobo_SN))
-for(j in airsns){
-if(substr(j,1,2)=="BT"){
-  tempdatdir<-"../data/BT_temp_data/tempblitz"
-  focalsn<-substr(j,3,nchar(j))
+tdir<-"../data/temp_data/"
+tfolds<-list.files(tdir)
+for(i in tfolds){
+  tempdatdir<-paste(tdir,i,sep="")
   tempfiles<-list.files(tempdatdir)
   tempfiles<-tempfiles[which(substr(tempfiles,nchar(tempfiles)-3,nchar(tempfiles))==".csv")]
-  focalsnfile<-tempfiles[grep(focalsn,tempfiles)]
-  if(length(focalsnfile)>1){focalsnfile<-focalsnfile[2]}
-  dat<-read.csv(paste(tempdatdir,"/",focalsnfile,sep=""), skip=1,header=TRUE)
-  colnames(dat)[2:3]<-c("date.time","airtemp_c")
-  dat<-dat[,-1]
-  dat$date<-substr(dat$date,1,10)
-  dat$time<-substr(dat$date.time,12,20)
-  #head(dat)
-  dat<-dat[dat$date=="08/11/2022",]
-  if(dim(dat[grep("08/11/2022",dat$date.time),])[1]==0){next}
-    #tempdatdir<-"../data/temp_data/2022_08_12"
-    #focalsn<-j
-    
+  for (j in tempfiles){
+    dat<-read.csv(paste(tempdatdir,"/",j,sep=""), skip=1,header=TRUE)
+    colnames(dat)[2:3]<-c("date.time","airtemp_c")
+    dat<-dat[,-1]
+    dat$date<-substr(dat$date,1,8)
+    dat$time<-substr(dat$date.time,10,20)
+    dat$time<-format(strptime(dat$time, "%I:%M:%S %p"), "%H:%M:%S")
+    dat$Hobo_SN<-paste(substr(j,1,nchar(j)-4))
+    if(substr(j,nchar(j)-5,nchar(j)-5)=="_"){dat$Hobo_SN<-paste(substr(j,1,nchar(j)-6))}
+    adat<-subset(dat,select=c(Hobo_SN,date,time, airtemp_c))
+    airtempdat<-rbind(airtempdat,adat)
   }
-if(substr(j,1,2)!="BT"){
-  tempdatdir<-"../data/temp_data/2022_08_10"
-  focalsn<-j
-tempfiles<-list.files(tempdatdir)
-tempfiles<-tempfiles[which(substr(tempfiles,nchar(tempfiles)-3,nchar(tempfiles))==".csv")]
-#if no data file exists with this sn, try a different folder
-if(length(tempfiles[grep(focalsn,tempfiles)])==0){
-  tempdatdir<-"../data/temp_data/2022_08_12"
-  focalsn<-j
-  tempfiles<-list.files(tempdatdir)
-  tempfiles<-tempfiles[which(substr(tempfiles,nchar(tempfiles)-3,nchar(tempfiles))==".csv")]
 }
-focalsnfile<-tempfiles[grep(focalsn,tempfiles)]
-dat<-read.csv(paste(tempdatdir,"/",tempfiles[grep(focalsnfile,tempfiles)],sep=""), skip=1,header=TRUE)
-colnames(dat)[2:3]<-c("date.time","airtemp_c")
-#if no data from temp blitz in this datafile, try a different folder
-if(dim(dat[grep("08/11/2022",dat$date.time),])[1]==0){
-  tempdatdir<-"../data/temp_data/2022_08_12"
-  focalsn<-j
-  tempfiles<-list.files(tempdatdir)
-  tempfiles<-tempfiles[which(substr(tempfiles,nchar(tempfiles)-3,nchar(tempfiles))==".csv")]
-  focalsnfile<-tempfiles[grep(focalsn,tempfiles)]
-  dat<-read.csv(paste(tempdatdir,"/",tempfiles[grep(focalsnfile,tempfiles)],sep=""), skip=1,header=TRUE)
-  colnames(dat)[2:3]<-c("date.time","airtemp_c")
-  }
-dat<-dat[,-1]
-dat$date<-substr(dat$date,1,8)
-dat$time<-substr(dat$date.time,10,20)
-dat$time<-format(strptime(dat$time, "%I:%M:%S %p"), "%H:%M:%S")
-#head(dat)
-dat<-dat[dat$date=="08/11/22",]
-}
-dat$Hobo_SN<-paste(j)
-adat<-subset(dat,select=c(Hobo_SN,time, airtemp_c))
-airtempdat<-rbind(airtempdat,adat)
-}
-#get time in same format
-airtempdat$time<-format(strptime(airtempdat$time, "%H:%M:%S"), "%H:%M")
-surftempdat$time<-format(strptime(surftempdat$time, "%H:%M"), "%H:%M")
 
-#now merge air temp into surf temp
-airsurdat<-left_join(surftempdat,airtempdat)
+dim(airtempdat)
+unique(airtempdat$Hobo_SN)  
+head(airtempdat)
 
-locdat2 <- tblocdat %>% 
-  select(Hobo_SN, Location, Latitude, Longitude, Elevation, Trees.,surftype, sunshade, impervious) %>% 
+#now format  blue tooth data
+bttempdat<-read.csv("../data/BT_temp_data/AllBTLoggers_start_to_06Dec202_2022_12_06_15_49_34_PST_1.csv", header=TRUE)
+#dim(bttempdat)
+#colnames(bttempdat)
+#bttempdat[1:5,1:3]
+bttempdat<-bttempdat[,-1]
+colnames(bttempdat)[2:length(colnames(bttempdat))]<-substr(colnames(bttempdat)[2:length(colnames(bttempdat))],50,nchar(colnames(bttempdat)[2:length(colnames(bttempdat))]))
+#reshape to long format
+bttempdat_long<-gather(bttempdat, logger, airtemp_c, colnames(bttempdat)[2:length(colnames(bttempdat))],factor_key=TRUE)
+bttempdat_long$Hobo_SN<-paste("BT",bttempdat_long$logger,sep="")
+bttempdat_long$date<-substr(bttempdat_long$Date,1,8)
+bttempdat_long$time<-substr(bttempdat_long$Date,10,20)
+
+btdat<-subset(bttempdat_long,select=c("Hobo_SN","date","time","airtemp_c"))
+#remove the many, many rows with airtemp=NA
+btdat<-btdat[-which(is.na(btdat$airtemp_c)),]
+#keep only data on the hour
+btdat<-btdat[which(substr(btdat$time,4,8)=="00:00"),]
+
+#now add btdat to airtemp
+allairdat<-rbind(airtempdat,btdat)
+
+#merge in locdata
+locdat2 <- locs %>% 
+  select(Hobo_SN, Location, Latitude, Longitude, Elevation, Trees.) %>% 
   distinct(Location, .keep_all= TRUE)
 
-asldat<-left_join(airsurdat,locdat2, by="Hobo_SN", copy=TRUE)
-asldat<-asldat[-(which(is.na(asldat$airtemp_c))),]
-asldat<-asldat[-which(asldat$Hobo_SN=="21223113"),]
+alldat<-left_join(allairdat,locdat2, by="Hobo_SN", copy=TRUE)
+alldat<-alldat[-(which(is.na(alldat$airtemp_c))),]
+alldat<-alldat[-which(alldat$Hobo_SN=="21223113"),]#messed up data!
+alldat<-alldat[-which(alldat$airtemp_c>36),]#inaccurate temperature readings
 
-#need to figure out why row45 is NA...for now, remove it
-asldat<-asldat[-(which(is.na(asldat$Latitude))),]
+###some serial numbers do not line up (e.g., we ave temp data, but no location matches up to them).
+###These are: unique(aldat$Hobo_SN[which(is.na(aldat$Longitude))])
+# "21162467"   "21223102"   "21223125"   "BT21302946" "BT21302957" "BT21302964" "BT21302976"
+#needs to be corrected but for now just removing these
+
+alldat<-alldat[-(which(is.na(alldat$Longitude))),]
+
 
 #Merge in tree data
-asldat_long<-gather(asldat, temptype, temp_c, surftemp_c:airtemp_c,factor_key=TRUE)
-asldat_long$trees.temptype<-paste(asldat_long$Trees.,asldat_long$temptype, sep=".")
-asldat_long2<-left_join(asldat_long,sumba,copy=TRUE)
+alldat2<-left_join(alldat,sumba,copy=TRUE)
 #check that locations with trees have more bai:
-boxplot(as.numeric(asldat_long2$TotalBA_cm2)~Trees., data=asldat_long2)
-#remove data from one logger that failed to accurately record temperature:
+boxplot(as.numeric(aldat2$TotalBA_cm2)~Trees., data=aldat)
 #Make some plots
-boxplot(as.numeric(surftemp_c)~Trees., data=asldat)
-boxplot(as.numeric(airtemp_c)~Trees., data=asldat)
-boxplot(as.numeric(temp_c)~trees.temptype, data=asldat_long)
+boxplot(as.numeric(airtemp_c)~Trees., data=aldat)
+alldat2$airtemp_c<-as.numeric(alldat2$airtemp_c)
+alldat2$hour<-as.integer(substr(alldat2$time,1,2))
+alldat2$Trees.<-as.factor(alldat2$Trees.)
+alldat2$TotalBA_cm2<-as.numeric(alldat2$TotalBA_cm2)
+aldat2$TotalBA_m2<-aldat2$TotalBA_cm2/10000
+alldat2$Hobo_SN <-as.factor(alldat2$Hobo_SN)
+alldat2$month<-as.factor(as.character(substr(alldat2$date,1,2)))
+alldat2$year<-as.factor(as.character(paste("20",substr(alldat2$date,7,8), sep="")))
+alldat2$day<-0
+alldat2$day[alldat2$hour>6 & alldat2$hour<19]<-1
+juldat<-alldat2[alldat2$month=="07",]
+jundat<-alldat2[alldat2$month=="06",]
 
-asldat_long2$hour<-as.integer(substr(asldat_long2$time,1,2))
-asldat_long2$temp_c<-as.numeric(asldat_long2$temp_c)
-asldat_long2$Trees.<-as.factor(asldat_long2$Trees.)
-asldat_long2$TotalBA_cm2<-as.numeric(asldat_long2$TotalBA_cm2)
-asldat_long2$TotalBA_m2<-asldat_long2$TotalBA_cm2/10000
-asldat_long2$Hobo_SN <-as.factor(asldat_long2$Hobo_SN)
+boxplot(jundat$airtemp_c[jundat$day==1]~jundat$Trees.[jundat$day==1])
+boxplot(jundat$airtemp_c[jundat$day==0]~jundat$Trees.[jundat$day==0])
+#Which logger recorded the hottest temperature and when was it?
+jundat[which(jundat$airtemp_c==max(jundat$airtemp_c)),]
+juldat[which(juldat$airtemp_c==max(juldat$airtemp_c)),]
+
+head(jundat[jundat$date=="06/27/22",])
+#Fit some models
+junm1<-lm(airtemp_c~Trees.*day, data=jundat)
+junm1a<-lm(airtemp_c~TotalBA_cm2*day, data=jundat)
+
+junm2<-lm(airtemp_c~Trees.*hour, data=jundat)
+junm2a<-lm(airtemp_c~TotalBA_cm2*hour, data=jundat)
+
+junm3<-lm(airtemp_c~Trees.*hour+Elevation, data=jundat)
+junm3a<-lm(airtemp_c~TotalBA_cm2*hour+Elevation, data=jundat)
+
+AIC(junm1,junm2,junm3,junm1a,junm2a,junm3a)
+
+
 cols<-c("gray","darkgreen")
 shapes<-c(24,21)
 png("figs/tempblitzdat_surfair.png", width=10, height=6, units="in", res=220)
@@ -161,42 +162,6 @@ plot(asldat_long2$TotalBA_cm2[asldat_long2$temptype=="airtemp_c"],asldat_long2$t
 dev.off()
 
 asldat_long2<-asldat_long2[-which(is.na(asldat_long2$TotalBA_cm2)),]
-#fit some models
-m1<-lm(temp_c~Trees.*temptype, data=asldat_long2)
-m1a<-lm(temp_c~TotalBA_m2*temptype, data=asldat_long2)
-
-m2<-lm(temp_c~Trees.*temptype+hour, data=asldat_long2)
-m2a<-lm(temp_c~TotalBA_m2*temptype+hour, data=asldat_long2)
-
-m3<-lm(temp_c~Trees.*temptype+hour +surftype, data=asldat_long2)
-m3a<-lm(temp_c~TotalBA_m2*temptype+hour +surftype, data=asldat_long2)
-m3b<-lm(temp_c~TotalBA_m2*temptype+hour +impervious, data=asldat_long2)
-
-m4<-lm(temp_c~Trees.*temptype+hour +surftype+sunshade, data=asldat_long2)
-m4a<-lm(temp_c~TotalBA_m2*temptype+hour +surftype+sunshade, data=asldat_long2)
-m4b<-lm(temp_c~TotalBA_m2*temptype+hour  +impervious+sunshade, data=asldat_long2)
-
-m5<-lm(temp_c~Trees.+temptype+hour+surftype+sunshade+Trees.:temptype+Trees.:hour, data=asldat_long2)
-m5a<-lm(temp_c~TotalBA_m2+temptype+hour+surftype+sunshade+TotalBA_m2:temptype+TotalBA_m2:hour, data=asldat_long2)
-m5b<-lm(temp_c~TotalBA_m2+temptype+hour+impervious+sunshade+TotalBA_m2:temptype+TotalBA_m2:hour, data=asldat_long2)
-
-m6<-lm(temp_c~Trees.+temptype+hour+surftype+sunshade+Trees.:temptype+Trees.:hour + Trees.:surftype, data=asldat_long2)
-m6a<-lm(temp_c~TotalBA_m2+temptype+hour+surftype+sunshade+TotalBA_m2:temptype+TotalBA_m2:hour + TotalBA_m2:surftype, data=asldat_long2)
-m6b<-lm(temp_c~TotalBA_m2+temptype+hour +impervious+sunshade+Trees.:temptype+TotalBA_m2:hour + TotalBA_m2:impervious, data=asldat_long2)
-
-
-m7<-lm(temp_c~Trees.+temptype+hour+surftype+surftype:temptype+sunshade+Trees.:temptype+Trees.:hour + Trees.:surftype, data=asldat_long2)
-m7a<-lm(temp_c~TotalBA_m2+temptype+hour+surftype+surftype:temptype+sunshade+TotalBA_m2:temptype+TotalBA_m2:hour + TotalBA_m2:surftype, data=asldat_long2)
-m7b<-lm(temp_c~TotalBA_m2+temptype+hour +impervious +impervious:temptype+sunshade+TotalBA_m2:temptype+TotalBA_m2:hour + TotalBA_m2:impervious, data=asldat_long2)
-
-m8b<-lm(temp_c~TotalBA_m2+temptype+hour +impervious +impervious:temptype+sunshade+TotalBA_m2:temptype+TotalBA_m2:hour + TotalBA_m2:impervious+impervious:hour, data=asldat_long2)
-m9b<-lm(temp_c~TotalBA_m2+temptype+hour +impervious +impervious:temptype+sunshade+TotalBA_m2:temptype + TotalBA_m2:impervious+impervious:hour, data=asldat_long2)
-m10b<-lm(temp_c~TotalBA_m2+temptype+hour +impervious +impervious:temptype+sunshade+TotalBA_m2:temptype + TotalBA_m2:impervious+impervious:hour+impervious:sunshade, data=asldat_long2)
-m11b<-lm(temp_c~TotalBA_m2+temptype+hour +impervious +impervious:temptype+sunshade+TotalBA_m2:temptype + TotalBA_m2:impervious+impervious:hour+impervious:sunshade+impervious:sunshade:hour, data=asldat_long2)
-m12b<-lm(temp_c~TotalBA_m2+temptype+hour +impervious +impervious:temptype+sunshade+TotalBA_m2:temptype + impervious:hour+impervious:sunshade+impervious:sunshade:hour, data=asldat_long2)
-mm12b<-lmer(temp_c~TotalBA_m2+temptype+hour +impervious +impervious:temptype+sunshade+TotalBA_m2:temptype + impervious:hour+impervious:sunshade+impervious:sunshade:hour+(1|Hobo_SN), data=asldat_long2)
-
-AIC(m1,m2,m3,m4,m5,m6,m1a,m2a,m3a,m3b, m4a,m4b, m5a,m5b,m6a,m6b, m7, m7a, m7b, m8b, m9b,m10b, m11b, m12b, mm12b)#m4a wins based on AIC
 summary(mm12b)
 cbind(coef(m12b), fixef(mm12b))
 plot(mm12b)
@@ -231,57 +196,4 @@ plot(asldat_long2$TotalBA_m2[asldat_long2$temptype=="surftemp_c"],asldat_long2$t
 abline(coef(m12b)[1]+coef(m12b)[10],coef(m12b)[2], lwd=2)#effect of trees in sun, impervious surface
 
 dev.off()
-
-#Fit a model that predicts surface temperature from air temperature
-#use the wide formatted data for this: 
-asldat2<-left_join(asldat,sumba,copy=TRUE)
-
-asldat2$hour<-as.integer(substr(asldat2$time,1,2))
-asldat2$surftemp_c<-as.numeric(asldat2$surftemp_c)
-asldat2$airtemp_c<-as.numeric(asldat2$airtemp_c)
-asldat2$Trees.<-as.factor(asldat2$Trees.)
-asldat2$TotalBA_cm2<-as.numeric(asldat2$TotalBA_cm2)
-asldat2$TotalBA_m2<-asldat2$TotalBA_cm2/10000
-asldat2$Hobo_SN <-as.factor(asldat2$Hobo_SN)
-asldat2<-asldat2[-which(is.na(asldat2$TotalBA_cm2)),]
-
-surfm1<-lm(surftemp_c~Trees.*airtemp_c, data=asldat2)
-surfm1a<-lm(surftemp_c~TotalBA_m2*airtemp_c, data=asldat2)
-
-surfm2<-lm(surftemp_c~Trees.*airtemp_c+hour, data=asldat2)
-surfm2a<-lm(surftemp_c~TotalBA_m2*airtemp_c+hour, data=asldat2)
-
-surfm3<-lm(surftemp_c~Trees.*airtemp_c+hour +surftype, data=asldat2)
-surfm3a<-lm(surftemp_c~TotalBA_m2*airtemp_c+hour +surftype, data=asldat2)
-surfm3b<-lm(surftemp_c~TotalBA_m2*airtemp_c+hour +impervious, data=asldat2)
-
-surfm4<-lm(surftemp_c~Trees.*airtemp_c+hour +surftype+sunshade, data=asldat2)
-surfm4a<-lm(surftemp_c~TotalBA_m2*airtemp_c+hour +surftype+sunshade, data=asldat2)
-surfm4b<-lm(surftemp_c~TotalBA_m2*airtemp_c+hour  +impervious+sunshade, data=asldat2)
-
-surfm5<-lm(surftemp_c~Trees.+airtemp_c+hour+surftype+sunshade+Trees.:airtemp_c+Trees.:hour, data=asldat2)
-surfm5a<-lm(surftemp_c~TotalBA_m2+airtemp_c+hour+surftype+sunshade+TotalBA_m2:airtemp_c+TotalBA_m2:hour, data=asldat2)
-surfm5b<-lm(surftemp_c~TotalBA_m2+airtemp_c+hour+impervious+sunshade+TotalBA_m2:airtemp_c+TotalBA_m2:hour, data=asldat2)
-
-surfm6<-lm(surftemp_c~Trees.+airtemp_c+hour+surftype+sunshade+Trees.:airtemp_c+Trees.:hour + Trees.:surftype, data=asldat2)
-surfm6a<-lm(surftemp_c~TotalBA_m2+airtemp_c+hour+surftype+sunshade+TotalBA_m2:airtemp_c+TotalBA_m2:hour + TotalBA_m2:surftype, data=asldat2)
-surfm6b<-lm(surftemp_c~TotalBA_m2+airtemp_c+hour +impervious+sunshade+Trees.:airtemp_c+TotalBA_m2:hour + TotalBA_m2:impervious, data=asldat2)
-
-
-surfm7<-lm(surftemp_c~Trees.+airtemp_c+hour+surftype+surftype:airtemp_c+sunshade+Trees.:airtemp_c+Trees.:hour + Trees.:surftype, data=asldat2)
-surfm7a<-lm(surftemp_c~TotalBA_m2+airtemp_c+hour+surftype+surftype:airtemp_c+sunshade+TotalBA_m2:airtemp_c+TotalBA_m2:hour + TotalBA_m2:surftype, data=asldat2)
-surfm7b<-lm(surftemp_c~TotalBA_m2+airtemp_c+hour +impervious +impervious:airtemp_c+sunshade+TotalBA_m2:airtemp_c+TotalBA_m2:hour + TotalBA_m2:impervious, data=asldat2)
-
-surfm8b<-lm(surftemp_c~TotalBA_m2+airtemp_c+hour +impervious +impervious:airtemp_c+sunshade+TotalBA_m2:airtemp_c+TotalBA_m2:hour + TotalBA_m2:impervious+impervious:hour, data=asldat2)
-surfm9b<-lm(surftemp_c~TotalBA_m2+airtemp_c+hour +impervious +impervious:airtemp_c+sunshade+TotalBA_m2:airtemp_c + TotalBA_m2:impervious+impervious:hour, data=asldat2)
-surfm10b<-lm(surftemp_c~TotalBA_m2+airtemp_c+hour +impervious +impervious:airtemp_c+sunshade+TotalBA_m2:airtemp_c + TotalBA_m2:impervious+impervious:hour+impervious:sunshade, data=asldat2)
-surfm11b<-lm(surftemp_c~TotalBA_m2+airtemp_c+hour +impervious +impervious:airtemp_c+sunshade+TotalBA_m2:airtemp_c + TotalBA_m2:impervious+impervious:hour+impervious:sunshade+impervious:sunshade:hour, data=asldat2)
-
-surfm12b<-lm(surftemp_c~airtemp_c+TotalBA_m2+hour +impervious +impervious:airtemp_c+sunshade+TotalBA_m2:airtemp_c + impervious:hour+impervious:sunshade+impervious:sunshade:hour, data=asldat2)
-surfmm12b<-lmer(surftemp_c~airtemp_c+TotalBA_m2+hour +impervious +impervious:airtemp_c+sunshade+TotalBA_m2:airtemp_c + impervious:hour+impervious:sunshade+impervious:sunshade:hour+(1|Hobo_SN), data=asldat2)
-
-surfm15<-lm(surftemp_c~airtemp_c+TotalBA_m2+hour+impervious +sunshade+TotalBA_m2:airtemp_c +TotalBA_m2:hour + impervious:hour+impervious:sunshade+impervious:sunshade:hour, data=asldat2)
-AIC(surfm1,surfm2,surfm3,surfm4,surfm5,surfm6,surfm1a,surfm2a,surfm3a,surfm3b, surfm4a,surfm4b, surfm5a,surfm5b,surfm6a,surfm6b, surfm7, surfm7a, surfm7b, surfm8b, surfm9b,surfm10b, surfm11b, surfm12b, surfmm12b, surfm15)#m4a wins based on AIC
-
-summary(surfm12b)
 
