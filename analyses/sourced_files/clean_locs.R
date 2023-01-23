@@ -1,6 +1,4 @@
 #file to clean the hobo locs datafile 
-locs<-locs[,1:18]
-
 #clean the Pole_No column
 locs$Pole_No[grep(" - Jointly Owned",locs$Pole_No)]<-gsub(" - Jointly Owned","",locs$Pole_No[grep(" - Jointly Owned",locs$Pole_No)])
 locs$Pole_No[grep(" - Tacoma Power Owned",locs$Pole_No)]<-gsub(" - Tacoma Power Owned","",locs$Pole_No[grep(" - Tacoma Power Owned",locs$Pole_No)])
@@ -16,3 +14,9 @@ locs$Hobo_SN[locs$Hobo_SN=="BT31302979"]<-"BT21302979"
 
 locs$Hobo_SN[locs$Pole_No=="TP25887"]<-"NEEDTOFIX"
 
+#remove abandoned logger:
+locs<-locs[!locs$Pole_No=="TP12963",]
+
+#correct pole that appears to have incorrect lat/long
+locs$Latitude[locs$Pole_No=="TP9879"]<-47.209794
+locs$Longitude[locs$Pole_No=="TP9879"]<--122.483606
