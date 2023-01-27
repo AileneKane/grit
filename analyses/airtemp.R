@@ -136,6 +136,13 @@ alldat2$month<-as.factor(as.character(substr(alldat2$date,1,2)))
 alldat2$year<-as.factor(as.character(paste("20",substr(alldat2$date,7,8), sep="")))
 alldat2$day<-0
 alldat2$day[alldat2$hour>6 & alldat2$hour<19]<-1
+#add column for whether logger has a sheild or not
+alldat2$shield<-"YES"
+alldat2$shield[alldat$Location=="Wapato Hills 2"]<-"NO"
+alldat2$shield[alldat$Location=="Wapato Hills 1"]<-"NO"
+alldat2$shield[alldat$Location=="South Tacoma Wetland"]<-"NO"
+alldat2$shield[alldat$Location=="South Tacoma Wetland 1"]<-"NO"
+
 juldat<-alldat2[alldat2$month=="07",]
 jundat<-alldat2[alldat2$month=="06",]
 
@@ -166,7 +173,8 @@ juldat$imp<-juldat$XAllImp.10mProp*100
 #juldat.nona<-juldat[-which(is.na(juldat$TotalBA_cm2)),]#used this to test how Total BA compared to canopy cover, remote data- it was not as good a predictor
 
 junm1a<-lm(airtemp_c~Trees.*day, data=jundat)
-#junm1b<-lm(airtemp_c~TotalBA_m2*day, data=jundat)
+junm1as<-lm(airtemp_c~Trees.*day, data=jundat[jundat$shield=="YES",])
+#junm1b<-ldm(airtemp_c~TotalBA_m2*day, data=jundat)
 junm1c<-lm(airtemp_c~cc.field*day, data=jundat)
 junm1r<-lm(airtemp_c~cc.rem*day, data=jundat)
 junm1imp<-lm(airtemp_c~imp*day, data=jundat)
@@ -302,6 +310,7 @@ dev.off()
 ##########################################################
 ############# max and min daily temperature ##############
 #########################################################,
+
 jundat.max<-aggregate(jundat$airtemp_c, by=list(jundat$Hobo_SN,jundat$Trees.,jundat$cc.field,jundat$cc.rem, jundat$imp,jundat$Elevation,jundat$dom), max)
 jundat.min<-aggregate(jundat$airtemp_c, by=list(jundat$Hobo_SN,jundat$Trees.,jundat$cc.field,jundat$cc.rem, jundat$imp,jundat$Elevation,jundat$dom), min)
 jundat.minmax<-cbind(jundat.max, jundat.min$x)
