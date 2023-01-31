@@ -229,7 +229,7 @@ summary(mm12b)
 cbind(coef(m12b), fixef(mm12b))
 plot(mm12b)
 summary(m12b)
-
+tab_model(m12b, digits=3)
 #plot conditional effects
 # 
 # interplot(

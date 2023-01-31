@@ -20,3 +20,5 @@ locs<-locs[!locs$Pole_No=="TP12963",]
 #correct pole that appears to have incorrect lat/long
 locs$Latitude[locs$Pole_No=="TP9879"]<-47.209794
 locs$Longitude[locs$Pole_No=="TP9879"]<--122.483606
+
+#47.21932583743805, -122.47372072046095

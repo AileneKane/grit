@@ -21,4 +21,6 @@ treedat$BA<-pi*treedat$DBH_cm*treedat$DBH_cm
 
 #now get sum of basal area for each HOBO_SN
 sumba<-aggregate(treedat$BA, by=list(treedat$Hobo_SN,treedat$WptNo,treedat$Pole_No), sum, na.rm=TRUE)
-colnames(sumba)<-c("Hobo_SN","WptNo","Pole_No","TotalBA_cm2")
+sumtreeno<-aggregate(treedat$BA, by=list(treedat$Hobo_SN,treedat$WptNo,treedat$Pole_No), length)
+sumba<-cbind(sumba,sumtreeno$x)
+colnames(sumba)<-c("Hobo_SN","WptNo","Pole_No","TotalBA_cm2","NumTrees")
