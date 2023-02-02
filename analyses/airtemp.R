@@ -158,11 +158,12 @@ alldat2$year<-as.factor(as.character(paste("20",substr(alldat2$date,7,8), sep=""
 alldat2$day<-0
 alldat2$day[alldat2$hour>6 & alldat2$hour<19]<-1
 # #add column for whether logger has a sheild or not- no longer necessary as this is done in "combine_lc_grittreedat.R"
-# alldat2$shield<-"YES"
-# alldat2$shield[alldat$Location=="Wapato Hills 2"]<-"NO"
-# alldat2$shield[alldat$Location=="Wapato Hills 1"]<-"NO"
-# alldat2$shield[alldat$Location=="South Tacoma Wetland"]<-"NO"
-# alldat2$shield[alldat$Location=="South Tacoma Wetland 1"]<-"NO"
+#BUT- that code must not be working, so need to look into it!
+alldat2$shield<-"YES"
+alldat2$shield[alldat$Location=="Wapato Hills 2"]<-"NO"
+alldat2$shield[alldat$Location=="Wapato Hills 1"]<-"NO"
+alldat2$shield[alldat$Location=="South Tacoma Wetland"]<-"NO"
+ alldat2$shield[alldat$Location=="South Tacoma Wetland 1"]<-"NO"
 
 #remove data for loggers without a shield
 alldat2<-alldat2[alldat2$shield=="YES",]
@@ -197,7 +198,7 @@ juldat.nona<-juldat[-which(is.na(juldat$TotalBA_cm2)),]#used this to test how To
 
 #Fit some mixed effects models
 junmm1a<-lmer(airtemp_c~Trees.*day + (1|Hobo_SN), data=jundat)
-junmm2b<-lmer(airtemp_c~TotalBA_cm2*hour+ (1|Hobo_SN), data=jundat.nona)
+#junmm2b<-lmer(airtemp_c~TotalBA_cm2*hour+ (1|Hobo_SN), data=jundat.nona)
 junmm1c<-lmer(airtemp_c~cc.field*day+ (1|Hobo_SN), data=jundat)
 junmm1r<-lmer(airtemp_c~cc.rem*day+ (1|Hobo_SN), data=jundat)
 junmm1imp<-lmer(airtemp_c~imp*day+ (1|Hobo_SN), data=jundat)
@@ -390,6 +391,7 @@ julTaveimp<-lmer(T_ave~imp+Elevation+imp:Elevation+(1|dom), data=juldat.minmax)
 julTavecnoelev<-lmer(T_ave~cc.field+(1|dom)+(1|Hobo_SN), data=juldat.minmax)
 AIC(julTavea,julTavec,julTaver,julTaveimp,julTavecnoelev)
 
+junTrangec<-lmer(Trange~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom), data=jundat.minmax)
 julTrangec<-lmer(Trange~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom), data=juldat.minmax)
 
 #Models to present in report
