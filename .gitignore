@@ -40,3 +40,9 @@ vignettes/*.pdf
 
 # hobo datafiles
 .hobo
+
+# zipped files
+.zip
+
+#Stormwater heat map which is too large
+data/psLandCover_mosaic.tif
