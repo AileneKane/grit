@@ -39,10 +39,10 @@ vignettes/*.pdf
 .Renviron
 
 # hobo datafiles
-.hobo
+*.hobo
 
 # zipped files
-.zip
+*.zip
 
 #Stormwater heat map which is too large
 data/psLandCover_mosaic.tif
