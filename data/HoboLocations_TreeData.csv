@@ -4,8 +4,8 @@ WptNo,Hobo_SN,Pole_No,Location,DBH_cm,DistFromLogger_m,Species
 1,21223135,TP20080/A1346783,"64th at edge of Wapato, across from Sound Christian Academy",40,9,Acer
 1,21223135,TP20080/A1346783,"64th at edge of Wapato, across from Sound Christian Academy",42.5,7,Prunus
 1,21223135,TP20080/A1346783,"64th at edge of Wapato, across from Sound Christian Academy",35.5,9,Acer
-2,21223128,A134679,62nd and Wapato Street,44,6,Acer
-2,21223128,A134679,62nd and Wapato Street,47,10,Acer
+2,21223128,A1346792,62nd and Wapato Street,44,6,Acer
+2,21223128,A1346792,62nd and Wapato Street,47,10,Acer
 3,21223117,WH1,Wapato Hills 1,86,0,Psemen
 3,21223117,WH1,Wapato Hills 1,4,3,Crataegus
 3,21223117,WH1,Wapato Hills 1,15,6,Crataegus
@@ -70,36 +70,36 @@ WptNo,Hobo_SN,Pole_No,Location,DBH_cm,DistFromLogger_m,Species
 10,21223120,TP24409,Pine at 48th,6,10,
 10,21223120,TP24409,Pine at 48th,4.5,5,
 12,21223139,TP34225,Pine between 49th and 50th,12,4,Fagus
-13,21223115,TP33991,Pine @ 50th,15,4,
+13,21223115,TP34216,Pine @ 50th,15,4,
 15,21223134,No Num,Pine @ 51,20,8,
 16,21223123,TP20171,"Junett Street, outside Mortuary",NA,NA,NA
-17,21223109,Tp15041,Park at warner,56.2,6,Quercus garryana
-17,21223109,Tp15041,Park at warner,66.5,6,Quercus garryana
+17,21223109,TP15041,Park at warner,56.2,6,Quercus garryana
+17,21223109,TP15041,Park at warner,66.5,6,Quercus garryana
 18,21223106,TPU927,47th at S Tacoma Way,NA,NA,NA
-19,21223122,Tp21035,Southnpuget sound ave; north of tp21036,5,10,
-20,21223108,Tp5817,South Puget sound ave; just north of 45 ,10,4,Lilac
-20,21223108,Tp5817,South Puget sound ave; just north of 46,10,4,Lilac
-20,21223108,Tp5817,South Puget sound ave; just north of 47,10,4,Lilac
-20,21223108,Tp5817,South Puget sound ave; just north of 48,10,4,Lilac
-20,21223108,Tp5817,South Puget sound ave; just north of 49,10,4,Lilac
-20,21223108,Tp5817,South Puget sound ave; just north of 50,10,4,Lilac
-20,21223108,Tp5817,South Puget sound ave; just north of 51,10,4,Lilac
-20,21223108,Tp5817,South Puget sound ave; just north of 52,10,4,Lilac
-20,21223108,Tp5817,South Puget sound ave; just north of 53,10,4,Lilac
-20,21223108,Tp5817,South Puget sound ave; just north of 54,10,4,Lilac
-21,21223137,Tp10073,South Puget sound ave;  north of 43 ,NA,NA,NA
-22,21223113,Tp9241,South Puget sound ave;  north of 43 and north of tp10073 ,8,3,Acer
-22,21223113,Tp9241,South Puget sound ave;  north of 43 and north of tp10073 ,4,6,Unknown
-23,21223121,Tp23269,45th east of warner,6,7,Camillia
-23,21223121,Tp23269,45th east of warner,8,7,Camillia
-23,21223121,Tp23269,45th east of warner,5,7,Camillia
-23,21223121,Tp23269,45th east of warner,10,7,Camillia
-23,21223121,Tp23269,45th east of warner,4,7,Camillia
-24,21223112,Tp24408,45th west of lawrence,30,4,Robinia
-24,21223112,Tp24408,45th west of lawrence,31,5,Robinia
+19,21223122,TP21035,South puget sound ave; north of tp21036,5,10,
+20,21223108,TP5817,South Puget sound ave; just north of 45 ,10,4,Lilac
+20,21223108,TP5818,South Puget sound ave; just north of 46,10,4,Lilac
+20,21223108,TP5819,South Puget sound ave; just north of 47,10,4,Lilac
+20,21223108,TP5820,South Puget sound ave; just north of 48,10,4,Lilac
+20,21223108,TP5821,South Puget sound ave; just north of 49,10,4,Lilac
+20,21223108,TP5822,South Puget sound ave; just north of 50,10,4,Lilac
+20,21223108,TP5823,South Puget sound ave; just north of 51,10,4,Lilac
+20,21223108,TP5824,South Puget sound ave; just north of 52,10,4,Lilac
+20,21223108,TP5825,South Puget sound ave; just north of 53,10,4,Lilac
+20,21223108,TP5826,South Puget sound ave; just north of 54,10,4,Lilac
+21,21223137,TP10073,South Puget sound ave;  north of 43 ,NA,NA,NA
+22,21223113,TP9241,South Puget sound ave;  north of 43 and north of tp10073 ,8,3,Acer
+22,21223113,TP9241,South Puget sound ave;  north of 43 and north of tp10073 ,4,6,Unknown
+23,21223121,TP23269,45th east of warner,6,7,Camillia
+23,21223121,TP23269,45th east of warner,8,7,Camillia
+23,21223121,TP23269,45th east of warner,5,7,Camillia
+23,21223121,TP23269,45th east of warner,10,7,Camillia
+23,21223121,TP23269,45th east of warner,4,7,Camillia
+24,21223112,TP24408,45th west of lawrence,30,4,Robinia
+24,21223112,TP24408,45th west of lawrence,31,5,Robinia
 25,21123119,TP9179,45th between Alder and Cedar,9 stems,6,Unknown
 25,21123119,TP9179,45th between Alder and Cedar,6 stems,10,Unknown
-26,21223111,TP4182 06040,45th at Cedar,NA,NA,NA
+26,21223111,TP418206040,45th at Cedar,NA,NA,NA
 27,21223124,TP24199/A1566119,Junette @ 45th ,25,10,palm
 28,21223107,TP20001/A1341143,Junette between 43rd and 45th ,NA,NA,NA
 29,21223125,TP32711/A0572122,Junette between 43rd and 45th ,4,10,conifer
@@ -112,108 +112,108 @@ WptNo,Hobo_SN,Pole_No,Location,DBH_cm,DistFromLogger_m,Species
 35,21223132,A1341119,45th at Lawrence ,20,6,Pinus
 35,21223132,A1341119,45th at Lawrence ,20,6,Pinus
 35,21223132,A1341119,45th at Lawrence ,20,6,Pinus
-38,21223138,Tp21036,South puget sound ave; just north of 47 (south of tp21035),27.5,4,Acer
-38,21223138,Tp21036,South puget sound ave; just north of 47 (south of tp21035),29.5,4,Acer
+38,21223138,TP21036,South puget sound ave; just north of 47 (south of tp21035),27.5,4,Acer
+38,21223138,TP21036,South puget sound ave; just north of 47 (south of tp21035),29.5,4,Acer
 39,21223136,TP13307,Prospect between 50th and 49th,5,3,
-40,21223105,NA,South Tacoma Wetland 1,67.5,9,Pseudotsuga
-40,21223105,NA,South Tacoma Wetland 1,52.6,6,Pseudotsuga
-40,21223105,NA,South Tacoma Wetland 1,7.5,0,Arbutus
-40,21223105,NA,South Tacoma Wetland 1,4,1,Arbutus
-40,21223105,NA,South Tacoma Wetland 1,3,0.5,Crataegus
-40,21223105,NA,South Tacoma Wetland 1,2,2,Holodiscus
-40,21223105,NA,South Tacoma Wetland 1,2,2,Holodiscus
-40,21223105,NA,South Tacoma Wetland 1,2,2,Holodiscus
-40,21223105,NA,South Tacoma Wetland 1,2,2,Holodiscus
-40,21223105,NA,South Tacoma Wetland 1,2,2,Holodiscus
-40,21223105,NA,South Tacoma Wetland 1,2,2,Holodiscus
-40,21223105,NA,South Tacoma Wetland 1,25,3,Arbutus
-40,21223105,NA,South Tacoma Wetland 1,3.5,4,Arbutus
-40,21223105,NA,South Tacoma Wetland 1,4,4,Arbutus
-40,21223105,NA,South Tacoma Wetland 1,20.8,7,Pseudotsuga
-40,21223105,NA,South Tacoma Wetland 1,2,8,Holodiscus
-40,21223105,NA,South Tacoma Wetland 1,9,8,Arbutus
-40,21223105,NA,South Tacoma Wetland 1,4.6,8,Arbutus
-40,21223105,NA,South Tacoma Wetland 1,4,4,Arbutus
-40,21223105,NA,South Tacoma Wetland 1,2,4,Arbutus
-40,21223105,NA,South Tacoma Wetland 1,10,3,Arbutus
-40,21223105,NA,South Tacoma Wetland 1,64.7,10,Pseudotsuga
-40,21223105,NA,South Tacoma Wetland 1,33.5,4,Pseudotsuga
-40,21223105,NA,South Tacoma Wetland 1,3,7,Holodiscus
-40,21223105,NA,South Tacoma Wetland 1,6,3,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,5,9,Prunus
-41,9784509,NA,South Tacoma Wetland 2,76.4,4,Pseudotsuga
-41,9784509,NA,South Tacoma Wetland 2,54,5,Pseudotsuga
-41,9784509,NA,South Tacoma Wetland 2,2,9,Unknwn
-41,9784509,NA,South Tacoma Wetland 2,2,9,Unknwn
-41,9784509,NA,South Tacoma Wetland 2,2,9,Unknwn
-41,9784509,NA,South Tacoma Wetland 2,2,9,Unknwn
-41,9784509,NA,South Tacoma Wetland 2,2,9,Unknwn
-41,9784509,NA,South Tacoma Wetland 2,2,9,Unknwn
-41,9784509,NA,South Tacoma Wetland 2,2,9,Unknwn
-41,9784509,NA,South Tacoma Wetland 2,2,9,Unknwn
-41,9784509,NA,South Tacoma Wetland 2,2,9,Unknwn
-41,9784509,NA,South Tacoma Wetland 2,2,9,Unknwn
-41,9784509,NA,South Tacoma Wetland 2,2,9,Unknwn
-41,9784509,NA,South Tacoma Wetland 2,52,4,Pseudotsuga
-41,9784509,NA,South Tacoma Wetland 2,8,5,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,7,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,7,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,4,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,2,6,Arbutus
-41,9784509,NA,South Tacoma Wetland 2,45.4,0,Pseudotsuga
-41,9784509,NA,South Tacoma Wetland 2,9,6,Prunus
-41,9784509,NA,South Tacoma Wetland 2,26.5,8,Pseudotsuga
-41,9784509,NA,South Tacoma Wetland 2,85.9,5,Pseudotsuga
-41,9784509,NA,South Tacoma Wetland 2,22,9,Pseudotsuga
-41,9784509,NA,South Tacoma Wetland 2,25.3,10,Pseudotsuga
-41,9784509,NA,South Tacoma Wetland 2,28.8,13,Pseudotsuga
-41,9784509,NA,South Tacoma Wetland 2,4,8,Alnus
-41,9784509,NA,South Tacoma Wetland 2,4,7,Alnus
-41,9784509,NA,South Tacoma Wetland 2,5,7,Alnus
-41,9784509,NA,South Tacoma Wetland 2,5,6,Alnus
-41,9784509,NA,South Tacoma Wetland 2,3,6,Alnus
-41,9784509,NA,South Tacoma Wetland 2,5.8,4,Alnus
-41,9784509,NA,South Tacoma Wetland 2,3.6,5,Alnus
-41,9784509,NA,South Tacoma Wetland 2,4.4,5,Alnus
-41,9784509,NA,South Tacoma Wetland 2,6.4,5,Alnus
-41,9784509,NA,South Tacoma Wetland 2,6.4,6,Alnus
-41,9784509,NA,South Tacoma Wetland 2,6.6,6,Alnus
-41,9784509,NA,South Tacoma Wetland 2,4,3,Unknown
-41,9784509,NA,South Tacoma Wetland 2,6.7,5,Alnus
-41,9784509,NA,South Tacoma Wetland 2,3.4,5,Alnus
-41,9784509,NA,South Tacoma Wetland 2,3.1,5,Alnus
-42,21223114,TP26058 - Tacoma Power Owned,Pine at 40th,20,7,Prunus
-42,21223114,TP26058 - Tacoma Power Owned,Pine at 40th,10.5,4,Amelanchier
-43,2401795,TP27040 - Tacoma Power Owned,Pine at 43rd,24,1,Lquidumbar
-43,2401795,TP27040 - Tacoma Power Owned,Pine at 43rd,22,6,Lquidumbar
-44,21162467,TP6336 - Tacoma Power Owned,Pine between 45th and 43rd,20.5,6,Lquidumbar
-44,21162467,TP6336 - Tacoma Power Owned,Pine between 45th and 43rd,29,9,Prunus
-45,21223140,TP32717 - Tacoma Power Owned,S. 50th at Asia Pacific Center,8.5,3,Rhodendron
-45,21223140,TP32717 - Tacoma Power Owned,S. 50th at Asia Pacific Center,9,3,Rhodendron
-45,21223140,TP32717 - Tacoma Power Owned,S. 50th at Asia Pacific Center,7,4,Rhodendron
-45,21223140,TP32717 - Tacoma Power Owned,S. 50th at Asia Pacific Center,8,4,Rhodendron
-45,21223140,TP32717 - Tacoma Power Owned,S. 50th at Asia Pacific Center,76,4,Quercus garryana
-45,21223140,TP32717 - Tacoma Power Owned,S. 50th at Asia Pacific Center,72.5,9,Quercus garryana
-45,21223140,TP32717 - Tacoma Power Owned,S. 50th at Asia Pacific Center,42.5,8,Prunus
+40,21223105,STW1,South Tacoma Wetland 1,67.5,9,Pseudotsuga
+40,21223105,STW1,South Tacoma Wetland 1,52.6,6,Pseudotsuga
+40,21223105,STW1,South Tacoma Wetland 1,7.5,0,Arbutus
+40,21223105,STW1,South Tacoma Wetland 1,4,1,Arbutus
+40,21223105,STW1,South Tacoma Wetland 1,3,0.5,Crataegus
+40,21223105,STW1,South Tacoma Wetland 1,2,2,Holodiscus
+40,21223105,STW1,South Tacoma Wetland 1,2,2,Holodiscus
+40,21223105,STW1,South Tacoma Wetland 1,2,2,Holodiscus
+40,21223105,STW1,South Tacoma Wetland 1,2,2,Holodiscus
+40,21223105,STW1,South Tacoma Wetland 1,2,2,Holodiscus
+40,21223105,STW1,South Tacoma Wetland 1,2,2,Holodiscus
+40,21223105,STW1,South Tacoma Wetland 1,25,3,Arbutus
+40,21223105,STW1,South Tacoma Wetland 1,3.5,4,Arbutus
+40,21223105,STW1,South Tacoma Wetland 1,4,4,Arbutus
+40,21223105,STW1,South Tacoma Wetland 1,20.8,7,Pseudotsuga
+40,21223105,STW1,South Tacoma Wetland 1,2,8,Holodiscus
+40,21223105,STW1,South Tacoma Wetland 1,9,8,Arbutus
+40,21223105,STW1,South Tacoma Wetland 1,4.6,8,Arbutus
+40,21223105,STW1,South Tacoma Wetland 1,4,4,Arbutus
+40,21223105,STW1,South Tacoma Wetland 1,2,4,Arbutus
+40,21223105,STW1,South Tacoma Wetland 1,10,3,Arbutus
+40,21223105,STW1,South Tacoma Wetland 1,64.7,10,Pseudotsuga
+40,21223105,STW1,South Tacoma Wetland 1,33.5,4,Pseudotsuga
+40,21223105,STW1,South Tacoma Wetland 1,3,7,Holodiscus
+40,21223105,STW1,South Tacoma Wetland 1,6,3,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,5,9,Prunus
+41,9784509,STW2,South Tacoma Wetland 2,76.4,4,Pseudotsuga
+41,9784509,STW2,South Tacoma Wetland 2,54,5,Pseudotsuga
+41,9784509,STW2,South Tacoma Wetland 2,2,9,Unknwn
+41,9784509,STW2,South Tacoma Wetland 2,2,9,Unknwn
+41,9784509,STW2,South Tacoma Wetland 2,2,9,Unknwn
+41,9784509,STW2,South Tacoma Wetland 2,2,9,Unknwn
+41,9784509,STW2,South Tacoma Wetland 2,2,9,Unknwn
+41,9784509,STW2,South Tacoma Wetland 2,2,9,Unknwn
+41,9784509,STW2,South Tacoma Wetland 2,2,9,Unknwn
+41,9784509,STW2,South Tacoma Wetland 2,2,9,Unknwn
+41,9784509,STW2,South Tacoma Wetland 2,2,9,Unknwn
+41,9784509,STW2,South Tacoma Wetland 2,2,9,Unknwn
+41,9784509,STW2,South Tacoma Wetland 2,2,9,Unknwn
+41,9784509,STW2,South Tacoma Wetland 2,52,4,Pseudotsuga
+41,9784509,STW2,South Tacoma Wetland 2,8,5,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,7,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,7,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,4,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,2,6,Arbutus
+41,9784509,STW2,South Tacoma Wetland 2,45.4,0,Pseudotsuga
+41,9784509,STW2,South Tacoma Wetland 2,9,6,Prunus
+41,9784509,STW2,South Tacoma Wetland 2,26.5,8,Pseudotsuga
+41,9784509,STW2,South Tacoma Wetland 2,85.9,5,Pseudotsuga
+41,9784509,STW2,South Tacoma Wetland 2,22,9,Pseudotsuga
+41,9784509,STW2,South Tacoma Wetland 2,25.3,10,Pseudotsuga
+41,9784509,STW2,South Tacoma Wetland 2,28.8,13,Pseudotsuga
+41,9784509,STW2,South Tacoma Wetland 2,4,8,Alnus
+41,9784509,STW2,South Tacoma Wetland 2,4,7,Alnus
+41,9784509,STW2,South Tacoma Wetland 2,5,7,Alnus
+41,9784509,STW2,South Tacoma Wetland 2,5,6,Alnus
+41,9784509,STW2,South Tacoma Wetland 2,3,6,Alnus
+41,9784509,STW2,South Tacoma Wetland 2,5.8,4,Alnus
+41,9784509,STW2,South Tacoma Wetland 2,3.6,5,Alnus
+41,9784509,STW2,South Tacoma Wetland 2,4.4,5,Alnus
+41,9784509,STW2,South Tacoma Wetland 2,6.4,5,Alnus
+41,9784509,STW2,South Tacoma Wetland 2,6.4,6,Alnus
+41,9784509,STW2,South Tacoma Wetland 2,6.6,6,Alnus
+41,9784509,STW2,South Tacoma Wetland 2,4,3,Unknown
+41,9784509,STW2,South Tacoma Wetland 2,6.7,5,Alnus
+41,9784509,STW2,South Tacoma Wetland 2,3.4,5,Alnus
+41,9784509,STW2,South Tacoma Wetland 2,3.1,5,Alnus
+42,21223114,TP26058,Pine at 40th,20,7,Prunus
+42,21223114,TP26058,Pine at 40th,10.5,4,Amelanchier
+43,2401795,TP27040,Pine at 43rd,24,1,Lquidumbar
+43,2401795,TP27040,Pine at 43rd,22,6,Lquidumbar
+44,21162467,TP6336,Pine between 45th and 43rd,20.5,6,Lquidumbar
+44,21162467,TP6336,Pine between 45th and 43rd,29,9,Prunus
+45,21223140,TP32717,S. 50th at Asia Pacific Center,8.5,3,Rhodendron
+45,21223140,TP32717,S. 50th at Asia Pacific Center,9,3,Rhodendron
+45,21223140,TP32717,S. 50th at Asia Pacific Center,7,4,Rhodendron
+45,21223140,TP32717,S. 50th at Asia Pacific Center,8,4,Rhodendron
+45,21223140,TP32717,S. 50th at Asia Pacific Center,76,4,Quercus garryana
+45,21223140,TP32717,S. 50th at Asia Pacific Center,72.5,9,Quercus garryana
+45,21223140,TP32717,S. 50th at Asia Pacific Center,42.5,8,Prunus
 46,21223116,TP6262/A1340985,S. Tacoma Way between 48th and 49th,94,6,Pseudotsuga
 46,21223116,TP6262/A1340985,S. Tacoma Way between 48th and 49th,42,7,Quercus garryana
 46,21223116,TP6262/A1340985,S. Tacoma Way between 48th and 49th,92,9,Pseudotsuga
@@ -223,14 +223,14 @@ WptNo,Hobo_SN,Pole_No,Location,DBH_cm,DistFromLogger_m,Species
 47,21223102,TP13987/A1378019,S. Tacoma Way between 38th and 42th,30,6,Acer
 47,21223102,TP13987/A1378019,S. Tacoma Way between 38th and 42th,30,4,Acer
 48,21223131,TP13988/A1378018,S. Tacoma Way between 38th and 42th,NA,NA,NA
-49,21223101,TP15706/A1278025 - Jointly Owned,S. Tacoma Way at 38th,NA,NA,NA
-51,BT21302953,TP6325/A1341104 - Jointly Owned,"Pine at 42nd (old Sequoia integraticve therapies building, 4042 pine st)",NA,NA,NA
-52,BT21302950,TP6340- Tacoma Power,Pine between 45th and 47th,NA,NA,NA
-53,B121302952,TP6323 - Jointly Owned ,Pine between 40th and 43td ,NA,NA,NA
-54,BT 21302953,TP6335 - Jointly Owned,Pne between 45 and 43,10,2,Lquidumbar
-54,BT 21302953,TP6335 - Jointly Owned,Pne between 45 and 43,20,3,Ulmus
-54,BT 21302953,TP6335 - Jointly Owned,Pne between 45 and 43,14,10,Lquidumbar
-54,BT 21302953,TP6335 - Jointly Owned,Pne between 45 and 43,10,4,Ulmus
+49,21223101,TP15706/A1278025,S. Tacoma Way at 38th,NA,NA,NA
+51,BT21302953,TP6325/A1341104,"Pine at 42nd (old Sequoia integraticve therapies building, 4042 pine st)",NA,NA,NA
+52,BT21302950,TP6340,Pine between 45th and 47th,NA,NA,NA
+53,B121302952,TP6323,Pine between 40th and 43td ,NA,NA,NA
+54,BT 21302953,TP6335,Pne between 45 and 43,10,2,Lquidumbar
+54,BT 21302953,TP6335,Pne between 45 and 43,20,3,Ulmus
+54,BT 21302953,TP6335,Pne between 45 and 43,14,10,Lquidumbar
+54,BT 21302953,TP6335,Pne between 45 and 43,10,4,Ulmus
 55,BT21302951,TP21629,California & Montana,,,
 56,BT21302961,TP21631/A1353441,outside Zenith,7,2,Acer
 56,BT21302961,TP21631/A1353441,outside Zenith,6,6,Pinus

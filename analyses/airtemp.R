@@ -1,6 +1,6 @@
 #######################################################
 ### Script to look at GRIT airtemp data ###
-################# August 24, 2022 #####################
+################# Started August 24, 2022 #####################
 ################ ailene.ettinger@tnc.org ##############
 #######################################################
 
@@ -40,6 +40,9 @@ source("sourced_files/combine_lc_grittreedat.R")
 
 #head(sumba)
 
+#load helper functions
+source("sourced_files/helper_funcs.R")
+
 #Before looking at temperature, look at field-collected canopy vs remote sensed land cover
 png("figs/remote_field_cover.png", width=6, height=6, units="in", res=220)
 field<-100-as.numeric(locs3$PercOpen_Mean)
@@ -50,10 +53,24 @@ plot(field,rem, pch=16, col="gray",
      ylab="Remote-sensed Vegetation Cover", 
      main="Remote sensed vs Field Estimates of Tree Cover")
 r<-lm(rem~field)
-abline(r, )
+abline(r)
+x<-seq(1,100, by=1)
+lines(x,x, lty=2)
 mtext(paste("r2=",round(summary(r)$r.squared, digits=3),", p=",round(summary(r)$coef[2,4], digits=3), sep=""), side=3, line=-1, adj=0)
 
 dev.off()
+
+dif<-field-rem
+length(which(abs(dif)>20))#24 sites differ in estimate of canopy cover by more thaan 20%
+
+#which are these sites?
+difsites<-unique(locs3$WptNo[which(abs(dif)>20)])#in nearly all cases, fieldcc>remcc, which makes sense
+#check that lat/long is correct or reasonable for each of these
+cbind(locs3$WptNo[which(abs(dif)>20)],
+       # locs3$Location[which(abs(dif)>20)],
+      field[which(abs(dif)>20)],
+      rem[which(abs(dif)>20)])
+
 png("figs/treenum_fieldcover.png", width=6, height=6, units="in", res=220)
 
 plot(locs3$NumTrees,field, pch=16, col="gray",
@@ -74,6 +91,7 @@ r<-gam(field[locs3$shield=="YES"]~locs3$NumTrees[locs3$shield=="YES"])
 lines(locs3$NumTrees[locs3$shield=="YES"],r$fitted.values)
 mtext(paste("r2=",round(summary(r)$r.sq, digits=3),", p=",round(summary(r)$pTerms.pv, digits=3), sep=""), side=3, line=-1, adj=0)
 dev.off()
+
 #Put together all air temperature data that we have
 airtempdat<-NULL
 tdir<-"../data/temp_data/"
@@ -126,27 +144,28 @@ allairdat<-rbind(airtempdat,btdat)
 #locdat2 <- locs %>% 
 #  select(Hobo_SN, Location, Latitude, Longitude, Elevation, Trees.) %>% 
 #  distinct(Location, .keep_all= TRUE)
-locdat2 <- subset(locs3, select=c(Hobo_SN, Location, Latitude, Longitude, Elevation, Trees., TotalBA_cm2, PercOpen_Mean,X1FineVeg.10mProp,X2MedVeg.10mProp,X3CoarseVeg.10mProp,XAllImp.10mProp))
+locdat2 <- subset(locs3, select=c(Hobo_SN, Location, Latitude, Longitude, Elevation, Trees., TotalBA_cm2, PercOpen_Mean,X1FineVeg.10mProp,X2MedVeg.10mProp,X3CoarseVeg.10mProp,XAllImp.10mProp,X3CoarseVeg.20mProp,X3CoarseVeg.30mProp,X3CoarseVeg.40mProp,X3CoarseVeg.50mProp,X3CoarseVeg.100mProp,X3CoarseVeg.200mProp,X3CoarseVeg.400mProp,X3CoarseVeg.800mProp))
 
 alldat<-left_join(allairdat,locdat2, by="Hobo_SN", copy=TRUE)
 alldat<-alldat[-(which(is.na(alldat$airtemp_c))),]
 alldat<-alldat[-which(alldat$Hobo_SN=="21223113"),]#messed up data!
-alldat<-alldat[-which(alldat$airtemp_c>36),]#inaccurate temperature readings
+#alldat<-alldat[-which(alldat$airtemp_c>36),]#inaccurate temperature readings?
 
-###some serial numbers do not line up (e.g., we ave temp data, but no location matches up to them).
-###These are: unique(aldat$Hobo_SN[which(is.na(aldat$Longitude))])
-# "21162467"   "21223102"   "21223125"   "BT21302946" "BT21302957" "BT21302964" "BT21302976"
-#needs to be corrected but for now just removing these
+#unique(alldat$Hobo_SN[which(is.na(alldat$Longitude))])
+###14 serial numbers do not line up (e.g., we have temp data, but no location matches up to them).
+###These are: unique(alldat$Hobo_SN[which(is.na(alldat$Longitude))])
+#8 of these are pilot data loggesr and we want them removed.
+###pilot loggers are: 21162466, 21162230,21162234,21162233, 21162232, 21162231, 21119950, 9768700
+#The following are not pilots and I need to figure out why they are not matching:
+####Mystery loggers: "9768697", "BT21302960", "BT21302963","BT21302977" -mystery logger...figure out the deal with these
+####"BT21302948"-this is a temp blitz logger- no need to include
+#removing these as we don't know where they're from
 
 alldat<-alldat[-(which(is.na(alldat$Longitude))),]
-
+#unique(alldat$Location[which(is.na(alldat$Longitude))])
 
 #Merge in tree data
 alldat2<-alldat
-#check that locations with trees have more bai:
-boxplot(as.numeric(alldat2$TotalBA_cm2)~Trees., data=alldat)
-#Make some plots
-boxplot(as.numeric(airtemp_c)~Trees., data=alldat)
 alldat2$airtemp_c<-as.numeric(alldat2$airtemp_c)
 alldat2$hour<-as.integer(substr(alldat2$time,1,2))
 alldat2$Trees.<-as.factor(alldat2$Trees.)
@@ -163,12 +182,23 @@ alldat2$shield<-"YES"
 alldat2$shield[alldat$Location=="Wapato Hills 2"]<-"NO"
 alldat2$shield[alldat$Location=="Wapato Hills 1"]<-"NO"
 alldat2$shield[alldat$Location=="South Tacoma Wetland"]<-"NO"
- alldat2$shield[alldat$Location=="South Tacoma Wetland 1"]<-"NO"
+alldat2$shield[alldat$Location=="South Tacoma Wetland 1"]<-"NO"
 
-#remove data for loggers without a shield
+#remove data from loggers without a shield
 alldat2<-alldat2[alldat2$shield=="YES",]
+
+#check that locations with trees have more bai:
+boxplot(TotalBA_cm2~Trees., data=alldat2)
+#Make some plots
+boxplot(as.numeric(airtemp_c)~Trees., data=alldat2)
+summary(lm(airtemp_c~Trees., data=alldat2))#sites with trees are cooler by -0.34556 on everage
+
 juldat<-alldat2[alldat2$month=="07",]
 jundat<-alldat2[alldat2$month=="06",]
+summary(lm(airtemp_c~Trees., data=jundat))
+summary(lm(airtemp_c~Trees., data=juldat))
+summary(lm(airtemp_c~Trees.*day, data=jundat))
+summary(lm(airtemp_c~Trees.*day, data=juldat))
 
 boxplot(jundat$airtemp_c[jundat$day==1]~jundat$Trees.[jundat$day==1])
 boxplot(jundat$airtemp_c[jundat$day==0]~jundat$Trees.[jundat$day==0])
@@ -177,10 +207,6 @@ jundat[which(jundat$airtemp_c==max(jundat$airtemp_c)),]
 juldat[which(juldat$airtemp_c==max(juldat$airtemp_c)),]
 
 #hottest day of the year:head(jundat[jundat$date=="06/27/22",])
-#remove NAs so that we can compare explanatory variables across a single dataset
-length(which(is.na(jundat$X6ImpOther.10m)))
-jundat<-jundat[-which(is.na(jundat$X1FineVeg.10m)),]
-juldat<-juldat[-which(is.na(juldat$X1FineVeg.10m)),]
 
 ##################################################
 #Fit some models to compare what best explains variation in temp
@@ -193,12 +219,12 @@ juldat$cc.field<-100-as.numeric(juldat$PercOpen_Mean)
 juldat$cc.rem<-juldat$X3CoarseVeg.10mProp*100
 juldat$imp<-juldat$XAllImp.10mProp*100
 
-jundat.nona<-jundat[-which(is.na(jundat$TotalBA_cm2)),]#used this to test how Total BA compared to canopy cover, remote data- it was not as good a predictor
-juldat.nona<-juldat[-which(is.na(juldat$TotalBA_cm2)),]#used this to test how Total BA compared to canopy cover, remote data- it was not as good a predictor
+#jundat.nona<-jundat[-which(is.na(jundat$TotalBA_cm2)),]#used this to test how Total BA compared to canopy cover, remote data- it was not as good a predictor
+#juldat.nona<-juldat[-which(is.na(juldat$TotalBA_cm2)),]#used this to test how Total BA compared to canopy cover, remote data- it was not as good a predictor
 
 #Fit some mixed effects models
 junmm1a<-lmer(airtemp_c~Trees.*day + (1|Hobo_SN), data=jundat)
-#junmm2b<-lmer(airtemp_c~TotalBA_cm2*hour+ (1|Hobo_SN), data=jundat.nona)
+junmm2b<-lmer(airtemp_c~TotalBA_cm2*hour+ (1|Hobo_SN), data=jundat)
 junmm1c<-lmer(airtemp_c~cc.field*day+ (1|Hobo_SN), data=jundat)
 junmm1r<-lmer(airtemp_c~cc.rem*day+ (1|Hobo_SN), data=jundat)
 junmm1imp<-lmer(airtemp_c~imp*day+ (1|Hobo_SN), data=jundat)
@@ -225,7 +251,8 @@ junmm5imp<-lmer(airtemp_c~imp+hour+day+imp:hour+imp:day+Elevation +day:hour+ (1|
 
 aictab<-AIC(junmm1a,junmm2a,junmm3a,junmm4a,junmm5a,junmm1c,junmm2c,junmm3c,junmm4c,junmm5c,junmm1r,junmm2r,junmm3r,junmm4r,junmm5r,junmm1imp,junmm2imp,junmm3imp,junmm4imp,junmm5imp)
 aictab<-aictab[order(aictab$AIC),]
-summary(junmm5a)#lowest AIC, though all mm5s  have fairly similar AICs
+aictab
+summary(junmm5a)#lowest AIC with tree cover, though all mm5s  have fairly similar AICs
 summary(junmm5r)#almost
 summary(junmm5imp)#lowest AIC
 #the best fit models:
@@ -302,56 +329,173 @@ plot(jundat$TotalBA_cm2/10000,jundat$airtemp_c,
 abline(a=fixef(junmm3a)[1]+8, b=fixef(junmm3a)[2], lwd=2)#effect of trees in sun, impervious surface
 
 dev.off()
+
+#Calculate number of hours above 89F in June and July
+jundat$heattrigger<-0
+jundat$heattrigger[which(jundat$airtemp_c>31.7)]<-1
+juldat$heattrigger<-0
+juldat$heattrigger[which(juldat$airtemp_c>31.7)]<-1
+
+heattrighrsjun<-aggregate(jundat$heattrigger, by=list(jundat$Hobo_SN,jundat$Trees.,jundat$cc.field), sum)
+heattrighrsjul<-aggregate(juldat$heattrigger, by=list(juldat$Hobo_SN,juldat$Trees.,juldat$cc.field), sum)
+
+colnames(heattrighrsjun)<-c("Hobo_SN","Trees.","cc.field","heattrig_hrsjun")
+colnames(heattrighrsjul)<-c("Hobo_SN","Trees.","cc.field","heattrig_hrsjul")
+
+heattrighrs<-left_join(heattrighrsjun,heattrighrsjul)
+
+#Fit a binomial model with probability of heatrigger as response, trees or cc as explanatory variable
+jundaydat<-jundat[jundat$day==1,]
+junmod<-glm(heattrigger~Trees., family="binomial",data=jundaydat)
+junmod2<-glm(heattrigger~cc.field+Elevation, family="binomial",data=jundaydat)
+summary(junmod2)
+#junmmod2<-glmer(heattrigger~cc.field+Elevation+ (1|Hobo_SN), family="binomial",data=jundat)
+#summary(junmmod2)
+juldaydat<-juldat[juldat$day==1,]
+
+julmod<-glm(heattrigger~Trees., family="binomial",data=juldaydat)
+julmod2<-glm(heattrigger~cc.field+Elevation, family="binomial",data=juldaydat)
+summary(julmod2)
+
+coef(junmod2)
+
+summary(junmod2)
+xcanopy <- seq(0,100,1)
+xelev <- rep(mean(jundaydat$Elevation),times=length(xcanopy))
+
+#Now we use the predict() function to create the model for all of the values of xweight.
+
+yprob <- predict(junmod2, list(cc.field = xcanopy, Elevation=xelev),type="response")
+
+
+#Make a plot
+heattab<-table(jundaydat$heattrigger,jundaydat$cc.field)
+heatprob<-heattab[2,]/(heattab[1,]+heattab[2,])
+
+#seprob <- predict(heatprob, list(cc.field = as.numeric(colnames(heattab)), Elevation=xelev),type="response", se.fit=TRUE)
+png("figs/probheattrigs.png", width=10, height=10, units="in", res=220)
+par(mar=c(4,10,4,1))
+
+plot(as.numeric(colnames(heattab)), heatprob, pch = 16, 
+     xlab = "Tree Canopy Cover (%)", 
+     ylab = "Probability of Temps >89°F",
+     ylim=c(0,.03),
+     bty="l")
+
+lines(xcanopy, yprob, lwd=2)
+dev.off()
+
+range(yprob)
+
+
+heattrighrjun<-aggregate(jundaydat$heattrigger, by=list(jundaydat$Hobo_SN,jundaydat$Trees.,jundaydat$cc.field), sum)
+
 ##########################################################
 ############# max, min, mean daily temperature ##############
 #########################################################,
 
-jundat.max<-aggregate(jundat$airtemp_c, by=list(jundat$Hobo_SN,jundat$Trees.,jundat$cc.field,jundat$cc.rem, jundat$imp,jundat$Elevation,jundat$dom), max)
-jundat.min<-aggregate(jundat$airtemp_c, by=list(jundat$Hobo_SN,jundat$Trees.,jundat$cc.field,jundat$cc.rem, jundat$imp,jundat$Elevation,jundat$dom), min)
-jundat.ave<-aggregate(jundat$airtemp_c, by=list(jundat$Hobo_SN,jundat$Trees.,jundat$cc.field,jundat$cc.rem, jundat$imp,jundat$Elevation,jundat$dom), mean)
+jundat.max<-aggregate(jundat$airtemp_c, by=list(jundat$Hobo_SN,jundat$Trees.,jundat$cc.field,jundat$cc.rem, jundat$imp,jundat$Elevation,jundat$X3CoarseVeg.20mProp,jundat$X3CoarseVeg.30mProp,jundat$X3CoarseVeg.40mProp,jundat$X3CoarseVeg.50mProp,jundat$X3CoarseVeg.100mProp,jundat$X3CoarseVeg.200mProp,jundat$X3CoarseVeg.400mProp,jundat$X3CoarseVeg.800mProp,jundat$dom), max)
+jundat.min<-aggregate(jundat$airtemp_c, by=list(jundat$Hobo_SN,jundat$Trees.,jundat$cc.field,jundat$cc.rem, jundat$imp,jundat$Elevation,jundat$X3CoarseVeg.20mProp,jundat$X3CoarseVeg.30mProp,jundat$X3CoarseVeg.40mProp,jundat$X3CoarseVeg.50mProp,jundat$X3CoarseVeg.100mProp,jundat$X3CoarseVeg.200mProp,jundat$X3CoarseVeg.400mProp,jundat$X3CoarseVeg.800mProp,jundat$dom), min)
+jundat.ave<-aggregate(jundat$airtemp_c, by=list(jundat$Hobo_SN,jundat$Trees.,jundat$cc.field,jundat$cc.rem, jundat$imp,jundat$Elevation,jundat$X3CoarseVeg.20mProp,jundat$X3CoarseVeg.30mProp,jundat$X3CoarseVeg.40mProp,jundat$X3CoarseVeg.50mProp,jundat$X3CoarseVeg.100mProp,jundat$X3CoarseVeg.200mProp,jundat$X3CoarseVeg.400mProp,jundat$X3CoarseVeg.800mProp,jundat$dom), mean)
 
 jundat.minmax<-cbind(jundat.max, jundat.min$x,jundat.ave$x)
+colnames(jundat.minmax)<-c("Hobo_SN","Trees.","cc.field","cc.rem", "imp","Elevation","cc.rem20m","cc.rem30m","cc.rem40m","cc.rem50m","cc.rem100m","cc.rem200m","cc.rem400m","cc.rem800m","dom","T_max","T_min","T_ave")
 
 juldat$dom<- as.numeric(substr(juldat$date,4,5))
-juldat.max<-aggregate(juldat$airtemp_c, by=list(juldat$Hobo_SN,juldat$Trees.,juldat$cc.field,juldat$cc.rem, juldat$imp,juldat$Elevation,juldat$dom), max)
-juldat.min<-aggregate(juldat$airtemp_c, by=list(juldat$Hobo_SN,juldat$Trees.,juldat$cc.field,juldat$cc.rem, juldat$imp,juldat$Elevation,juldat$dom), min)
-juldat.ave<-aggregate(juldat$airtemp_c, by=list(juldat$Hobo_SN,juldat$Trees.,juldat$cc.field,juldat$cc.rem, juldat$imp,juldat$Elevation,juldat$dom), mean)
+juldat.max<-aggregate(juldat$airtemp_c, by=list(juldat$Hobo_SN,juldat$Trees.,juldat$cc.field,juldat$cc.rem, juldat$imp,juldat$Elevation,juldat$X3CoarseVeg.20mProp,juldat$X3CoarseVeg.30mProp,juldat$X3CoarseVeg.40mProp,juldat$X3CoarseVeg.50mProp,juldat$X3CoarseVeg.100mProp,juldat$X3CoarseVeg.200mProp,juldat$X3CoarseVeg.400mProp,juldat$X3CoarseVeg.800mProp,juldat$dom), max)
+juldat.min<-aggregate(juldat$airtemp_c, by=list(juldat$Hobo_SN,juldat$Trees.,juldat$cc.field,juldat$cc.rem, juldat$imp,juldat$Elevation,juldat$X3CoarseVeg.20mProp,juldat$X3CoarseVeg.30mProp,juldat$X3CoarseVeg.40mProp,juldat$X3CoarseVeg.50mProp,juldat$X3CoarseVeg.100mProp,juldat$X3CoarseVeg.200mProp,juldat$X3CoarseVeg.400mProp,juldat$X3CoarseVeg.800mProp,juldat$dom), min)
+juldat.ave<-aggregate(juldat$airtemp_c, by=list(juldat$Hobo_SN,juldat$Trees.,juldat$cc.field,juldat$cc.rem, juldat$imp,juldat$Elevation,juldat$X3CoarseVeg.20mProp,juldat$X3CoarseVeg.30mProp,juldat$X3CoarseVeg.40mProp,juldat$X3CoarseVeg.50mProp,juldat$X3CoarseVeg.100mProp,juldat$X3CoarseVeg.200mProp,juldat$X3CoarseVeg.400mProp,juldat$X3CoarseVeg.800mProp,juldat$dom), mean)
 juldat.minmax<-cbind(juldat.max, juldat.min$x, juldat.ave$x)
-colnames(jundat.minmax)<-colnames(juldat.minmax)<-c("Hobo_SN","Trees.","cc.field","cc.rem", "imp","Elevation","dom","T_max","T_min","T_ave")
+colnames(juldat.minmax)<-colnames(jundat.minmax)
 jundat.minmax$Trange<-jundat.minmax$T_max-jundat.minmax$T_min
 juldat.minmax$Trange<-juldat.minmax$T_max-juldat.minmax$T_min
 
 #Fit mixed models to account for nonindependent of days
 jundat.minmax$dom<-as.factor(jundat.minmax$dom)
 juldat.minmax$dom<-as.factor(juldat.minmax$dom)
+# junTmaxb<-lmer(T_max~Trees.+Elevation+Trees.:Elevation+Trees.+(1|dom), data=jundat.minmax)
+# junTmaxa<-lmer(T_max~Trees.+Elevation+Trees.:Elevation+Trees.+(1|dom), data=jundat.minmax)
+# junTmaxc<-lmer(T_max~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom), data=jundat.minmax)
+# junTmaxr<-lmer(T_max~cc.rem+Elevation+cc.rem:Elevation+cc.rem+(1|dom), data=jundat.minmax)
+# junTmaximp<-lmer(T_max~imp+Elevation+imp:Elevation+imp+(1|dom), data=jundat.minmax)
+#junTmaxcnoelev<-lmer(T_max~cc.field+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+#junTmaxrnoelev<-lmer(T_max~cc.rem+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+#junTmaxanoelev<-lmer(T_max~Trees.+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
 
-junTmaxa<-lmer(T_max~Trees.+Elevation+Trees.:Elevation+Trees.+(1|dom), data=jundat.minmax)
-junTmaxc<-lmer(T_max~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom), data=jundat.minmax)
-junTmaxr<-lmer(T_max~cc.rem+Elevation+cc.rem:Elevation+cc.rem+(1|dom), data=jundat.minmax)
-junTmaximp<-lmer(T_max~imp+Elevation+imp:Elevation+imp+(1|dom), data=jundat.minmax)
-junTmaxcnoelev<-lmer(T_max~cc.field+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
-junTmaxrnoelev<-lmer(T_max~cc.rem+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
-junTmaxanoelev<-lmer(T_max~Trees.+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
-
-AIC(junTmaxa,junTmaxc,junTmaxr,junTmaximp,junTmaxcnoelev,junTmaxanoelev,junTmaxrnoelev)
-tab_model(junTmaxc)
-#find best random effects structure
-jundat.minmax$cc.field.st<-(jundat.minmax$cc.field-mean(jundat.minmax$cc.field)/sd(jundat.minmax$cc.field))
-junTmaxcnoelev<-lmer(T_max~cc.field.st+(cc.field.st|dom), data=jundat.minmax)
-junTmaxc<-lmer(T_max~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom), data=jundat.minmax, REML=TRUE)
-junTmaxc2<-lmer(T_max~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom)+(1|Hobo_SN), data=jundat.minmax, REML=TRUE)
-junTmaxc3<-lmer(T_max~cc.field+Elevation+cc.field:Elevation+cc.field +(cc.field.st|dom), data=jundat.minmax, REML=TRUE)
-junTmaxc4<-lmer(T_max~cc.field+Elevation+cc.field:Elevation+cc.field +(cc.field.st|dom)+(1|Hobo_SN), data=jundat.minmax, REML=TRUE)
-
-aictab<-AIC(junTmaxc,junTmaxc2,junTmaxc3,junTmaxc4)
+aictab<-AIC(junTmaxa,junTmaxc,junTmaxr,junTmaximp)
 aictab<-aictab[order(aictab$AIC),]
 aictab
-fixef(junTmaxc)
-fixef(junTmaxc2)
-fixef(junTmaxcnoelev)
-summary(junTmaxc)
+tab_model(junTmaxc, digits=3)
+jundat.minmax$T_max_F<-(jundat.minmax$T_max* 9/5) + 32 
 
-tab_model(junTmaxcnoelev)
+#find best random effects structure
+# jundat.minmax$cc.field.st<-(jundat.minmax$cc.field-mean(jundat.minmax$cc.field)/sd(jundat.minmax$cc.field))
+# junTmaxcnoelev<-lmer(T_max~cc.field.st+(cc.field.st|dom), data=jundat.minmax)
+# junTmaxc<-lmer(T_max~cc.field+Elevation+cc.field:Elevation +(1|dom), data=jundat.minmax, REML=TRUE)
+junTmaxc2<-lmer(T_max~cc.field+Elevation+cc.field:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax, REML=TRUE)
+junTmaxc2F<-lmer(T_max_F~cc.field+Elevation+cc.field:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax, REML=TRUE)
+
+# junTmaxc3<-lmer(T_max~cc.field+Elevation+cc.field:Elevation +(cc.field|dom), data=jundat.minmax, REML=TRUE)
+# junTmaxc4<-lmer(T_max~cc.field+Elevation+cc.field:Elevation+(cc.field|dom)+(1|Hobo_SN), data=jundat.minmax, REML=TRUE)
+# 
+# aictab<-AIC(junTmaxc,junTmaxc2,junTmaxc3,junTmaxc4)
+# aictab<-aictab[order(aictab$AIC),]
+# aictab
+fixef(junTmaxc2)#best fit model
+fixef(junTmaxc2F)#best fit model
+
+tab_model(junTmaxc2, digits=4)#model to report in paper
+#prep rem sensed data to be on the same scale
+jundat.minmax$cc.rem20m<-jundat.minmax$cc.rem20m*100
+jundat.minmax$cc.rem30m<-jundat.minmax$cc.rem30m*100
+jundat.minmax$cc.rem40m<-jundat.minmax$cc.rem40m*100
+jundat.minmax$cc.rem50m<-jundat.minmax$cc.rem50m*100
+jundat.minmax$cc.rem100m<-jundat.minmax$cc.rem100m*100
+jundat.minmax$cc.rem200m<-jundat.minmax$cc.rem200m*100
+jundat.minmax$cc.rem400m<-jundat.minmax$cc.rem400m*100
+jundat.minmax$cc.rem800m<-jundat.minmax$cc.rem800m*100
+
+
+#now compare canopy at different distances away, and remote vs field
+junTmaxr2.10m<-lmer(T_max~cc.rem+Elevation+cc.rem:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxr2.20m<-lmer(T_max~cc.rem20m+Elevation+cc.rem20m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxr2.30m<-lmer(T_max~cc.rem30m+Elevation+cc.rem30m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxr2.40m<-lmer(T_max~cc.rem40m+Elevation+cc.rem40m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxr2.50m<-lmer(T_max~cc.rem50m+Elevation+cc.rem50m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxr2.100m<-lmer(T_max~cc.rem100m+Elevation+cc.rem100m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxr2.200m<-lmer(T_max~cc.rem200m+Elevation+cc.rem200m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxr2.400m<-lmer(T_max~cc.rem400m+Elevation+cc.rem400m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxr2.800m<-lmer(T_max~cc.rem800m+Elevation+cc.rem800m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+
+junTmaxrc2.10m<-lmer(T_max~cc.field+cc.rem+Elevation+cc.rem:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxrc2.20m<-lmer(T_max~cc.field+cc.rem20m+Elevation+cc.rem20m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxrc2.30m<-lmer(T_max~cc.field+cc.rem30m+Elevation+cc.rem30m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxrc2.40m<-lmer(T_max~cc.field+cc.rem40m+Elevation+cc.rem40m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxrc2.50m<-lmer(T_max~cc.field+cc.rem50m+Elevation+cc.rem50m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxrc2.100m<-lmer(T_max~cc.field+cc.rem100m+Elevation+cc.rem100m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxrc2.200m<-lmer(T_max~cc.field+cc.field+cc.rem200m+Elevation+cc.rem200m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxrc2.400m<-lmer(T_max~cc.field+cc.rem400m+Elevation+cc.rem400m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxrc2.800m<-lmer(T_max~cc.field+cc.rem800m+Elevation+cc.rem800m:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxrc2int.800m<-lmer(T_max~cc.field+cc.rem800m+Elevation+cc.field:Elevation +cc.field:cc.rem800m+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxc2imp.800m<-lmer(T_max~cc.field+imp+Elevation+ +cc.field:imp+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxrc2int2.800m<-lmer(T_max~cc.field+cc.rem800m+Elevation+cc.field:Elevation+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+
+aictab<-AIC(junTmaxc2,junTmaxrc2int.800m,junTmaxc2imp.800m,junTmaxrc2int2.800m,
+            junTmaxr2.10m,junTmaxr2.20m,junTmaxr2.30m,junTmaxr2.40m,junTmaxr2.50m,junTmaxr2.100m,junTmaxr2.200m,junTmaxr2.400m,junTmaxr2.800m,
+            junTmaxrc2.10m,junTmaxrc2.20m,junTmaxrc2.30m,junTmaxrc2.40m,junTmaxrc2.50m,junTmaxrc2.100m,junTmaxrc2.200m,junTmaxrc2.400m,junTmaxrc2.800m)
+aictab<-aictab[order(aictab$AIC),]
+aictab
+#c2 is best, r2.20m next best
+fixef(junTmaxc2)
+fixef(junTmaxr2.10m)
+
+fixef(junTmaxr2.20m)
+fixef(junTmaxr2.30m)
+fixef(junTmaxr2.200m)
+tab_model(junTmaxc2, digits=3)
+
+jundat.minmax$T_min_F<-(jundat.minmax$T_min* 9/5) + 32 
+jundat.minmax$T_ave_F<-(jundat.minmax$T_ave* 9/5) + 32 
 
 junTmina<-lmer(T_min~Trees.+Elevation+Trees.:Elevation+Trees.+(1|dom), data=jundat.minmax)
 junTminc<-lmer(T_min~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom), data=jundat.minmax)
@@ -360,14 +504,19 @@ junTminimp<-lmer(T_min~imp+Elevation+imp:Elevation+imp+(1|dom), data=jundat.minm
 junTminanoelev<-lmer(T_min~Trees.+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
 junTmincnoelev<-lmer(T_min~cc.field+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
 junTminrnoelev<-lmer(T_min~cc.rem+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTminc2<-lmer(T_min~cc.field+Elevation+cc.field:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTminc2F<-lmer(T_min_F~cc.field+Elevation+cc.field:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
 
-AIC(junTmina,junTminc,junTminr,junTminimp,junTminanoelev,junTmincnoelev,junTminrnoelev)
+AIC(junTmina,junTminc2,junTminc2F,junTminc,junTminr,junTminimp,junTminanoelev,junTmincnoelev,junTminrnoelev)
 
 junTavea<-lmer(T_ave~Trees.+Elevation+Trees.:Elevation+Trees.+(1|dom), data=jundat.minmax)
 junTavec<-lmer(T_ave~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom), data=jundat.minmax)
 junTaver<-lmer(T_ave~cc.rem+Elevation+cc.rem:Elevation+cc.rem+(1|dom), data=jundat.minmax)
 junTaveimp<-lmer(T_ave~imp+Elevation+imp:Elevation+imp+(1|dom), data=jundat.minmax)
 junTavecnoelev<-lmer(T_ave~cc.field +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTavec2<-lmer(T_ave~cc.field+Elevation+cc.field:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax, REML=TRUE)
+junTavec2F<-lmer(T_ave_F~cc.field+Elevation+cc.field:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax, REML=TRUE)
+
 AIC(junTavea,junTavec,junTaver,junTaveimp,junTavecnoelev)
 
 julTmaxa<-lmer(T_max~Trees.+Elevation+Trees.:Elevation+Trees.+(1|dom), data=juldat.minmax)
@@ -391,17 +540,19 @@ julTaveimp<-lmer(T_ave~imp+Elevation+imp:Elevation+(1|dom), data=juldat.minmax)
 julTavecnoelev<-lmer(T_ave~cc.field+(1|dom)+(1|Hobo_SN), data=juldat.minmax)
 AIC(julTavea,julTavec,julTaver,julTaveimp,julTavecnoelev)
 
-junTrangec<-lmer(Trange~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom), data=jundat.minmax)
-julTrangec<-lmer(Trange~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom), data=juldat.minmax)
+junTrangec2<-lmer(Trange~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+julTrangec2<-lmer(Trange~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom)+(1|Hobo_SN), data=juldat.minmax)
+summary(junTrangec)
+
 
 #Models to present in report
-tab_model(junTmaxc, digits=3)
-tab_model(junTminc, digits=3)
-tab_model(junTavec, digits=3)
-tab_model(junTrangec, digits=3)
+tab_model(junTmaxc2, digits=3)
+tab_model(junTminc2, digits=3)
+tab_model(junTavec2, digits=3)
+tab_model(junTrangec2, digits=3)
 
 tab_model(julTmaxc, digits=3)
-tab_model(julTminc, digits=3)
+tab_model(julTminc2, digits=3)
 tab_model(julTavec, digits=3)
 tab_model(julTrangec, digits=3)
 png("figs/maxminavtemp_cc_mod.png", width=10, height=5, units="in", res=220)
@@ -546,7 +697,7 @@ ggplot(jundat.minmax,
 dev.off()
 
 #Select only the hottest day of the year- Jun 27 for Tmax, June 26b for Tmin
-jundat.minmax$dom[which(jundat.minmax$T_max==max(jundat.minmax$T_max))]
+jundat.minmax$dolm[which(jundat.minmax$T_max==max(jundat.minmax$T_max))]
 jundat.minmax$dom[which(jundat.minmax$T_min==max(jundat.minmax$T_min))]
 
 jun27dat<-jundat.minmax[jundat.minmax$dom==27,]
@@ -554,12 +705,31 @@ jun26dat<-jundat.minmax[jundat.minmax$dom==26,]
 jun20dat<-jundat.minmax[jundat.minmax$dom==20,]
 
 png(file="figs/tmax.fieldcc.2022jun27.png",width =1800, height =1800 ,res =200)
+ylab <- expression(paste("Maximum Temperature (",degree,"C)", sep=""))
 
 ggplot(jun27dat,
        aes(x= cc.field, y = T_max)) +
-  geom_point() +
+  geom_point(size = 3) +
+  theme(text = element_text(size = 20)) +
+  xlab("Canopy Cover (%)") + ylab("Maximum Temperature (°C)")+
   stat_smooth(method = "gam", 
               method.args = list(family = gaussian))
+#theme() 
+
+dev.off()
+#same plot but in degrees F
+png(file="figs/tmax.fieldcc.2022jun27_F.png",width =1800, height =1800 ,res =200)
+ylab <- expression(paste("Maximum Temperature (",degree,"F)", sep=""))
+jun27dat$T_max_F<-(jun27dat$T_max* 9/5) + 32 
+
+ggplot(jun27dat,
+       aes(x= cc.field, y = T_max_F)) +
+  geom_point(size = 3) +
+  theme(text = element_text(size = 20)) +
+  xlab("Canopy Cover (%)") + ylab("Maximum Temperature (°F)")+
+  stat_smooth(method = "gam", 
+              method.args = list(family = gaussian))
+#theme() 
 
 dev.off()
 png(file="figs/tmin.fieldcc.2022jun26.png",width =1800, height =1800 ,res =200)
@@ -732,6 +902,10 @@ juldat.minmax$dom[which(juldat.minmax$T_min==max(juldat.minmax$T_min))]
 jul31dat<-juldat.minmax[juldat.minmax$dom==31,]
 jul29dat<-juldat.minmax[juldat.minmax$dom==29,]
 
+#which logger had the hottest temp on the hottest day in July?
+jul31dat[which(jul31dat$T_max==(max(jul31dat$T_max))),]
+jul31dat[which(jul31dat$T_min==(max(jul31dat$T_min))),]
+
 png(file="figs/tmax.fieldcc.2022jul31.png",width =1800, height =1800 ,res =200)
 
 ggplot(jul31dat,
@@ -855,7 +1029,7 @@ jul31hrdat<-juldat[juldat$dom=="31",]
 png(file="figs/hrly.fieldcc.2022jul31.png",width =1800, height =1800 ,res =200)
 
 plot(0, xaxt = 'n', yaxt = 'n', bty = 'n', pch = '', 
-     ylim=range(jul31hrdat$airtemp_c),xlim=range(jul31hrdat$hour),
+     ylim=c(15,40),xlim=range(jul31hrdat$hour),
      ylab = 'Temperature (C)', xlab = 'Time of day (hour)')
 
 for(i in unique(jul31hrdat$Hobo_SN)){
@@ -868,7 +1042,7 @@ for(i in unique(jul31hrdat$Hobo_SN)){
 
 dev.off()
 
-#Plots of temperature range
+#Plots of temperature range-redo this with box plots beside each other
 
 png(file="figs/boxplothrly.fieldcc.2022jul31.png",width =1800, height =800 ,res =200)
 par(mfrow=c(1,2))
@@ -906,3 +1080,39 @@ vegmet<-vegmet[-which(is.na(vegmet$allimp)),]
 
 pairs(vegmet, pch=16,col="gray",upper.panel=panel.cor)
 
+#To make map of loggers by their temperatures, save a csv file with tmax and tmin on hottest days in jun and jult:
+
+jun27datll<-left_join(jun27dat, locs3, by=c("Hobo_SN","Trees.","cc.field", "cc.rem","imp", "Elevation"), suffixes=c("moist", "temp"))
+
+#which logger had the hottest temp on the hottest day in July?
+jul31dat[which(jul31dat$T_max==(max(jul31dat$T_max))),]
+jul31dat[which(jul31dat$T_min==(max(jul31dat$T_min))),]
+
+templatlonjul31
+templatlon
+ggplot(alleff, aes(x = Longitude, y = Latitude, color=Tmax)) +
+  geom_point(aes(size = Tmax), alpha = 0.5) +
+  scale_colour_viridis_c()
+
+#Use temperature anomoly approach and look at cloudiness
+
+# Human health: Days with temps above threshold temp (Flunker et al 2022)
+#  The trigger in the current WA permanent heat rule is an air temperature of 89 ◦F (31.7 ◦C) for workers wearing regularwork clothes [24,25]
+jundat.minmax$heattrigger<-0
+jundat.minmax$heattrigger[which(jundat.minmax$T_max>31.7)]<-1
+juldat.minmax$heattrigger<-0
+juldat.minmax$heattrigger[which(juldat.minmax$T_max>31.7)]<-1
+
+
+heattrigjun<-aggregate(jundat.minmax$heattrigger, by=list(jundat.minmax$Hobo_SN,jundat.minmax$Trees.,jundat.minmax$cc.field), sum)
+heattrigjul<-aggregate(juldat.minmax$heattrigger, by=list(juldat.minmax$Hobo_SN,juldat.minmax$Trees.,juldat.minmax$cc.field), sum)
+
+colnames(heattrigjun)<-c("Hobo_SN","Trees.","cc.field","heattrig_daysjun")
+colnames(heattrigjul)<-c("Hobo_SN","Trees.","cc.field","heattrig_daysjul")
+
+heattrig<-left_join(heattrigjun,heattrigjul)
+
+#Fit a binomial model with probability of heatrigger as response, trees or cc as explanatory variable
+mod<-glm(heattrigger~Trees., family="binomial",data=jundat.minmax)
+mod2<-glm(heattrigger~cc.field+Elevation, family="binomial",data=jundat.minmax)
+summary(mod2)
