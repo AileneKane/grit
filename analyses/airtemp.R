@@ -40,6 +40,8 @@ source("sourced_files/combine_lc_grittreedat.R")
 
 #head(sumba)
 
+#Read in temperature data from Visual crossings for Tacoma
+vc<-read.csv("../data/TacomaWA2022-01-01to2023-01-01.csv", header=TRUE)
 #load helper functions
 source("sourced_files/helper_funcs.R")
 
@@ -57,7 +59,7 @@ abline(r)
 x<-seq(1,100, by=1)
 lines(x,x, lty=2)
 mtext(paste("r2=",round(summary(r)$r.squared, digits=3),", p=",round(summary(r)$coef[2,4], digits=3), sep=""), side=3, line=-1, adj=0)
-
+text(field,rem,text=locs3$WptNo)#check which sites are off
 dev.off()
 
 dif<-field-rem
@@ -208,6 +210,7 @@ juldat[which(juldat$airtemp_c==max(juldat$airtemp_c)),]
 
 #hottest day of the year:head(jundat[jundat$date=="06/27/22",])
 
+#
 ##################################################
 #Fit some models to compare what best explains variation in temp
 #################################################
@@ -261,12 +264,12 @@ tab_model(junmm5imp, digits=3)
 tab_model(junmm5c, digits=3)
 
 
-jundat$dom<- as.numeric(substr(jundat$date,4,5))
+jundat$dom<- as.character(substr(jundat$date,4,5))
 
 cols<-c("seagreen3","gray")
 
 png("figs/airtempbvsBA.png", width=10, height=6, units="in", res=220)
-plot(jundat$dom,jundat$airtemp_c, 
+plot(as.numeric(jundat$dom),jundat$airtemp_c, 
      pch=21,bg=alpha(cols[as.factor(jundat$Trees.)],.5),
      ylim=c(10,40),cex=1.5,
      cex.axis=1.5,cex.lab=1.5,cex.main=1.5,
@@ -401,7 +404,7 @@ jundat.ave<-aggregate(jundat$airtemp_c, by=list(jundat$Hobo_SN,jundat$Trees.,jun
 jundat.minmax<-cbind(jundat.max, jundat.min$x,jundat.ave$x)
 colnames(jundat.minmax)<-c("Hobo_SN","Trees.","cc.field","cc.rem", "imp","Elevation","cc.rem20m","cc.rem30m","cc.rem40m","cc.rem50m","cc.rem100m","cc.rem200m","cc.rem400m","cc.rem800m","dom","T_max","T_min","T_ave")
 
-juldat$dom<- as.numeric(substr(juldat$date,4,5))
+juldat$dom<- as.character(substr(juldat$date,4,5))
 juldat.max<-aggregate(juldat$airtemp_c, by=list(juldat$Hobo_SN,juldat$Trees.,juldat$cc.field,juldat$cc.rem, juldat$imp,juldat$Elevation,juldat$X3CoarseVeg.20mProp,juldat$X3CoarseVeg.30mProp,juldat$X3CoarseVeg.40mProp,juldat$X3CoarseVeg.50mProp,juldat$X3CoarseVeg.100mProp,juldat$X3CoarseVeg.200mProp,juldat$X3CoarseVeg.400mProp,juldat$X3CoarseVeg.800mProp,juldat$dom), max)
 juldat.min<-aggregate(juldat$airtemp_c, by=list(juldat$Hobo_SN,juldat$Trees.,juldat$cc.field,juldat$cc.rem, juldat$imp,juldat$Elevation,juldat$X3CoarseVeg.20mProp,juldat$X3CoarseVeg.30mProp,juldat$X3CoarseVeg.40mProp,juldat$X3CoarseVeg.50mProp,juldat$X3CoarseVeg.100mProp,juldat$X3CoarseVeg.200mProp,juldat$X3CoarseVeg.400mProp,juldat$X3CoarseVeg.800mProp,juldat$dom), min)
 juldat.ave<-aggregate(juldat$airtemp_c, by=list(juldat$Hobo_SN,juldat$Trees.,juldat$cc.field,juldat$cc.rem, juldat$imp,juldat$Elevation,juldat$X3CoarseVeg.20mProp,juldat$X3CoarseVeg.30mProp,juldat$X3CoarseVeg.40mProp,juldat$X3CoarseVeg.50mProp,juldat$X3CoarseVeg.100mProp,juldat$X3CoarseVeg.200mProp,juldat$X3CoarseVeg.400mProp,juldat$X3CoarseVeg.800mProp,juldat$dom), mean)
@@ -415,16 +418,16 @@ jundat.minmax$dom<-as.factor(jundat.minmax$dom)
 juldat.minmax$dom<-as.factor(juldat.minmax$dom)
 # junTmaxb<-lmer(T_max~Trees.+Elevation+Trees.:Elevation+Trees.+(1|dom), data=jundat.minmax)
 # junTmaxa<-lmer(T_max~Trees.+Elevation+Trees.:Elevation+Trees.+(1|dom), data=jundat.minmax)
-# junTmaxc<-lmer(T_max~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom), data=jundat.minmax)
+ junTmaxc<-lmer(T_max~cc.field+Elevation+cc.field:Elevation +(1|dom), data=jundat.minmax)
 # junTmaxr<-lmer(T_max~cc.rem+Elevation+cc.rem:Elevation+cc.rem+(1|dom), data=jundat.minmax)
 # junTmaximp<-lmer(T_max~imp+Elevation+imp:Elevation+imp+(1|dom), data=jundat.minmax)
 #junTmaxcnoelev<-lmer(T_max~cc.field+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
 #junTmaxrnoelev<-lmer(T_max~cc.rem+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
 #junTmaxanoelev<-lmer(T_max~Trees.+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
 
-aictab<-AIC(junTmaxa,junTmaxc,junTmaxr,junTmaximp)
-aictab<-aictab[order(aictab$AIC),]
-aictab
+#aictab<-AIC(junTmaxa,junTmaxc,junTmaxr,junTmaximp)
+#aictab<-aictab[order(aictab$AIC),]
+#aictab
 tab_model(junTmaxc, digits=3)
 jundat.minmax$T_max_F<-(jundat.minmax$T_max* 9/5) + 32 
 
@@ -585,6 +588,43 @@ plot(jundat.minmax$cc.field ,jundat.minmax$T_ave,
      xlab="Tree cover (%)",ylab=c("Temperature (C)"), bty="l")
 abline(fixef(junTavec)[1:2], lwd=4)#effect of trees in sun, impervious surface
 mtext("C)", side=3,line=1,adj=-.2)
+
+
+###Compare to data from vc
+head(jundat.minmax)
+vc$mon<-as.factor(substr(vc$datetime,6,7))
+vc$year<-substr(vc$datetime,1,4)
+vc$dom<-substr(vc$datetime,9,10)
+
+junvc<-vc[vc$mon=="06",]
+jundat.minmax<-left_join(jundat.minmax,junvc,by="dom", copy=TRUE)
+jundat.minmax$T_maxdif<-jundat.minmax$T_max-jundat.minmax$tempmax
+jundat.minmax$T_mindif<-jundat.minmax$T_min-jundat.minmax$tempmin
+mean(jundat.minmax$T_maxdif)
+range(jundat.minmax$T_maxdif)
+hist(jundat.minmax$T_maxdif)
+#Fit models to T_maxdf
+junTmindifa<-lmer(T_mindif~Trees.+Elevation+Trees.:Elevation+Trees.+(1|dom), data=jundat.minmax)
+junTmindifc<-lmer(T_mindif~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom), data=jundat.minmax)
+junTmindifr<-lmer(T_mindif~cc.rem+Elevation+cc.rem:Elevation+cc.rem+(1|dom), data=jundat.minmax)
+junTmindifimp<-lmer(T_mindif~imp+Elevation+imp:Elevation+imp+(1|dom), data=jundat.minmax)
+junTmindifanoelev<-lmer(T_mindif~Trees.+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmincdifnoelev<-lmer(T_mindif~cc.field+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmindifrnoelev<-lmer(T_mindif~cc.rem+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmindifc2<-lmer(T_mindif~cc.field+Elevation+cc.field:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+
+AIC(junTmindifa,junTmindifc2,junTmindifc,junTmindifr,junTmindifimp,junTmindifanoelev)
+#Fit models to T_mindf
+junTmindifa<-lmer(T_mindif~Trees.+Elevation+Trees.:Elevation+Trees.+(1|dom), data=jundat.minmax)
+junTmindifc<-lmer(T_mindif~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom), data=jundat.minmax)
+junTmindifr<-lmer(T_mindif~cc.rem+Elevation+cc.rem:Elevation+cc.rem+(1|dom), data=jundat.minmax)
+junTmindifimp<-lmer(T_mindif~imp+Elevation+imp:Elevation+imp+(1|dom), data=jundat.minmax)
+junTmindifanoelev<-lmer(T_mindif~Trees.+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmincdifnoelev<-lmer(T_mindif~cc.field+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmindifrnoelev<-lmer(T_mindif~cc.rem+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmindifc2<-lmer(T_mindif~cc.field+Elevation+cc.field:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+
+AIC(junTmindifa,junTmindifc2,junTmindifc,junTmindifr,junTmindifimp,junTmindifanoelev)
 
 #July temperature
 plot(juldat.minmax$cc.field ,juldat.minmax$T_max, 
