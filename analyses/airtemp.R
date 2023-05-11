@@ -59,7 +59,7 @@ abline(r)
 x<-seq(1,100, by=1)
 lines(x,x, lty=2)
 mtext(paste("r2=",round(summary(r)$r.squared, digits=3),", p=",round(summary(r)$coef[2,4], digits=3), sep=""), side=3, line=-1, adj=0)
-text(field,rem,text=locs3$WptNo)#check which sites are off
+text(field,rem,labels=as.character(locs3$WptNo))#check which sites are off
 dev.off()
 
 dif<-field-rem
@@ -358,7 +358,7 @@ juldaydat<-juldat[juldat$day==1,]
 
 julmod<-glm(heattrigger~Trees., family="binomial",data=juldaydat)
 julmod2<-glm(heattrigger~cc.field+Elevation, family="binomial",data=juldaydat)
-summary(julmod2)
+summary(junmod2)
 
 coef(junmod2)
 
@@ -392,6 +392,28 @@ range(yprob)
 
 
 heattrighrjun<-aggregate(jundaydat$heattrigger, by=list(jundaydat$Hobo_SN,jundaydat$Trees.,jundaydat$cc.field), sum)
+
+
+#do some forecasting of effects of warming:
+jundaydat$airtemp_plus.5<-jundaydat$airtemp_c+.5
+jundaydat$airtemp_plus1<-jundaydat$airtemp_c+1
+jundaydat$airtemp_plus2<-jundaydat$airtemp_c+2
+jundaydat$heattrigger_plus1<-0
+jundaydat$heattrigger_plus1[which(jundaydat$airtemp_plus1>31.7)]<-1
+
+jundaydat$heattrigger_plus2<-0
+jundaydat$heattrigger_plus2[which(jundaydat$airtemp_plus2>31.7)]<-1
+
+jundaydat$heattrigger_plus.5<-0
+jundaydat$heattrigger_plus.5[which(jundaydat$airtemp_plus.5>31.7)]<-1
+
+junmod2plus.5<-glm(heattrigger_plus.5~cc.field+Elevation, family="binomial",data=jundaydat)
+junmod2plus1<-glm(heattrigger_plus1~cc.field+Elevation, family="binomial",data=jundaydat)
+junmod2plus2<-glm(heattrigger_plus2~cc.field+Elevation, family="binomial",data=jundaydat)
+
+summary(junmod2plus2)
+heattab.5<-table(jundaydat$heattrigger_plus.5,jundaydat$cc.field)
+heatprob.5<-heattab.5[2,]/(heattab.5[1,]+heattab.5[2,])
 
 ##########################################################
 ############# max, min, mean daily temperature ##############
@@ -604,16 +626,16 @@ mean(jundat.minmax$T_maxdif)
 range(jundat.minmax$T_maxdif)
 hist(jundat.minmax$T_maxdif)
 #Fit models to T_maxdf
-junTmindifa<-lmer(T_mindif~Trees.+Elevation+Trees.:Elevation+Trees.+(1|dom), data=jundat.minmax)
-junTmindifc<-lmer(T_mindif~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom), data=jundat.minmax)
-junTmindifr<-lmer(T_mindif~cc.rem+Elevation+cc.rem:Elevation+cc.rem+(1|dom), data=jundat.minmax)
-junTmindifimp<-lmer(T_mindif~imp+Elevation+imp:Elevation+imp+(1|dom), data=jundat.minmax)
-junTmindifanoelev<-lmer(T_mindif~Trees.+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
-junTmincdifnoelev<-lmer(T_mindif~cc.field+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
-junTmindifrnoelev<-lmer(T_mindif~cc.rem+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
-junTmindifc2<-lmer(T_mindif~cc.field+Elevation+cc.field:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxdifa<-lmer(T_maxdif~Trees.+Elevation+Trees.:Elevation+Trees.+(1|dom), data=jundat.minmax)
+junTmaxdifc<-lmer(T_maxdif~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom), data=jundat.minmax)
+junTmaxdifr<-lmer(T_maxdif~cc.rem+Elevation+cc.rem:Elevation+cc.rem+(1|dom), data=jundat.minmax)
+junTmaxdifimp<-lmer(T_maxdif~imp+Elevation+imp:Elevation+imp+(1|dom), data=jundat.minmax)
+junTmaxdifanoelev<-lmer(T_maxdif~Trees.+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxcdifnoelev<-lmer(T_maxdif~cc.field+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxdifrnoelev<-lmer(T_maxdif~cc.rem+(1|dom)+(1|Hobo_SN), data=jundat.minmax)
+junTmaxdifc2<-lmer(T_maxdif~cc.field+Elevation+cc.field:Elevation +(1|dom)+(1|Hobo_SN), data=jundat.minmax)
 
-AIC(junTmindifa,junTmindifc2,junTmindifc,junTmindifr,junTmindifimp,junTmindifanoelev)
+AIC(junTmaxdifa,junTmaxdifc2,junTmaxdifc,junTmaxdifr,junTmaxdifimp,junTmaxdifanoelev)
 #Fit models to T_mindf
 junTmindifa<-lmer(T_mindif~Trees.+Elevation+Trees.:Elevation+Trees.+(1|dom), data=jundat.minmax)
 junTmindifc<-lmer(T_mindif~cc.field+Elevation+cc.field:Elevation+cc.field +(1|dom), data=jundat.minmax)
