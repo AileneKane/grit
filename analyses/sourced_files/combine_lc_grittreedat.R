@@ -10,7 +10,7 @@ locs2$TotalBA_cm2[which(is.na(locs2$TotalBA_cm2))]<-0
 locs2$NumTrees[which(is.na(locs2$NumTrees))]<-0
 locs2$NumTrees[locs2$TotalBA_cm2==0]<-0
 
-colnames(locs2)[2]<-"Hobo_SN"
+#colnames(locs2)[2]<-"Hobo_SN"
 #check for mismatches- i.e. sites with no trees, but have BA:
 #locs2[locs2$Trees.=="N" & locs2$TotalBA_cm2>0,]#Wypt 23, fixed
 #locs2$WptNo[locs2$Trees.=="Y" & locs2$TotalBA_cm2==0]# 25 28 55 59

@@ -32,6 +32,11 @@ source("sourced_files/clean_locs.R")
 treedat<-read.csv("../data/HoboLocations_TreeData.csv", header=TRUE)
 
 source("sourced_files/summarize_grittreedat.R")
+
+#Read in data on temp loggers locations
+logs<-read.csv("../data/HoboLocations_TempLoggerInfo.csv", header=TRUE)
+source("sourced_files/clean_temploggers.R")
+
 #Read in remote-sensed land cover estimates, derived from stormwater heat map lc data
 lc<-read.csv("output/grit_logger_lc.csv", header=TRUE)
 
@@ -63,7 +68,7 @@ text(field,rem,labels=as.character(locs3$WptNo))#check which sites are off
 dev.off()
 
 dif<-field-rem
-length(which(abs(dif)>20))#24 sites differ in estimate of canopy cover by more thaan 20%
+length(which(abs(dif)>20))#12 sites differ in estimate of canopy cover by more thaan 20%
 
 #which are these sites?
 difsites<-unique(locs3$WptNo[which(abs(dif)>20)])#in nearly all cases, fieldcc>remcc, which makes sense
@@ -93,6 +98,9 @@ r<-gam(field[locs3$shield=="YES"]~locs3$NumTrees[locs3$shield=="YES"])
 lines(locs3$NumTrees[locs3$shield=="YES"],r$fitted.values)
 mtext(paste("r2=",round(summary(r)$r.sq, digits=3),", p=",round(summary(r)$pTerms.pv, digits=3), sep=""), side=3, line=-1, adj=0)
 dev.off()
+################Below needs to be recoded
+####
+NEed to update the below
 
 #Put together all air temperature data that we have
 airtempdat<-NULL

@@ -1,0 +1,13 @@
+"Timestamp","When did your temperature collection start? 
+ (hh:mm AM/PM)","Your name(s)","What shift are you on?","Which route number are you on?","Which waypoint number (WptNo) are you at?","What is the utility pole # on which the mounted temperature logger is located?","What are the last 3 digits of the mounted logger number?  It should be written on the radiation shield and starts with “BT…”","Was your temperature logger in the sun or shade?","What kind of terrain is your temperature logger on?","Any other relevant notes?","When did your temperature collection end? 
+ (hh:mm AM/PM)"
+"2023/05/13 12:38:59 PM MDT","11:31","Sarah Sutton","Shift 1: 11am - 12pm","#2","Can’t access will text.Most south station on PS","TP20135","122","Full Sun","Paved Surface (e.g., sidewalk)","","11:39"
+"2023/05/13 12:50:08 PM MDT","11:42","Sarah Sutton","Shift 1: 11am - 12pm","#2","","TP5817","942","Mix (i.e., sun for part of the time, shade for part of the time)","Paved Surface (e.g., sidewalk)","","11:50"
+"2023/05/13 12:59:54 PM MDT","11:55","Sarah & DJ","Shift 1: 11am - 12pm","#2","","10073","930","Full Sun","Vegetation (grass, weeds)","Temperature gauge on pole needs reinforcement: one wood screw has disattached","12:03"
+"2023/05/13 1:10:25 PM MDT","12:09","Sarah & dj","Shift 1: 11am - 12pm","#2","","Tp9241","947","Full Shade","Vegetation (grass, weeds)","","12:17"
+"2023/05/13 1:26:51 PM MDT","12:26","Sarah & Dj","Shift 1: 11am - 12pm","#2","","Tp21036","932","Full Shade","Dirt/bare soil","","12:34"
+"2023/05/13 3:31:22 PM MDT","14:25","Emily Heber","Shift 2: 2pm - 3pm","#2","38","TP21036","932","Full Shade","Paved Surface (e.g., sidewalk)","","14:31"
+"2023/05/13 3:38:54 PM MDT","14:32","Emily Heber","Shift 2: 2pm - 3pm","#2","19","TP21035","122","Full Sun","Paved Surface (e.g., sidewalk)","","14:38"
+"2023/05/13 3:46:13 PM MDT","14:40","Emily Heber","Shift 2: 2pm - 3pm","#2","20","TP5817","942","Mix (i.e., sun for part of the time, shade for part of the time)","Paved Surface (e.g., sidewalk)","","14:46"
+"2023/05/13 3:56:22 PM MDT","14:50","Emily Heber","Shift 2: 2pm - 3pm","#2","21","TP10073","930","Full Sun","Vegetation (grass, weeds)","","14:56"
+"2023/05/13 4:03:21 PM MDT","14:57","Emily Heber","Shift 2: 2pm - 3pm","#2","22","TP9241","947","Full Sun","Vegetation (grass, weeds)","","15:03"

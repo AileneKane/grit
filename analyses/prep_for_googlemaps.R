@@ -17,9 +17,15 @@ setwd("~/GitHub/grit/analyses")
 
 #Read in data on hobo locatoins
 locs<-read.csv("../data/HoboLocations_PoleLocations.csv", header=TRUE)
-locs<-locs[,1:18]
+locs<-locs[,1:13]
 
 locs$gmapslocs<-paste(locs$Latitude,locs$Longitude,sep=",")
-gmaps<-subset(locs, select=c("Pole_No","Hobo_SN","gmapslocs"))
+gmaps<-subset(locs, select=c("WptNo", "Pole_No","gmapslocs"))
 gmaps<-gmaps[-which(gmaps$gmapslocs=="NA,NA"),]      
+gmaps<-gmaps[-which(gmaps$Pole_No=="WH1"),]      
+gmaps<-gmaps[-which(gmaps$Pole_No=="WH2"),]      
+gmaps<-gmaps[-which(gmaps$Pole_No=="STW1"),]      
+
+gmaps<-gmaps[-which(gmaps$Pole_No=="STW2"),]      
+
 write.csv(gmaps,"output/gmapslocs.csv", row.names=FALSE)

@@ -32,7 +32,7 @@ library(mapdata)
 library(tigris)
 
 setwd("~/GitHub/grit/analyses")
-
+options("digits" = 15)
 #Read in lat/longs of temperature loggers
 locs<-read.csv("../data/HoboLocations_PoleLocations.csv", header=TRUE)
 source("sourced_files/clean_locs.R")
@@ -84,8 +84,7 @@ poly <- locs %>%
   st_bbox() %>% 
   st_as_sfc()
 
-lc_grit<-crop(x = lc, y = locs)#need to redo this
-#lc_grit2<-crop(x = lc, y = poly)
+lc_grit<-crop(x = lc, y = locs)
 
 #make a map of points with land cover
 png("figs/tacomaglcmap.png", width=12, height=12, units="in", res=220)
@@ -104,7 +103,6 @@ plot(lc_grit,
 plot(locs, add=TRUE, col="black", pch=16)
 
 dev.off()
-
 
 
 #i think both are now in metric system
@@ -198,7 +196,8 @@ e200sums.df<-as.data.frame(e200sums)
 e400sums.df<-as.data.frame(e400sums)
 e800sums.df<-as.data.frame(e800sums)
 
-locs_raw$ID<-as.character(seq(from=1, to=65, by=1))
+locs_raw$ID<-as.character(seq(from=1, to=dim(locs_raw)[1], by=1))
+
 locslc1<-left_join(locs_raw,e10sums.df, by="ID", copy=FALSE)
 locslc2<-left_join(locslc1,e20sums.df, by="ID", copy=FALSE)
 locslc3<-left_join(locslc2,e30sums.df, by="ID", copy=FALSE)
