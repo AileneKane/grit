@@ -125,7 +125,7 @@ for(i in tfolds){
     dat$time<-format(strptime(dat$time, "%I:%M:%S %p"), "%H:%M:%S")
     dat$Hobo_SN<-paste(substr(j,1,nchar(j)-4))
     if(substr(j,nchar(j)-5,nchar(j)-5)=="_"){dat$Hobo_SN<-paste(substr(j,1,nchar(j)-6))}
-    adat<-subset(dat,select=c(Hobo_SN,date,time, airtemp_c))
+    adat<-subset(ddat,select=c(Hobo_SN,date,time, airtemp_c))
     airtempdat<-rbind(airtempdat,adat)
   }
 }
@@ -354,6 +354,21 @@ axis(1,c("Night","Day"), at=c(1.5,3.5), tick=FALSE, line=2, cex.axis=1.5)
 
 dev.off()
 
+summm4a<-lmer(airtemp_c~Trees.*day+Elevation+ (1|date)+(1|Pole_No), data=sum22dat)
+fixs<-c(fixef(summm4a)[1],fixef(summm4a)[1]+fixef(summm4a)[2],fixef(summm4a)[1]+fixef(summm4a)[3], fixef(summm4a)[1]+fixef(summm4a)[2]+fixef(summm4a)[4])
+
+png(file="figs/daynighteffects.png",width =3000, height =1500 ,res =300)
+x<-barplot(fixs, col=c("gray", "dark green","gray", "dark green"), lwd=2,ylim=c(0,25), 
+           cex.lab=1.3,cex.axis=1.3,cex.names=1.4,,ylab="Temperature (°C)",names.arg=c("No trees","Trees","No Trees","Trees"))
+
+error<-c(summary(summm4a)$coef[,2])
+for(i in 1:length(fixs)){
+  arrows(x[i],fixs[i]+error[i],x[i],fixs[i]-error[i], code=3, angle=90, length=0.0,  lwd=1)
+}
+axis(side=1,at=c(1.5,3.25), labels=c("Night","Day"), line=2,cex.axis=1.5, lty=0)
+abline(h=0)
+dev.off() 
+
 
 # 
 # 
@@ -408,7 +423,7 @@ summod1<-glm(heattrigger~TotalBA_cm2+Elevation, family="binomial",data=d)
 
 summod2<-glm(heattrigger~cc.field+Elevation, family="binomial",data=d)
 summod2x<-glm(heattrigger~cc.field, family="binomial",data=d)
-summod2c<-glm(heattrigger~cc.field+Elevation+cc.field:Elevation, family="binomial",data=d)
+summod2c<-glmer(heattrigger~cc.field+Elevation+cc.field:Elevation, family="binomial",data=d)
 
 summod3<-glm(heattrigger~cc.rem+Elevation, family="binomial",data=d)
 summod3x<-glm(heattrigger~cc.rem, family="binomial",data=d)
@@ -450,7 +465,7 @@ inv.logit(coef(summod0))
 inv.logit(confint(summod0))
 #how many days had temps over heattreeger threshold?
 length(unique(d$date[d$heattrigger==1]))#13
-length(unique(d$Hobo_SN[d$heattrigger==1]))#49
+length(unique(d$Hobo_SN[d$heattrigger==1]))#50
 
 table(d$Hobo_SN[d$heattrigger==1],d$date[d$heattrigger==1],d$heattrigger[d$heattrigger==1])
 
@@ -541,6 +556,26 @@ heatprob1.5<-heattab.5[2,]/(heattab.5[1,]+heattab.5[2,])
 heattab2<-table(d$heattrigger_plus2,d$cc.field)
 heatprob2<-heattab2[2,]/(heattab2[1,]+heattab2[2,])
 
+#total probability and number of days
+heatwarm<-c(sum(d$heattrigger)/length(d$heattrigger),
+    sum(d$heattrigger_plus.1)/length(d$heattrigger),
+    sum(d$heattrigger_plus.2)/length(d$heattrigger),
+    sum(d$heattrigger_plus.3)/length(d$heattrigger),
+    sum(d$heattrigger_plus.4)/length(d$heattrigger),
+    sum(d$heattrigger_plus.5)/length(d$heattrigger),
+    sum(d$heattrigger_plus1)/length(d$heattrigger),
+    sum(d$heattrigger_plus1.5)/length(d$heattrigger),
+    sum(d$heattrigger_plus2)/length(d$heattrigger))
+    
+length(unique(d$date[d$heattrigger==1]))#13
+length(unique(d$date[d$heattrigger_plus.1==1]))#13
+length(unique(d$date[d$heattrigger_plus.2==1]))#15
+length(unique(d$date[d$heattrigger_plus.3==1]))#15
+length(unique(d$date[d$heattrigger_plus.4==1]))#17
+length(unique(d$date[d$heattrigger_plus.5==1]))#17
+length(unique(d$date[d$heattrigger_plus1==1]))#23
+length(unique(d$date[d$heattrigger_plus1.5==1]))#23
+length(unique(d$date[d$heattrigger_plus2==1]))#23
 
 #############################################################
 ###############Effect of trees on hourly temperature across the summer
@@ -576,7 +611,7 @@ aictab.forms<-aictab.forms[order(aictab.forms$AIC),]
 aictab.forms
 
 
-summary(summm4r)#lowest AIC
+summary(summm4rx)#lowest AIC
 tab_model(summm4r, digits=3)
 tab_model(summm4c, digits=3)
 tab_model(summm4b, digits=3)
@@ -594,7 +629,7 @@ hrlymodsumtab<-round(cbind(
 colnames(hrlymodsumtab)<-c("Canopy Cover (%)","2.5%","97.5%","Presence", "2.5%","97.5%","Basal Area (m2)","2.5%","97.5%","Number","2.5%","97.5 %")
 write.csv(hrlymodsumtab, "output/hrlymodcomp.csv")
 
-summm4af<-lmer(airtemp_f~Trees.*day+Elevation+ (1|date)+(1|Hobo_SN), data=sum22dat)
+summm4af<-lmer(airtemp_f~Trees.*day+Elevation+ (1|date)+(1|Pole_No), data=sum22dat)
 summary(summm4af)
 summary(summm4a)
 
@@ -602,7 +637,7 @@ summary(summm4a)
 #number of trees provided the best explanation (lowest AIC)
 summary(summod2c)
 
-tab_model(summm4c)
+tab_model(summod2c)
 tab_model(summm4rx)
 #calculate variation between temperature readings at any one time
 sum22dat$date.time<-as.factor(paste(sum22dat$date,sum22dat$time,sep="."))
@@ -649,12 +684,12 @@ mean(hrlymaxminnight$tdif)#5.583416
 # colnames(jundat.minmax)<-c("Hobo_SN","Trees.","BA_m2","cc.field","cc.rem", "imp","Elevation","cc.rem20m","cc.rem30m","cc.rem40m","cc.rem50m","cc.rem100m","cc.rem200m","cc.rem400m","cc.rem800m","dom","T_max","T_min","T_ave")
 #sum22datnoext<-sum22dat[-which(sum22dat$airtemp_c>36),]#inaccurate temperature readings?
 
-sumdat.max<-aggregate(sum22dat$airtemp_c, by=list(sum22dat$Hobo_SN,sum22dat$Trees.,sum22dat$TotalBA_m2,sum22dat$cc.field,sum22dat$cc.rem,sum22dat$imp,sum22dat$Elevation,sum22dat$X3CoarseVeg.20mProp,sum22dat$X3CoarseVeg.30mProp,sum22dat$X3CoarseVeg.40mProp,sum22dat$X3CoarseVeg.50mProp,sum22dat$X3CoarseVeg.100mProp,sum22dat$X3CoarseVeg.200mProp,sum22dat$X3CoarseVeg.400mProp,sum22dat$X3CoarseVeg.800mProp,sum22dat$date), max)
-sumdat.min<-aggregate(sum22dat$airtemp_c, by=list(sum22dat$Hobo_SN,sum22dat$Trees.,sum22dat$TotalBA_m2,sum22dat$cc.field,sum22dat$cc.rem,sum22dat$imp,sum22dat$Elevation,sum22dat$X3CoarseVeg.20mProp,sum22dat$X3CoarseVeg.30mProp,sum22dat$X3CoarseVeg.40mProp,sum22dat$X3CoarseVeg.50mProp,sum22dat$X3CoarseVeg.100mProp,sum22dat$X3CoarseVeg.200mProp,sum22dat$X3CoarseVeg.400mProp,sum22dat$X3CoarseVeg.800mProp,sum22dat$date), min)
-sumdat.ave<-aggregate(sum22dat$airtemp_c, by=list(sum22dat$Hobo_SN,sum22dat$Trees.,sum22dat$TotalBA_m2,sum22dat$cc.field,sum22dat$cc.rem,sum22dat$imp,sum22dat$Elevation,sum22dat$X3CoarseVeg.20mProp,sum22dat$X3CoarseVeg.30mProp,sum22dat$X3CoarseVeg.40mProp,sum22dat$X3CoarseVeg.50mProp,sum22dat$X3CoarseVeg.100mProp,sum22dat$X3CoarseVeg.200mProp,sum22dat$X3CoarseVeg.400mProp,sum22dat$X3CoarseVeg.800mProp,sum22dat$date), mean)
+sumdat.max<-aggregate(sum22dat$airtemp_c, by=list(sum22dat$Hobo_SN,sum22dat$Pole_No, sum22dat$Trees.,sum22dat$TotalBA_m2,sum22dat$cc.field,sum22dat$cc.rem,sum22dat$imp,sum22dat$Elevation,sum22dat$X3CoarseVeg.20mProp,sum22dat$X3CoarseVeg.30mProp,sum22dat$X3CoarseVeg.40mProp,sum22dat$X3CoarseVeg.50mProp,sum22dat$X3CoarseVeg.100mProp,sum22dat$X3CoarseVeg.200mProp,sum22dat$X3CoarseVeg.400mProp,sum22dat$X3CoarseVeg.800mProp,sum22dat$date), max)
+sumdat.min<-aggregate(sum22dat$airtemp_c, by=list(sum22dat$Hobo_SN,sum22dat$Pole_No, sum22dat$Trees.,sum22dat$TotalBA_m2,sum22dat$cc.field,sum22dat$cc.rem,sum22dat$imp,sum22dat$Elevation,sum22dat$X3CoarseVeg.20mProp,sum22dat$X3CoarseVeg.30mProp,sum22dat$X3CoarseVeg.40mProp,sum22dat$X3CoarseVeg.50mProp,sum22dat$X3CoarseVeg.100mProp,sum22dat$X3CoarseVeg.200mProp,sum22dat$X3CoarseVeg.400mProp,sum22dat$X3CoarseVeg.800mProp,sum22dat$date), min)
+sumdat.ave<-aggregate(sum22dat$airtemp_c, by=list(sum22dat$Hobo_SN,sum22dat$Pole_No, sum22dat$Trees.,sum22dat$TotalBA_m2,sum22dat$cc.field,sum22dat$cc.rem,sum22dat$imp,sum22dat$Elevation,sum22dat$X3CoarseVeg.20mProp,sum22dat$X3CoarseVeg.30mProp,sum22dat$X3CoarseVeg.40mProp,sum22dat$X3CoarseVeg.50mProp,sum22dat$X3CoarseVeg.100mProp,sum22dat$X3CoarseVeg.200mProp,sum22dat$X3CoarseVeg.400mProp,sum22dat$X3CoarseVeg.800mProp,sum22dat$date), mean)
 sumdat.minmax<-cbind(sumdat.max, sumdat.min$x, sumdat.ave$x)
-colnames(sumdat.minmax)<-c("Hobo_SN","Trees.","BA_m2","cc.field","cc.rem", "imp","Elevation","cc.rem20m","cc.rem30m","cc.rem40m","cc.rem50m","cc.rem100m","cc.rem200m","cc.rem400m","cc.rem800m","date","T_max","T_min","T_ave")
-colnames(sumdat.ave)<-c("Hobo_SN","Trees.","BA_m2","cc.field","cc.rem", "imp","Elevation","cc.rem20m","cc.rem30m","cc.rem40m","cc.rem50m","cc.rem100m","cc.rem200m","cc.rem400m","cc.rem800m","date","T_max","T_min","T_ave")
+colnames(sumdat.minmax)<-c("Hobo_SN","Pole_No","Trees.","BA_m2","cc.field","cc.rem", "imp","Elevation","cc.rem20m","cc.rem30m","cc.rem40m","cc.rem50m","cc.rem100m","cc.rem200m","cc.rem400m","cc.rem800m","date","T_max","T_min","T_ave")
+colnames(sumdat.ave)<-c("Hobo_SN","Pole_No","Trees.","BA_m2","cc.field","cc.rem", "imp","Elevation","cc.rem20m","cc.rem30m","cc.rem40m","cc.rem50m","cc.rem100m","cc.rem200m","cc.rem400m","cc.rem800m","date","T_ave")
 
 sumdat.minmax$Trange<-sumdat.minmax$T_max-sumdat.minmax$T_min
 #which date has the max average T?
@@ -671,7 +706,7 @@ sumdat.minmax$cc.rem50m<-sumdat.minmax$cc.rem50m*100
 #sumdat.minmax$cc.rem400m<-sumdat.minmax$cc.rem400m*100
 #sumdat.minmax$cc.rem800m<-sumdat.minmax$cc.rem800m*100
 
-
+sumdat.minmax$Pole_No<-as.factor(sumdat.minmax$Pole_No)
 #standardize predictors
 sumdat.minmax$cc.field.st<-(sumdat.minmax$cc.field-mean(sumdat.minmax$cc.field)/sd(sumdat.minmax$cc.field))
 sumdat.minmax$Elevation.st<-(sumdat.minmax$Elevation-mean(sumdat.minmax$Elevation)/sd(sumdat.minmax$Elevation))
@@ -696,7 +731,7 @@ r<-lm(rem~field)
 abline(r,lwd=4)
 x<-seq(1,100, by=1)
 lines(x,x, lty=2, lwd=4)
-mtext(paste(" r2=",round(summary(r)$r.squared, digits=3),", p<001", sep=""), side=3, line=-1, adj=0)
+mtext(paste(" r2=",round(summary(r)$r.squared, digits=3),", p<0.001", sep=""), side=3, line=-1, adj=0)
 #text(field,rem,labels=as.character(locs3$WptNo))#check which sites are off
 
 dev.off()
@@ -731,18 +766,18 @@ length(sumdat.minmax$date[which(sumdat.minmax$tmaxanom>0)])
 # summary(sumTmaxc4)
 
 #Tmax
-sumTmaxc<-lmer(tmaxanom~cc.field+Elevation+cc.field:Elevation+(1|date) +(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxr<-lmer(tmaxanom~cc.rem+Elevation+cc.rem:Elevation+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaximp<-lmer(tmaxanom~imp+Elevation+imp:Elevation+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxcnoelev<-lmer(tmaxanom~cc.field+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxrnoelev<-lmer(tmaxanom~cc.rem+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaximpnoelev<-lmer(tmaxanom~imp+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxrcc<-lmer(tmaxanom~cc.rem*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaximpcc<-lmer(tmaxanom~imp*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxccc<-lmer(tmaxanom~cc.field*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxrhum<-lmer(tmaxanom~cc.rem*humidity+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaximphum<-lmer(tmaxanom~imp*humidity+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxchum<-lmer(tmaxanom~cc.field*humidity+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
+sumTmaxc<-lmer(tmaxanom~cc.field+Elevation+cc.field:Elevation+(1|date) +(1|Pole_No), data=sumdat.minmax)
+sumTmaxr<-lmer(tmaxanom~cc.rem+Elevation+cc.rem:Elevation+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaximp<-lmer(tmaxanom~imp+Elevation+imp:Elevation+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxcnoelev<-lmer(tmaxanom~cc.field+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxrnoelev<-lmer(tmaxanom~cc.rem+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaximpnoelev<-lmer(tmaxanom~imp+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxrcc<-lmer(tmaxanom~cc.rem*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaximpcc<-lmer(tmaxanom~imp*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxccc<-lmer(tmaxanom~cc.field*cloudcover+(1|date)+(1||Pole_No), data=sumdat.minmax)
+sumTmaxrhum<-lmer(tmaxanom~cc.rem*humidity+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaximphum<-lmer(tmaxanom~imp*humidity+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxchum<-lmer(tmaxanom~cc.field*humidity+(1|date)+(1|Pole_No), data=sumdat.minmax)
 
 aictab<-AIC(sumTmaxc,sumTmaxr,sumTmaximp,sumTmaxcnoelev,sumTmaxrnoelev,sumTmaximpnoelev,sumTmaxrcc,sumTmaximpcc,sumTmaxccc,sumTmaxrhum,sumTmaximphum,sumTmaxchum)
 
@@ -754,25 +789,25 @@ sumdat.minmax$T_max_F<-(sumdat.minmax$T_max* 9/5) + 32
 Anova(sumTmaxccc, type="III")
 
 #now compare canopy at different distances away, and remote vs field
-sumTmaxr2.10m<-lmer(T_max~cc.rem+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxr2.20m<-lmer(T_max~cc.rem20m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxr2.30m<-lmer(T_max~cc.rem30m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxr2.40m<-lmer(T_max~cc.rem40m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxr2.50m<-lmer(T_max~cc.rem50m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxr2.100m<-lmer(T_max~cc.rem100m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxr2.200m<-lmer(T_max~cc.rem200m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxr2.400m<-lmer(T_max~cc.rem400m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxr2.800m<-lmer(T_max~cc.rem800m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
+sumTmaxr2.10m<-lmer(T_max~cc.rem+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxr2.20m<-lmer(T_max~cc.rem20m +(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxr2.30m<-lmer(T_max~cc.rem30m +(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxr2.40m<-lmer(T_max~cc.rem40m +(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxr2.50m<-lmer(T_max~cc.rem50m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxr2.100m<-lmer(T_max~cc.rem100m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxr2.200m<-lmer(T_max~cc.rem200m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxr2.400m<-lmer(T_max~cc.rem400m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxr2.800m<-lmer(T_max~cc.rem800m +(1|date)+(1|Pole_No), data=sumdat.minmax)
 
-sumTmaxrc2.10m<-lmer(T_max~cc.field+cc.rem+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxrc2.20m<-lmer(T_max~cc.field+cc.rem20m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxrc2.30m<-lmer(T_max~cc.field+cc.rem30m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxrc2.40m<-lmer(T_max~cc.field+cc.rem40m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxrc2.50m<-lmer(T_max~cc.field+cc.rem50m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxrc2.100m<-lmer(T_max~cc.field+cc.rem100m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxrc2.200m<-lmer(T_max~cc.field+cc.rem200m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxrc2.400m<-lmer(T_max~cc.field+cc.rem400m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmaxrc2.800m<-lmer(T_max~cc.field+cc.rem800m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
+sumTmaxrc2.10m<-lmer(T_max~cc.field+cc.rem+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxrc2.20m<-lmer(T_max~cc.field+cc.rem20m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxrc2.30m<-lmer(T_max~cc.field+cc.rem30m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxrc2.40m<-lmer(T_max~cc.field+cc.rem40m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxrc2.50m<-lmer(T_max~cc.field+cc.rem50m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxrc2.100m<-lmer(T_max~cc.field+cc.rem100m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxrc2.200m<-lmer(T_max~cc.field+cc.rem200m +(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxrc2.400m<-lmer(T_max~cc.field+cc.rem400m +(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmaxrc2.800m<-lmer(T_max~cc.field+cc.rem800m +(1|date)+(1|Pole_No), data=sumdat.minmax)
 sumTmaxrc2int.800m<-lmer(T_max~cc.field+cc.rem800m+cc.field:cc.rem800m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
 aictab<-AIC(sumTmaxc,sumTmaxr,sumTmaximp,sumTmaxcnoelev,sumTmaxrnoelev,sumTmaximpnoelev,sumTmaxrcc,sumTmaximpcc,sumTmaxccc,sumTmaxrhum,sumTmaximphum,sumTmaxchum,
             sumTmaxr2.10m,sumTmaxr2.20m,sumTmaxr2.30m,sumTmaxr2.40m,sumTmaxr2.50m,
@@ -787,103 +822,76 @@ tab_model(sumTmaxrnoelev, digits=3)
 
 
 #Tmin
-sumTminc<-lmer(tminanom~cc.field+Elevation+cc.field:Elevation+(1|date) +(1|Hobo_SN), data=sumdat.minmax)
-sumTminr<-lmer(tminanom~cc.rem+Elevation+cc.rem:Elevation+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminimp<-lmer(tminanom~imp+Elevation+imp:Elevation+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmincnoelev<-lmer(tminanom~cc.field+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrnoelev<-lmer(tminanom~cc.rem+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminimpnoelev<-lmer(tminanom~imp+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrcc<-lmer(tminanom~cc.rem*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminimpcc<-lmer(tminanom~imp*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminccc<-lmer(tminanom~cc.field*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrhum<-lmer(tminanom~cc.rem*humidity+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminimphum<-lmer(tminanom~imp*humidity+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminchum<-lmer(tminanom~cc.field*humidity+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
+sumTminc<-lmer(tminanom~cc.field+Elevation+cc.field:Elevation+(1|date) +(1|Pole_No), data=sumdat.minmax)
+sumTminr<-lmer(tminanom~cc.rem+Elevation+cc.rem:Elevation+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminimp<-lmer(tminanom~imp+Elevation+imp:Elevation+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmincnoelev<-lmer(tminanom~cc.field+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminrnoelev<-lmer(tminanom~cc.rem+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminimpnoelev<-lmer(tminanom~imp+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminrcc<-lmer(tminanom~cc.rem*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminimpcc<-lmer(tminanom~imp*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminccc<-lmer(tminanom~cc.field*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminrhum<-lmer(tminanom~cc.rem*humidity+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminimphum<-lmer(tminanom~imp*humidity+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminchum<-lmer(tminanom~cc.field*humidity+(1|date)+(1|Pole_No), data=sumdat.minmax)
 
 aictab<-AIC(sumTminc,sumTminr,sumTminimp,sumTmincnoelev,sumTminrnoelev,sumTminimpnoelev,sumTminrcc,sumTminimpcc,sumTminccc,sumTminrhum,sumTminimphum,sumTminchum)
 
 aictab<-aictab[order(aictab$AIC),]
 aictab
-tab_model(sumTminrnoelev, digits=3)
-tab_model(sumTmincnoelev, digits=3)
+tab_model(sumTminimpcc, digits=3)
+tab_model(sumTminccc, digits=3)
 sumdat.minmax$T_max_F<-(sumdat.minmax$T_max* 9/5) + 32 
 Anova(sumTminccc, type="III")
 
-#now compare canopy at different distances away, and remote vs field
-sumTminr2.10m<-lmer(T_max~cc.rem+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.20m<-lmer(T_max~cc.rem20m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.30m<-lmer(T_max~cc.rem30m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.40m<-lmer(T_max~cc.rem40m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.50m<-lmer(T_max~cc.rem50m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.100m<-lmer(T_max~cc.rem100m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.200m<-lmer(T_max~cc.rem200m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.400m<-lmer(T_max~cc.rem400m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.800m<-lmer(T_max~cc.rem800m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-
-sumTminrc2.10m<-lmer(T_max~cc.field+cc.rem+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2.20m<-lmer(T_max~cc.field+cc.rem20m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2.30m<-lmer(T_max~cc.field+cc.rem30m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2.40m<-lmer(T_max~cc.field+cc.rem40m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2.50m<-lmer(T_max~cc.field+cc.rem50m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2.100m<-lmer(T_max~cc.field+cc.rem100m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2.200m<-lmer(T_max~cc.field+cc.rem200m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2.400m<-lmer(T_max~cc.field+cc.rem400m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2.800m<-lmer(T_max~cc.field+cc.rem800m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2int.800m<-lmer(T_max~cc.field+cc.rem800m+cc.field:cc.rem800m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-aictab<-AIC(sumTminc,sumTminr,sumTminimp,sumTmincnoelev,sumTminrnoelev,sumTminimpnoelev,sumTminrcc,sumTminimpcc,sumTminccc,sumTminrhum,sumTminimphum,sumTminchum,
-            sumTminr2.10m,sumTminr2.20m,sumTminr2.30m,sumTminr2.40m,sumTminr2.50m,
-            sumTminrc2.10m,sumTminrc2.20m,sumTminrc2.30m,sumTminrc2.40m,sumTminrc2.50m
-)
 aictab<-aictab[order(aictab$AIC),]
 aictab
 #bestfit
-summary(sumTminrnoelev)
-tab_model(sumTminrnoelev, digits=3)
+summary(sumTminccc)
+tab_model(sumTminccc, digits=3)
 #for comparison, second best- field measured cc
 
 
 #Tmin
-sumTminc<-lmer(tminanom~cc.field+Elevation+cc.field:Elevation+(1|date) +(1|Hobo_SN), data=sumdat.minmax)
-sumTminr<-lmer(tminanom~cc.rem+Elevation+cc.rem:Elevation+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminimp<-lmer(tminanom~imp+Elevation+imp:Elevation+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmincnoelev<-lmer(tminanom~cc.field+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrnoelev<-lmer(tminanom~cc.rem+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminimpnoelev<-lmer(tminanom~imp+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrcc<-lmer(tminanom~cc.rem*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminimpcc<-lmer(tminanom~imp*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminccc<-lmer(tminanom~cc.field*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrhum<-lmer(tminanom~cc.rem*humidity+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminimphum<-lmer(tminanom~imp*humidity+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminchum<-lmer(tminanom~cc.field*humidity+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
+sumTminc<-lmer(tminanom~cc.field+Elevation+cc.field:Elevation+(1|date) +(1|Pole_No), data=sumdat.minmax)
+sumTminr<-lmer(tminanom~cc.rem+Elevation+cc.rem:Elevation+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminimp<-lmer(tminanom~imp+Elevation+imp:Elevation+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTmincnoelev<-lmer(tminanom~cc.field+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminrnoelev<-lmer(tminanom~cc.rem+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminimpnoelev<-lmer(tminanom~imp+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminrcc<-lmer(tminanom~cc.rem*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminimpcc<-lmer(tminanom~imp*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminccc<-lmer(tminanom~cc.field*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminrhum<-lmer(tminanom~cc.rem*humidity+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminimphum<-lmer(tminanom~imp*humidity+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminchum<-lmer(tminanom~cc.field*humidity+(1|date)+(1|Pole_No), data=sumdat.minmax)
 
 aictab<-AIC(sumTminc,sumTminr,sumTminimp,sumTmincnoelev,sumTminrnoelev,sumTminimpnoelev,sumTminrcc,sumTminimpcc,sumTminccc,sumTminrhum,sumTminimphum,sumTminchum)
 
 aictab<-aictab[order(aictab$AIC),]
 aictab
-tab_model(sumTminrnoelev, digits=3)
-tab_model(sumTmincnoelev, digits=3)
-sumdat.minmax$T_max_F<-(sumdat.minmax$T_max* 9/5) + 32 
+tab_model(sumTminccc, digits=3)
 Anova(sumTminccc, type="III")
 
 #now compare canopy at different distances away, and remote vs field
-sumTminr2.10m<-lmer(tminanom~cc.rem+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.20m<-lmer(tminanom~cc.rem20m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.30m<-lmer(tminanom~cc.rem30m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.40m<-lmer(tminanom~cc.rem40m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.50m<-lmer(tminanom~cc.rem50m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.100m<-lmer(tminanom~cc.rem100m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.200m<-lmer(tminanom~cc.rem200m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.400m<-lmer(tminanom~cc.rem400m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.800m<-lmer(tminanom~cc.rem800m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
+sumTminr2.10m<-lmer(tminanom~cc.rem+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminr2.20m<-lmer(tminanom~cc.rem20m +(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminr2.30m<-lmer(tminanom~cc.rem30m +(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminr2.40m<-lmer(tminanom~cc.rem40m +(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminr2.50m<-lmer(tminanom~cc.rem50m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminr2.100m<-lmer(tminanom~cc.rem100m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminr2.200m<-lmer(tminanom~cc.rem200m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminr2.400m<-lmer(tminanom~cc.rem400m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminr2.800m<-lmer(tminanom~cc.rem800m +(1|date)+(1|Pole_No), data=sumdat.minmax)
 
-sumTminrc2.10m<-lmer(tminanom~cc.field+cc.rem+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2.20m<-lmer(tminanom~cc.field+cc.rem20m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2.30m<-lmer(tminanom~cc.field+cc.rem30m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2.40m<-lmer(tminanom~cc.field+cc.rem40m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2.50m<-lmer(tminanom~cc.field+cc.rem50m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2.100m<-lmer(tminanom~cc.field+cc.rem100m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2.200m<-lmer(tminanom~cc.field+cc.rem200m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2.400m<-lmer(tminanom~cc.field+cc.rem400m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
+sumTminrc2.10m<-lmer(tminanom~cc.field+cc.rem+(1|date)+(1|HPole_No), data=sumdat.minmax)
+sumTminrc2.20m<-lmer(tminanom~cc.field+cc.rem20m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminrc2.30m<-lmer(tminanom~cc.field+cc.rem30m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminrc2.40m<-lmer(tminanom~cc.field+cc.rem40m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminrc2.50m<-lmer(tminanom~cc.field+cc.rem50m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminrc2.100m<-lmer(tminanom~cc.field+cc.rem100m+(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminrc2.200m<-lmer(tminanom~cc.field+cc.rem200m +(1|date)+(1|Pole_No), data=sumdat.minmax)
+sumTminrc2.400m<-lmer(tminanom~cc.field+cc.rem400m +(1|date)+(1|Pole_No), data=sumdat.minmax)
 sumTminrc2.800m<-lmer(tminanom~cc.field+cc.rem800m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
 sumTminrc2int.800m<-lmer(tminanom~cc.field+cc.rem800m+cc.field:cc.rem800m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
 
@@ -902,50 +910,10 @@ tab_model(sumTminrcc, digits=3)
 
 #for comparison, second best- field measured cc
 
-
-#Tmin
-sumTminc<-lmer(tminanom~cc.field+Elevation+cc.field:Elevation+(1|date) +(1|Hobo_SN), data=sumdat.minmax)
-sumTminr<-lmer(tminanom~cc.rem+Elevation+cc.rem:Elevation+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminimp<-lmer(tminanom~imp+Elevation+imp:Elevation+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTmincnoelev<-lmer(tminanom~cc.field+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrnoelev<-lmer(tminanom~cc.rem+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminimpnoelev<-lmer(tminanom~imp+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrcc<-lmer(tminanom~cc.rem*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminimpcc<-lmer(tminanom~imp*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminccc<-lmer(tminanom~cc.field*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrhum<-lmer(tminanom~cc.rem*humidity+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminimphum<-lmer(tminanom~imp*humidity+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminchum<-lmer(tminanom~cc.field*humidity+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-
-aictab<-AIC(sumTminc,sumTminr,sumTminimp,sumTmincnoelev,sumTminrnoelev,sumTminimpnoelev,sumTminrcc,sumTminimpcc,sumTminccc,sumTminrhum,sumTminimphum,sumTminchum)
-
-aictab<-aictab[order(aictab$AIC),]
-aictab
-tab_model(sumTminccc, digits=3)#best fit canopy mod
-tab_model(sumTminrcc, digits=3)#next best canopy mod
-Anova(sumTminccc, type="III")
-
-#now compare canopy at different distances away, and remote vs field
-sumTminr2.10m<-lmer(T_min~cc.rem*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.20m<-lmer(T_min~cc.rem20m*cloudcover +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.30m<-lmer(T_min~cc.rem30m*cloudcover +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.40m<-lmer(T_min~cc.rem40m*cloudcover +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminr2.50m<-lmer(T_min~cc.rem50m*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-
-aictab<-AIC(sumTminc,sumTminr,sumTminimp,sumTmincnoelev,sumTminrnoelev,sumTminimpnoelev,sumTminrcc,sumTminimpcc,sumTminccc,sumTminrhum,sumTminimphum,sumTminchum,
-            sumTminr2.10m,sumTminr2.20m,sumTminr2.30m,sumTminr2.40m,sumTminr2.50m
-)
-aictab<-aictab[order(aictab$AIC),]
-aictab
-#bestfit
-summary(sumTminccc)
-tab_model(sumTminccc, digits=3)
 #for comparison, second remote sensed cc
 
 summary(sumTminrcc)
 tab_model(sumTminrcc, digits=3)
-
-
 
 #Models to present in main ms
 tab_model(sumTmaxccc, digits=3)
@@ -1340,102 +1308,6 @@ pairs(vegmet, pch=16,col="gray",upper.panel=panel.cor)
 sumdat.minmaxv<-left_join(sumdat.minmax,locs3,by=c("Hobo_SN","Trees.","Elevation"))
 #Tmin
 #Best fit model is
-#sumTminrcc<-lmer(tminanom~cc.rem*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-#so, follow this structure and compare finescale vegetation
-#now compare canopy at different distances away, and remote vs field
-sumTminr2.10m<-lmer(T_min~cc.rem*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTminr2.20m<-lmer(T_min~cc.rem20m*cloudcover +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTminr2.30m<-lmer(T_min~cc.rem30m*cloudcover +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTminr2.40m<-lmer(T_min~cc.rem40m*cloudcover +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTminr2.50m<-lmer(T_min~cc.rem50m*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTminmed.10m<-lmer(T_min~X2MedVeg.10m*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTminmed.20m<-lmer(T_min~X2MedVeg.20m*cloudcover +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTminmed.30m<-lmer(T_min~X2MedVeg.30m*cloudcover +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTminmed.40m<-lmer(T_min~X2MedVeg.40m*cloudcover +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTminmed.50m<-lmer(T_min~X2MedVeg.50m*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTminfin.10m<-lmer(T_min~X1FineVeg.10m*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTminfin.20m<-lmer(T_min~X1FineVeg.20m*cloudcover +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTminfin.30m<-lmer(T_min~X1FineVeg.30m*cloudcover +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTminfin.40m<-lmer(T_min~X1FineVeg.40m*cloudcover +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTminfin.50m<-lmer(T_min~X1FineVeg.50m*cloudcover+(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-
-aictab<-AIC(sumTminr2.10m,sumTminr2.20m,sumTminr2.30m,sumTminr2.40m,sumTminr2.50m,
-            sumTminmed.10m,sumTminmed.20m,sumTminmed.30m,sumTminmed.40m,sumTminmed.50m,
-            sumTminfin.10m,sumTminfin.20m,sumTminfin.30m,sumTminfin.40m,sumTminfin.50m
-            
-)
-aictab<-aictab[order(aictab$AIC),]
-aictab
-summary(sumTminfin.30m)
-summary(sumTminfin.10m)
-summary(sumTminr2.10m)
-eff<-c(fixef(sumTminr2.10m)[2],fixef(sumTminr2.20m)[2],fixef(sumTminr2.30m)[2],fixef(sumTminr2.40m)[2],fixef(sumTminr2.50m)[2],
-       fixef(sumTminmed.10m)[2],fixef(sumTminmed.20m)[2],fixef(sumTminmed.30m)[2],fixef(sumTminmed.40m)[2],fixef(sumTminmed.50m)[2],
-       fixef(sumTminfin.10m)[2],fixef(sumTminfin.20m)[2],fixef(sumTminfin.30m)[2],fixef(sumTminfin.40m)[2],fixef(sumTminfin.50m)[2])
-      #To make map of loggers by their temperatures, save a csv file with tmax and tmin on hottest days in jun and jult:
-ps<-c(Anova(sumTminr2.10m)[1,3],Anova(sumTminr2.20m)[1,3],Anova(sumTminr2.30m)[1,3],Anova(sumTminr2.40m)[1,3],Anova(sumTminr2.50m)[1,3],
-      Anova(sumTminmed.10m)[1,3],Anova(sumTminmed.20m)[1,3],Anova(sumTminmed.30m)[1,3],Anova(sumTminmed.40m)[1,3],Anova(sumTminmed.50m)[1,3],
-      Anova(sumTminfin.10m)[1,3],Anova(sumTminfin.20m)[1,3],Anova(sumTminfin.30m)[1,3],Anova(sumTminfin.40m)[1,3],Anova(sumTminfin.50m)[1,3])
-modtab<-round(rbind(
-        cbind(summary(sumTminr2.10m)$coef,Anova(sumTminr2.10m, type="III"),summary(sumTminr2.20m)$coef,Anova(sumTminr2.20m, type="III"),summary(sumTminr2.30m)$coef,Anova(sumTminr2.30m, type="III"),summary(sumTminr2.40m)$coef,Anova(sumTminr2.40m,type="III"),summary(sumTminr2.50m)$coef,Anova(sumTminr2.50m, type="III")),
-        cbind(summary(sumTminmed.10m)$coef,Anova(sumTminmed.10m, type="III"),summary(sumTminmed.20m)$coef,Anova(sumTminmed.20m, type="III"),summary(sumTminmed.30m)$coef,Anova(sumTminmed.30m, type="III"),summary(sumTminmed.40m)$coef,Anova(sumTminmed.40m, type="III"),summary(sumTminmed.50m)$coef,Anova(sumTminmed.50m, type="III")),
-        cbind(summary(sumTminfin.10m)$coef,Anova(sumTminfin.10m, type="III"),summary(sumTminfin.20m)$coef,Anova(sumTminfin.20m, type="III"),summary(sumTminfin.30m)$coef,Anova(sumTminfin.30m, type="III"),summary(sumTminfin.40m)$coef,Anova(sumTminfin.40m, type="III"),summary(sumTminfin.50m)$coef,Anova(sumTminfin.50m, type="III"))), digits=3)
-
-write.csv(modtab,"output/vegeffectsmodsummaries.csv")
-
-
-#Tmax
-#Best fit model is
-sumTmaxrnoelev<-lmer(tmaxanom~cc.rem+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-#so, follow this structure and compare finescale vegetation
-#now compare canopy at different distances away, and remote vs field
-#Tmax
-#Best fit model is
-#sumTmaxrcc<-lmer(tmaxanom~cc.rem+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-#so, follow this structure and compare finescale vegetation
-#now compare canopy at different distances away, and remote vs field
-sumTmaxr2.10m<-lmer(T_max~cc.rem+(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTmaxr2.20m<-lmer(T_max~cc.rem20m +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTmaxr2.30m<-lmer(T_max~cc.rem30m +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTmaxr2.40m<-lmer(T_max~cc.rem40m +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTmaxr2.50m<-lmer(T_max~cc.rem50m+(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTmaxmed.10m<-lmer(T_max~X2MedVeg.10m+(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTmaxmed.20m<-lmer(T_max~X2MedVeg.20m +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTmaxmed.30m<-lmer(T_max~X2MedVeg.30m +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTmaxmed.40m<-lmer(T_max~X2MedVeg.40m +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTmaxmed.50m<-lmer(T_max~X2MedVeg.50m+(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTmaxfin.10m<-lmer(T_max~X1FineVeg.10m+(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTmaxfin.20m<-lmer(T_max~X1FineVeg.20m +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTmaxfin.30m<-lmer(T_max~X1FineVeg.30m +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTmaxfin.40m<-lmer(T_max~X1FineVeg.40m +(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-sumTmaxfin.50m<-lmer(T_max~X1FineVeg.50m+(1|date)+(1|Hobo_SN), data=sumdat.minmaxv)
-
-aictab<-AIC(sumTmaxr2.10m,sumTmaxr2.20m,sumTmaxr2.30m,sumTmaxr2.40m,sumTmaxr2.50m,
-            sumTmaxmed.10m,sumTmaxmed.20m,sumTmaxmed.30m,sumTmaxmed.40m,sumTmaxmed.50m,
-            sumTmaxfin.10m,sumTmaxfin.20m,sumTmaxfin.30m,sumTmaxfin.40m,sumTmaxfin.50m
-            
-)
-aictab<-aictab[order(aictab$AIC),]
-aictab
-summary(sumTmaxfin.30m)
-summary(sumTmaxfin.10m)
-summary(sumTmaxr2.10m)
-eff<-c(fixef(sumTmaxr2.10m)[2],fixef(sumTmaxr2.20m)[2],fixef(sumTmaxr2.30m)[2],fixef(sumTmaxr2.40m)[2],fixef(sumTmaxr2.50m)[2],
-       fixef(sumTmaxmed.10m)[2],fixef(sumTmaxmed.20m)[2],fixef(sumTmaxmed.30m)[2],fixef(sumTmaxmed.40m)[2],fixef(sumTmaxmed.50m)[2],
-       fixef(sumTmaxfin.10m)[2],fixef(sumTmaxfin.20m)[2],fixef(sumTmaxfin.30m)[2],fixef(sumTmaxfin.40m)[2],fixef(sumTmaxfin.50m)[2])
-#To make map of loggers by their temperatures, save a csv file with tmax and tmin on hottest days in jun and jult:
-ps<-c(Anova(sumTmaxr2.10m)[1,3],Anova(sumTmaxr2.20m)[1,3],Anova(sumTmaxr2.30m)[1,3],Anova(sumTmaxr2.40m)[1,3],Anova(sumTmaxr2.50m)[1,3],
-      Anova(sumTmaxmed.10m)[1,3],Anova(sumTmaxmed.20m)[1,3],Anova(sumTmaxmed.30m)[1,3],Anova(sumTmaxmed.40m)[1,3],Anova(sumTmaxmed.50m)[1,3],
-      Anova(sumTmaxfin.10m)[1,3],Anova(sumTmaxfin.20m)[1,3],Anova(sumTmaxfin.30m)[1,3],Anova(sumTmaxfin.40m)[1,3],Anova(sumTmaxfin.50m)[1,3])
-modtab<-round(rbind(
-  cbind(summary(sumTmaxr2.10m)$coef,Anova(sumTmaxr2.10m, type="III"),summary(sumTmaxr2.20m)$coef,Anova(sumTmaxr2.20m, type="III"),summary(sumTmaxr2.30m)$coef,Anova(sumTmaxr2.30m, type="III"),summary(sumTmaxr2.40m)$coef,Anova(sumTmaxr2.40m,type="III"),summary(sumTmaxr2.50m)$coef,Anova(sumTmaxr2.50m, type="III")),
-  cbind(summary(sumTmaxmed.10m)$coef,Anova(sumTmaxmed.10m, type="III"),summary(sumTmaxmed.20m)$coef,Anova(sumTmaxmed.20m, type="III"),summary(sumTmaxmed.30m)$coef,Anova(sumTmaxmed.30m, type="III"),summary(sumTmaxmed.40m)$coef,Anova(sumTmaxmed.40m, type="III"),summary(sumTmaxmed.50m)$coef,Anova(sumTmaxmed.50m, type="III")),
-  cbind(summary(sumTmaxfin.10m)$coef,Anova(sumTmaxfin.10m, type="III"),summary(sumTmaxfin.20m)$coef,Anova(sumTmaxfin.20m, type="III"),summary(sumTmaxfin.30m)$coef,Anova(sumTmaxfin.30m, type="III"),summary(sumTmaxfin.40m)$coef,Anova(sumTmaxfin.40m, type="III"),summary(sumTmaxfin.50m)$coef,Anova(sumTmaxfin.50m, type="III"))), digits=3)
-
-write.csv(modtab,"output/vegeffectstmaxmodsummaries.csv")
-
-
-
 
 
 #To make map of loggers by their temperatures, save a csv file with tmax and tmin on hottest days in jun and jult:
@@ -1461,6 +1333,24 @@ for(i in 1:length(eff)){
 axis(side=1,at=c(3,9,15), labels=c("Coarse (Trees)","Medium (Shrubs)","Fine (Grass)"), line=3,cex=1.3, lty=0)
 abline(h=0)
 dev.off() 
+
+
+eff<-c(fixef(sumTminr2.10m)[2],fixef(sumTminr2.20m)[2],fixef(sumTminr2.30m)[2],fixef(sumTminr2.40m)[2],fixef(sumTminr2.50m)[2],
+       fixef(sumTminmed.10m)[2],fixef(sumTminmed.20m)[2],fixef(sumTminmed.30m)[2],fixef(sumTminmed.40m)[2],fixef(sumTminmed.50m)[2],
+       fixef(sumTminfin.10m)[2],fixef(sumTminfin.20m)[2],fixef(sumTminfin.30m)[2],fixef(sumTminfin.40m)[2],fixef(sumTminfin.50m)[2])
+#To make map of loggers by their temperatures, save a csv file with tmax and tmin on hottest days in jun and jult:
+ps<-c(Anova(sumTminr2.10m)[1,3],Anova(sumTminr2.20m)[1,3],Anova(sumTminr2.30m)[1,3],Anova(sumTminr2.40m)[1,3],Anova(sumTminr2.50m)[1,3],
+      Anova(sumTminmed.10m)[1,3],Anova(sumTminmed.20m)[1,3],Anova(sumTminmed.30m)[1,3],Anova(sumTminmed.40m)[1,3],Anova(sumTminmed.50m)[1,3],
+      Anova(sumTminfin.10m)[1,3],Anova(sumTminfin.20m)[1,3],Anova(sumTminfin.30m)[1,3],Anova(sumTminfin.40m)[1,3],Anova(sumTminfin.50m)[1,3])
+modtab<-round(rbind(
+  cbind(summary(sumTminr2.10m)$coef,Anova(sumTminr2.10m, type="III"),summary(sumTminr2.20m)$coef,Anova(sumTminr2.20m, type="III"),summary(sumTminr2.30m)$coef,Anova(sumTminr2.30m, type="III"),summary(sumTminr2.40m)$coef,Anova(sumTminr2.40m,type="III"),summary(sumTminr2.50m)$coef,Anova(sumTminr2.50m, type="III")),
+  cbind(summary(sumTminmed.10m)$coef,Anova(sumTminmed.10m, type="III"),summary(sumTminmed.20m)$coef,Anova(sumTminmed.20m, type="III"),summary(sumTminmed.30m)$coef,Anova(sumTminmed.30m, type="III"),summary(sumTminmed.40m)$coef,Anova(sumTminmed.40m, type="III"),summary(sumTminmed.50m)$coef,Anova(sumTminmed.50m, type="III")),
+  cbind(summary(sumTminfin.10m)$coef,Anova(sumTminfin.10m, type="III"),summary(sumTminfin.20m)$coef,Anova(sumTminfin.20m, type="III"),summary(sumTminfin.30m)$coef,Anova(sumTminfin.30m, type="III"),summary(sumTminfin.40m)$coef,Anova(sumTminfin.40m, type="III"),summary(sumTminfin.50m)$coef,Anova(sumTminfin.50m, type="III"))), digits=3)
+
+write.csv(modtab,"output/vegeffectsmodsummaries.csv")
+
+
+
 
 jun27datll<-left_join(jun27dat, locs3, by=c("Hobo_SN","Trees.","cc.field", "cc.rem","imp", "Elevation"), suffixes=c("moist", "temp"))
 
