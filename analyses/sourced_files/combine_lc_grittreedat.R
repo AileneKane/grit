@@ -32,7 +32,16 @@ locs3$X3CoarseVeg.800mProp<-locs3$X3CoarseVeg.800m/2010619
 
 locs3$XAllImp.10mProp<-(locs3$X6ImpOther.10m+ locs3$X7ImpRoofs.10m)/314.016
 locs3$X1FineVeg.10mProp<-locs3$X1FineVeg.10m/314.016
+locs3$X1FineVeg.20mProp<-locs3$X1FineVeg.20m/1256.06
+locs3$X1FineVeg.30mProp<-locs3$X1FineVeg.30m/2826.14
+locs3$X1FineVeg.40mProp<-locs3$X1FineVeg.40m/5024.25
+locs3$X1FineVeg.50mProp<-locs3$X1FineVeg.50m/7850.39
 locs3$X2MedVeg.10mProp<-locs3$X2MedVeg.10m/314.016
+locs3$X2MedVeg.20mProp<-locs3$X2MedVeg.20m/1256.06
+locs3$X2MedVeg.30mProp<-locs3$X2MedVeg.30m/2826.14
+locs3$X2MedVeg.40mProp<-locs3$X2MedVeg.40m/5024.25
+locs3$X2MedVeg.50mProp<-locs3$X2MedVeg.50m/7850.39
+
 #add column for whether logger has a sheild or not
 locs3$shield<-"YES"
 locs3$shield[locs3$Location=="Wapato Hills 2"]<-"NO"

@@ -84,15 +84,15 @@ cbind(locs3$WptNo[which(abs(dif)>20)],
       field[which(abs(dif)>20)],
       rem[which(abs(dif)>20)])
 
-png("figs/treenum_fieldcover.png", width=6, height=6, units="in", res=220)
+png("figs/treenum_fieldcover_noline.png", width=6, height=6, units="in", res=220)
 
 plot(locs3$NumTrees,field, pch=16, col="gray",
      ylab="Field Canopy Cover",
      xlab="Number of Trees within 10m")
 r<-gam(field~locs3$NumTrees)
 
-lines(locs3$NumTrees,r$fitted.values)
-mtext(paste("r2=",round(summary(r)$r.sq, digits=3),", p=",round(summary(r)$pTerms.pv, digits=3), sep=""), side=3, line=-1, adj=0)
+#lines(locs3$NumTrees,r$fitted.values)
+#mtext(paste("r2=",round(summary(r)$r.sq, digits=3),", p=",round(summary(r)$pTerms.pv, digits=3), sep=""), side=3, line=-1, adj=0)
 dev.off()
 png("figs/streettreenum_fieldcover.png", width=6, height=6, units="in", res=220)
 
@@ -125,13 +125,13 @@ for(i in tfolds){
     dat$time<-format(strptime(dat$time, "%I:%M:%S %p"), "%H:%M:%S")
     dat$Hobo_SN<-paste(substr(j,1,nchar(j)-4))
     if(substr(j,nchar(j)-5,nchar(j)-5)=="_"){dat$Hobo_SN<-paste(substr(j,1,nchar(j)-6))}
-    adat<-subset(ddat,select=c(Hobo_SN,date,time, airtemp_c))
+    adat<-subset(dat,select=c(Hobo_SN,date,time, airtemp_c))
     airtempdat<-rbind(airtempdat,adat)
   }
 }
 
-dim(airtempdat)#586957 4 on 6/7/2023
-unique(airtempdat$Hobo_SN)#55 on 6/7/2023  
+dim(airtempdat)#586957 4 on 1/16/2024
+unique(airtempdat$Hobo_SN)#55 on 1/16/2024
 head(airtempdat)
 
 #now format  blue tooth data
@@ -158,7 +158,7 @@ allairdat<-rbind(airtempdat,btdat)
 
 #remove some of the recordings that are NAs
 allairdat<-allairdat[which(substr(allairdat$time,4,8)=="00:00"),]
-dim(allairdat)#526460 
+dim(allairdat)#526460 on 1/16/2024
 
 #figure out how many are mismatching and why:
 tempdat.logs<-unique(allairdat$Hobo_SN)
@@ -255,21 +255,22 @@ sum22dat<-sum22dat[sum22dat$Shield.=="Yes",]
 
 #remove extra data measured during temperature blitz
 sum22dat<-sum22dat[which(substr(sum22dat$time,4,5)=="00"),]
-#dim(sum22dat)[1] 85906    53
+#dim(sum22dat)[1] 88124    53 on 1/16/2024
 jundat<-sum22dat[sum22dat$month=="06",]
 juldat<-sum22dat[sum22dat$month=="07",]
 augdat<-sum22dat[sum22dat$month=="08",]
 
 #Which logger recorded the hottest temperature and when was it?
-jundat[which(jundat$airtemp_c==max(jundat$airtemp_c)),]
-juldat[which(juldat$airtemp_c==max(juldat$airtemp_c)),]
-sum22dat[which(sum22dat$airtemp_c==max(sum22dat$airtemp_c)),]
+jundat[which(jundat$airtemp_c==max(jundat$airtemp_c)),]#34.585  on 2022-06-27
+juldat[which(juldat$airtemp_c==max(juldat$airtemp_c)),]# 36.89  on 2022-07-31
+sum22dat[which(sum22dat$airtemp_c==max(sum22dat$airtemp_c)),]#36.89  on 2022-07-31
 
 #day in summer which the hottest temp recorded= july 31, Pine btwn 40 & 43 (no trees)- 46.979 (116.5622)- 2 trees, but no canopy cover
 #day in june on which the hottest temp recorded= june 26, 45th at Cedar location (no trees)- 43.359C (110 F)
 
-length(unique(sum22dat$Pole_No))
+length(unique(sum22dat$Pole_No))#46
 table(sum22dat$Pole_No,sum22dat$date)
+
 ##################################################
 #Fit some models to compare what best explains variation in temp
 #########################################################
@@ -353,56 +354,27 @@ axis(1,c("Night","Day"), at=c(1.5,3.5), tick=FALSE, line=2, cex.axis=1.5)
 #legend("topleft", legend = c("No Trees","Trees"),fill = cols, bty="n")
 
 dev.off()
+sum22dat$day.Trees<-paste(sum22dat$day, sum22dat$Trees., sep=",")
+summm4afig<-lmer(airtemp_c~-1+day.Trees +Elevation+ (1|date)+(1|Pole_No), data=sum22dat)
 
-summm4a<-lmer(airtemp_c~Trees.*day+Elevation+ (1|date)+(1|Pole_No), data=sum22dat)
-fixs<-c(fixef(summm4a)[1],fixef(summm4a)[1]+fixef(summm4a)[2],fixef(summm4a)[1]+fixef(summm4a)[3], fixef(summm4a)[1]+fixef(summm4a)[2]+fixef(summm4a)[4])
+fixs<-fixef(summm4afig)[1:4]
+error<-confint(summm4afig)[4:7,]
 
-png(file="figs/daynighteffects.png",width =3000, height =1500 ,res =300)
+png(file="figs/Fig2daynighteffects.png",width =3000, height =1500 ,res =300)
 x<-barplot(fixs, col=c("gray", "dark green","gray", "dark green"), lwd=2,ylim=c(0,25), 
-           cex.lab=1.3,cex.axis=1.3,cex.names=1.4,,ylab="Temperature (°C)",names.arg=c("No trees","Trees","No Trees","Trees"))
+           cex.lab=1.3,cex.axis=1.3,cex.names=1.4,,ylab="Temperature (°C)",names.arg=c("No Trees","Trees","No Trees","Trees"))
 
-error<-c(summary(summm4a)$coef[,2])
 for(i in 1:length(fixs)){
-  arrows(x[i],fixs[i]+error[i],x[i],fixs[i]-error[i], code=3, angle=90, length=0.0,  lwd=1)
+  arrows(x[i],error[i,1],x[i],error[i,2], code=3, angle=90, length=0.05,  lwd=2)
 }
 axis(side=1,at=c(1.5,3.25), labels=c("Night","Day"), line=2,cex.axis=1.5, lty=0)
 abline(h=0)
 dev.off() 
 
-
-# 
-# 
-# png("figs/temp_cc_mod.png", width=10, height=5, units="in", res=220)
-# par(mfrow=c(1,2))
-# plot(jundat$cc.field, jundat$airtemp_c, 
-#      pch=21,bg=alpha(cols[as.factor(jundat$Trees.)], .6),
-#      ylim=c(1,40),cex=1.5,
-#      cex.axis=1.5,cex.lab=1.5,cex.main=1.5,
-#      xlab="Canopy cover (field)",ylab=c("Temperature (C)"), main="",bty="l")
-# abline(a=fixef(junmm3c)[1]+8, b=fixef(junmm3c)[2], lwd=2)#effect of trees in sun, impervious surface
-# plot(jundat$cc.rem, jundat$airtemp_c, 
-#      pch=21,bg=alpha(cols[as.factor(jundat$Trees.)], .6),
-#      ylim=c(1,40),cex=1.5,
-#      cex.axis=1.5,cex.lab=1.5,cex.main=1.5,
-#      xlab="Cover (remote-sensed)",ylab=c("Temperature (C)"), main="",bty="l")
-# 
-# abline(a=fixef(junmm3r)[1]+8, b=fixef(junmm3r)[2],lwd=2)#effect of trees in sun, impervious surface
-# 
-# dev.off()
-# png("figs/temp_BA_mod.png", width=10, height=5, units="in", res=220)
-# 
-# plot(jundat$TotalBA_cm2/10000,jundat$airtemp_c, 
-#      pch=21,bg=alpha(cols[as.factor(jundat$Trees.)], .5),
-#      #ylim=c(5,40),cex=1.5,
-#      cex.axis=1.5,cex.lab=1.5,cex.main=1.5,
-#      xlab="Tree abundance (basal area)",ylab=c("Temperature (C)"), main="",bty="l")
-# abline(a=fixef(junmm3a)[1]+8, b=fixef(junmm3a)[2], lwd=2)#effect of trees in sun, impervious surface
-# 
-# dev.off()
-
-#Calculate number of hours above 89F in June and July
+#Calculate number of hours above regulated heat thresholds of 80F(26.7C) and 90F(32.2C)
+ht<-26.7
 sum22dat$heattrigger<-0
-sum22dat$heattrigger[which(sum22dat$airtemp_c>31.7)]<-1
+sum22dat$heattrigger[which(sum22dat$airtemp_c>=ht)]<-1
 heattrighrs<-aggregate(sum22dat$heattrigger, by=list(sum22dat$Hobo_SN,sum22dat$Trees.,sum22dat$cc.field), sum)
 
 colnames(heattrighrs)<-c("Hobo_SN","Trees.","cc.field","heattrig_hrsjun")
@@ -415,7 +387,6 @@ sumdat.nona<-sumdat[!which(is.na(sumdat$TotalBA_cm2)),]#used this to test how To
 d=sumdaydat
 summod0<-glm(heattrigger~1, family="binomial",data=d)
 summary(summod0)
-
 summod<-glm(heattrigger~Trees.+Elevation, family="binomial",data=d)
 summodc<-glm(heattrigger~Trees.+Elevation+day+Trees.:day, family="binomial",data=d)
 
@@ -423,7 +394,7 @@ summod1<-glm(heattrigger~TotalBA_cm2+Elevation, family="binomial",data=d)
 
 summod2<-glm(heattrigger~cc.field+Elevation, family="binomial",data=d)
 summod2x<-glm(heattrigger~cc.field, family="binomial",data=d)
-summod2c<-glmer(heattrigger~cc.field+Elevation+cc.field:Elevation, family="binomial",data=d)
+summod2c<-glm(heattrigger~cc.field+Elevation+cc.field:Elevation, family="binomial",data=d)
 
 summod3<-glm(heattrigger~cc.rem+Elevation, family="binomial",data=d)
 summod3x<-glm(heattrigger~cc.rem, family="binomial",data=d)
@@ -445,10 +416,9 @@ aictab
 summary(summod2c)#lowest aic for sum22dat
 tab_model(summod2c)#lowest aic for sum22dat
 
-#summmod2c<-glmer(heattrigger~cc.field+Elevation+cc.field:Elevation+(1|Hobo_SN), family="binomial",data=d)
-#doesn't converge
-xcanopy <- seq(0,100,1)
-elev<-rep(60, times=length(xcanopy))
+
+xcanopy <- seq(from =1,to=100,by=1)
+elev<-rep(40, times=length(xcanopy))
 #Now we use the predict() function to create the model for all of the values of xweight.
 
 yprob <- predict(summod2c, list(cc.field= xcanopy, Elevation=elev),type="response")
@@ -464,26 +434,28 @@ sum(d$heattrigger)/length(d$heattrigger)
 inv.logit(coef(summod0))
 inv.logit(confint(summod0))
 #how many days had temps over heattreeger threshold?
-length(unique(d$date[d$heattrigger==1]))#13
-length(unique(d$Hobo_SN[d$heattrigger==1]))#50
+length(unique(d$date[d$heattrigger==1]))#42
+length(unique(d$Hobo_SN[d$heattrigger==1]))#51
 
 table(d$Hobo_SN[d$heattrigger==1],d$date[d$heattrigger==1],d$heattrigger[d$heattrigger==1])
 
 #seprob <- predict(heatprob, list(cc.field = as.numeric(colnames(heattab)), Elevation=xelev),type="response", se.fit=TRUE)
-png("figs/probheattrigsdayC.png", width=8, height=8, units="in", res=320)
+if(ht==26.7){png("figs/probheattrigday26.7C.png", width=8, height=8, units="in", res=320)}
+if(ht==32.2){png("figs/probheattrigday32.2C.png", width=8, height=8, units="in", res=320)}
 par(mar=c(4,10,4,1))
 
 plot(as.numeric(colnames(heattab)), heatprob, pch = 16, col=alpha("black",.5),
      cex=1.8, cex.axis=1.5, cex.lab=1.8,
      xlab = "Tree Canopy Cover (%)", 
-     ylab = "Probability of Temperature >31.7°C",
-     ylim=c(0,.05),
+     ylab = "Probability of Temperature >26.7°C",
+     ylim=c(0,.2),
+     xlim=c(0,100),
      bty="l")
 
 lines(xcanopy, yprob, lwd=3)
 #Now we use the predict() function to show effect at different elevations
 
-elev<-rep(70, times=length(xcanopy))
+elev<-rep(60, times=length(xcanopy))
 yprob <- predict(summod2c, list(cc.field= xcanopy, Elevation=elev),type="response")
 lines(xcanopy, yprob, lwd=3, col="gray")
 
@@ -493,30 +465,12 @@ lines(xcanopy, yprob, lwd=3, col="lightgray")
 
 dev.off()
 
-png("figs/probheattrigsday_rem_C.png", width=8, height=8, units="in", res=320)
-heattabrem<-table(d$heattrigger,d$X3CoarseVeg.400mProp)
-heatprobrem<-heattabrem[2,]/(heattabrem[1,]+heattabrem[2,])
-
-par(mar=c(4,10,4,1))
-xcanopy <- seq(0,.33,.1)
-elev<-rep(mean(d$Elevation), times=length(xcanopy))
-yprob <- predict(summod10, list(X3CoarseVeg.400mProp= xcanopy, Elevation=elev),type="response")
-plot(as.numeric(colnames(heattabrem)), heatprobrem, pch = 16, col=alpha("black",.5),
-     cex=1.8, cex.axis=1.5, cex.lab=1.8,
-     xlab = "Tree Canopy Cover (Proportion)", 
-     ylab = "Probability of Temperature >32°C",
-     ylim=c(0,.05),
-     bty="l")
-
-lines(xcanopy, yprob, lwd=3)
-dev.off()
-
 heattab<-table(d$heattrigger,d$cc.field)
 heatprob<-heattab[2,]/(heattab[1,]+heattab[2,])
 
-predict(summod2c, list(cc.field= 100, Elevation=60),type="response",se.fit=TRUE)
-
-predict(summod2c, list(cc.field= 0, Elevation=60),type="response",se.fit=TRUE)#0.03829144 
+predict(summod2c, list(cc.field= 100, Elevation=40),type="response",se.fit=TRUE)#0.00581963 for 90
+predict(summod2c, list(cc.field= 50, Elevation=40),type="response",se.fit=TRUE)#0.0141184 for 90 
+predict(summod2c, list(cc.field= 0, Elevation=40),type="response",se.fit=TRUE)#0.03384827 for 90
 
 #do some forecasting of effects of warming
 d$airtemp_plus.1<-d$airtemp_c+.1
@@ -528,23 +482,23 @@ d$airtemp_plus1<-d$airtemp_c+1.5
 d$airtemp_plus1.5<-d$airtemp_c+2
 d$airtemp_plus2<-d$airtemp_c+2
 d$heattrigger_plus1<-0
-d$heattrigger_plus1[which(d$airtemp_plus1>31.7)]<-1
+d$heattrigger_plus1[which(d$airtemp_plus1>ht)]<-1
 d$heattrigger_plus1.5<-0
-d$heattrigger_plus1.5[which(d$airtemp_plus1>31.7)]<-1
+d$heattrigger_plus1.5[which(d$airtemp_plus1>ht)]<-1
 
 d$heattrigger_plus2<-0
-d$heattrigger_plus2[which(d$airtemp_plus2>31.7)]<-1
+d$heattrigger_plus2[which(d$airtemp_plus2>=ht)]<-1
 
 d$heattrigger_plus.1<-0
-d$heattrigger_plus.1[which(d$airtemp_plus.1>31.7)]<-1
+d$heattrigger_plus.1[which(d$airtemp_plus.1>ht)]<-1
 d$heattrigger_plus.2<-0
-d$heattrigger_plus.2[which(d$airtemp_plus.2>31.7)]<-1
+d$heattrigger_plus.2[which(d$airtemp_plus.2>ht)]<-1
 d$heattrigger_plus.3<-0
-d$heattrigger_plus.3[which(d$airtemp_plus.3>31.7)]<-1
+d$heattrigger_plus.3[which(d$airtemp_plus.3>ht)]<-1
 d$heattrigger_plus.4<-0
-d$heattrigger_plus.4[which(d$airtemp_plus.4>31.7)]<-1
+d$heattrigger_plus.4[which(d$airtemp_plus.4>ht)]<-1
 d$heattrigger_plus.5<-0
-d$heattrigger_plus.5[which(d$airtemp_plus.5>31.7)]<-1
+d$heattrigger_plus.5[which(d$airtemp_plus.5>ht)]<-1
 
 heattab.5<-table(d$heattrigger_plus.5,d$cc.field)
 heatprob.5<-heattab.5[2,]/(heattab.5[1,]+heattab.5[2,])
@@ -567,15 +521,18 @@ heatwarm<-c(sum(d$heattrigger)/length(d$heattrigger),
     sum(d$heattrigger_plus1.5)/length(d$heattrigger),
     sum(d$heattrigger_plus2)/length(d$heattrigger))
     
-length(unique(d$date[d$heattrigger==1]))#13
-length(unique(d$date[d$heattrigger_plus.1==1]))#13
-length(unique(d$date[d$heattrigger_plus.2==1]))#15
-length(unique(d$date[d$heattrigger_plus.3==1]))#15
-length(unique(d$date[d$heattrigger_plus.4==1]))#17
-length(unique(d$date[d$heattrigger_plus.5==1]))#17
-length(unique(d$date[d$heattrigger_plus1==1]))#23
-length(unique(d$date[d$heattrigger_plus1.5==1]))#23
-length(unique(d$date[d$heattrigger_plus2==1]))#23
+length(unique(d$date[d$heattrigger==1]))#11 for 90, 42 for 80
+length(unique(d$date[d$heattrigger_plus.1==1]))#11 for 90, 42 for 80
+length(unique(d$date[d$heattrigger_plus.2==1]))#12 for 90, 42 for 80
+length(unique(d$date[d$heattrigger_plus.3==1]))#15 for 90, 42 for 80
+length(unique(d$date[d$heattrigger_plus.4==1]))#12 for 90, 43 for 80
+length(unique(d$date[d$heattrigger_plus.5==1]))#13 for 90, 44 for 80
+length(unique(d$date[d$heattrigger_plus1==1]))#20 for 90, 52 for 80
+length(unique(d$date[d$heattrigger_plus1.5==1]))#20 for 90, 52 for 80
+length(unique(d$date[d$heattrigger_plus2==1]))#23 for 90, 55 for 80
+summod0plus2<-glm(heattrigger_plus2~1, family="binomial",data=d)
+inv.logit(coef(summod0plus2))
+inv.logit(confint(summod0plus2))
 
 #############################################################
 ###############Effect of trees on hourly temperature across the summer
@@ -611,12 +568,18 @@ aictab.forms<-aictab.forms[order(aictab.forms$AIC),]
 aictab.forms
 
 
-summary(summm4rx)#lowest AIC
-tab_model(summm4r, digits=3)
-tab_model(summm4c, digits=3)
-tab_model(summm4b, digits=3)
-tab_model(summm4a, digits=3)
-tab_model(summm4n, digits=3)
+tab_model(summm4r, digits=4)
+tab_model(summm4c, digits=4)
+tab_model(summm4b, digits=4)
+tab_model(summm4a, digits=4)
+tab_model(summm4n, digits=6)
+
+round(sqrt(mean(summary(summm4r)$residuals^2)), digits=4)
+round(sqrt(mean(summary(summm4c)$residuals^2)), digits=4)
+round(sqrt(mean(summary(summm4b)$residuals^2)), digits=4)
+round(sqrt(mean(summary(summm4a)$residuals^2)), digits=6)
+round(sqrt(mean(summary(summm4n)$residuals^2)), digits=6)
+
 
 #make comparison table
 rws<-c(1,2,4,5,6,7,8)
@@ -633,12 +596,6 @@ summm4af<-lmer(airtemp_f~Trees.*day+Elevation+ (1|date)+(1|Pole_No), data=sum22d
 summary(summm4af)
 summary(summm4a)
 
-#Make table with these model comparisons
-#number of trees provided the best explanation (lowest AIC)
-summary(summod2c)
-
-tab_model(summod2c)
-tab_model(summm4rx)
 #calculate variation between temperature readings at any one time
 sum22dat$date.time<-as.factor(paste(sum22dat$date,sum22dat$time,sep="."))
 
@@ -701,13 +658,10 @@ sumdat.minmax$cc.rem20m<-sumdat.minmax$cc.rem20m*100
 sumdat.minmax$cc.rem30m<-sumdat.minmax$cc.rem30m*100
 sumdat.minmax$cc.rem40m<-sumdat.minmax$cc.rem40m*100
 sumdat.minmax$cc.rem50m<-sumdat.minmax$cc.rem50m*100
-#sumdat.minmax$cc.rem100m<-sumdat.minmax$cc.rem100m*100
-#sumdat.minmax$cc.rem200m<-sumdat.minmax$cc.rem200m*100
-#sumdat.minmax$cc.rem400m<-sumdat.minmax$cc.rem400m*100
-#sumdat.minmax$cc.rem800m<-sumdat.minmax$cc.rem800m*100
 
 sumdat.minmax$Pole_No<-as.factor(sumdat.minmax$Pole_No)
 #standardize predictors
+sumdat.minmax$cc.rem.st<-(sumdat.minmax$cc.rem-mean(sumdat.minmax$cc.rem)/sd(sumdat.minmax$cc.rem))
 sumdat.minmax$cc.field.st<-(sumdat.minmax$cc.field-mean(sumdat.minmax$cc.field)/sd(sumdat.minmax$cc.field))
 sumdat.minmax$Elevation.st<-(sumdat.minmax$Elevation-mean(sumdat.minmax$Elevation)/sd(sumdat.minmax$Elevation))
 sumdat.minmax$cc.rem20m.st<-(sumdat.minmax$cc.rem20m-mean(sumdat.minmax$cc.rem20m)/sd(sumdat.minmax$cc.rem20m))
@@ -766,6 +720,7 @@ length(sumdat.minmax$date[which(sumdat.minmax$tmaxanom>0)])
 # summary(sumTmaxc4)
 
 #Tmax
+sum
 sumTmaxc<-lmer(tmaxanom~cc.field+Elevation+cc.field:Elevation+(1|date) +(1|Pole_No), data=sumdat.minmax)
 sumTmaxr<-lmer(tmaxanom~cc.rem+Elevation+cc.rem:Elevation+(1|date)+(1|Pole_No), data=sumdat.minmax)
 sumTmaximp<-lmer(tmaxanom~imp+Elevation+imp:Elevation+(1|date)+(1|Pole_No), data=sumdat.minmax)
@@ -774,8 +729,11 @@ sumTmaxrnoelev<-lmer(tmaxanom~cc.rem+(1|date)+(1|Pole_No), data=sumdat.minmax)
 sumTmaximpnoelev<-lmer(tmaxanom~imp+(1|date)+(1|Pole_No), data=sumdat.minmax)
 sumTmaxrcc<-lmer(tmaxanom~cc.rem*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmax)
 sumTmaximpcc<-lmer(tmaxanom~imp*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTmaxccc<-lmer(tmaxanom~cc.field*cloudcover+(1|date)+(1||Pole_No), data=sumdat.minmax)
+
+sumTmaxccc<-lmer(tmaxanom~cc.field*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmax)
+
 sumTmaxrhum<-lmer(tmaxanom~cc.rem*humidity+(1|date)+(1|Pole_No), data=sumdat.minmax)
+
 sumTmaximphum<-lmer(tmaxanom~imp*humidity+(1|date)+(1|Pole_No), data=sumdat.minmax)
 sumTmaxchum<-lmer(tmaxanom~cc.field*humidity+(1|date)+(1|Pole_No), data=sumdat.minmax)
 
@@ -790,6 +748,8 @@ Anova(sumTmaxccc, type="III")
 
 #now compare canopy at different distances away, and remote vs field
 sumTmaxr2.10m<-lmer(T_max~cc.rem+(1|date)+(1|Pole_No), data=sumdat.minmax)
+
+
 sumTmaxr2.20m<-lmer(T_max~cc.rem20m +(1|date)+(1|Pole_No), data=sumdat.minmax)
 sumTmaxr2.30m<-lmer(T_max~cc.rem30m +(1|date)+(1|Pole_No), data=sumdat.minmax)
 sumTmaxr2.40m<-lmer(T_max~cc.rem40m +(1|date)+(1|Pole_No), data=sumdat.minmax)
@@ -852,26 +812,10 @@ tab_model(sumTminccc, digits=3)
 #for comparison, second best- field measured cc
 
 
-#Tmin
-sumTminc<-lmer(tminanom~cc.field+Elevation+cc.field:Elevation+(1|date) +(1|Pole_No), data=sumdat.minmax)
-sumTminr<-lmer(tminanom~cc.rem+Elevation+cc.rem:Elevation+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminimp<-lmer(tminanom~imp+Elevation+imp:Elevation+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTmincnoelev<-lmer(tminanom~cc.field+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminrnoelev<-lmer(tminanom~cc.rem+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminimpnoelev<-lmer(tminanom~imp+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminrcc<-lmer(tminanom~cc.rem*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminimpcc<-lmer(tminanom~imp*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminccc<-lmer(tminanom~cc.field*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminrhum<-lmer(tminanom~cc.rem*humidity+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminimphum<-lmer(tminanom~imp*humidity+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminchum<-lmer(tminanom~cc.field*humidity+(1|date)+(1|Pole_No), data=sumdat.minmax)
-
-aictab<-AIC(sumTminc,sumTminr,sumTminimp,sumTmincnoelev,sumTminrnoelev,sumTminimpnoelev,sumTminrcc,sumTminimpcc,sumTminccc,sumTminrhum,sumTminimphum,sumTminchum)
-
-aictab<-aictab[order(aictab$AIC),]
-aictab
-tab_model(sumTminccc, digits=3)
-Anova(sumTminccc, type="III")
+#compare nonlinear vs linear fit
+#fit nonlinear model in brms
+plot(sumTmincnoelev)
+plot(sumTmaxcnoelev)
 
 #now compare canopy at different distances away, and remote vs field
 sumTminr2.10m<-lmer(tminanom~cc.rem+(1|date)+(1|Pole_No), data=sumdat.minmax)
@@ -879,23 +823,6 @@ sumTminr2.20m<-lmer(tminanom~cc.rem20m +(1|date)+(1|Pole_No), data=sumdat.minmax
 sumTminr2.30m<-lmer(tminanom~cc.rem30m +(1|date)+(1|Pole_No), data=sumdat.minmax)
 sumTminr2.40m<-lmer(tminanom~cc.rem40m +(1|date)+(1|Pole_No), data=sumdat.minmax)
 sumTminr2.50m<-lmer(tminanom~cc.rem50m+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminr2.100m<-lmer(tminanom~cc.rem100m+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminr2.200m<-lmer(tminanom~cc.rem200m+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminr2.400m<-lmer(tminanom~cc.rem400m+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminr2.800m<-lmer(tminanom~cc.rem800m +(1|date)+(1|Pole_No), data=sumdat.minmax)
-
-sumTminrc2.10m<-lmer(tminanom~cc.field+cc.rem+(1|date)+(1|HPole_No), data=sumdat.minmax)
-sumTminrc2.20m<-lmer(tminanom~cc.field+cc.rem20m+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminrc2.30m<-lmer(tminanom~cc.field+cc.rem30m+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminrc2.40m<-lmer(tminanom~cc.field+cc.rem40m+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminrc2.50m<-lmer(tminanom~cc.field+cc.rem50m+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminrc2.100m<-lmer(tminanom~cc.field+cc.rem100m+(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminrc2.200m<-lmer(tminanom~cc.field+cc.rem200m +(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminrc2.400m<-lmer(tminanom~cc.field+cc.rem400m +(1|date)+(1|Pole_No), data=sumdat.minmax)
-sumTminrc2.800m<-lmer(tminanom~cc.field+cc.rem800m +(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-sumTminrc2int.800m<-lmer(tminanom~cc.field+cc.rem800m+cc.field:cc.rem800m+(1|date)+(1|Hobo_SN), data=sumdat.minmax)
-
-
 
 aictab<-AIC(sumTminc,sumTminr,sumTminimp,sumTmincnoelev,sumTminrnoelev,sumTminimpnoelev,sumTminrcc,sumTminimpcc,sumTminccc,sumTminrhum,sumTminimphum,sumTminchum,
             sumTminr2.10m,sumTminr2.20m,sumTminr2.30m,sumTminr2.40m,sumTminr2.50m,
@@ -1032,8 +959,14 @@ plms<-c()
 for(i in unique(jundat.minmax$date)){
 daydat<- jundat.minmax[jundat.minmax$date==i,]
 m<-lm(T_min~cc.field, data=daydat)
-msum<-round(c(m$coef, summary(m)$r.squared,summary(m)$coef[2,4]), digits=3)
-plms<-rbind(plms,msum)
+msum<-round(c(summary(m)$adj.r.squared,summary(m)$coef[2,4]), digits=3)
+rmse<- round(sqrt(mean(m$residuals^2)), digits=3)
+nlm<-gam(T_min~s(cc.field), data=daydat)
+nlmsum<-round(c(summary(nlm)$r.sq,summary(nlm)$s.table[4]), digits=3)
+nlm.rmse<- round(sqrt(mean(nlm$residuals^2)), digits=3)
+maic<-round(AIC(m), digits=3)
+gamaic<-round(AIC(nlm), digits=3)
+plms<-rbind(plms,c(msum, rmse,maic,nlmsum,nlm.rmse,gamaic))
 
   p[[i]]<- ggplot(daydat,
        aes(x= cc.field, y = T_min, main=i)) +
@@ -1041,8 +974,8 @@ plms<-rbind(plms,msum)
   stat_smooth(method = "gam", 
               method.args = list(family = gaussian))
 }
-colnames(plms)[3:4]<-c("r2","p")
-tmin.field.cc<-as.data.frame(plms)
+colnames(plms)<-c("lm.r2","lm.p","lm.rmse","lm.aic","gam.r2","gam.p","gam.rmse","gam.aic")
+juntmin.field.ccmodcomp<-as.data.frame(plms)
 
 do.call(grid.arrange,p)
 dev.off()
@@ -1054,21 +987,24 @@ plms<-c()
 for(i in unique(jundat.minmax$date)){
   daydat<- jundat.minmax[jundat.minmax$date==i,]
   m<-lm(T_max~cc.field, data=daydat)
-  msum<-round(c(m$coef, summary(m)$r.squared,summary(m)$coef[2,4]), digits=3)
-  plms<-rbind(plms,msum)
-  
+  msum<-round(c(summary(m)$adj.r.squared,summary(m)$coef[2,4]), digits=3)
+  rmse<- round(sqrt(mean(m$residuals^2)), digits=3)
+  nlm<-gam(T_max~s(cc.field), data=daydat)
+  nlmsum<-round(c(summary(nlm)$r.sq,summary(nlm)$s.table[4]), digits=3)
+  nlm.rmse<- round(sqrt(mean(nlm$residuals^2)), digits=3)
+  maic<-round(AIC(m), digits=3)
+  gamaic<-round(AIC(nlm), digits=3)
+  plms<-rbind(plms,c(msum, rmse,maic,nlmsum,nlm.rmse,gamaic))  
   p[[i]]<- ggplot(daydat,
                   aes(x= cc.field, y = T_max, main=i)) +
     geom_point() +
     stat_smooth(method = "gam", 
                 method.args = list(family = gaussian))
 }
-colnames(plms)[3:4]<-c("r2","p")
-tmax.field.cc<-as.data.frame(plms)
-
+colnames(plms)<-c("lm.r2","lm.p","lm.rmse","lm.aic","gam.r2","gam.p","gam.rmse","gam.aic")
+juntmax.field.ccmodcomp<-as.data.frame(plms)
 do.call(grid.arrange,p)
 dev.off()
-
 
 png(file="figs/tmax.remcc.2022jun.png",width =1800, height =1800 ,res =200)
 p<-list()
@@ -1076,8 +1012,14 @@ plms<-c()
 for(i in unique(jundat.minmax$date)){
   daydat<- jundat.minmax[jundat.minmax$date==i,]
   m<-lm(T_max~cc.rem, data=daydat)
-  msum<-round(c(m$coef, summary(m)$r.squared,summary(m)$coef[2,4]), digits=3)
-  plms<-rbind(plms,msum)
+  msum<-round(c(summary(m)$adj.r.squared,summary(m)$coef[2,4]), digits=3)
+  rmse<- round(sqrt(mean(m$residuals^2)), digits=3)
+  nlm<-gam(T_max~s(cc.rem), data=daydat)
+  nlmsum<-round(c(summary(nlm)$r.sq,summary(nlm)$s.table[4]), digits=3)
+  nlm.rmse<- round(sqrt(mean(nlm$residuals^2)), digits=3)
+  maic<-round(AIC(m), digits=3)
+  gamaic<-round(AIC(nlm), digits=3)
+  plms<-rbind(plms,c(msum, rmse,maic,nlmsum,nlm.rmse,gamaic))
   p[[i]]<- ggplot(daydat,
                   aes(x= cc.rem, y = T_max, main=i)) +
     geom_point() +
@@ -1086,19 +1028,23 @@ for(i in unique(jundat.minmax$date)){
 }
 do.call(grid.arrange,p)
 dev.off()
-
-colnames(plms)[3:4]<-c("r2","p")
-tmax.rem.cc<-as.data.frame(plms)
+colnames(plms)<-c("lm.r2","lm.p","lm.rmse","lm.aic","gam.r2","gam.p","gam.rmse","gam.aic")
+juntmax.rem.ccmodcomp<-as.data.frame(plms)
 
 png(file="figs/tmin.remcc.2022jun.png",width =1800, height =1800 ,res =200)
 p<-list()
 plms<-c()
 for(i in unique(jundat.minmax$date)){
   daydat<- jundat.minmax[jundat.minmax$date==i,]
-  
   m<-lm(T_min~cc.rem, data=daydat)
-  msum<-round(c(m$coef, summary(m)$r.squared,summary(m)$coef[2,4]), digits=3)
-  plms<-rbind(plms,msum)
+  msum<-round(c(summary(m)$adj.r.squared,summary(m)$coef[2,4]), digits=3)
+  rmse<- round(sqrt(mean(m$residuals^2)), digits=3)
+  nlm<-gam(T_min~s(cc.rem), data=daydat)
+  nlmsum<-round(c(summary(nlm)$r.sq,summary(nlm)$s.table[4]), digits=3)
+  nlm.rmse<- round(sqrt(mean(nlm$residuals^2)), digits=3)
+  maic<-round(AIC(m), digits=3)
+  gamaic<-round(AIC(nlm), digits=3)
+  plms<-rbind(plms,c(msum, rmse,maic,nlmsum,nlm.rmse,gamaic))
   
   p[[i]]<- ggplot(daydat,
                   aes(x= cc.rem, y = T_min, main=i)) +
@@ -1108,19 +1054,29 @@ for(i in unique(jundat.minmax$date)){
 }
 do.call(grid.arrange,p)
 dev.off()
-colnames(plms)[3:4]<-c("r2","p")
-tmin.rem.cc<-as.data.frame(plms)
+colnames(plms)<-c("lm.r2","lm.p","lm.rmse","lm.aic","gam.r2","gam.p","gam.rmse","gam.aic")
+
+juntim.rem.ccmodcomp<-as.data.frame(plms)
 
 
-#compare coefs and ps
-length(which(tmax.rem.cc$p<0.05))
-mean(tmax.rem.cc$cc.rem)
-length(which(tmin.rem.cc$p<0.05))
-mean(tmin.rem.cc$cc.rem)
-length(which(tmin.field.cc$p<0.05))
-mean(tmin.field.cc$cc.field)
-length(which(tmax.field.cc$p<0.05))
-mean(tmax.field.cc$cc.field)
+#summarize across all days- primarily interested in field data
+juntmin.field.ccmodcomp$gamlower<-0
+juntmin.field.ccmodcomp$gamlower[juntmin.field.ccmodcomp$gam.rmse<juntmin.field.ccmodcomp$lm.rmse]<-1
+juntmin.field.ccmodcomp$gamAIClower<-0
+juntmin.field.ccmodcomp$gamAIClower[juntmin.field.ccmodcomp$gam.aic<juntmin.field.ccmodcomp$lm.aic]<-1
+juntmax.field.ccmodcomp$gamlower<-0
+juntmax.field.ccmodcomp$gamlower[juntmax.field.ccmodcomp$gam.rmse<juntmax.field.ccmodcomp$lm.rmse]<-1
+juntmax.field.ccmodcomp$gamAIClower<-0
+juntmax.field.ccmodcomp$gamAIClower[juntmax.field.ccmodcomp$gam.aic<juntmax.field.ccmodcomp$lm.aic]<-1
+
+sum(juntmax.field.ccmodcomp$gamlower)#8 days had better nonlinear fits
+sum(juntmin.field.ccmodcomp$gamlower)#9 days had better nonlinear fits
+
+#compare ps
+length(which(juntmin.field.ccmodcomp$lm.p<0.05))#7
+length(which(juntmin.field.ccmodcomp$gam.p<0.05))#8
+length(which(juntmax.field.ccmodcomp$lm.p<0.05))#21
+length(which(juntmax.field.ccmodcomp$gam.p<0.05))#20
 
 #Select only the hottest day of the year- jul 31 for Tmax, july 31 for Tmin
 sumdat.minmax$date[which(sumdat.minmax$T_max==max(sumdat.minmax$T_max))]
@@ -1156,8 +1112,14 @@ plms<-c()
 for(i in unique(juldat.minmax$date)){
   daydat<- juldat.minmax[juldat.minmax$date==i,]
   m<-lm(T_max~cc.field, data=daydat)
-  msum<-round(c(m$coef, summary(m)$r.squared,summary(m)$coef[2,4]), digits=3)
-  plms<-rbind(plms,msum)
+  msum<-round(c(summary(m)$adj.r.squared,summary(m)$coef[2,4]), digits=3)
+  rmse<- round(sqrt(mean(m$residuals^2)), digits=3)
+  nlm<-gam(T_max~s(cc.field), data=daydat)
+  nlmsum<-round(c(summary(nlm)$r.sq,summary(nlm)$s.table[4]), digits=3)
+  nlm.rmse<- round(sqrt(mean(nlm$residuals^2)), digits=3)
+  maic<-round(AIC(m), digits=3)
+  gamaic<-round(AIC(nlm), digits=3)
+  plms<-rbind(plms,c(msum, rmse,maic,nlmsum,nlm.rmse,gamaic))
   
   p[[i]]<- ggplot(daydat,
                   aes(x= cc.field, y = T_max, main=i)) +
@@ -1165,7 +1127,7 @@ for(i in unique(juldat.minmax$date)){
     stat_smooth(method = "gam", 
                 method.args = list(family = gaussian))
 }
-colnames(plms)[3:4]<-c("r2","p")
+colnames(plms)<-c("lm.r2","lm.p","lm.rmse","lm.aic","gam.r2","gam.p","gam.rmse","gam.aic")
 tmaxjul.field.cc<-as.data.frame(plms)
 
 do.call(grid.arrange,p)
@@ -1178,8 +1140,14 @@ plms<-c()
 for(i in unique(juldat.minmax$date)){
   daydat<- juldat.minmax[juldat.minmax$date==i,]
   m<-lm(T_min~cc.field, data=daydat)
-  msum<-round(c(m$coef, summary(m)$r.squared,summary(m)$coef[2,4]), digits=3)
-  plms<-rbind(plms,msum)
+  msum<-round(c(summary(m)$adj.r.squared,summary(m)$coef[2,4]), digits=3)
+  rmse<- round(sqrt(mean(m$residuals^2)), digits=3)
+  nlm<-gam(T_min~s(cc.field), data=daydat)
+  nlmsum<-round(c(summary(nlm)$r.sq,summary(nlm)$s.table[4]), digits=3)
+  nlm.rmse<- round(sqrt(mean(nlm$residuals^2)), digits=3)
+  maic<-round(AIC(m), digits=3)
+  gamaic<-round(AIC(nlm), digits=3)
+  plms<-rbind(plms,c(msum, rmse,maic,nlmsum,nlm.rmse,gamaic))
   
   p[[i]]<- ggplot(daydat,
                   aes(x= cc.field, y = T_min, main=i)) +
@@ -1187,8 +1155,8 @@ for(i in unique(juldat.minmax$date)){
     stat_smooth(method = "gam", 
                 method.args = list(family = gaussian))
 }
-colnames(plms)[3:4]<-c("r2","p")
-tmaxjul.field.cc<-as.data.frame(plms)
+colnames(plms)<-c("lm.r2","lm.p","lm.rmse","lm.aic","gam.r2","gam.p","gam.rmse","gam.aic")
+tminjul.field.cc<-as.data.frame(plms)
 
 do.call(grid.arrange,p)
 dev.off()
@@ -1199,8 +1167,15 @@ plms<-c()
 for(i in unique(juldat.minmax$date)){
   daydat<- juldat.minmax[juldat.minmax$date==i,]
   m<-lm(T_max~cc.rem, data=daydat)
-  msum<-round(c(m$coef, summary(m)$r.squared,summary(m)$coef[2,4]), digits=3)
-  plms<-rbind(plms,msum)
+  msum<-round(c(summary(m)$adj.r.squared,summary(m)$coef[2,4]), digits=3)
+  rmse<- round(sqrt(mean(m$residuals^2)), digits=3)
+  nlm<-gam(T_max~s(cc.rem), data=daydat)
+  nlmsum<-round(c(summary(nlm)$r.sq,summary(nlm)$s.table[4]), digits=3)
+  nlm.rmse<- round(sqrt(mean(nlm$residuals^2)), digits=3)
+  lmaic<-AIC(m)
+  gamaic<-AIC(nlm)
+  plms<-rbind(plms,c(msum, rmse,lmaic,nlmsum,nlm.rmse,gamaic))
+  
   p[[i]]<- ggplot(daydat,
                   aes(x= cc.rem, y = T_max, main=i)) +
     geom_point() +
@@ -1209,7 +1184,7 @@ for(i in unique(juldat.minmax$date)){
 }
 do.call(grid.arrange,p)
 dev.off()
-colnames(plms)[3:4]<-c("r2","p")
+colnames(plms)<-c("lm.r2","lm.p","lm.rmse","lm.aic","gam.r2","gam.p","gam.rmse","gam.aic")
 tmaxjul.rem.cc<-as.data.frame(plms)
 
 png(file="figs/tmin.remcc.2022jul.png",width =1800, height =1800 ,res =200)
@@ -1217,10 +1192,15 @@ p<-list()
 plms<-c()
 for(i in unique(juldat.minmax$date)){
   daydat<- juldat.minmax[juldat.minmax$date==i,]
-  
-   m<-lm(T_min~cc.rem, data=daydat)
-  msum<-round(c(m$coef, summary(m)$r.squared,summary(m)$coef[2,4]), digits=3)
-  plms<-rbind(plms,msum)
+  m<-lm(T_min~cc.rem, data=daydat)
+  msum<-round(c(summary(m)$adj.r.squared,summary(m)$coef[2,4]), digits=3)
+  rmse<- round(sqrt(mean(m$residuals^2)), digits=3)
+  nlm<-gam(T_min~s(cc.rem), data=daydat)
+  nlmsum<-round(c(summary(nlm)$r.sq,summary(nlm)$s.table[4]), digits=3)
+  nlm.rmse<- round(sqrt(mean(nlm$residuals^2)), digits=3)
+  lmaic<-round(AIC(m), digits=3)
+  gamaic<-round(AIC(nlm), digits=3)
+  plms<-rbind(plms,c(msum, rmse,maic,nlmsum,nlm.rmse,gamaic))
   
   
   p[[i]]<- ggplot(daydat,
@@ -1231,18 +1211,167 @@ for(i in unique(juldat.minmax$date)){
 }
 do.call(grid.arrange,p)
 dev.off()
-colnames(plms)[3:4]<-c("r2","p")
+colnames(plms)<-c("lm.r2","lm.p","lm.rmse","lm.aic","gam.r2","gam.p","gam.rmse","gam.aic")
 tminjul.rem.cc<-as.data.frame(plms)
 
-#compare coefs and ps
-length(which(tmaxjul.rem.cc$p<0.05))
-mean(tmaxjul.rem.cc$cc.rem)
-length(which(tminjul.rem.cc$p<0.05))
-mean(tminjul.rem.cc$cc.rem)
-length(which(tminjul.field.cc$p<0.05))
-mean(tminjul.field.cc$cc.field)
-length(which(tmaxjul.field.cc$p<0.05))
-mean(tmaxjul.field.cc$cc.field)
+
+png(file="figs/tmin.fieldcc.2022aug.png",width =1800, height =1800 ,res =200)
+p<-list()
+plms<-c()
+for(i in unique(augdat.minmax$date)){
+  daydat<- augdat.minmax[augdat.minmax$date==i,]
+  m<-lm(T_min~cc.field, data=daydat)
+  msum<-round(c(summary(m)$adj.r.squared,summary(m)$coef[2,4]), digits=3)
+  rmse<- round(sqrt(mean(m$residuals^2)), digits=3)
+  nlm<-gam(T_min~s(cc.field), data=daydat)
+  nlmsum<-round(c(summary(nlm)$r.sq,summary(nlm)$s.table[4]), digits=3)
+  nlm.rmse<- round(sqrt(mean(nlm$residuals^2)), digits=3)
+  maic<-round(AIC(m), digits=3)
+  gamaic<-round(AIC(nlm), digits=3)
+  plms<-rbind(plms,c(msum, rmse,maic,nlmsum,nlm.rmse,gamaic))
+  
+  p[[i]]<- ggplot(daydat,
+                  aes(x= cc.field, y = T_min, main=i)) +
+    geom_point() +
+    stat_smooth(method = "gam", 
+                method.args = list(family = gaussian))
+}
+colnames(plms)<-c("lm.r2","lm.p","lm.rmse","lm.aic","gam.r2","gam.p","gam.rmse","gam.aic")
+tminaug.field.cc<-as.data.frame(plms)
+
+do.call(grid.arrange,p)
+dev.off()
+
+
+png(file="figs/tmax.fieldcc.2022aug.png",width =1800, height =1800 ,res =200)
+p<-list()
+plms<-c()
+for(i in unique(augdat.minmax$date)){
+  daydat<- augdat.minmax[augdat.minmax$date==i,]
+  m<-lm(T_max~cc.field, data=daydat)
+  msum<-round(c(summary(m)$adj.r.squared,summary(m)$coef[2,4]), digits=3)
+  rmse<- round(sqrt(mean(m$residuals^2)), digits=3)
+  nlm<-gam(T_max~s(cc.field), data=daydat)
+  nlmsum<-round(c(summary(nlm)$r.sq,summary(nlm)$s.table[4]), digits=3)
+  nlm.rmse<- round(sqrt(mean(nlm$residuals^2)), digits=3)
+  maic<-round(AIC(m), digits=3)
+  gamaic<-round(AIC(nlm), digits=3)
+  plms<-rbind(plms,c(msum, rmse,maic,nlmsum,nlm.rmse,gamaic))
+  
+  p[[i]]<- ggplot(daydat,
+                  aes(x= cc.field, y = T_max, main=i)) +
+    geom_point() +
+    stat_smooth(method = "gam", 
+                method.args = list(family = gaussian))
+}
+colnames(plms)<-c("lm.r2","lm.p","lm.rmse","lm.aic","gam.r2","gam.p","gam.rmse","gam.aic")
+tmaxaug.field.cc<-as.data.frame(plms)
+
+do.call(grid.arrange,p)
+dev.off()
+
+
+png(file="figs/tmin.remcc.2022aug.png",width =1800, height =1800 ,res =200)
+p<-list()
+plms<-c()
+for(i in unique(augdat.minmax$date)){
+  daydat<- augdat.minmax[augdat.minmax$date==i,]
+  m<-lm(T_min~cc.rem, data=daydat)
+  msum<-round(c(summary(m)$adj.r.squared,summary(m)$coef[2,4]), digits=3)
+  rmse<- round(sqrt(mean(m$residuals^2)), digits=3)
+  nlm<-gam(T_min~s(cc.rem), data=daydat)
+  nlmsum<-round(c(summary(nlm)$r.sq,summary(nlm)$s.table[4]), digits=3)
+  nlm.rmse<- round(sqrt(mean(nlm$residuals^2)), digits=3)
+  maic<-round(AIC(m), digits=3)
+  gamaic<-round(AIC(nlm), digits=3)
+  plms<-rbind(plms,c(msum, rmse,maic,nlmsum,nlm.rmse,gamaic))
+  
+  p[[i]]<- ggplot(daydat,
+                  aes(x= cc.rem, y = T_min, main=i)) +
+    geom_point() +
+    stat_smooth(method = "gam", 
+                method.args = list(family = gaussian))
+}
+colnames(plms)<-c("lm.r2","lm.p","lm.rmse","lm.aic","gam.r2","gam.p","gam.rmse","gam.aic")
+tminaug.rem.cc<-as.data.frame(plms)
+
+do.call(grid.arrange,p)
+dev.off()
+
+
+png(file="figs/tmax.remcc.2022aug.png",width =1800, height =1800 ,res =200)
+p<-list()
+plms<-c()
+for(i in unique(augdat.minmax$date)){
+  daydat<- augdat.minmax[augdat.minmax$date==i,]
+  m<-lm(T_max~cc.rem, data=daydat)
+  msum<-round(c(summary(m)$adj.r.squared,summary(m)$coef[2,4]), digits=3)
+  rmse<- round(sqrt(mean(m$residuals^2)), digits=3)
+  nlm<-gam(T_max~s(cc.rem), data=daydat)
+  nlmsum<-round(c(summary(nlm)$r.sq,summary(nlm)$s.table[4]), digits=3)
+  nlm.rmse<- round(sqrt(mean(nlm$residuals^2)), digits=3)
+  maic<-round(AIC(m), digits=3)
+  gamaic<-round(AIC(nlm), digits=3)
+  plms<-rbind(plms,c(msum, rmse,maic,nlmsum,nlm.rmse,gamaic))
+  
+  p[[i]]<- ggplot(daydat,
+                  aes(x= cc.rem, y = T_max, main=i)) +
+    geom_point() +
+    stat_smooth(method = "gam", 
+                method.args = list(family = gaussian))
+}
+colnames(plms)<-c("lm.r2","lm.p","lm.rmse","lm.aic","gam.r2","gam.p","gam.rmse","gam.aic")
+tmaxaug.rem.cc<-as.data.frame(plms)
+
+do.call(grid.arrange,p)
+dev.off()
+
+
+#summarize across all days- primarily interested in field data
+tmaxjul.field.cc$gamlower<-0
+tmaxjul.field.cc$gamlower[tmaxjul.field.cc$gam.rmse<tmaxjul.field.cc$lm.rmse]<-1
+
+tminjul.field.cc$gamlower<-0
+tminjul.field.cc$gamlower[tminjul.field.cc$gam.rmse<tminjul.field.cc$lm.rmse]<-1
+
+tmaxaug.field.cc$gamlower<-0
+tmaxaug.field.cc$gamlower[tmaxaug.field.cc$gam.rmse<tmaxaug.field.cc$lm.rmse]<-1
+
+tminaug.field.cc$gamlower<-0
+tminaug.field.cc$gamlower[tminaug.field.cc$gam.rmse<tminaug.field.cc$lm.rmse]<-1
+
+sum(tmaxjul.field.cc$gamlower)#7 days hadlower rmse
+sum(tminjul.field.cc$gamlower)#6 days had better nonlinear fits
+sum(juntmax.field.ccmodcomp$gamlower)#8 days had better nonlinear fits
+sum(juntmin.field.ccmodcomp$gamlower)#9 days had better nonlinear fits
+sum(tmaxaug.field.cc$gamlower)#14 days hadlower rmse
+
+#compare ps
+length(which(juntmin.field.ccmodcomp$lm.p<0.05))#7
+length(which(juntmin.field.ccmodcomp$gam.p<0.05))#8
+length(which(juntmax.field.ccmodcomp$lm.p<0.05))#21
+length(which(juntmax.field.ccmodcomp$gam.p<0.05))#20
+
+length(which(tminjul.field.cc$lm.p<0.05))#8
+length(which(tminjul.field.cc$gam.p<0.05))#9
+length(which(tmaxjul.field.cc$lm.p<0.05))#16
+length(which(tmaxjul.field.cc$gam.p<0.05))#14
+
+length(which(tminaug.field.cc$lm.p<0.05))#13
+length(which(tminaug.field.cc$gam.p<0.05))#10
+length(which(tmaxaug.field.cc$lm.p<0.05))#10
+length(which(tmaxaug.field.cc$gam.p<0.05))#8
+
+
+#Sum across all days: 
+length(which(juntmin.field.ccmodcomp$lm.p<0.05))+length(which(tminjul.field.cc$lm.p<0.05))+length(which(tminaug.field.cc$lm.p<0.05))#28
+length(which(juntmin.field.ccmodcomp$gam.p<0.05))+length(which(tminjul.field.cc$gam.p<0.05))+length(which(tminaug.field.cc$gam.p<0.05))#27
+length(which(juntmax.field.ccmodcomp$lm.p<0.05))+length(which(tmaxjul.field.cc$lm.p<0.05))+length(which(tmaxaug.field.cc$lm.p<0.05))#47
+length(which(juntmax.field.ccmodcomp$gam.p<0.05))+length(which(tmaxjul.field.cc$gam.p<0.05))+length(which(tmaxaug.field.cc$gam.p<0.05))#42
+
+1-sum(sum(juntmax.field.ccmodcomp$gamlower)+sum(tmaxjul.field.cc$gamlower)+sum(tmaxaug.field.cc$gamlower))/sum(length(juntmax.field.ccmodcomp$gamlower)+length(tmaxjul.field.cc$gamlower)+length(tmaxaug.field.cc$gamlower))##29 days hadlower rmse
+1-sum(sum(juntmin.field.ccmodcomp$gamlower)+sum(tminjul.field.cc$gamlower)+sum(tmaxaug.field.cc$gamlower))/92
+
 
 ##Look at daily patterns on hottest days in june and july
 jun27hrdat<-jundat[jundat$date=="2022-06-27",]
@@ -1264,6 +1393,11 @@ for(i in unique(jul31hrdat$Hobo_SN)){
 }
 
 dev.off()
+
+
+
+
+
 
 #Plots of temperature range-redo this with box plots beside each other
 
@@ -1305,11 +1439,49 @@ pairs(vegmet, pch=16,col="gray",upper.panel=panel.cor)
 
 #Do model comparison between Tmax and Tmin mods and other vege
 #merge vegmetrics in with sumdat.minmax
-sumdat.minmaxv<-left_join(sumdat.minmax,locs3,by=c("Hobo_SN","Trees.","Elevation"))
+sumdat.minmaxv<-left_join(sumdat.minmax,locs3,by=c("Pole_No","Trees.","Elevation"))
 #Tmin
-#Best fit model is
+sumTminr2.10m<-lmer(T_min~cc.rem*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmaxv)
+sumTminr2.20m<-lmer(T_min~cc.rem20m*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmaxv)
+sumTminr2.30m<-lmer(T_min~cc.rem30m*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmaxv)
+sumTminr2.40m<-lmer(T_min~cc.rem40m*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmaxv)
+sumTminr2.50m<-lmer(T_min~cc.rem50m*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmaxv)
 
+sumdat.minmaxv$med10m<-sumdat.minmaxv$X2MedVeg.10mProp*100
+sumdat.minmaxv$med20m<-sumdat.minmaxv$X2MedVeg.20mProp*100
+sumdat.minmaxv$med30m<-sumdat.minmaxv$X2MedVeg.30m*100
+sumdat.minmaxv$med40m<-sumdat.minmaxv$X2MedVeg.40m*100
+sumdat.minmaxv$med50m<-sumdat.minmaxv$X2MedVeg.50m*100
+sumdat.minmaxv$med10m.st<-(sumdat.minmaxv$med10m-mean(sumdat.minmaxv$med10m)/sd(sumdat.minmaxv$med10m))
+sumdat.minmaxv$med20m.st<-(sumdat.minmaxv$med20m-mean(sumdat.minmaxv$med20m)/sd(sumdat.minmaxv$med20m))
+sumdat.minmaxv$med30m.st<-(sumdat.minmaxv$med30m-mean(sumdat.minmaxv$med30m)/sd(sumdat.minmaxv$med30m))
+sumdat.minmaxv$med40m.st<-(sumdat.minmaxv$med40m-mean(sumdat.minmaxv$med40m)/sd(sumdat.minmaxv$med40m))
+sumdat.minmaxv$med50m.st<-(sumdat.minmaxv$med50m-mean(sumdat.minmaxv$med50m)/sd(sumdat.minmaxv$med50m))
+sumdat.minmaxv$fin10m<-sumdat.minmaxv$X1FineVeg.10m*100
+sumdat.minmaxv$fin20m<-sumdat.minmaxv$X1FineVeg.20m*100
+sumdat.minmaxv$fin30m<-sumdat.minmaxv$X1FineVeg.30m*100
+sumdat.minmaxv$fin40m<-sumdat.minmaxv$X1FineVeg.40m*100
+sumdat.minmaxv$fin50m<-sumdat.minmaxv$X1FineVeg.50m*100
+sumdat.minmaxv$fin10m.st<-(sumdat.minmaxv$fin10m-mean(sumdat.minmaxv$fin10m)/sd(sumdat.minmaxv$fin10m))
+sumdat.minmaxv$fin20m.st<-(sumdat.minmaxv$fin20m-mean(sumdat.minmaxv$fin20m)/sd(sumdat.minmaxv$fin20m))
+sumdat.minmaxv$fin30m.st<-(sumdat.minmaxv$fin30m-mean(sumdat.minmaxv$fin30m)/sd(sumdat.minmaxv$fin30m))
+sumdat.minmaxv$fin40m.st<-(sumdat.minmaxv$fin40m-mean(sumdat.minmaxv$fin40m)/sd(sumdat.minmaxv$fin40m))
+sumdat.minmaxv$fin50m.st<-(sumdat.minmaxv$fin50m-mean(sumdat.minmaxv$fin50m)/sd(sumdat.minmaxv$fin50m))
 
+sumTminmed.10m<-lmer(T_min~med10m*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmaxv)
+sumTminmed.20m<-lmer(T_min~med20m*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmaxv)
+sumTminmed.30m<-lmer(T_min~med30m*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmaxv)
+sumTminmed.40m<-lmer(T_min~med40m*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmaxv)
+sumTminmed.50m<-lmer(T_min~med50m*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmaxv)
+sumTminfin.10m<-lmer(T_min~fin10m*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmaxv)
+sumTminfin.20m<-lmer(T_min~fin20m*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmaxv)
+sumTminfin.30m<-lmer(T_min~fin30m*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmaxv)
+sumTminfin.40m<-lmer(T_min~fin40m*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmaxv)
+sumTminfin.50m<-lmer(T_min~fin50m*cloudcover+(1|date)+(1|Pole_No), data=sumdat.minmaxv)
+
+eff<-c(fixef(sumTminr2.10m)[2],fixef(sumTminr2.20m)[2],fixef(sumTminr2.30m)[2],fixef(sumTminr2.40m)[2],fixef(sumTminr2.50m)[2],
+       fixef(sumTminmed.10m)[2],fixef(sumTminmed.20m)[2],fixef(sumTminmed.30m)[2],fixef(sumTminmed.40m)[2],fixef(sumTminmed.50m)[2],
+       fixef(sumTminfin.10m)[2],fixef(sumTminfin.20m)[2],fixef(sumTminfin.30m)[2],fixef(sumTminfin.40m)[2],fixef(sumTminfin.50m)[2])
 #To make map of loggers by their temperatures, save a csv file with tmax and tmin on hottest days in jun and jult:
 ps<-c(Anova(sumTminr2.10m)[1,3],Anova(sumTminr2.20m)[1,3],Anova(sumTminr2.30m)[1,3],Anova(sumTminr2.40m)[1,3],Anova(sumTminr2.50m)[1,3],
       Anova(sumTminmed.10m)[1,3],Anova(sumTminmed.20m)[1,3],Anova(sumTminmed.30m)[1,3],Anova(sumTminmed.40m)[1,3],Anova(sumTminmed.50m)[1,3],
@@ -1320,7 +1492,7 @@ vegcols2<-vegcols
 vegcols2[which(ps>0.1)]<-"white"
 
 png(file="figs/vegeffects.png",width =3000, height =1500 ,res =300)
-x<-barplot(eff, col=vegcols2, border=vegcols, lwd=2,ylim=c(-0.02,0.02), 
+x<-barplot(eff, col=vegcols2, border=vegcols, lwd=2,ylim=c(-0.1,0.1), 
            cex.lab=1.3,cex.axis=1.2,cex.names=1.2,
            ylab="Effect on minimum temperature",xlab="Distance (m)",names.arg=rep(c("10","20","30","40","50"), times=3))
 error<-c(summary(sumTminr2.10m)$coef[2,2],summary(sumTminr2.20m)$coef[2,2],summary(sumTminr2.30m)$coef[2,2],summary(sumTminr2.40m)$coef[2,2],summary(sumTminr2.50m)$coef[2,2],
@@ -1328,20 +1500,12 @@ error<-c(summary(sumTminr2.10m)$coef[2,2],summary(sumTminr2.20m)$coef[2,2],summa
          summary(sumTminfin.10m)$coef[2,2],summary(sumTminfin.20m)$coef[2,2],summary(sumTminfin.30m)$coef[2,2],summary(sumTminfin.40m)$coef[2,2],summary(sumTminfin.50m)$coef[2,2])
 
 for(i in 1:length(eff)){
-  arrows(x[i],eff[i]+error[i],x[i],eff[i]-error[i], code=3, angle=90, length=0.0,  lwd=1)
+  arrows(x[i],eff[i]+error[i],x[i],eff[i]-error[i], code=3, angle=90, length=0.05,  lwd=2)
 }
 axis(side=1,at=c(3,9,15), labels=c("Coarse (Trees)","Medium (Shrubs)","Fine (Grass)"), line=3,cex=1.3, lty=0)
 abline(h=0)
 dev.off() 
 
-
-eff<-c(fixef(sumTminr2.10m)[2],fixef(sumTminr2.20m)[2],fixef(sumTminr2.30m)[2],fixef(sumTminr2.40m)[2],fixef(sumTminr2.50m)[2],
-       fixef(sumTminmed.10m)[2],fixef(sumTminmed.20m)[2],fixef(sumTminmed.30m)[2],fixef(sumTminmed.40m)[2],fixef(sumTminmed.50m)[2],
-       fixef(sumTminfin.10m)[2],fixef(sumTminfin.20m)[2],fixef(sumTminfin.30m)[2],fixef(sumTminfin.40m)[2],fixef(sumTminfin.50m)[2])
-#To make map of loggers by their temperatures, save a csv file with tmax and tmin on hottest days in jun and jult:
-ps<-c(Anova(sumTminr2.10m)[1,3],Anova(sumTminr2.20m)[1,3],Anova(sumTminr2.30m)[1,3],Anova(sumTminr2.40m)[1,3],Anova(sumTminr2.50m)[1,3],
-      Anova(sumTminmed.10m)[1,3],Anova(sumTminmed.20m)[1,3],Anova(sumTminmed.30m)[1,3],Anova(sumTminmed.40m)[1,3],Anova(sumTminmed.50m)[1,3],
-      Anova(sumTminfin.10m)[1,3],Anova(sumTminfin.20m)[1,3],Anova(sumTminfin.30m)[1,3],Anova(sumTminfin.40m)[1,3],Anova(sumTminfin.50m)[1,3])
 modtab<-round(rbind(
   cbind(summary(sumTminr2.10m)$coef,Anova(sumTminr2.10m, type="III"),summary(sumTminr2.20m)$coef,Anova(sumTminr2.20m, type="III"),summary(sumTminr2.30m)$coef,Anova(sumTminr2.30m, type="III"),summary(sumTminr2.40m)$coef,Anova(sumTminr2.40m,type="III"),summary(sumTminr2.50m)$coef,Anova(sumTminr2.50m, type="III")),
   cbind(summary(sumTminmed.10m)$coef,Anova(sumTminmed.10m, type="III"),summary(sumTminmed.20m)$coef,Anova(sumTminmed.20m, type="III"),summary(sumTminmed.30m)$coef,Anova(sumTminmed.30m, type="III"),summary(sumTminmed.40m)$coef,Anova(sumTminmed.40m, type="III"),summary(sumTminmed.50m)$coef,Anova(sumTminmed.50m, type="III")),
@@ -1393,3 +1557,6 @@ write.csv(meanTmin,"output/meanTmin.csv")
 
 #To compare our work to Ziter2018 
 source("compare_GRIT_Ziter2018.R")
+
+
+
