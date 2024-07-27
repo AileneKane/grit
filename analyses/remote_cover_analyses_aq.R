@@ -24,26 +24,28 @@ library(ggpubr)#used in Locke et al 2020
 library(sjPlot)
 library(sjstats)
 library(knitr)
-library(rgdal)  # for vector work; sp package should always load with rgdal. 
+#library(rgdal)  # for vector work; sp package should always load with rgdal. 
 library(raster)
 library(sp)
 library(maps)
 library(mapdata)
-library(tigris)
+library(tigris) 
+options(tigris_use_cache = TRUE)
 
-setwd("~/GitHub/grit/analyses")
+setwd("/Users/samiebaclig/Documents/GitHub/grit/analyses") 
 options("digits" = 15)
 
 #Read in lat/longs of air quality monitors
 #(need to creat this file first based on the loggers chosen frmo PurpleAir Map)
-locs<-read.csv("../data/HoboLocations_PoleLocations.csv", header=TRUE)
+aq_locs<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/GRIT_AQ_Monitors_Survey.csv", header=TRUE) 
+locs_raw <-rename(aq_locs, Longitude = x, Latitude = y)
 
-locs_raw<-locs
-colnames(locs_raw)<-c("Name","Longitude","Latitude")
+# locs_raw<-aq_locs
+#colnames(locs_raw)<-c("Purple.Air.Name","Longitude","Latitude") 
 
 #read in Puget Sound landcover layer from stormwater heat map (https://tnc.app.box.com/s/rephyio647qxpy44uuvaspkq8p8h4yfu)
 lc <- 
-  raster("../data/psLandCover_mosaic.tif")
+  raster("~/Documents/Land Cover/psLandCover_mosaic.tif")
 
 #read in polygon for Tacoma
 
@@ -55,6 +57,7 @@ tacoma <- places("WA", cb = TRUE) %>%
 wa_outline <- states(cb = TRUE) %>%
   filter(NAME == "Washington") %>%
   st_transform(6580)
+
 #plot
 ggplot() + 
   geom_sf(data = wa_outline) + 
@@ -131,19 +134,21 @@ library(ggpubr)#used in Locke et al 2020
 library(sjPlot)
 library(sjstats)
 library(knitr)
-library(rgdal)  # for vector work; sp package should always load with rgdal. 
+# library(rgdal)  # for vector work; sp package should always load with rgdal.
 library(raster)
 library(sp)
 library(maps)
 library(mapdata)
 library(tigris)
 
-setwd("~/GitHub/grit/analyses")
+setwd("~/Documents/GitHub/grit/analyses")
 options("digits" = 15)
 
 #Read in lat/longs of temperature loggers
-locs<-read.csv("../data/HoboLocations_PoleLocations.csv", header=TRUE)
-source("sourced_files/clean_locs.R")
+aq_locs<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/GRIT_AQ_Monitors_Survey.csv", header=TRUE) 
+locs_raw <-rename(aq_locs, Longitude = x, Latitude = y)
+
+
 #remove locations where no temperature shield was present
 locs$shield<-"YES"
 locs$shield[locs$Location=="Wapato Hills 2"]<-"NO"
@@ -160,7 +165,7 @@ colnames(locs_raw)<-c("Pole_No","Longitude","Latitude")
 
 #read in Puget Sound landcover layer from stormwater heat map (https://tnc.app.box.com/s/rephyio647qxpy44uuvaspkq8p8h4yfu)
 lc <- 
-  raster("../data/psLandCover_mosaic.tif")
+  raster("~/Documents/Land Cover/wa_2021_ccap_v2_hires_canopy_20240402.tif")
 
 #read in polygon for TAcoma
 
@@ -318,15 +323,15 @@ e200sums<-cbind(rownames(table(e200$ID,e200$psLandCover_mosaic)),table(e200$ID,e
 e400sums<-cbind(rownames(table(e400$ID,e400$psLandCover_mosaic)),table(e400$ID,e400$psLandCover_mosaic))
 e800sums<-cbind(rownames(table(e800$ID,e800$psLandCover_mosaic)),table(e800$ID,e800$psLandCover_mosaic))
 #colnames(e20sums)
-if(unique(colnames(e10sums)== c("","1","2","3","6","7"))==TRUE){colnames(e10sums)<-c("ID","1FineVeg.10m","2MedVeg.10m","3CoarseVeg.10m","6ImpOther.10m","7ImpRoofs.10m")}
+if(unique(colnames(e10sums)== c("","1","3","6","7"))==TRUE){colnames(e10sums)<-c("ID","1FineVeg.10m","3CoarseVeg.10m","6ImpOther.10m","7ImpRoofs.10m")} #no 2 present
 if(unique(colnames(e20sums)== c("","1","2","3","6","7"))==TRUE){colnames(e20sums)<-c("ID","1FineVeg.20m","2MedVeg.20m","3CoarseVeg.20m","6ImpOther.20m","7ImpRoofs.20m")}
 if(unique(colnames(e30sums)== c("","1","2","3","6","7"))==TRUE){colnames(e30sums)<-c("ID","1FineVeg.30m","2MedVeg.30m","3CoarseVeg.30m","6ImpOther.30m","7ImpRoofs.30m")}
 if(unique(colnames(e40sums)== c("","1","2","3","6","7"))==TRUE){colnames(e40sums)<-c("ID","1FineVeg.40m","2MedVeg.40m","3CoarseVeg.40m","6ImpOther.40m","7ImpRoofs.40m")}
 if(unique(colnames(e50sums)== c("","1","2","3","6","7"))==TRUE){colnames(e50sums)<-c("ID","1FineVeg.50m","2MedVeg.50m","3CoarseVeg.50m","6ImpOther.50m","7ImpRoofs.50m")}
 if(unique(colnames(e100sums)== c("","1","2","3","6","7"))==TRUE){colnames(e100sums)<-c("ID","1FineVeg.100m","2MedVeg.100m","3CoarseVeg.100m","6ImpOther.100m","7ImpRoofs.100m")}
 if(unique(colnames(e200sums)== c("","1","2","3","6","7"))==TRUE){colnames(e200sums)<-c("ID","1FineVeg.200m","2MedVeg.200m","3CoarseVeg.200m","6ImpOther.200m","7ImpRoofs.200m")}
-if(unique(colnames(e400sums)== c("","1","2","3","4","6","7"))==TRUE){colnames(e400sums)<-c("ID","1FineVeg.400m","2MedVeg.400m","3CoarseVeg.400m","4Dirt.400m","6ImpOther.400m","7ImpRoofs.400m")}
-if(unique(colnames(e800sums)== c("","1","2","3","4","5","6","7"))==TRUE){colnames(e800sums)<-c("ID","1FineVeg.800m","2MedVeg.800m","3CoarseVeg.800m","4Dirt.800m","5Water.800m","6ImpOther.800m","7ImpRoofs.800m")}
+if(unique(colnames(e400sums)== c("","1","2","3","6","7"))==TRUE){colnames(e400sums)<-c("ID","1FineVeg.400m","2MedVeg.400m","3CoarseVeg.400m","6ImpOther.400m","7ImpRoofs.400m")} #no 4 present
+if(unique(colnames(e800sums)== c("","1","2","3","6","7"))==TRUE){colnames(e800sums)<-c("ID","1FineVeg.800m","2MedVeg.800m","3CoarseVeg.800m","6ImpOther.800m","7ImpRoofs.800m")} #no 4 and 5
 
 #merge all data together
 e10sums.df<-as.data.frame(e10sums)
@@ -427,15 +432,15 @@ e200sums<-cbind(rownames(table(e200$ID,e200$psLandCover_mosaic)),table(e200$ID,e
 e400sums<-cbind(rownames(table(e400$ID,e400$psLandCover_mosaic)),table(e400$ID,e400$psLandCover_mosaic))
 e800sums<-cbind(rownames(table(e800$ID,e800$psLandCover_mosaic)),table(e800$ID,e800$psLandCover_mosaic))
 #colnames(e20sums)
-if(unique(colnames(e10sums)== c("","1","2","3","6","7"))==TRUE){colnames(e10sums)<-c("ID","1FineVeg.10m","2MedVeg.10m","3CoarseVeg.10m","6ImpOther.10m","7ImpRoofs.10m")}
+if(unique(colnames(e10sums)== c("","1","3","6","7"))==TRUE){colnames(e10sums)<-c("ID","1FineVeg.10m", "3CoarseVeg.10m","6ImpOther.10m","7ImpRoofs.10m")} #no 2 present
 if(unique(colnames(e20sums)== c("","1","2","3","6","7"))==TRUE){colnames(e20sums)<-c("ID","1FineVeg.20m","2MedVeg.20m","3CoarseVeg.20m","6ImpOther.20m","7ImpRoofs.20m")}
 if(unique(colnames(e30sums)== c("","1","2","3","6","7"))==TRUE){colnames(e30sums)<-c("ID","1FineVeg.30m","2MedVeg.30m","3CoarseVeg.30m","6ImpOther.30m","7ImpRoofs.30m")}
 if(unique(colnames(e40sums)== c("","1","2","3","6","7"))==TRUE){colnames(e40sums)<-c("ID","1FineVeg.40m","2MedVeg.40m","3CoarseVeg.40m","6ImpOther.40m","7ImpRoofs.40m")}
 if(unique(colnames(e50sums)== c("","1","2","3","6","7"))==TRUE){colnames(e50sums)<-c("ID","1FineVeg.50m","2MedVeg.50m","3CoarseVeg.50m","6ImpOther.50m","7ImpRoofs.50m")}
 if(unique(colnames(e100sums)== c("","1","2","3","6","7"))==TRUE){colnames(e100sums)<-c("ID","1FineVeg.100m","2MedVeg.100m","3CoarseVeg.100m","6ImpOther.100m","7ImpRoofs.100m")}
 if(unique(colnames(e200sums)== c("","1","2","3","6","7"))==TRUE){colnames(e200sums)<-c("ID","1FineVeg.200m","2MedVeg.200m","3CoarseVeg.200m","6ImpOther.200m","7ImpRoofs.200m")}
-if(unique(colnames(e400sums)== c("","1","2","3","4","6","7"))==TRUE){colnames(e400sums)<-c("ID","1FineVeg.400m","2MedVeg.400m","3CoarseVeg.400m","4Dirt.400m","6ImpOther.400m","7ImpRoofs.400m")}
-if(unique(colnames(e800sums)== c("","1","2","3","4","5","6","7"))==TRUE){colnames(e800sums)<-c("ID","1FineVeg.800m","2MedVeg.800m","3CoarseVeg.800m","4Dirt.800m","5Water.800m","6ImpOther.800m","7ImpRoofs.800m")}
+if(unique(colnames(e400sums)== c("","1","2","3","6","7"))==TRUE){colnames(e400sums)<-c("ID","1FineVeg.400m","2MedVeg.400m","3CoarseVeg.400m","6ImpOther.400m","7ImpRoofs.400m")} #No 4
+if(unique(colnames(e800sums)== c("","1","2","3","6","7"))==TRUE){colnames(e800sums)<-c("ID","1FineVeg.800m","2MedVeg.800m","3CoarseVeg.800m","6ImpOther.800m","7ImpRoofs.800m")}
 
 #merge all data together
 e10sums.df<-as.data.frame(e10sums)
