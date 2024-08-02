@@ -26,10 +26,16 @@ setwd("documents/GitHub/grit/analyses") #for apple computers add documents
 #Read in data file with PurpleAir logger locations
 #(notyet created)
 #Read in air quality data from 2 sites
-GRIT01<-read.csv("../data/PurpleAir/GRIT01-2024-07-03 2024-07-05.csv", header=TRUE) 
+GRIT01<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/GRIT01 2024-07-03 2024-07-05.csv", header=TRUE) 
 GRIT02<-read.csv("../data/PurpleAir/GRIT02 2024-07-03 2024-07-05.csv", header=TRUE) 
 GRIT03<-read.csv("../data/PurpleAir/GRIT03 2024-07-03 2024-07-05.csv", header=TRUE) 
 GRIT04<-read.csv("../data/PurpleAir/GRIT04 2024-07-03 2024-07-05.csv", header=TRUE) 
+
+GRIT01$Purple.Air.Name<- "GRIT01"
+GRIT02$Purple.Air.Name<-"GRIT02"
+GRIT03$Purple.Air.Name<-"GRIT03"
+GRIT04$Purple.Air.Name<-"GRIT04"
+
 
 #look at the data
 head(GRIT01)
@@ -289,6 +295,189 @@ print(p7)
 #viewing July 3rd and July 4th graphs side by side
 grid.arrange(p4, p6, nrow = 2)
 
+#Merging all GRIT
+GRIT01_July03 <- GRIT01_July03[,-which(colnames(GRIT01_July03)=="day")]
+all_GRITaq <- rbind(GRIT01_July03, GRIT01_July04,GRIT02_July03, GRIT02_July04, GRIT03_July03, GRIT03_July04, GRIT04_July03, GRIT04_July04)
+all_GRITaq_July03 <- rbind(GRIT01_July03,GRIT02_July03, GRIT03_July03,GRIT04_July03)
+all_GRITq_July04<- rbind(GRIT01_July04, GRIT02_July04, GRIT03_July04, GRIT04_July04)
+
+matched <- intersect(colnames(GRIT01_July03),colnames(GRIT02_July03))
+all <- union(colnames(GRIT01_July03), colnames(GRIT02_July03))
+non.matched <- all[!all %in% matched]
+canopy_cover <- read.csv("output/grit_aq_lc.csv", header=TRUE)
+
+canopy_cover$cancov.10m <- round(canopy_cover$cancov.10m, digits = 4)
+canopy_cover$cancov.20m <- round(canopy_cover$cancov.20m, digits = 4)
+canopy_cover$cancov.30m <- round(canopy_cover$cancov.30m, digits = 4)
+canopy_cover$cancov.40m <- round(canopy_cover$cancov.40m, digits = 4)
+canopy_cover$cancov.50m <- round(canopy_cover$cancov.50m, digits = 4)
+canopy_cover$cancov.100m <- round(canopy_cover$cancov.100m, digits = 4)
+canopy_cover$cancov.200m <- round(canopy_cover$cancov.200m, digits = 4)
+canopy_cover$cancov.400m <- round(canopy_cover$cancov.400m, digits = 4)
+canopy_cover$cancov.800m <- round(canopy_cover$cancov.800m, digits = 4)
 
 
+all_cc<-left_join(all_GRITaq, canopy_cover, by= "Purple.Air.Name", copy = TRUE)
+all_cc_July03<- left_join(all_GRITaq_July03, canopy_cover, by = "Purple.Air.Name", copy=TRUE)
+all_cc_July04 <- left_join(all_GRITq_July04, canopy_cover, by = "Purple.Air.Name", copy=TRUE)
 
+#All GRIT Graphs 
+boxplot(all_cc_July03$pm2.5_atm ~ all_cc_July03$cancov.10m, 
+        xlab = "Canopy Cover within 10m", ylab = "PM 2.5 Concentration", main = "July 3rd",
+        ylim = c(0,20))
+boxplot(all_cc_July04$pm2.5_atm ~ all_cc_July04$cancov.10m, 
+        xlab = "Canopy Cover within 10m", ylab = "PM 2.5 Concentration", main = "July 4th",
+        ylim = c(0,20)) #repeat for different buffers 
+
+#show GRIT side by side 
+
+#######################################################
+### Script to look at Non-GRIT purpleair air quality data  ###
+#######################################################
+
+#read CSV Low Tree Canopy###
+LOWTC01<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/Baker Middle School  2024-07-03 2024-07-05.csv", header=TRUE)
+LOWTC02<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/PSU Star Lab South Tacoma 2024-07-03 2024-07-05 .csv", header=TRUE) 
+LOWTC03<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/Morgan Family YMCA 2024-07-03 2024-07-05 .csv", header=TRUE) 
+LOWTC04<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/Boze Elementary School 2024-07-03 2024-07-05 .csv", header=TRUE) 
+LOWTC05<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/6th Ave and Sprague-ish 2024-07-03 2024-07-05 .csv", header=TRUE) 
+LOWTC06<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/Rustin 2024-07-03 2024-07-05 .csv", header=TRUE) 
+LOWTC07<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/Whitman Elementary School 2024-07-03 2024-07-05.csv", header=TRUE) 
+LOWTC08<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/N Tacoma N 9th and Stevens 2024-07-03 2024-07-05 .csv", header=TRUE) 
+LOWTC09<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/Tacoma Alexander 2024-07-03 2024-07-05 .csv", header=TRUE) 
+
+#read CSV High Tree Canopy#
+HIGHTC01 <-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/PT Woodworth 2024-07-03 2024-07-05.csv", header=TRUE)
+HIGHTC02<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/Manitou Park Elementary 2024-07-03 2024-07-05.csv", header=TRUE) 
+HIGHTC03<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/Owl's Roost 2024-07-03 2024-07-05.csv", header=TRUE)
+HIGHTC04<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/PTOI 2024-07-03 2024-07-05.csv", header=TRUE)
+HIGHTC05<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/Central Tacoma 19th and Mullen 2024-07-03 2024-07-05.csv",header=TRUE)
+HIGHTC06<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/1 Broadway 2024-07-03 2024-07-05.csv",header=TRUE)
+HIGHTC07<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/Pointe Woodworth 2024-07-03 2024-07-05.csv", header=TRUE)
+HIGHTC08<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/Norpoint 2024-07-03 2024-07-05.csv",header=TRUE)
+HIGHTC09<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/Millers Skyline Terrace 2024-07-03 2024-07-05.csv",header=TRUE)
+HIGHTC010<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/PSU Star Labs Titlow 2024-07-03 2024-07-05.csv",header=TRUE)
+
+
+#changing column name#
+time <- c(
+  "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", 
+  "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", 
+  "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", 
+  "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", 
+  "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", 
+  "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", 
+  "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", 
+  "21:00", "21:30", "22:00", "22:30", "23:00", "23:30")
+
+
+LOWTC01$time_stamp <-time 
+LOWTC01 <- LOWTC01 %>%
+  rename(date_time = time_stamp)
+LOWTC02$time_stamp <-time 
+LOWTC02 <- LOWTC02 %>%
+  rename(date_time = time_stamp)
+LOWTC03$time_stamp <-time 
+LOWTC03 <- LOWTC03 %>%
+  rename(date_time = time_stamp)
+LOWTC04$time_stamp <-time 
+LOWTC04 <- LOWTC04 %>%
+  rename(date_time = time_stamp)
+LOWTC05$time_stamp <-time 
+LOWTC05 <- LOWTC05 %>%
+  rename(date_time = time_stamp)
+LOWTC06$time_stamp <-time 
+LOWTC06 <- LOWTC06 %>%
+  rename(date_time = time_stamp)
+LOWTC07$time_stamp <-time 
+LOWTC07 <- LOWTC07 %>%
+  rename(date_time = time_stamp)
+LOWTC08$time_stamp <-time 
+LOWTC08 <- LOWTC08 %>%
+  rename(date_time = time_stamp)
+LOWTC09$time_stamp <-time 
+LOWTC09 <- LOWTC09 %>%
+  rename(date_time = time_stamp)
+
+HIGHTC01$time_stamp <-time 
+HIGHTC01 <- HIGHTC01 %>%
+  rename(date_time = time_stamp)
+HIGHTC02$time_stamp <-time 
+HIGHTC02 <- HIGHTC02 %>%
+  rename(date_time = time_stamp)
+HIGHTC03$time_stamp <-time 
+HIGHTC03 <- HIGHTC03 %>%
+  rename(date_time = time_stamp)
+HIGHTC04$time_stamp <-time 
+HIGHTC04 <- HIGHTC04 %>%
+  rename(date_time = time_stamp)
+HIGHTC05$time_stamp <-time 
+HIGHTC05 <- HIGHTC05 %>%
+  rename(date_time = time_stamp)
+HIGHTC06$time_stamp <-time 
+HIGHTC06 <- HIGHTC06 %>%
+  rename(date_time = time_stamp)
+HIGHTC07$time_stamp <-time 
+HIGHTC07 <- HIGHTC07 %>%
+  rename(date_time = time_stamp)
+HIGHTC08$time_stamp <-time 
+HIGHTC08 <- HIGHTC08 %>%
+  rename(date_time = time_stamp)
+HIGHTC09$time_stamp <-time 
+HIGHTC09 <- HIGHTC09 %>%
+  rename(date_time = time_stamp)
+
+#Low TC PM2.5 Concentrations on July 4th
+y1 <- ggplot() + 
+  geom_line(data = LOWTC01, mapping = aes(date_time, pm2.5_atm, group = 1, color ="Baker"))+
+  geom_line (data = LOWTC02, mapping = aes(date_time, pm2.5_atm, group = 1, color = "PSU Star"))+
+  geom_line (data = LOWTC03, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Morgan"))+
+  geom_line (data = LOWTC04, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Boze"))+
+  geom_line (data = LOWTC05, mapping = aes(date_time, pm2.5_atm, group = 1, color = "6th"))+
+  geom_line (data = LOWTC06, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Rustin"))+
+  geom_line (data = LOWTC07, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Whitman"))+
+  geom_line (data = LOWTC08, mapping = aes(date_time, pm2.5_atm, group = 1, color = "NTacoma"))+
+  geom_line (data = LOWTC09, mapping = aes(date_time, pm2.5_atm, group = 1, color = "TacomaAlexander"))+
+  ggtitle("Low Tree Canopy PurpleAir PM 2.5 Concentrations on July 4th, 2024")+ 
+  labs(x = "Time",
+       y = "PM 2.5 Concentrations (µg/m3)", color = "PurpleAir Name")+
+  theme(
+    axis.text.x = element_text (angle = 90, vjust = -0.01),
+    plot.title = element_text(face='bold'))
+  
+#High TC PM2.5 Concentrations on July 4th
+y2 <- ggplot() +
+  geom_line(data = HIGHTC01, mapping = aes(date_time, pm2.5_atm, group = 1, color ="PT Woodworth"))+
+  geom_line (data = HIGHTC02, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Manitou"))+
+  geom_line (data = HIGHTC03, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Owl"))+
+  geom_line (data = HIGHTC04, mapping = aes(date_time, pm2.5_atm, group = 1, color = "PTOI"))+
+  geom_line (data = HIGHTC05, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Central Tacoma"))+
+  geom_line (data = HIGHTC06, mapping = aes(date_time, pm2.5_atm, group = 1, color = "1 Broadway"))+
+  geom_line (data = HIGHTC07, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Pointe Woodworth"))+
+  geom_line (data = HIGHTC08, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Norpoint"))+
+  geom_line (data =HIGHTC09, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Miller"))+
+  ggtitle("High Tree Canopy PurpleAir PM 2.5 Concentrations on July 4th, 2024")+ 
+  labs(x = "Time",
+       y = "PM 2.5 Concentrations (µg/m3)", color = "PurpleAir Name")+
+  theme(
+    axis.text.x = element_text (angle = 90, vjust = -0.01),
+    plot.title = element_text(face='bold'))
+  
+
+y3 <- ggplot() +
+  geom_line(data = GRIT01_July04, mapping = aes(date_time, pm2.5_atm, group = 1, color ="GRIT 01"))+
+  geom_line (data = GRIT02_July04, mapping = aes(date_time, pm2.5_atm, group = 1, color = "GRIT 02"))+
+  geom_line (data = GRIT03_July04, mapping = aes(date_time, pm2.5_atm, group = 1, color = "GRIT 03"))+
+  geom_line (data = GRIT04_July04, mapping = aes(date_time, pm2.5_atm, group = 1, color = "GRIT04"))+
+  ggtitle("GRIT PM 2.5 Concentrations on July 4th, 2024")+ 
+  labs(x = "Time",
+       y = "PM 2.5 Concentrations (µg/m3)", color = "PurpleAir Name")+
+  theme(
+    axis.text.x = element_text (angle = 90, vjust = -0.01),
+    plot.title = element_text(face='bold'))
+y1 + y2
+  
+  
+  
+  
+ 
