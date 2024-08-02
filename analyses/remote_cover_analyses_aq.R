@@ -104,7 +104,7 @@ png("figs/tacomagcanopymap.png", width=12, height=12, units="in", res=220)
 
 plot(lc_tacoma_NOAA, 
      main = "Tacoma canopy cover", col = c("lightgray", "darkgreen", "springgreen"))
-plot(locs_NOAA, add=TRUE, col="black", pch=16, cex=3)
+plot(locs_NOAA, add=TRUE, col="black", pch=16, cex=)
 dev.off()
 
 
