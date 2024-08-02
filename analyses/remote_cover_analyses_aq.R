@@ -37,7 +37,7 @@ options("digits" = 15)
 
 #Read in lat/longs of air quality monitors
 #(need to creat this file first based on the loggers chosen frmo PurpleAir Map)
-locs<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/GRIT_AQ_Monitors_Survey.csv", header=TRUE) 
+locs<-read.csv("../data/PurpleAir/GRIT_AQ_Monitors_Survey.csv", header=TRUE) 
 locs_raw <-rename(locs, Longitude = x, Latitude = y)
 
 # locs_raw<-aq_locs
@@ -50,6 +50,8 @@ lc <-
 lcNOAA <-
   raster("~/Documents/Land Cover/wa_2021_ccap_v2_hires_canopy_20240402.tif")
 
+#lcNOAA <-  raster("../data/C-CAP/wa_2021_ccap_v2_hires_canopy_20240402.tif")
+
 #read in polygon for Tacoma
 
 st <- states()
@@ -60,6 +62,7 @@ tacoma <- places("WA", cb = TRUE) %>%
 wa_outline <- states(cb = TRUE) %>%
   filter(NAME == "Washington") %>%
   st_transform(6580)
+
 
 #plot
 ggplot() + 
@@ -86,16 +89,22 @@ tacoma2<-st_transform(tacoma, crs(lcNOAA))
 #crop lc raster to just Tacoma:
 # lc_tacoma<-crop(x = lc, y = tacoma2)
 
-lc_tacoma_NOAA<-crop(x = lcNOAA, y = tacoma2)
+#using the Tacoma polygon seems to cut out one of our AQ monitors- not sure why. To get around this, create a new, larger, rectangular polygon that is a bit bigger than Tacoma, and use this to crop the landcover
+etacrect <- as(raster::extent(-2000000, -1975000, 2960000, 2990000), "SpatialPolygons")
+proj4string(etacrect) <- crs(lcNOAA)
+plot(etacrect)
+
+#instead of using tacoma2 shapefile, use tacrect_
+lc_tacoma_NOAA<-crop(x = lcNOAA, y = etacrect)
 
 #create a polygon bounded by min max of lc
 
-#make a map of points with land cover
+#make a map of points with land covere
 png("figs/tacomagcanopymap.png", width=12, height=12, units="in", res=220)
 
 plot(lc_tacoma_NOAA, 
-     main = "Tacoma landcover", col = c("gray", "darkgreen", "springgreen"))
-plot(locs_NOAA, add=TRUE, col="black", pch=16, cex=2)
+     main = "Tacoma canopy cover", col = c("lightgray", "darkgreen", "springgreen"))
+plot(locs_NOAA, add=TRUE, col="black", pch=16, cex=3)
 dev.off()
 
 
