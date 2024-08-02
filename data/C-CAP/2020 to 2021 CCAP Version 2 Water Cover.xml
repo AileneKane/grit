@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<inport-metadata xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                 version="1.7"
+                 source="https://www.fisheries.noaa.gov">
+   <item-identification>
+      <catalog-item-id>70564</catalog-item-id>
+      <title>2020-2021 CCAP Version 2 Water Cover</title>
+      <catalog-item-type>Data Set</catalog-item-type>
+      <metadata-workflow-state ccs-id="7">Approved</metadata-workflow-state>
+      <parent-catalog-item-id>47841</parent-catalog-item-id>
+      <parent-title>C-CAP</parent-title>
+      <parent-catalog-item-type>Project</parent-catalog-item-type>
+      <status>Completed</status>
+      <creation-date>2023-09-30</creation-date>
+      <publication-date>2023-09-30</publication-date>
+      <abstract>The NOAA Coastal Change Analysis Program (C-CAP) produces national standardized land cover and change products for the coastal regions of the U.S. C-CAP products inventory coastal intertidal areas, wetlands, and adjacent uplands with the goal of monitoring changes in these habitats through time. The timeframe for this metadata is 2020 through 2021, depending on the latest date of available imagery. These maps were developed utilizing high resolution 30cm or better aerial imagery. In addition, a digital surface model (DSM) derived from the stereo imagery was used to determine vegetation heights. This information provides managers with a detailed accounting of current landscape conditions related to impervious surface, woody canopy, and water feature extents.</abstract>
+      <purpose>C-CAP is dedicated to the development, distribution, and application of land cover and change data for the coastal regions of the U.S. </purpose>
+      <notes>This data was produced under contract to Ecopia Tech Corporation. C-CAP data sets are not jurisdictional or intended for use in litigation. While efforts have been made to ensure that these data are accurate and reliable within the limits of current technology, NOAA cannot assume liability for any damages or misrepresentations caused by inaccuracies in the data, or as a result of the data to be used on a particular system. NOAA makes no warranty, expressed or implied, nor does the fact of distribution constitute such a warranty. This is a national and regional data set that should be used only as a screening tool for very local or site-specific management decisions. Small features and changes should be verified with a higher-resolution data source.</notes>
+      <other-citation-details>USE RESTRICTIONS: This land cover data may not be used for the purpose of creating, training, improving, modifying, validating, testing, or evaluating machine learning algorithms, or otherwise leverage the product for the purposes of machine learning for a period of five years from its date of creation, except with the express written consent of Ecopia Tech Corporation.
+
+</other-citation-details>
+      <supplemental-information>Attributes for this product are as follows:
+
+0 Background,
+
+1 Open Water
+
+10 No Data
+
+
+Recommended Citation. NOAA Coastal Change Analysis Program (C-CAP) New Orleans Region High Resolution Land Cover Data. Data collected 2017. Charleston, SC: National Oceanic and Atmospheric Administration (NOAA) Office for Coastal Management. Data accessed at https://coast.noaa.gov/digitalcoast/data/ccaphighres.html.</supplemental-information>
+   </item-identification>
+   <keywords>
+      <keyword controlled="Yes">
+         <keyword-type>Theme</keyword-type>
+         <thesaurus version="12.3">Global Change Master Directory (GCMD) Science Keywords</thesaurus>
+         <keyword identifier="e5815f58-8232-4c7f-b50d-ea71d73891a9">EARTH SCIENCE &gt; LAND SURFACE &gt; LAND USE/LAND COVER</keyword>
+      </keyword>
+      <keyword controlled="Yes">
+         <keyword-type>Theme</keyword-type>
+         <thesaurus version="12.3">Global Change Master Directory (GCMD) Science Keywords</thesaurus>
+         <keyword identifier="75c312bc-79f9-4d74-a7c0-3c67c019196c">EARTH SCIENCE &gt; LAND SURFACE &gt; LAND USE/LAND COVER &gt; LAND USE/LAND COVER CLASSIFICATION</keyword>
+      </keyword>
+      <keyword controlled="Yes">
+         <keyword-type>Theme</keyword-type>
+         <thesaurus>ISO 19115 Topic Category</thesaurus>
+         <keyword>imageryBaseMapsEarthCover</keyword>
+      </keyword>
+      <keyword controlled="Yes">
+         <keyword-type>Spatial</keyword-type>
+         <thesaurus version="12.3">Global Change Master Directory (GCMD) Location Keywords</thesaurus>
+         <keyword identifier="dcef091b-18b5-48bf-b191-69ab7a3511f1">CONTINENT &gt; NORTH AMERICA &gt; UNITED STATES OF AMERICA &gt; WASHINGTON</keyword>
+      </keyword>
+      <keyword controlled="Yes">
+         <keyword-type>Instrument</keyword-type>
+         <thesaurus version="14.9">Global Change Master Directory (GCMD) Instrument Keywords</thesaurus>
+         <keyword identifier="b434201b-4969-4a7e-8749-ba5b7c537c2f">CAMERAS</keyword>
+      </keyword>
+      <keyword controlled="Yes">
+         <keyword-type>Platform</keyword-type>
+         <thesaurus version="14.9">Global Change Master Directory (GCMD) Platform Keywords</thesaurus>
+         <keyword identifier="8b7834c1-2c66-414e-a655-2298e7dcc479">Airplane &gt; Airplane</keyword>
+      </keyword>
+      <keyword controlled="No">
+         <keyword-type>Theme</keyword-type>
+         <keyword>C-CAP</keyword>
+      </keyword>
+      <keyword controlled="No">
+         <keyword-type>Theme</keyword-type>
+         <keyword>CCAP</keyword>
+      </keyword>
+      <keyword controlled="No">
+         <keyword-type>Theme</keyword-type>
+         <keyword>Land Cover</keyword>
+      </keyword>
+      <keyword controlled="No">
+         <keyword-type>Theme</keyword-type>
+         <keyword>Land Cover Analysis</keyword>
+      </keyword>
+      <keyword controlled="No">
+         <keyword-type>Theme</keyword-type>
+         <keyword>Remotely Sensed Imagery/Photos</keyword>
+      </keyword>
+      <keyword controlled="No">
+         <keyword-type>Temporal</keyword-type>
+         <thesaurus>Geographic Names Information System</thesaurus>
+         <keyword>2020</keyword>
+      </keyword>
+      <keyword controlled="No">
+         <keyword-type>Temporal</keyword-type>
+         <keyword>2019</keyword>
+      </keyword>
+      <keyword controlled="No">
+         <keyword-type>Temporal</keyword-type>
+         <keyword>2021</keyword>
+      </keyword>
+      <keyword controlled="No">
+         <keyword-type>Spatial</keyword-type>
+         <thesaurus>Geographic Names Information System</thesaurus>
+         <keyword>Coastal States</keyword>
+      </keyword>
+      <keyword controlled="No">
+         <keyword-type>Spatial</keyword-type>
+         <thesaurus>Geographic Names Information System</thesaurus>
+         <keyword>Water</keyword>
+      </keyword>
+      <keyword controlled="No">
+         <keyword-type>Spatial</keyword-type>
+         <keyword>Coastal Zone</keyword>
+      </keyword>
+   </keywords>
+   <physical-location>
+      <organization>Office for Coastal Management</organization>
+      <city>Charleston</city>
+      <state-province>SC</state-province>
+   </physical-location>
+   <data-set-information>
+      <data-set-scope-code>Data Set</data-set-scope-code>
+      <maintenance-note>5 years</maintenance-note>
+      <data-presentation-form>Image (digital)</data-presentation-form>
+      <distribution-liability>Users must assume responsibility to determine the usability of these data.</distribution-liability>
+   </data-set-information>
+   <entity-attribute-information partial-listing="No" total-count="0"/>
+   <support-roles>
+      <support-role cc-id="1267549" in-effect="Yes">
+         <support-role-type>Data Steward</support-role-type>
+         <from-date>2023-03-29</from-date>
+         <contact-type>Organization</contact-type>
+         <contact-name>NOAA Office for Coastal Management</contact-name>
+         <contact-noaa-acronym>NOAA/OCM</contact-noaa-acronym>
+         <contact-email>coastal.info@noaa.gov</contact-email>
+         <contact-address>2234 South Hobson Ave</contact-address>
+         <contact-address-city>Charleston</contact-address-city>
+         <contact-address-state>SC</contact-address-state>
+         <contact-address-zip>29405-2413</contact-address-zip>
+         <contact-phone-number>(843) 740-1202</contact-phone-number>
+         <contact-url>https://coast.noaa.gov</contact-url>
+         <contact-url-description>NOAA Office for Coastal Management Home Page</contact-url-description>
+         <contact-url-function>Online Resource</contact-url-function>
+      </support-role>
+      <support-role cc-id="1267551" in-effect="Yes">
+         <support-role-type>Distributor</support-role-type>
+         <from-date>2023-03-29</from-date>
+         <contact-type>Organization</contact-type>
+         <contact-name>NOAA Office for Coastal Management</contact-name>
+         <contact-noaa-acronym>NOAA/OCM</contact-noaa-acronym>
+         <contact-email>coastal.info@noaa.gov</contact-email>
+         <contact-address>2234 South Hobson Ave</contact-address>
+         <contact-address-city>Charleston</contact-address-city>
+         <contact-address-state>SC</contact-address-state>
+         <contact-address-zip>29405-2413</contact-address-zip>
+         <contact-phone-number>(843) 740-1202</contact-phone-number>
+         <contact-url>https://coast.noaa.gov</contact-url>
+         <contact-url-description>NOAA Office for Coastal Management Home Page</contact-url-description>
+         <contact-url-function>Online Resource</contact-url-function>
+      </support-role>
+      <support-role cc-id="1267552" in-effect="Yes">
+         <support-role-type>Metadata Contact</support-role-type>
+         <from-date>2023-03-29</from-date>
+         <contact-type>Organization</contact-type>
+         <contact-name>NOAA Office for Coastal Management</contact-name>
+         <contact-noaa-acronym>NOAA/OCM</contact-noaa-acronym>
+         <contact-email>coastal.info@noaa.gov</contact-email>
+         <contact-address>2234 South Hobson Ave</contact-address>
+         <contact-address-city>Charleston</contact-address-city>
+         <contact-address-state>SC</contact-address-state>
+         <contact-address-zip>29405-2413</contact-address-zip>
+         <contact-phone-number>(843) 740-1202</contact-phone-number>
+         <contact-url>https://coast.noaa.gov</contact-url>
+         <contact-url-description>NOAA Office for Coastal Management Home Page</contact-url-description>
+         <contact-url-function>Online Resource</contact-url-function>
+      </support-role>
+      <support-role cc-id="1267550" in-effect="Yes">
+         <support-role-type>Point of Contact</support-role-type>
+         <from-date>2023-03-29</from-date>
+         <contact-type>Organization</contact-type>
+         <contact-name>NOAA Office for Coastal Management</contact-name>
+         <contact-noaa-acronym>NOAA/OCM</contact-noaa-acronym>
+         <contact-email>coastal.info@noaa.gov</contact-email>
+         <contact-address>2234 South Hobson Ave</contact-address>
+         <contact-address-city>Charleston</contact-address-city>
+         <contact-address-state>SC</contact-address-state>
+         <contact-address-zip>29405-2413</contact-address-zip>
+         <contact-phone-number>(843) 740-1202</contact-phone-number>
+         <contact-url>https://coast.noaa.gov</contact-url>
+         <contact-url-description>NOAA Office for Coastal Management Home Page</contact-url-description>
+         <contact-url-function>Online Resource</contact-url-function>
+      </support-role>
+   </support-roles>
+   <extents>
+      <currentness-reference>Acquisition date of the aerial imagery</currentness-reference>
+      <extent cc-id="1267565">
+         <geographic-areas>
+            <geographic-area cc-id="1267567">
+               <west-bound>-129.64</west-bound>
+               <east-bound>-66.01</east-bound>
+               <north-bound>51.07</north-bound>
+               <south-bound>22.6</south-bound>
+            </geographic-area>
+         </geographic-areas>
+         <time-frames>
+            <time-frame cc-id="1267566">
+               <time-frame-type>Range</time-frame-type>
+               <start-date-time>2020</start-date-time>
+               <end-date-time>2021</end-date-time>
+            </time-frame>
+         </time-frames>
+      </extent>
+   </extents>
+   <spatial-information>
+      <spatial-representation>
+         <representations-used>
+            <grid>Yes</grid>
+         </representations-used>
+         <grid-representations>
+            <grid-representation cc-id="1267559">
+               <dimension-count>3</dimension-count>
+               <cell-geometry>Point</cell-geometry>
+               <transformation-parameters-available>No</transformation-parameters-available>
+               <axis-dimensions>
+                  <axis-dimension cc-id="1267560">
+                     <dimension-type>Row</dimension-type>
+                     <size>4166</size>
+                  </axis-dimension>
+                  <axis-dimension cc-id="1267561">
+                     <dimension-type>Column</dimension-type>
+                     <size>7703</size>
+                  </axis-dimension>
+                  <axis-dimension cc-id="1267562">
+                     <dimension-type>Vertical</dimension-type>
+                     <size>1</size>
+                  </axis-dimension>
+               </axis-dimensions>
+            </grid-representation>
+         </grid-representations>
+      </spatial-representation>
+   </spatial-information>
+   <access-information>
+      <security-class>Unclassified</security-class>
+      <data-access-constraints>None</data-access-constraints>
+      <data-use-constraints>Data set is not for use in litigation. While efforts have been made to ensure that these data are accurate and reliable within the state of the art, NOAA, cannot assume liability for any damages, or misrepresentations, caused by any inaccuracies in the data, or as a result of the data to be used on a particular system. NOAA makes no warranty, expressed or implied, nor does the fact of distribution constitute such a warranty.</data-use-constraints>
+   </access-information>
+   <urls>
+      <url cc-id="1267553">
+         <url>https://coast.noaa.gov/digitalcoast/data/ccaphighres.html</url>
+      </url>
+      <url cc-id="1267554">
+         <url>https://coastalimagery.blob.core.windows.net/ccap-landcover/CCAP_bulk_download/index.html</url>
+         <url-type>Online Resource</url-type>
+      </url>
+   </urls>
+   <technical-environment>
+      <description>Microsoft Windows XP Version 5.1 (Build 2600) Service Pack 3; ESRI ArcCatalog 9.2.2.1350</description>
+   </technical-environment>
+   <data-quality>
+      <accuracy>An accuracy assessment of the landcover was not performed by NOAA Office for Coastal Management staff. </accuracy>
+      <conceptual-consistency>Tests for logical consistency indicate that all row and column positions in the selected latitude/longitude window contain data. Conversion and integration with vector files indicates that all positions are consistent with earth coordinates covering the same area. Attribute files are logically consistent.</conceptual-consistency>
+   </data-quality>
+   <lineage>
+      <lineage-process-steps>
+         <lineage-process-step cc-id="1267563">
+            <sequence-number>1</sequence-number>
+            <description>This dataset was created by NOAA's Ocean Service, Office for Coastal Management (OCM).
+
+Classification: Initial 1m spatial resolution feature extraction for water mapping was conducted by Ecopia Tech Corporation and was developed by Ecopia Tech Corporation using a proprietary feature recognition technology. This involves taking each image and classifying the pixels based on spectral and spatial properties, based on training examples and analyst refinement. The interim product classifications were reviewed, and feedback was provided that allowed for training data that resulted in the refinement of those classifiers. Once the review and edits were complete, the water class was separated out from the remaining classes. This work was done under contract to NOAA, through NOAAs Coastal Geospatial Services Contract (CGSC) vehicle. 
+
+Attributes for the water product are as follows:
+0	Background
+1	Open Water
+
+Recommended Citation. NOAA Coastal Change Analysis Program (C-CAP) New Orleans Region High Resolution Land Cover Data. Data collected 2017. Charleston, SC: National Oceanic and Atmospheric Administration (NOAA) Office for Coastal Management. Data accessed at https://coast.noaa.gov/digitalcoast/data/ccaphighres.html.
+
+</description>
+            <process-date-time>2023-08-25T00:00:00</process-date-time>
+         </lineage-process-step>
+      </lineage-process-steps>
+   </lineage>
+   <catalog-details>
+      <guid>gov.noaa.nmfs.inport:70564</guid>
+      <metadata-record-created-by pers-id="20138">Erik Hund</metadata-record-created-by>
+      <metadata-record-created>2023-08-17T16:41:08</metadata-record-created>
+      <metadata-record-last-modified-by pers-id="20138">Erik Hund</metadata-record-last-modified-by>
+      <metadata-record-last-modified>2023-10-03T17:08:46</metadata-record-last-modified>
+      <record-published>2023-10-03</record-published>
+      <owner-organization>Office for Coastal Management</owner-organization>
+      <owner-organization-acronym>OCM</owner-organization-acronym>
+      <owner-organization-address/>
+      <owner-organization-address-city/>
+      <owner-organization-address-state/>
+      <owner-organization-address-zip/>
+      <owner-organization-address-country/>
+      <owner-organization-phone/>
+      <owner-organization-url/>
+      <owner-organization-business-hours/>
+      <owner-organization-group-id>1002</owner-organization-group-id>
+      <publication-status>Never Published</publication-status>
+      <is-do-not-publish>No</is-do-not-publish>
+      <metadata-last-review-date>2023-05-17</metadata-last-review-date>
+      <metadata-review-frequency>1 Year</metadata-review-frequency>
+      <metadata-next-review-date>2024-05-17</metadata-next-review-date>
+   </catalog-details>
+</inport-metadata>
