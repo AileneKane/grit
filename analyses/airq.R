@@ -8,7 +8,6 @@
 rm(list=ls()) 
 options(stringsAsFactors = FALSE)
 install.packages("patchwork")
-install.packages("plotly")
 install.packages("gridExtra")
 
 # load libraries
@@ -18,18 +17,19 @@ library(dplyr)
 library(patchwork)
 library(plotly)
 library(gridExtra)
+library(scales)
 
 
 # set working directory
-setwd("documents/GitHub/grit/analyses") #for apple computers add documents
+setwd("documents/GitHub/grit/analyses") 
 
 #Read in data file with PurpleAir logger locations
 #(notyet created)
 #Read in air quality data from 2 sites
 GRIT01<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/GRIT01 2024-07-03 2024-07-05.csv", header=TRUE) 
-GRIT02<-read.csv("../data/PurpleAir/GRIT02 2024-07-03 2024-07-05.csv", header=TRUE) 
-GRIT03<-read.csv("../data/PurpleAir/GRIT03 2024-07-03 2024-07-05.csv", header=TRUE) 
-GRIT04<-read.csv("../data/PurpleAir/GRIT04 2024-07-03 2024-07-05.csv", header=TRUE) 
+GRIT02<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/GRIT02 2024-07-03 2024-07-05.csv", header=TRUE) 
+GRIT03<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/GRIT03 2024-07-03 2024-07-05.csv", header=TRUE) 
+GRIT04<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/GRIT04 2024-07-03 2024-07-05.csv", header=TRUE) 
 
 GRIT01$Purple.Air.Name<- "GRIT01"
 GRIT02$Purple.Air.Name<-"GRIT02"
@@ -62,7 +62,7 @@ GRIT01_July03 <- GRIT01_July03 %>%
   rename(date_time = time_stamp) #renamed date_time because R has built in argument with time_stamp and I was getting errors
 view(GRIT01_July03)
 GRIT01_July03$date_time <- factor(GRIT01_July03$date_time, levels = GRIT01_July03$date_time)
-day <- rep(c("July 3rd"), each=41)
+# day <- rep(c("July 3rd"), each=41)
 GRIT01_July03 <- GRIT01_July03 %>% mutate (day = "July 3rd")
 GRIT01_July04 <- GRIT01_July04 %>% mutate (day = "July 4th")
 
@@ -318,18 +318,64 @@ canopy_cover$cancov.800m <- round(canopy_cover$cancov.800m, digits = 4)
 
 
 all_cc<-left_join(all_GRITaq, canopy_cover, by= "Purple.Air.Name", copy = TRUE)
+
 all_cc_July03<- left_join(all_GRITaq_July03, canopy_cover, by = "Purple.Air.Name", copy=TRUE)
 all_cc_July04 <- left_join(all_GRITq_July04, canopy_cover, by = "Purple.Air.Name", copy=TRUE)
 
-#All GRIT Graphs 
-boxplot(all_cc_July03$pm2.5_atm ~ all_cc_July03$cancov.10m, 
-        xlab = "Canopy Cover within 10m", ylab = "PM 2.5 Concentration", main = "July 3rd",
-        ylim = c(0,20))
-boxplot(all_cc_July04$pm2.5_atm ~ all_cc_July04$cancov.10m, 
-        xlab = "Canopy Cover within 10m", ylab = "PM 2.5 Concentration", main = "July 4th",
-        ylim = c(0,20)) #repeat for different buffers 
+all_cc_combined <- bind_rows(
+  all_cc_July03 %>% mutate(date = "July 3rd"),
+  all_cc_July04 %>% mutate(date = "July 4th"))
+all_cc_combined_2 <- bind_rows(all_cc_July03 %>% mutate (Pu))
 
-#show GRIT side by side 
+#All GRIT Graphs 
+#Box plots comparing July 3rd vs July 4th PM 2.5 Concentrations
+label_10 <- all_cc_combined %>% group_by(Purple.Air.Name,date,cancov.10m) %>% summarise(pm2.5_atm = max(pm2.5_atm) + 1) %>% ungroup()
+label_20<- all_cc_combined %>% group_by(Purple.Air.Name,date,cancov.20m) %>% summarise(pm2.5_atm = max(pm2.5_atm) + 1) %>% ungroup()
+label_30<- all_cc_combined %>% group_by(Purple.Air.Name,date,cancov.30m) %>% summarise(pm2.5_atm = max(pm2.5_atm) + 1) %>% ungroup()
+label_40<- all_cc_combined %>% group_by(Purple.Air.Name,date,cancov.40m) %>% summarise(pm2.5_atm = max(pm2.5_atm) + 1) %>% ungroup()
+label_50<- all_cc_combined %>%group_by(Purple.Air.Name,date,cancov.50m) %>%  summarise(pm2.5_atm = max(pm2.5_atm) + 1) %>% ungroup()
+label_100<- all_cc_combined %>% group_by(Purple.Air.Name,date,cancov.100m) %>% summarise(pm2.5_atm = max(pm2.5_atm) + 1) %>% ungroup()
+label_200<- all_cc_combined %>% group_by(Purple.Air.Name,date,cancov.200m) %>% summarise(pm2.5_atm = max(pm2.5_atm) + 1) %>% ungroup()
+label_400<- all_cc_combined %>% group_by(Purple.Air.Name,date,cancov.400m) %>% summarise(pm2.5_atm = max(pm2.5_atm) + 1) %>% ungroup()
+label_800<- all_cc_combined %>% group_by(Purple.Air.Name,date,cancov.800m) %>% summarise(pm2.5_atm = max(pm2.5_atm) + 1) %>% ungroup()
+
+box_cancov10 <- 
+  ggplot(all_cc_combined, aes(x = factor(cancov.10m), y = pm2.5_atm, fill = date)) + 
+  geom_boxplot()+
+  geom_text(data = label_10, aes(label = Purple.Air.Name, y = pm2.5_atm), position = position_dodge(width = 0.75), vjust = -0.1, size = 3) +
+  scale_y_continuous(limits = c(0, 20))+
+  scale_fill_manual(values = c("July 3rd" = "lightgoldenrod", "July 4th" = "darkolivegreen3"))+
+  ggtitle("All GRIT Sensors: Canopy Cover within 10m and PM 2.5 Concentration", 
+          subtitle = "July 3rd vs July 4th")+
+  labs(x= "Canopy Cover 10 (m)", y  = "PM 2.5 Concentration (µg/m3)", fill = "Date")+
+  theme(plot.title = element_text(face ="bold"))
+box_cancov10 + facet_wrap(vars(Purple.Air.Name))
+
+box_cancov20<-
+  ggplot(all_cc_combined, aes(x = factor(cancov.20m), y = pm2.5_atm, fill = date)) + 
+  geom_boxplot()+
+  geom_text(data = label_20, aes(label = Purple.Air.Name, y = pm2.5_atm), position = position_dodge(width = 0.75), vjust = -0.1, size = 3) +
+  scale_y_continuous(limits = c(0, 20))+
+  scale_fill_manual(values = c("July 3rd" = "lightgoldenrod", "July 4th" = "darkolivegreen3"))+
+  ggtitle("All GRIT Sensors: Canopy Cover within 20m and PM 2.5 Concentration", 
+          subtitle = "July 3rd vs July 4th")+
+  labs(x= "Canopy Cover 20 (m)", y  = "PM 2.5 Concentration (µg/m3)", fill = "Date")+
+  theme(plot.title = element_text(face ="bold"))
+box_cancov20 + facet_wrap(vars(Purple.Air.Name)) #facet wrap option remove labels from graph, delete geom_text()
+
+box_cancov30<-
+  ggplot(all_cc_combined, aes(x = factor(cancov.30m), y = pm2.5_atm, fill = date)) + 
+  geom_boxplot()+
+  geom_text(data = label_30, aes(label = Purple.Air.Name, y = pm2.5_atm), position = position_dodge(width = 0.75), vjust = -0.1, size = 3) +
+  scale_y_continuous(limits = c(0, 20))+
+  scale_fill_manual(values = c("July 3rd" = "lightgoldenrod", "July 4th" = "darkolivegreen3"))+
+  ggtitle("All GRIT Sensors: Canopy Cover within 30m and PM 2.5 Concentration", 
+          subtitle = "July 3rd vs July 4th")+
+  labs(x= "Canopy Cover 20 (m)", y  = "PM 2.5 Concentration (µg/m3)", fill = "Date")+
+  theme(plot.title = element_text(face ="bold"))
+#repeat for rest of canopy cover buffers
+
+#Line graph representing each sensors x = time, y = AQ 
 
 #######################################################
 ### Script to look at Non-GRIT purpleair air quality data  ###
