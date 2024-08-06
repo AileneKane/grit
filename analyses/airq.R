@@ -322,10 +322,10 @@ all_cc<-left_join(all_GRITaq, canopy_cover, by= "Purple.Air.Name", copy = TRUE)
 all_cc_July03<- left_join(all_GRITaq_July03, canopy_cover, by = "Purple.Air.Name", copy=TRUE)
 all_cc_July04 <- left_join(all_GRITq_July04, canopy_cover, by = "Purple.Air.Name", copy=TRUE)
 
+#combined all_cc with separate date column to indicate July 3rd or July4th
 all_cc_combined <- bind_rows(
   all_cc_July03 %>% mutate(date = "July 3rd"),
-  all_cc_July04 %>% mutate(date = "July 4th"))
-all_cc_combined_2 <- bind_rows(all_cc_July03 %>% mutate (Pu))
+  all_cc_July04 %>% mutate(date = "July 4th")) 
 
 #All GRIT Graphs 
 #Box plots comparing July 3rd vs July 4th PM 2.5 Concentrations
@@ -339,16 +339,32 @@ label_200<- all_cc_combined %>% group_by(Purple.Air.Name,date,cancov.200m) %>% s
 label_400<- all_cc_combined %>% group_by(Purple.Air.Name,date,cancov.400m) %>% summarise(pm2.5_atm = max(pm2.5_atm) + 1) %>% ungroup()
 label_800<- all_cc_combined %>% group_by(Purple.Air.Name,date,cancov.800m) %>% summarise(pm2.5_atm = max(pm2.5_atm) + 1) %>% ungroup()
 
+#EPA PM2.5 Standards 
+PM2.5_EPA_short <- data.frame(yintercept=35, Lines='24 hour') #primary 24-hour PM2.5 standard
+PM2.5_EPA_annual <- data.frame(yintercept = 9, Lines = 'Annual') # long-term standard (annual average)
+
 box_cancov10 <- 
   ggplot(all_cc_combined, aes(x = factor(cancov.10m), y = pm2.5_atm, fill = date)) + 
   geom_boxplot()+
   geom_text(data = label_10, aes(label = Purple.Air.Name, y = pm2.5_atm), position = position_dodge(width = 0.75), vjust = -0.1, size = 3) +
-  scale_y_continuous(limits = c(0, 20))+
-  scale_fill_manual(values = c("July 3rd" = "lightgoldenrod", "July 4th" = "darkolivegreen3"))+
+  scale_y_continuous(limits = c(0, 40))+
   ggtitle("All GRIT Sensors: Canopy Cover within 10m and PM 2.5 Concentration", 
           subtitle = "July 3rd vs July 4th")+
-  labs(x= "Canopy Cover 10 (m)", y  = "PM 2.5 Concentration (µg/m3)", fill = "Date")+
+  labs(x= "Canopy Cover 10 (m)", y  = "PM 2.5 Concentration (µg/m3)", fill = "Date",
+      color = "EPA PM2.5 standard", linetype = "EPA PM 2.5 Standards")+
+  theme_bw()+
+  geom_hline(data = PM2.5_EPA_short, aes(yintercept = yintercept, color = "Short-term Standard", linetype = "Short-term Standard"), linetype = "dashed") +
+  geom_hline(data = PM2.5_EPA_annual, aes(yintercept = yintercept, color = "Annual Standard", linetype = "Annual Standard"), linetype = "dashed") +
+  scale_color_manual(values = c("Short-term Standard" = "red", "Annual Standard" = "darkred"),
+                     labels = c("Short-term Standard" = "Short-term Standard", "Annual Standard" = "Annual Standard")) +
+  scale_fill_manual(values = c("July 3rd" = "lightgoldenrod", "July 4th" = "darkolivegreen3"))+
   theme(plot.title = element_text(face ="bold"))
+
+ box_cancov10 + labs(
+   colour = "name1",
+   shape = "name2"
+ )
+
 box_cancov10 + facet_wrap(vars(Purple.Air.Name))
 
 box_cancov20<-
@@ -357,25 +373,65 @@ box_cancov20<-
   geom_text(data = label_20, aes(label = Purple.Air.Name, y = pm2.5_atm), position = position_dodge(width = 0.75), vjust = -0.1, size = 3) +
   scale_y_continuous(limits = c(0, 20))+
   scale_fill_manual(values = c("July 3rd" = "lightgoldenrod", "July 4th" = "darkolivegreen3"))+
+    geom_hline(data = PM2.5_EPA_short, aes(yintercept = yintercept, color = "Short-term Standard", linetype = "Short-term Standard"), linetype = "dashed") +
+  geom_hline(data = PM2.5_EPA_annual, aes(yintercept = yintercept, color = "Annual Standard", linetype = "Annual Standard"), linetype = "dashed") +
+  scale_color_manual(values = c("Short-term Standard" = "red", "Annual Standard" = "darkred"),
+                     labels = c("Short-term Standard" = "Short-term Standard", "Annual Standard" = "Annual Standard")) +
   ggtitle("All GRIT Sensors: Canopy Cover within 20m and PM 2.5 Concentration", 
           subtitle = "July 3rd vs July 4th")+
   labs(x= "Canopy Cover 20 (m)", y  = "PM 2.5 Concentration (µg/m3)", fill = "Date")+
-  theme(plot.title = element_text(face ="bold"))
-box_cancov20 + facet_wrap(vars(Purple.Air.Name)) #facet wrap option remove labels from graph, delete geom_text()
+  theme_bw()+
+  theme(plot.title = element_text(face = "bold"))
 
-box_cancov30<-
-  ggplot(all_cc_combined, aes(x = factor(cancov.30m), y = pm2.5_atm, fill = date)) + 
-  geom_boxplot()+
-  geom_text(data = label_30, aes(label = Purple.Air.Name, y = pm2.5_atm), position = position_dodge(width = 0.75), vjust = -0.1, size = 3) +
-  scale_y_continuous(limits = c(0, 20))+
-  scale_fill_manual(values = c("July 3rd" = "lightgoldenrod", "July 4th" = "darkolivegreen3"))+
-  ggtitle("All GRIT Sensors: Canopy Cover within 30m and PM 2.5 Concentration", 
-          subtitle = "July 3rd vs July 4th")+
-  labs(x= "Canopy Cover 20 (m)", y  = "PM 2.5 Concentration (µg/m3)", fill = "Date")+
-  theme(plot.title = element_text(face ="bold"))
+
+box_cancov20 + facet_wrap(vars(Purple.Air.Name)) #facet wrap option remove labels from graph, delete geom_text()
 #repeat for rest of canopy cover buffers
 
 #Line graph representing each sensors x = time, y = AQ 
+#fixing time stamps for plot
+GRIT01$time_stamp <- gsub("T|Z", " ", GRIT01$time_stamp)
+  GRIT01$time_stamp <- substr(GRIT01$time_stamp, 1, 16) 
+  GRIT01$time_stamp<- as.POSIXct(GRIT01$time_stamp, format = '%Y-%m-%d %H:%M')
+GRIT02$time_stamp <- gsub("T|Z", " ",GRIT02$time_stamp)
+  GRIT02$time_stamp <- substr(GRIT02$time_stamp, 1, 16) 
+  GRIT02$time_stamp<- as.POSIXct(GRIT02$time_stamp, format = '%Y-%m-%d %H:%M')
+GRIT03$time_stamp <- gsub("T|Z", " ",GRIT03$time_stamp)
+  GRIT03$time_stamp <- substr(GRIT03$time_stamp, 1, 16) 
+  GRIT03$time_stamp<- as.POSIXct(GRIT03$time_stamp, format = '%Y-%m-%d %H:%M')
+GRIT04$time_stamp <- gsub("T|Z", " ",GRIT03$time_stamp)
+  GRIT04$time_stamp <- substr(GRIT04$time_stamp, 1, 16) 
+  GRIT04$time_stamp<- as.POSIXct(GRIT04$time_stamp, format = '%Y-%m-%d %H:%M')
+
+#line graph  with all GRIT sensors, changed date and time so it's easier to read
+all_cc_GRIT01 <- all_cc_combined %>% filter(Purple.Air.Name == "GRIT01") %>% mutate(as.date(date_time = GRIT01$time_stamp))
+all_cc_GRIT02 <- all_cc_combined %>% filter(Purple.Air.Name == "GRIT02") %>% mutate(as.date(date_time = GRIT02$time_stamp))
+all_cc_GRIT03 <- all_cc_combined %>% filter(Purple.Air.Name == "GRIT03") %>% mutate(date_time = GRIT03$time_stamp)
+all_cc_GRIT04 <- all_cc_combined %>% filter(Purple.Air.Name == "GRIT04") %>% mutate(date_time = GRIT04$time_stamp)
+
+line_allGRIT <- ggplot()+
+    geom_line(data = all_cc_GRIT01, mapping = aes(date_time, pm2.5_atm, group = 1, color = "GRIT01")) +
+    geom_line(data = all_cc_GRIT02, mapping = aes(date_time, pm2.5_atm, group = 1, color = "GRIT02"))+
+    geom_line(data = all_cc_GRIT03, mapping = aes(date_time, pm2.5_atm, group = 1, color = "GRIT03"))+
+    geom_line (data = all_cc_GRIT04, mapping = aes(date_time, pm2.5_atm, group = 1, color = "GRIT04"))+
+  geom_hline(data = PM2.5_EPA_short, aes(yintercept = yintercept, color = "Short-term Standard", linetype = "Short-term Standard")) +
+  geom_hline(data = PM2.5_EPA_annual, aes(yintercept = yintercept, color = "Annual Standard", linetype = "Annual Standard")) +
+  ggtitle("All GRIT Sensors: PM 2.5 Concentrations July 3rd - July 4th 2024") +
+  scale_color_manual(values = c('red', 'darkolivegreen3', 'gray', 'lightgoldenrod',"darkblue","black"))+
+  scale_linetype_manual(values = c("Short-term Standard" = "dotted", "Annual Standard" = "dashed")) +
+  labs( x = "Time", y = "PM 2.5 Concentration (µg/m3)",linetype = "EPA PM 2.5 Standards", color ="EPA Standards & GRIT Sensors" )+
+  theme_bw()+
+  theme(plot.title = element_text(face = "bold"))
+
+
+install.packages("ggprism")
+library(ggprism)
+
+line_allGRIT + guides(x = guide_prism_minor())
+
+
+
+  
+
 
 #######################################################
 ### Script to look at Non-GRIT purpleair air quality data  ###
