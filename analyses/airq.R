@@ -346,18 +346,18 @@ PM2.5_EPA_annual <- data.frame(yintercept = 9, Lines = 'Annual') # long-term sta
 box_cancov10 <- 
   ggplot(all_cc_combined, aes(x = factor(cancov.10m), y = pm2.5_atm, fill = date)) + 
   geom_boxplot()+
-  geom_text(data = label_10, aes(label = Purple.Air.Name, y = pm2.5_atm), position = position_dodge(width = 0.75), vjust = -0.1, size = 3) +
+  #geom_text(data = label_10, aes(label = Purple.Air.Name, y = pm2.5_atm), position = position_dodge(width = 0.75), vjust = -0.1, size = 3) +
   scale_y_continuous(limits = c(0, 40))+
-  ggtitle("All GRIT Sensors: Canopy Cover within 10m and PM 2.5 Concentration", 
+  ggtitle("All GRIT Sensors: Tree Canopy Cover (10 Meters) and PM 2.5 Concentration", 
           subtitle = "July 3rd vs July 4th")+
-  labs(x= "Canopy Cover 10 (m)", y  = "PM 2.5 Concentration (µg/m3)", fill = "Date",
-      color = "EPA PM2.5 standard", linetype = "EPA PM 2.5 Standards")+
+  labs(x= "Proportion of Tree Canopy Cover within 10 Meters", y  = "PM 2.5 Concentration (µg/m3)", fill = "Date",
+      color = "EPA PM 2.5 standard", linetype = "EPA PM 2.5 Standards")+
   theme_bw()+
   geom_hline(data = PM2.5_EPA_short, aes(yintercept = yintercept, color = "Short-term Standard", linetype = "Short-term Standard"), linetype = "dashed") +
-  geom_hline(data = PM2.5_EPA_annual, aes(yintercept = yintercept, color = "Annual Standard", linetype = "Annual Standard"), linetype = "dashed") +
-  scale_color_manual(values = c("Short-term Standard" = "red", "Annual Standard" = "darkred"),
-                     labels = c("Short-term Standard" = "Short-term Standard", "Annual Standard" = "Annual Standard")) +
-  scale_fill_manual(values = c("July 3rd" = "lightgoldenrod", "July 4th" = "darkolivegreen3"))+
+ # geom_hline(data = PM2.5_EPA_annual, aes(yintercept = yintercept, color = "Annual Standard", linetype = "Annual Standard"), linetype = "dashed") +
+  scale_color_manual(values = c("Short-term Standard" = "red"),
+                     labels = c("Short-term Standard" = "Short-Term")) + # EPA primary 24-hour PM2.5 standard at the level of 35 µg/m3. 
+  scale_fill_manual(values = c("July 3rd" = "lightgoldenrod", "July 4th" = "deepskyblue"))+
   theme(plot.title = element_text(face ="bold"))
 
  box_cancov10 + labs(
@@ -370,18 +370,71 @@ box_cancov10 + facet_wrap(vars(Purple.Air.Name))
 box_cancov20<-
   ggplot(all_cc_combined, aes(x = factor(cancov.20m), y = pm2.5_atm, fill = date)) + 
   geom_boxplot()+
-  geom_text(data = label_20, aes(label = Purple.Air.Name, y = pm2.5_atm), position = position_dodge(width = 0.75), vjust = -0.1, size = 3) +
-  scale_y_continuous(limits = c(0, 20))+
-  scale_fill_manual(values = c("July 3rd" = "lightgoldenrod", "July 4th" = "darkolivegreen3"))+
-    geom_hline(data = PM2.5_EPA_short, aes(yintercept = yintercept, color = "Short-term Standard", linetype = "Short-term Standard"), linetype = "dashed") +
-  geom_hline(data = PM2.5_EPA_annual, aes(yintercept = yintercept, color = "Annual Standard", linetype = "Annual Standard"), linetype = "dashed") +
-  scale_color_manual(values = c("Short-term Standard" = "red", "Annual Standard" = "darkred"),
-                     labels = c("Short-term Standard" = "Short-term Standard", "Annual Standard" = "Annual Standard")) +
-  ggtitle("All GRIT Sensors: Canopy Cover within 20m and PM 2.5 Concentration", 
+  #geom_text(data = label_10, aes(label = Purple.Air.Name, y = pm2.5_atm), position = position_dodge(width = 0.75), vjust = -0.1, size = 3) +
+  scale_y_continuous(limits = c(0, 40))+
+  ggtitle("All GRIT Sensors: Tree Canopy Cover (20 Meters) and PM 2.5 Concentration ", 
           subtitle = "July 3rd vs July 4th")+
-  labs(x= "Canopy Cover 20 (m)", y  = "PM 2.5 Concentration (µg/m3)", fill = "Date")+
+  labs(x= "Proportion of Tree Canopy Cover within 20 Meters", y  = "PM 2.5 Concentration (µg/m3)", fill = "Date",
+       color = "EPA PM 2.5 standard", linetype = "EPA PM 2.5 Standards")+
   theme_bw()+
-  theme(plot.title = element_text(face = "bold"))
+  geom_hline(data = PM2.5_EPA_short, aes(yintercept = yintercept, color = "Short-term Standard", linetype = "Short-term Standard"), linetype = "dashed") +
+  # geom_hline(data = PM2.5_EPA_annual, aes(yintercept = yintercept, color = "Annual Standard", linetype = "Annual Standard"), linetype = "dashed") +
+  scale_color_manual(values = c("Short-term Standard" = "red"),
+                     labels = c("Short-term Standard" = "Short-Term")) + # EPA primary 24-hour PM2.5 standard at the level of 35 µg/m3. 
+  scale_fill_manual(values = c("July 3rd" = "lightgoldenrod", "July 4th" = "deepskyblue"))+
+  theme(plot.title = element_text(face ="bold"))
+
+
+box_cancov50<-
+  ggplot(all_cc_combined, aes(x = factor(cancov.50m), y = pm2.5_atm, fill = date)) + 
+  geom_boxplot()+
+  #geom_text(data = label_10, aes(label = Purple.Air.Name, y = pm2.5_atm), position = position_dodge(width = 0.75), vjust = -0.1, size = 3) +
+  scale_y_continuous(limits = c(0, 40))+
+  ggtitle("All GRIT Sensors: Tree Canopy Cover (50 Meters) and PM 2.5 Concentration ", 
+          subtitle = "July 3rd vs July 4th")+
+  labs(x= "Proportion of Tree Canopy Cover within 50 Meters", y  = "PM 2.5 Concentration (µg/m3)", fill = "Date",
+       color = "EPA PM 2.5 standard", linetype = "EPA PM 2.5 Standards")+
+  theme_bw()+
+  geom_hline(data = PM2.5_EPA_short, aes(yintercept = yintercept, color = "Short-term Standard", linetype = "Short-term Standard"), linetype = "dashed") +
+  # geom_hline(data = PM2.5_EPA_annual, aes(yintercept = yintercept, color = "Annual Standard", linetype = "Annual Standard"), linetype = "dashed") +
+  scale_color_manual(values = c("Short-term Standard" = "red"),
+                     labels = c("Short-term Standard" = "Primary")) + # EPA primary 24-hour PM2.5 standard at the level of 35 µg/m3. 
+  scale_fill_manual(values = c("July 3rd" = "lightgoldenrod", "July 4th" = "deepskyblue"))+
+  theme(plot.title = element_text(face ="bold"))
+
+box_cancov100<-
+  ggplot(all_cc_combined, aes(x = factor(cancov.100m), y = pm2.5_atm, fill = date)) + 
+  geom_boxplot()+
+  #geom_text(data = label_10, aes(label = Purple.Air.Name, y = pm2.5_atm), position = position_dodge(width = 0.75), vjust = -0.1, size = 3) +
+  scale_y_continuous(limits = c(0, 40))+
+  ggtitle("All GRIT Sensors: Tree Canopy Cover (100 Meters) and PM 2.5 Concentration ", 
+          subtitle = "July 3rd vs July 4th")+
+  labs(x= "Proportion of Tree Canopy Cover within 100 Meters", y  = "PM 2.5 Concentration (µg/m3)", fill = "Date",
+       color = "EPA PM 2.5 standard", linetype = "EPA PM 2.5 Standards")+
+  theme_bw()+
+  geom_hline(data = PM2.5_EPA_short, aes(yintercept = yintercept, color = "Short-term Standard", linetype = "Short-term Standard"), linetype = "dashed") +
+  # geom_hline(data = PM2.5_EPA_annual, aes(yintercept = yintercept, color = "Annual Standard", linetype = "Annual Standard"), linetype = "dashed") +
+  scale_color_manual(values = c("Short-term Standard" = "red"),
+                     labels = c("Short-term Standard" = "Short-Term")) + # EPA primary 24-hour PM2.5 standard at the level of 35 µg/m3. 
+  scale_fill_manual(values = c("July 3rd" = "lightgoldenrod", "July 4th" = "deepskyblue"))+
+  theme(plot.title = element_text(face ="bold"))
+
+box_canco800<-
+  ggplot(all_cc_combined, aes(x = factor(cancov.800m), y = pm2.5_atm, fill = date)) + 
+  geom_boxplot()+
+  #geom_text(data = label_10, aes(label = Purple.Air.Name, y = pm2.5_atm), position = position_dodge(width = 0.75), vjust = -0.1, size = 3) +
+  scale_y_continuous(limits = c(0, 40))+
+  ggtitle("All GRIT Sensors: Tree Canopy Cover (800 Meters) and PM 2.5 Concentration ", 
+          subtitle = "July 3rd vs July 4th")+
+  labs(x= "Proportion of Tree Canopy Cover within 800 Meters", y  = "PM 2.5 Concentration (µg/m3)", fill = "Date",
+       color = "EPA PM 2.5 standard", linetype = "EPA PM 2.5 Standards")+
+  theme_bw()+
+  geom_hline(data = PM2.5_EPA_short, aes(yintercept = yintercept, color = "Short-term Standard", linetype = "Short-term Standard"), linetype = "dashed") +
+  # geom_hline(data = PM2.5_EPA_annual, aes(yintercept = yintercept, color = "Annual Standard", linetype = "Annual Standard"), linetype = "dashed") +
+  scale_color_manual(values = c("Short-term Standard" = "red"),
+                     labels = c("Short-term Standard" = "Short-term")) + # EPA primary 24-hour PM2.5 standard at the level of 35 µg/m3. 
+  scale_fill_manual(values = c("July 3rd" = "lightgoldenrod", "July 4th" = "deepskyblue"))+
+  theme(plot.title = element_text(face ="bold"))
 
 
 box_cancov20 + facet_wrap(vars(Purple.Air.Name)) #facet wrap option remove labels from graph, delete geom_text()
@@ -416,9 +469,11 @@ line_allGRIT <- ggplot()+
   geom_hline(data = PM2.5_EPA_short, aes(yintercept = yintercept, color = "Short-term Standard", linetype = "Short-term Standard")) +
   geom_hline(data = PM2.5_EPA_annual, aes(yintercept = yintercept, color = "Annual Standard", linetype = "Annual Standard")) +
   ggtitle("All GRIT Sensors: PM 2.5 Concentrations July 3rd - July 4th 2024") +
-  scale_color_manual(values = c('red', 'darkolivegreen3', 'gray', 'lightgoldenrod',"darkblue","black"))+
-  scale_linetype_manual(values = c("Short-term Standard" = "dotted", "Annual Standard" = "dashed")) +
-  labs( x = "Time", y = "PM 2.5 Concentration (µg/m3)",linetype = "EPA PM 2.5 Standards", color ="EPA Standards & GRIT Sensors" )+
+  scale_color_discrete(breaks=c("GRIT01", "GRIT02", "GRIT03", "GRIT04"))+
+  #scale_color_manual(values = c('black', 'darkolivegreen3', 'gray', 'lightgoldenrod',"blue","black"))+
+  scale_linetype_manual(values = c("Short-term Standard" = "dotted", "Annual Standard" = "dashed"),) +
+  labs( x = "Time", y = "PM 2.5 Concentration (µg/m3)",linetype = "EPA PM 2.5 Standards", 
+        color ="GRIT Sensors" )+
   theme_bw()+
   theme(plot.title = element_text(face = "bold"))
 
