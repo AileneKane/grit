@@ -37,8 +37,8 @@ options("digits" = 15)
 
 #Read in lat/longs of air quality monitors
 #(need to creat this file first based on the loggers chosen frmo PurpleAir Map)
-locs<-read.csv("../data/PurpleAir/GRIT_AQ_Monitors_Survey.csv", header=TRUE) 
-locs_raw <-rename(locs, Longitude = x, Latitude = y)
+locs<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/PA_locations.csv", header=TRUE) 
+locs_raw <-rename(locs)#, Longitude = x, Latitude = y)
 
 # locs_raw<-aq_locs
 #colnames(locs_raw)<-c("Purple.Air.Name","Longitude","Latitude") 
@@ -76,7 +76,7 @@ ggplot() +
 
 #Convert points data frame to sf using these as coordinates:
   
-locs = st_as_sf(locs_raw,coords=c("Longitude","Latitude"), crs="+proj=longlat +datum=WGS84")
+locs = st_as_sf(locs_raw,coords=c("longitude","latitude"), crs="+proj=longlat +datum=WGS84")
   
 #take the coordinate system of the lc file booths:
     
@@ -87,7 +87,7 @@ locs_NOAA <- st_transform(locs, crs(lcNOAA))
 tacoma2<-st_transform(tacoma, crs(lcNOAA))
 
 #crop lc raster to just Tacoma:
-# lc_tacoma<-crop(x = lc, y = tacoma2)
+#lc_tacoma<-crop(x = lc, y = tacoma2)
 
 #using the Tacoma polygon seems to cut out one of our AQ monitors- not sure why. To get around this, create a new, larger, rectangular polygon that is a bit bigger than Tacoma, and use this to crop the landcover
 etacrect <- as(raster::extent(-2000000, -1975000, 2960000, 2990000), "SpatialPolygons")
@@ -99,7 +99,7 @@ lc_tacoma_NOAA<-crop(x = lcNOAA, y = etacrect)
 
 #create a polygon bounded by min max of lc
 
-#make a map of points with land covere
+#make a map of points with land cover
 png("figs/tacomagcanopymap.png", width=12, height=12, units="in", res=220)
 
 plot(lc_tacoma_NOAA, 
@@ -161,7 +161,7 @@ e200 <- raster::extract(x = lc_tacoma_NOAA,
 e400 <- raster::extract(x = lc_tacoma_NOAA, 
                        y = locs_buffer400m, 
                        df = TRUE)
-e800 <- raster::extract(x = lc_tacoma_NOAA,  y = locs_buffer800m, df = TRUE)
+#e800 <- raster::extract(x = lc_tacoma_NOAA,  y = locs_buffer800m, df = TRUE)
 
 #1 = upland tree forest
 #2 = scrub shrub 
@@ -175,8 +175,8 @@ e40sums<-cbind(rownames(table(e40$ID,e40$Layer_1)),table(e40$ID,e40$Layer_1))
 e50sums<-cbind(rownames(table(e50$ID,e50$Layer_1)),table(e50$ID,e50$Layer_1))
 e100sums<-cbind(rownames(table(e100$ID,e100$Layer_1)),table(e100$ID,e100$Layer_1))
 e200sums<-cbind(rownames(table(e200$ID,e200$Layer_1)),table(e200$ID,e200$Layer_1))
-e400sums<-cbind(rownames(table(e400$ID,e400$Layer_1)),table(e400$ID,e400$Layer_1))
-e800sums<-cbind(rownames(table(e800$ID,e800$Layer_1)),table(e800$ID,e800$Layer_1))
+#e400sums<-cbind(rownames(table(e400$ID,e400$Layer_1)),table(e400$ID,e400$Layer_1))
+#e800sums<-cbind(rownames(table(e800$ID,e800$Layer_1)),table(e800$ID,e800$Layer_1))
 
 #colnames(e20sums)
 
@@ -192,29 +192,53 @@ e200sums.df<-as.data.frame(e200sums)
 e400sums.df<-as.data.frame(e400sums)
 e800sums.df<-as.data.frame(e800sums)
 
-head(e100sums.df)
-colnames(e10sums.df)<-c("ID","0.10m","1.10m","2.10m")
-colnames(e20sums.df)<-c("ID","0.20m","1.20m","2.20m")
-colnames(e30sums.df)<-c("ID","0.30m","1.30m","2.30m")
-colnames(e40sums.df)<-c("ID","0.40m","1.40m","2.40m")
-colnames(e50sums.df)<-c("ID","0.50m","1.50m","2.50m")
-colnames(e100sums.df)<-c("ID","0.100m","1.100m","2.100m")
-colnames(e200sums.df)<-c("ID","0.200m","1.200m","2.200m")
-colnames(e400sums.df)<-c("ID","0.400m","1.400m","2.400m")
-colnames(e800sums.df)<-c("ID","0.800m","1.800m","2.800m")
+head(e20sums.df)
+e10sums.df<- e10sums.df %>%
+  setNames(c("sensor_index", "0.10m", "1.10m")) %>%
+  mutate(sensor_index = locs_raw$sensor_index)
+
+e20sums.df<- e20sums.df %>% 
+  setNames(c("sensor_index","0.20m","1.20m","2.20m")) %>%
+  mutate(sensor_index = locs_raw$sensor_index)
+    
+e30sums.df<- e30sums.df %>% 
+  setNames(c("sensor_index","0.30m","1.30m","2.30m")) %>%
+  mutate(sensor_index = locs_raw$sensor_index)
+
+e40sums.df <- e40sums.df %>% 
+  setNames(c("sensor_index","0.40m","1.40m","2.40m")) %>%
+  mutate(sensor_index = locs_raw$sensor_index)
+
+e50sums.df<- e50sums.df %>% 
+  setNames(c("sensor_index","0.50m","1.50m","2.50m")) %>%
+  mutate(sensor_index = locs_raw$sensor_index)
+
+e100sums.df <- e100sums.df %>%
+  setNames(c("sensor_index","0.100m","1.100m","2.100m")) %>%
+  mutate(sensor_index = locs_raw$sensor_index)
+  
+e200sums.df <- e200sums.df %>%
+  setNames(c("sensor_index", "0.200m", "1.200m", "2.200m")) %>%
+  mutate(sensor_index = locs_raw$sensor_index)
+
+#colnames(e400sums.df)<-c("sensor_index","0.40m","1.40m","2.40m")
+#colnames(e800sums.df)<-c("ID","0.80m","1.80m","2.80m")
 
 
-locs_raw$ID<-substr(locs_raw$Purple.Air.Name,6,6)
 
-locslc1<-left_join(locs_raw,e10sums.df, by="ID", copy=FALSE)
-locslc2<-left_join(locslc1,e20sums.df, by="ID", copy=FALSE)
-locslc3<-left_join(locslc2,e30sums.df, by="ID", copy=FALSE)
-locslc4<-left_join(locslc3,e40sums.df, by="ID", copy=FALSE)
-locslc5<-left_join(locslc4,e50sums.df, by="ID", copy=FALSE)
-locslc6<-left_join(locslc5,e100sums.df, by="ID", copy=FALSE)
-locslc7<-left_join(locslc6,e200sums.df, by="ID", copy=FALSE)
-locslc8<-left_join(locslc7,e400sums.df, by="ID", copy=FALSE)
-locslc<-left_join(locslc8,e800sums.df, by="ID", copy=FALSE)
+#locs_raw$ID<-substr(locs_raw$ID,1,28)
+
+locs_raw$sensor_index <- as.character(locs_raw$sensor_index)
+
+locslc1<-left_join(locs_raw,e10sums.df, by="sensor_index", copy=FALSE)
+locslc2<-left_join(locslc1,e20sums.df, by="sensor_index", copy=FALSE)
+locslc3<-left_join(locslc2,e30sums.df, by="sensor_index", copy=FALSE)
+locslc4<-left_join(locslc3,e40sums.df, by="sensor_index", copy=FALSE)
+locslc5<-left_join(locslc4,e50sums.df, by="sensor_index", copy=FALSE)
+locslc6<-left_join(locslc5,e100sums.df, by="sensor_index", copy=FALSE)
+locslc<-left_join(locslc6,e200sums.df, by="sensor_index", copy=FALSE)
+#locslc8<-left_join(locslc7,e400sums.df, by="ID", copy=FALSE)
+#locslc<-left_join(locslc7,e400sums.df, by="ID", copy=FALSE)
 
 #new col for percent canopy cover 
 locslc$cancov.10m<-as.numeric(locslc$"1.10m")/ sum(as.numeric(locslc$"0.10m"),as.numeric(locslc$"1.10m"),as.numeric(locslc$"2.10m"), na.rm = TRUE)
@@ -224,7 +248,7 @@ locslc$cancov.40m<-as.numeric(locslc$"1.40m")/ sum(as.numeric(locslc$"0.40m"),as
 locslc$cancov.50m<-as.numeric(locslc$"1.50m")/ sum(as.numeric(locslc$"0.50m"),as.numeric(locslc$"1.50m"),as.numeric(locslc$"2.50m"), na.rm = TRUE)
 locslc$cancov.100m<-as.numeric(locslc$"1.100m")/ sum(as.numeric(locslc$"0.100m"), as.numeric(locslc$"1.100m"),as.numeric(locslc$"2.100"), na.rm = TRUE)
 locslc$cancov.200m<-as.numeric(locslc$"1.200m")/ sum(as.numeric(locslc$"0.200m"),as.numeric(locslc$"1.200m"),as.numeric(locslc$"2.200"), na.rm = TRUE)
-locslc$cancov.400m<-as.numeric(locslc$"1.400m")/ sum(as.numeric(locslc$"0.400m"),as.numeric(locslc$"1.400m"), as.numeric(locslc$"2.400"), na.rm = TRUE)
-locslc$cancov.800m<-as.numeric(locslc$"1.800m")/ sum(as.numeric(locslc$"0.800m"),as.numeric(locslc$"1.800m"), as.numeric(locslc$"2.800"), na.rm = TRUE)
+#locslc$cancov.400m<-as.numeric(locslc$"1.400m")/ sum(as.numeric(locslc$"0.400m"),as.numeric(locslc$"1.400m"), as.numeric(locslc$"2.400"), na.rm = TRUE)
+#locslc$cancov.800m<-as.numeric(locslc$"1.800m")/ sum(as.numeric(locslc$"0.800m"),as.numeric(locslc$"1.800m"), as.numeric(locslc$"2.800"), na.rm = TRUE)
 
-write.csv(locslc,"output/grit_aq_lc.csv", row.names = FALSE)
+write.csv(locslc,"output/grit_aq_lc_jul_aug.csv", row.names = FALSE)
