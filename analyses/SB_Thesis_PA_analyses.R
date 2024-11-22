@@ -16,7 +16,7 @@ library(mgcv)
 
 ##reading in data##
 setwd("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August")
-PA_locs<-read.csv("PA_locations.csv")
+PA_locs<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug.csv")
 
 
 ## 30 minute time intervals represents Purple Air averaging period, PA takes measurements average PM 2.5 of 30 min intervals, 
@@ -198,20 +198,16 @@ sensor<-c("136172","15203","156499","167065","167413",
           "9732","98105")
 pm2.5 <- data.frame(sensor_index= sensor, pm2.5_jul= pm2.5_jul, pm2.5_aug=pm2.5_aug)
 
-
-can_cov <- read.csv("grit_aq_lc_jul_aug.csv")
-
-
-result <- merge(pm2.5, can_cov, by = "sensor_index", all.x = TRUE)
+result <- merge(pm2.5, PA_locs, by = "sensor_index", all.x = TRUE)
 result$pm2.5_jul<-as.numeric(result$pm2.5_jul)
 result$pm2.5_aug <- as.numeric(result$pm2.5_aug)
 
 
-mod_jul<-lm(pm2.5_jul~cancov.10m, data=result)
+mod_jul<-lm(pm2.5_jul~cancov.800m, data=result)
 summary(mod_jul)
-mod_aug<-lm(pm2.5_aug~cancov.40m, data=result)
+mod_aug<-lm(pm2.5_aug~cancov.800m, data=result)
 
-y <- ggplot(result, aes(x = cancov.40m, y =pm2.5_jul))+
+y <- ggplot(result, aes(x = cancov.800m, y =pm2.5_jul))+
   geom_point()+
   stat_smooth(method="gam", method.args=list(family=gaussian))
 gam_model <- gam(pm2.5_jul ~ s(cancov.40m), data = result, family = gaussian)
