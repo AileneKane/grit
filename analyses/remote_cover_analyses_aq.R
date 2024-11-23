@@ -37,7 +37,9 @@ options("digits" = 15)
 
 #Read in lat/longs of air quality monitors
 #(need to creat this file first based on the loggers chosen frmo PurpleAir Map)
-locs<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/ALL_PA_locs.csv", header=TRUE) 
+locs<-read.csv("data/PurpleAir/ALL_PA_locs.csv", header=TRUE) 
+#correct mistake in locs
+locs$longitude[locs$longitude==122.517100000000]<- -122.517100000000
 locs_raw <-rename(locs)#, Longitude = x, Latitude = y)
 
 # locs_raw<-aq_locs
@@ -49,8 +51,9 @@ lc <-
 
 lcNOAA <-
   raster("~/Documents/Land Cover/wa_2021_ccap_v2_hires_canopy_20240402.tif")
-
-#lcNOAA <-  raster("../data/C-CAP/wa_2021_ccap_v2_hires_canopy_20240402.tif")
+#For ailene:
+#lcNOAA <-  raster("data/C-CAP/wa_2021_ccap_v2_hires_canopy_20240402.tif")
+#lc <-  raster("data/psLandCover_mosaic.tif")
 
 #read in polygon for Tacoma
 
@@ -91,23 +94,34 @@ tacoma2<-st_transform(tacoma, crs(lcNOAA))
 #lc_tacoma<-crop(x = lc, y = tacoma2)
 
 #using the Tacoma polygon seems to cut out one of our AQ monitors- not sure why. To get around this, create a new, larger, rectangular polygon that is a bit bigger than Tacoma, and use this to crop the landcover
-etacrect <- as(raster::extent(-2000000, -1975000,2960000, 2985000), "SpatialPolygons")
+
+bbox <- st_bbox(locs_NOAA)
+
+
+etacrect <- as(raster::extent(bbox$xmin, bbox$xmax,bbox$ymin, bbox$ymax), "SpatialPolygons")
 proj4string(etacrect) <- crs(lcNOAA)
 plot(etacrect)
 
 #instead of using tacoma2 shapefile, use tacrect_
 lc_tacoma_NOAA<-crop(x = lcNOAA, y = etacrect)
+lc_tacoma2_NOAA<-crop(x = lcNOAA, y = tacoma2)
 
 #create a polygon bounded by min max of lc
 
 #make a map of points with land cover
-png("~/Documents/GitHub/grit/analyses/figs/tacomagcanopymap.png", width=12, height=12, units="in", res=220)
+png("analyses/figs/tacomagcanopymap_bigger.png", width=12, height=12, units="in", res=220)
 
 plot(lc_tacoma_NOAA, 
      main = "Tacoma canopy cover", col = c("lightgray", "darkgreen", "springgreen"))
 plot(locs_NOAA, add=TRUE, col="black", pch=16, cex= 2)
 dev.off()
 
+png("analyses/figs/tacomagcanopymap_bigger2.png", width=12, height=12, units="in", res=220)
+
+plot(lc_tacoma2_NOAA, 
+     main = "Tacoma canopy cover", col = c("lightgray", "darkgreen", "springgreen"))
+plot(locs_NOAA, add=TRUE, col="black", pch=16, cex= 2)
+dev.off()
 
 #i think both are now in metric system
 #Create buffer zones of 10-800m around locs:
@@ -134,12 +148,12 @@ locs_buffer200m$area_sqm <- st_area(locs_buffer200m)#
 locs_buffer400m$area_sqm <- st_area(locs_buffer400m)#
 locs_buffer800m$area_sqm <- st_area(locs_buffer800m)#
 
-#locs_buffer100m$area_sqm <- st_area(locs_buffer100m)
+#locs_buffer10m$area_sqm <- st_area(locs_buffer100m)
 
 e10 <- raster::extract(x = lc_tacoma_NOAA, 
                         y = locs_buffer10m, 
-                        df = TRUE)
-
+                        df = TRUE,method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, 
+                       fun=, na.rm=TRUE, factors=FALSE)
 e20 <- raster::extract(x = lc_tacoma_NOAA, 
                         y = locs_buffer20m, 
                         df = TRUE)
@@ -178,7 +192,7 @@ e200sums<-cbind(rownames(table(e200$ID,e200$Layer_1)),table(e200$ID,e200$Layer_1
 e400sums<-cbind(rownames(table(e400$ID,e400$Layer_1)),table(e400$ID,e400$Layer_1))
 e800sums<-cbind(rownames(table(e800$ID,e800$Layer_1)),table(e800$ID,e800$Layer_1))
 
-#colnames(e20sums)
+#colnames(e800sums)
 
 
 #merge all data together
