@@ -153,29 +153,37 @@ locs_buffer800m$area_sqm <- st_area(locs_buffer800m)#
 e10 <- raster::extract(x = lc_tacoma_NOAA, 
                         y = locs_buffer10m, 
                         df = TRUE,method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, 
-                       fun=, na.rm=TRUE, factors=FALSE)
+                        na.rm=FALSE, factors=FALSE)
 e20 <- raster::extract(x = lc_tacoma_NOAA, 
                         y = locs_buffer20m, 
-                        df = TRUE)
+                       df = TRUE,method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, 
+                       na.rm=FALSE, factors=FALSE)
 e30 <- raster::extract(x = lc_tacoma_NOAA, 
                        y = locs_buffer30m, 
-                       df = TRUE)
+                       df = TRUE,method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, 
+                       na.rm=FALSE, factors=FALSE)
 e40 <- raster::extract(x = lc_tacoma_NOAA, 
                        y = locs_buffer40m, 
-                       df = TRUE)
+                       df = TRUE,method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, 
+                       na.rm=FALSE, factors=FALSE)
 e50 <- raster::extract(x = lc_tacoma_NOAA, 
                        y = locs_buffer50m, 
-                       df = TRUE)
+                       df = TRUE,method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, 
+                       na.rm=FALSE, factors=FALSE)
 e100 <- raster::extract(x = lc_tacoma_NOAA, 
                        y = locs_buffer100m, 
-                       df = TRUE)
+                       df = TRUE,method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, 
+                       na.rm=FALSE, factors=FALSE)
 e200 <- raster::extract(x = lc_tacoma_NOAA, 
                        y = locs_buffer200m, 
-                       df = TRUE)
+                       df = TRUE,method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, 
+                       na.rm=FALSE, factors=FALSE)
 e400 <- raster::extract(x = lc_tacoma_NOAA, 
                        y = locs_buffer400m, 
-                       df = TRUE)
-e800 <- raster::extract(x = lc_tacoma_NOAA,  y = locs_buffer800m, df = TRUE)
+                       df = TRUE,method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, 
+                       na.rm=FALSE, factors=FALSE)
+e800 <- raster::extract(x = lc_tacoma_NOAA,  y = locs_buffer800m, df = TRUE,method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, 
+                        na.rm=FALSE, factors=FALSE)
 
 #1 = upland tree forest
 #2 = scrub shrub 
