@@ -21,7 +21,7 @@ library(scales)
 
 
 # set working directory
-setwd("documents/GitHub/grit/analyses") 
+setwd(setwd("documents/GitHub/grit/") 
 
 #Read in data file with PurpleAir logger locations
 #(notyet created)
@@ -489,152 +489,127 @@ line_allGRIT + guides(x = guide_prism_minor())
 
 
 #######################################################
-### Script to look at Non-GRIT purpleair air quality data  ###
-#######################################################
+### Script to look at all July 3rd vs July 4th PA  ###
 
-#read CSV Low Tree Canopy###
-LOWTC01<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/Baker Middle School  2024-07-03 2024-07-05.csv", header=TRUE)
-LOWTC02<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/PSU Star Lab South Tacoma 2024-07-03 2024-07-05 .csv", header=TRUE) 
-LOWTC03<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/Morgan Family YMCA 2024-07-03 2024-07-05 .csv", header=TRUE) 
-LOWTC04<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/Boze Elementary School 2024-07-03 2024-07-05 .csv", header=TRUE) 
-LOWTC05<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/6th Ave and Sprague-ish 2024-07-03 2024-07-05 .csv", header=TRUE) 
-LOWTC06<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/Rustin 2024-07-03 2024-07-05 .csv", header=TRUE) 
-LOWTC07<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/Whitman Elementary School 2024-07-03 2024-07-05.csv", header=TRUE) 
-LOWTC08<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/N Tacoma N 9th and Stevens 2024-07-03 2024-07-05 .csv", header=TRUE) 
-LOWTC09<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/Low Tree Canopy/Tacoma Alexander 2024-07-03 2024-07-05 .csv", header=TRUE) 
-
-#read CSV High Tree Canopy#
-HIGHTC01 <-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/PT Woodworth 2024-07-03 2024-07-05.csv", header=TRUE)
-HIGHTC02<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/Manitou Park Elementary 2024-07-03 2024-07-05.csv", header=TRUE) 
-HIGHTC03<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/Owl's Roost 2024-07-03 2024-07-05.csv", header=TRUE)
-HIGHTC04<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/PTOI 2024-07-03 2024-07-05.csv", header=TRUE)
-HIGHTC05<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/Central Tacoma 19th and Mullen 2024-07-03 2024-07-05.csv",header=TRUE)
-HIGHTC06<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/1 Broadway 2024-07-03 2024-07-05.csv",header=TRUE)
-HIGHTC07<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/Pointe Woodworth 2024-07-03 2024-07-05.csv", header=TRUE)
-HIGHTC08<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/Norpoint 2024-07-03 2024-07-05.csv",header=TRUE)
-HIGHTC09<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/Millers Skyline Terrace 2024-07-03 2024-07-05.csv",header=TRUE)
-HIGHTC010<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Map Data (Non GRIT)/High Tree Canopy/PSU Star Labs Titlow 2024-07-03 2024-07-05.csv",header=TRUE)
+csv_files <- list.files(path = "~/PurpleAir/PA Data Download July 3rd and July 4th 1 hr avg", pattern = "*.csv", full.names = TRUE)
 
 
-#changing column name#
-time <- c(
-  "00:00", "00:30", "01:00", "01:30", "02:00", "02:30", 
-  "03:00", "03:30", "04:00", "04:30", "05:00", "05:30", 
-  "06:00", "06:30", "07:00", "07:30", "08:00", "08:30", 
-  "09:00", "09:30", "10:00", "10:30", "11:00", "11:30", 
-  "12:00", "12:30", "13:00", "13:30", "14:00", "14:30", 
-  "15:00", "15:30", "16:00", "16:30", "17:00", "17:30", 
-  "18:00", "18:30", "19:00", "19:30", "20:00", "20:30", 
-  "21:00", "21:30", "22:00", "22:30", "23:00", "23:30")
+data_list <- list()
 
+for (file in csv_files) {
+  data <- read.csv(file)
+  data_list[[file]] <- data
+}
+combined_data <- do.call(rbind, data_list)  
+write.csv(combined_data,"~/Documents/GitHub/grit/data/PurpleAircombinedJuly.csv", row.names = FALSE)
+PA_july <- read.csv("~/Documents/GitHub/grit/data/PurpleAir/PA Data Download July 3rd and July 4th 1 hr avg/PurpleAircombinedJuly.csv", header=TRUE)
+PA_july <- PA_july %>%
+          mutate(pm2.5_correct= (0.524*pm2.5_cf_1) - (0.0852*humidity) + 5.72)
+unique_sensors <- unique(PA_july$sensor_index)
 
-LOWTC01$time_stamp <-time 
-LOWTC01 <- LOWTC01 %>%
-  rename(date_time = time_stamp)
-LOWTC02$time_stamp <-time 
-LOWTC02 <- LOWTC02 %>%
-  rename(date_time = time_stamp)
-LOWTC03$time_stamp <-time 
-LOWTC03 <- LOWTC03 %>%
-  rename(date_time = time_stamp)
-LOWTC04$time_stamp <-time 
-LOWTC04 <- LOWTC04 %>%
-  rename(date_time = time_stamp)
-LOWTC05$time_stamp <-time 
-LOWTC05 <- LOWTC05 %>%
-  rename(date_time = time_stamp)
-LOWTC06$time_stamp <-time 
-LOWTC06 <- LOWTC06 %>%
-  rename(date_time = time_stamp)
-LOWTC07$time_stamp <-time 
-LOWTC07 <- LOWTC07 %>%
-  rename(date_time = time_stamp)
-LOWTC08$time_stamp <-time 
-LOWTC08 <- LOWTC08 %>%
-  rename(date_time = time_stamp)
-LOWTC09$time_stamp <-time 
-LOWTC09 <- LOWTC09 %>%
-  rename(date_time = time_stamp)
+filtered_data <- split(PA_july, PA_july$sensor_index)
 
-HIGHTC01$time_stamp <-time 
-HIGHTC01 <- HIGHTC01 %>%
-  rename(date_time = time_stamp)
-HIGHTC02$time_stamp <-time 
-HIGHTC02 <- HIGHTC02 %>%
-  rename(date_time = time_stamp)
-HIGHTC03$time_stamp <-time 
-HIGHTC03 <- HIGHTC03 %>%
-  rename(date_time = time_stamp)
-HIGHTC04$time_stamp <-time 
-HIGHTC04 <- HIGHTC04 %>%
-  rename(date_time = time_stamp)
-HIGHTC05$time_stamp <-time 
-HIGHTC05 <- HIGHTC05 %>%
-  rename(date_time = time_stamp)
-HIGHTC06$time_stamp <-time 
-HIGHTC06 <- HIGHTC06 %>%
-  rename(date_time = time_stamp)
-HIGHTC07$time_stamp <-time 
-HIGHTC07 <- HIGHTC07 %>%
-  rename(date_time = time_stamp)
-HIGHTC08$time_stamp <-time 
-HIGHTC08 <- HIGHTC08 %>%
-  rename(date_time = time_stamp)
-HIGHTC09$time_stamp <-time 
-HIGHTC09 <- HIGHTC09 %>%
-  rename(date_time = time_stamp)
-
-#Low TC PM2.5 Concentrations on July 4th
-y1 <- ggplot() + 
-  geom_line(data = LOWTC01, mapping = aes(date_time, pm2.5_atm, group = 1, color ="Baker"))+
-  geom_line (data = LOWTC02, mapping = aes(date_time, pm2.5_atm, group = 1, color = "PSU Star"))+
-  geom_line (data = LOWTC03, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Morgan"))+
-  geom_line (data = LOWTC04, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Boze"))+
-  geom_line (data = LOWTC05, mapping = aes(date_time, pm2.5_atm, group = 1, color = "6th"))+
-  geom_line (data = LOWTC06, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Rustin"))+
-  geom_line (data = LOWTC07, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Whitman"))+
-  geom_line (data = LOWTC08, mapping = aes(date_time, pm2.5_atm, group = 1, color = "NTacoma"))+
-  geom_line (data = LOWTC09, mapping = aes(date_time, pm2.5_atm, group = 1, color = "TacomaAlexander"))+
-  ggtitle("Low Tree Canopy PurpleAir PM 2.5 Concentrations on July 4th, 2024")+ 
-  labs(x = "Time",
-       y = "PM 2.5 Concentrations (µg/m3)", color = "PurpleAir Name")+
-  theme(
-    axis.text.x = element_text (angle = 90, vjust = -0.01),
-    plot.title = element_text(face='bold'))
+PA_101109 <- filtered_data[["101109"]]
+  july3_101109<- slice(PA_101109,1:24)
+  july4_101109<-slice(PA_101109,25:48)
+PA_136172 <- filtered_data[["136172"]]
+  july3_136172<-slice(PA_136172,1:24)
+  july4_136172<-slice(PA_136172,25:48)
+PA_15203 <- filtered_data[["15203"]]
+  july3_15203<-slice(PA_15203,1:24)
+  july4_15203<-slice(PA_15203,25:48)
+PA_156499 <-filtered_data[["156499"]]
+  july3_156499<-slice(PA_156499,1:24)
+  july4_156499<-slice(PA_156499,25:48)
+PA_167065<-filtered_data[["167065"]]
+  july3_167065<-slice(PA_167065,1:24)
+  july4_167065<-slice(PA_167065,25:48)
+PA_167399<-filtered_data[["167399"]]
+  july3_167399<-slice(PA_167399,1:24)
+  july4_167399<-slice(PA_167399,25:48)
+PA_167413<-filtered_data[["167413"]]
+  july3_167413<-slice(PA_167413,1:24)
+  july4_167413<-slice(PA_167413,25:48)
+PA_171177<-filtered_data[["171177"]]
+  july3_171177<-slice(PA_171177,1:24)
+  july4_171177<-slice(PA_171177,25:48)
+PA_171181<-filtered_data[["171181"]]
+  july3_171181<-slice(PA_171181,1:24)
+  july4_171181<-slice(PA_171181,25:48)
+PA_171217<-filtered_data[["171217"]]
+  july3_171217<-slice(PA_171217,1:24)
+  july4_171217<-slice(PA_171217,25:28)
+PA_173501<-filtered_data[["173501"]]
+  july3_173501<-slice(PA_173501,1:24)
+  july4_173501<-slice(PA_173501,25:48)
+PA_174613<-filtered_data[["174613"]]
+  july3_174613<-slice(PA_174613,1:24)
+  july4_174613<-slice(PA_174613,25:48)
+PA_17663<-filtered_data[["17663"]]
+  july3_17663<-slice(PA_17663,1:24)
+  july4_17663<-slice(PA_17663,25:48)
+PA_177979<-filtered_data[["177979"]]
+  july3_177979<-slice(PA_177979,1:24)
+  july4_177979<-slice(PA_177979,25:48)
+PA_183851<-filtered_data[["183851"]]
+  july3_18351<-slice(PA_183851,1:24)
+  july4_18351<-slice(PA_183851,25:48)
+PA_183853<-filtered_data[["183853"]]
+  july3_183853<-slice(PA_183853,1:21)
+  july4_183853<-slice(PA_183853,22:45)
+PA_183863<-filtered_data[["183863"]]
+  july3_183863<-slice(PA_183863,1:24)
+  july4_183863<-slice(PA_183863,25:48)
+PA_183883<-filtered_data[["183883"]]
+  july3_183883<-slice(PA_183883,1:24)
+  july4_183883<-slice(PA_183883,25:48)
+PA_185377<-filtered_data[["185377"]]
+  july3_185377<-slice(PA_185377,1:24)
+  july4_185377<-slice(PA_185377,25:48)
+PA_192199<-filtered_data[["192199"]]
+  july3_192199<-slice(PA_192199,1:24)
+  july4_192199<-slice(PA_192199,25:48)
+PA_194473<-filtered_data[["194473"]]
+  july3_194473<-slice(PA_194473,1:24)
+  july4_194473<-slice(PA_194473,25:48)
+PA_199129<-filtered_data[["199129"]]
+  july3_199129<-slice(PA_199129,1:24)
+  july4_199129<-slice(PA_199129,25:48)
+PA_26687<-filtered_data[["26687"]]
+  july3_26687<-slice(PA_26687,1:24)
+  july4_26687<-slice(PA_26687,25:48)
+PA_50485<-filtered_data[["50485"]]
+  july3_50485<-slice(PA_50485,1:24)
+  july4_50485<-slice(PA_50485,25:41)
+PA_51969<-filtered_data[["51969"]]
+  july3_51969<-slice(PA_51969,1:24)
+  july4_51969<-slice(PA_51969,25:48)
+PA_71029<-filtered_data[["71029"]]
+  july3_71029<-slice(PA_71029,1:24)
+  july4_71029<-slice(PA_71029,25:48)
+PA_7384<-filtered_data[["7384"]]
+  july3_7384<-slice(PA_7384,1:24)
+  july4_7384<-slice(PA_7384,25:48)
+PA_86009<-filtered_data[["86009"]]
+  july3_86009<-slice(PA_86009,1:24)
+  july4_86099<-slice(PA_86009,25:48)
+PA_9732<-filtered_data[["9732"]]
+  july3_9732<-slice(PA_86009,1:24)
+  july4_9732<-slice(PA_86009,25:48)
+PA_98105<-filtered_data[["98105"]]
+  july3_98105<-slice(PA_98105,1:24)
+  july4_98105<-slice(PA_98105,25:48)
   
-#High TC PM2.5 Concentrations on July 4th
-y2 <- ggplot() +
-  geom_line(data = HIGHTC01, mapping = aes(date_time, pm2.5_atm, group = 1, color ="PT Woodworth"))+
-  geom_line (data = HIGHTC02, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Manitou"))+
-  geom_line (data = HIGHTC03, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Owl"))+
-  geom_line (data = HIGHTC04, mapping = aes(date_time, pm2.5_atm, group = 1, color = "PTOI"))+
-  geom_line (data = HIGHTC05, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Central Tacoma"))+
-  geom_line (data = HIGHTC06, mapping = aes(date_time, pm2.5_atm, group = 1, color = "1 Broadway"))+
-  geom_line (data = HIGHTC07, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Pointe Woodworth"))+
-  geom_line (data = HIGHTC08, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Norpoint"))+
-  geom_line (data =HIGHTC09, mapping = aes(date_time, pm2.5_atm, group = 1, color = "Miller"))+
-  ggtitle("High Tree Canopy PurpleAir PM 2.5 Concentrations on July 4th, 2024")+ 
-  labs(x = "Time",
-       y = "PM 2.5 Concentrations (µg/m3)", color = "PurpleAir Name")+
-  theme(
-    axis.text.x = element_text (angle = 90, vjust = -0.01),
-    plot.title = element_text(face='bold'))
-  
+july3<-list(july3_101109,july3_136172,july3_15203,july3_156499,july3_167065,july3_167399,july3_167413,july3_171177,july3_171181,july3_171217,july3_173501,july3_174613,july3_17663,july3_177979,july3_18351,july3_183853,july3_183863,july3_183883,july3_185377,july3_192199,
+                july3_194473,july3_199129,july3_26687,july3_50485,july3_51969,july3_71029,july3_7384,july3_86009,july3_9732,july3_98105)
+all_july3<-bind_rows(july3)
+write.csv(all_july3,"~/Documents/GitHub/grit/data/PurpleAir/allJuly3rd.csv",row.names = FALSE)
 
-y3 <- ggplot() +
-  geom_line(data = GRIT01_July04, mapping = aes(date_time, pm2.5_atm, group = 1, color ="GRIT 01"))+
-  geom_line (data = GRIT02_July04, mapping = aes(date_time, pm2.5_atm, group = 1, color = "GRIT 02"))+
-  geom_line (data = GRIT03_July04, mapping = aes(date_time, pm2.5_atm, group = 1, color = "GRIT 03"))+
-  geom_line (data = GRIT04_July04, mapping = aes(date_time, pm2.5_atm, group = 1, color = "GRIT04"))+
-  ggtitle("GRIT PM 2.5 Concentrations on July 4th, 2024")+ 
-  labs(x = "Time",
-       y = "PM 2.5 Concentrations (µg/m3)", color = "PurpleAir Name")+
-  theme(
-    axis.text.x = element_text (angle = 90, vjust = -0.01),
-    plot.title = element_text(face='bold'))
-y1 + y2
-  
-  
-  
-  
- 
+july4<-list(july4_101109,july4_136172,july4_15203,july4_156499,july4_167065,july4_167399,july4_167413,july4_171177,july4_171181,july4_171217,july4_173501,july4_174613,july4_17663,july4_177979,july4_18351,july4_183853,july4_183863,july4_183883,july4_185377,july4_192199,
+           july4_194473,july4_199129,july4_26687,july4_50485,july4_51969,july4_71029,july4_7384,july4_86009,july4_9732,july4_98105)
+all_july4<-bind_rows(july4)
+write.csv(all_july4,"~/Documents/GitHub/grit/data/PurpleAir/allJuly4th.csv",row.names = FALSE)
+
+
+
+

@@ -37,9 +37,9 @@ options("digits" = 15)
 
 #Read in lat/longs of air quality monitors
 #(need to creat this file first based on the loggers chosen frmo PurpleAir Map)
-locs<-read.csv("data/PurpleAir/ALL_PA_locs.csv", header=TRUE) 
+locs<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/ALL_PA_locs_updated.csv", header=TRUE) 
 #correct mistake in locs
-locs$longitude[locs$longitude==122.517100000000]<- -122.517100000000
+#locs$longitude[locs$longitude==122.517100000000]<- -122.517100000000
 locs_raw <-rename(locs)#, Longitude = x, Latitude = y)
 
 # locs_raw<-aq_locs
@@ -214,11 +214,9 @@ e200sums.df<-as.data.frame(e200sums)
 e400sums.df<-as.data.frame(e400sums)
 e800sums.df<-as.data.frame(e800sums)
 
-head(e20sums.df)
-e10sums.df<- e10sums.df %>%
-  setNames(c("sensor_index", "0.10m", "1.10m","2.10"))  %>%
-  mutate(sensor_index=locs$sensor_index)
-
+e10sums.df <- e10sums.df %>% 
+  setNames(c("sensor_index", "0.10m", "1.10m")) %>%
+  mutate(sensor_index = locs_raw$sensor_index)
 
 e20sums.df<- e20sums.df %>% 
   setNames(c("sensor_index","0.20m","1.20m","2.20m"))
@@ -285,4 +283,4 @@ locslc$cancov.200m<-as.numeric(locslc$"1.200m")/ sum(as.numeric(locslc$"0.200m")
 locslc$cancov.400m<-as.numeric(locslc$"1.400m")/ sum(as.numeric(locslc$"0.400m"),as.numeric(locslc$"1.400m"), as.numeric(locslc$"2.400"), na.rm = TRUE)
 locslc$cancov.800m<-as.numeric(locslc$"1.800m")/ sum(as.numeric(locslc$"0.800m"),as.numeric(locslc$"1.800m"), as.numeric(locslc$"2.800"), na.rm = TRUE)
 
-write.csv(locslc,"output/grit_aq_lc_jul_aug.csv", row.names = FALSE)
+write.csv(locslc,"~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_updated.csv", row.names = FALSE)

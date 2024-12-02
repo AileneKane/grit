@@ -4,6 +4,7 @@ options(stringsAsFactors = FALSE)
 install.packages("patchwork")
 install.packages("gridExtra")
 
+
 # load libraries
 library(tidyverse)
 library(ggplot2)
@@ -304,4 +305,298 @@ annual <- ggplot(annual_data, aes(x=sensor, y=annual))+
   ggtitle("Purple Air (PA) Sensors and Number of Readings Exceeding EPA Standard July 2024", 
           subtitle = "30 Minute Averaging Period Readings")+
   theme(legend.position = c(0.89, 0.89))
+  
+
+#####july 3rd and july 4th####
+setwd("~/Documents/GitHub/grit/analyses")
+july3rd<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/allJuly3rd.csv")
+july4th<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/allJuly4th.csv")
+july3rd <- july3rd %>%
+  group_by(sensor_index) %>%
+  mutate(pm2.5_avg = mean(pm2.5_correct, na.rm = TRUE)) %>%
+  ungroup()
+
+july3rd_clean <- july3rd %>%
+  mutate(sensor_index = as.character(sensor_index))%>%
+  group_by(sensor_index) %>%
+  slice_head(n = 1) %>%  
+  ungroup()
+
+july4th <- july4th%>%
+  group_by(sensor_index) %>%
+  mutate(pm2.5_avg = mean(pm2.5_correct, na.rm = TRUE)) %>%
+  ungroup()
+
+july4th_clean <- july4th %>%
+  mutate(sensor_index = as.character(sensor_index))%>%
+  group_by(sensor_index) %>%
+  slice_head(n = 1) %>%  
+  ungroup()
+
+
+lc<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_updated.csv")
+lc <- lc %>% mutate(sensor_index = as.character(sensor_index)) %>%
+      group_by(sensor_index)%>%
+      slice_head(n=1)%>%
+      ungroup()
+
+lc_filtered <- lc %>%
+  filter(sensor_index %in% july3rd_clean$sensor_index)
+july3rd_filtered <- july3rd_clean %>%
+  filter(sensor_index %in% lc_filtered$sensor_index)
+july4th_filtered <- july4th_clean %>%
+  filter(sensor_index %in% lc_filtered$sensor_index)
+
+july3_final<- left_join(july3rd_filtered,lc_filtered,by="sensor_index")
+july4_final <-left_join(july4th_filtered,lc_filtered, by= "sensor_index")
+july3_final<- july3_final %>% filter(pm2.5_avg < 40) 
+july4_final<-july4_final %>% filter(pm2.5_avg < 40)
+
+
+###cancov comparison###
+all_cancov <- rbind(july3_final,july4_final)
+all_cancov$time_stamp<-gsub("T|Z", " ",all_cancov$time_stamp)
+all_cancov$time_stamp <- substr(all_cancov$time_stamp, 1, 16)
+all_cancov$time_stamp<-as.POSIXct(all_cancov$time_stamp, format = '%Y-%m-%d %H:%M')
+
+all_cancov<- all_cancov[all_cancov$time_stamp != "2024-07-03 03:00:00", ]
+all_cancov$cancov.10m_percent <- all_cancov$cancov.10m * 100
+all_cancov$cancov.20m_percent <- all_cancov$cancov.20m * 100
+all_cancov$cancov.30m_percent <- all_cancov$cancov.30m * 100
+all_cancov$cancov.40m_percent <- all_cancov$cancov.40m * 100
+all_cancov$cancov.50m_percent <- all_cancov$cancov.50m * 100
+all_cancov$cancov.100m_percent <- all_cancov$cancov.100m * 100
+all_cancov$cancov.200m_percent <- all_cancov$cancov.200m* 100
+all_cancov$cancov.400m_percent <- all_cancov$cancov.400m* 100
+all_cancov$cancov.800m_percent <- all_cancov$cancov.800m* 100
+
+cancov.10<- ggplot(all_cancov, aes(x = cancov.10m_percent, y = pm2.5_avg, color = as.factor(time_stamp))) +
+  geom_point(size = 2) +  # Plot the points
+  stat_smooth(method="gam", method.args=list(family=gaussian)) +  
+  labs(
+    title = "PM 2.5 Concentrations vs. Tree Canopy Cover 10m",
+    x = "Tree Canopy Cover (%)",
+    y = "PM 2.5 Concentration (µg/m3)",
+    color = "Day"
+  ) +
+  theme_bw() +
+  scale_y_continuous(limits = c(0, 20))+
+  theme(legend.position = "bottom",
+        plot.title = element_text(size = 14, face = "bold"))+
+  scale_color_viridis_d(option = "D") 
+
+cancov.20<- ggplot(all_cancov, aes(x = cancov.20m_percent, y = pm2.5_avg, color = as.factor(time_stamp))) +
+  geom_point(size = 2) +  # Plot the points
+  stat_smooth(method="gam", method.args=list(family=gaussian)) +  
+  labs(
+    title = "PM 2.5 Concentrations vs. Tree Canopy Cover 10m",
+    x = "Tree Canopy Cover (%)",
+    y = "PM 2.5 Concentration (µg/m3)",
+    color = "Day"
+  ) +
+  theme_bw() +
+  scale_y_continuous(limits = c(0, 20))+
+  theme(legend.position = "bottom",
+        plot.title = element_text(size = 14, face = "bold"))+
+  scale_color_viridis_d(option = "D") 
+
+cancov.30<- ggplot(all_cancov, aes(x = cancov.30m_percent, y = pm2.5_avg, color = as.factor(time_stamp))) +
+  geom_point(size = 2) +  # Plot the points
+  stat_smooth(method="gam", method.args=list(family=gaussian)) +  
+  labs(
+    title = "PM 2.5 Concentrations vs. Tree Canopy Cover 30m",
+    x = "Tree Canopy Cover (%)",
+    y = "PM 2.5 Concentration (µg/m3)",
+    color = "Day"
+  ) +
+  theme_bw() +
+  scale_y_continuous(limits = c(0, 20))+
+  theme(legend.position = "bottom",
+        plot.title = element_text(size = 14, face = "bold"))+
+  scale_color_viridis_d(option = "D") 
+
+cancov.40<- ggplot(all_cancov, aes(x = cancov.40m_percent, y = pm2.5_avg, color = as.factor(time_stamp))) +
+  geom_point(size = 2) +  # Plot the points
+  stat_smooth(method="gam", method.args=list(family=gaussian)) +  
+  labs(
+    title = "PM 2.5 Concentrations vs. Tree Canopy Cover 40m",
+    x = "Tree Canopy Cover (%)",
+    y = "PM 2.5 Concentration (µg/m3)",
+    color = "Day"
+  ) +
+  theme_bw() +
+  scale_y_continuous(limits = c(0, 20))+
+  theme(legend.position = "bottom",
+        plot.title = element_text(size = 14, face = "bold"))+
+  scale_color_viridis_d(option = "D") 
+
+cancov.50<- ggplot(all_cancov, aes(x = cancov.50m_percent, y = pm2.5_avg, color = as.factor(time_stamp))) +
+  geom_point(size = 2) +  # Plot the points
+  stat_smooth(method="gam", method.args=list(family=gaussian)) +  
+  labs(
+    title = "PM 2.5 Concentrations vs. Tree Canopy Cover 50m",
+    x = "Tree Canopy Cover (%)",
+    y = "PM 2.5 Concentration (µg/m3)",
+    color = "Day"
+  ) +
+  theme_bw() +
+  scale_y_continuous(limits = c(0, 20))+
+  theme(legend.position = "bottom",
+        plot.title = element_text(size = 14, face = "bold"))+
+  scale_color_viridis_d(option = "D") 
+
+cancov.100<- ggplot(all_cancov, aes(x = cancov.100m_percent, y = pm2.5_avg, color = as.factor(time_stamp))) +
+  geom_point(size = 2) +  # Plot the points
+  stat_smooth(method="gam", method.args=list(family=gaussian)) +  
+  labs(
+    title = "PM 2.5 Concentrations vs. Tree Canopy Cover 100m",
+    x = "Tree Canopy Cover (%)",
+    y = "PM 2.5 Concentration (µg/m3)",
+    color = "Day"
+  ) +
+  theme_bw() +
+  scale_y_continuous(limits = c(0, 20))+
+  theme(legend.position = "bottom",
+        plot.title = element_text(size = 14, face = "bold"))+
+  scale_color_viridis_d(option = "D") 
+
+cancov.200<- ggplot(all_cancov, aes(x = cancov.200m_percent, y = pm2.5_avg, color = as.factor(time_stamp))) +
+  geom_point(size = 2) +  # Plot the points
+  stat_smooth(method="gam", method.args=list(family=gaussian)) +  
+  labs(
+    title = "PM 2.5 Concentrations vs. Tree Canopy Cover 200m",
+    x = "Tree Canopy Cover (%)",
+    y = "PM 2.5 Concentration (µg/m3)",
+    color = "Day"
+  ) +
+  theme_bw() +
+  scale_y_continuous(limits = c(0, 20))+
+  theme(legend.position = "bottom",
+        plot.title = element_text(size = 14, face = "bold"))+
+  scale_color_viridis_d(option = "D") 
+  
+cancov.400<- ggplot(all_cancov, aes(x = cancov.400m_percent, y = pm2.5_avg, color = as.factor(time_stamp))) +
+  geom_point(size = 2) +  # Plot the points
+  stat_smooth(method="gam", method.args=list(family=gaussian)) +  
+  labs(
+    title = "PM 2.5 Concentrations vs. Tree Canopy Cover 400m",
+    x = "Tree Canopy Cover (%)",
+    y = "PM 2.5 Concentration (µg/m3)",
+    color = "Day"
+  ) +
+  theme_bw() +
+  scale_y_continuous(limits = c(0, 20))+
+  theme(legend.position = "bottom",
+        plot.title = element_text(size = 14, face = "bold"))+
+  scale_color_viridis_d(option = "D") 
+
+cancov.800<- ggplot(all_cancov, aes(x = cancov.800m_percent, y = pm2.5_avg, color = as.factor(time_stamp))) +
+  geom_point(size = 2) +  # Plot the points
+  stat_smooth(method="gam", method.args=list(family=gaussian)) +  
+  labs(
+    title = "PM 2.5 Concentrations vs. Tree Canopy Cover 800m",
+    x = "Tree Canopy Cover (%)",
+    y = "PM 2.5 Concentration (µg/m3)",
+    color = "Day"
+  ) +
+  theme_bw() +
+  scale_y_continuous(limits = c(0, 20))+
+  theme(legend.position = "bottom",
+        plot.title = element_text(size = 14, face = "bold"))+
+  scale_color_viridis_d(option = "D") 
+
+all_cancov_long <- all_cancov %>%
+  pivot_longer(cols = starts_with("cancov"), 
+               names_to = "canopy_type", 
+               values_to = "cancov_percent")
+all_cancov_filtered <- all_cancov_long %>%
+  filter(grepl("percent", canopy_type))
+
+all_cancov_filtered$canopy_type <- gsub("cancov\\.|_percent", "", all_cancov_filtered$canopy_type)
+all_cancov_filtered$canopy_type <- trimws(all_cancov_filtered$canopy_type)
+
+all_buffers<- ggplot(all_cancov_filtered, aes(x = cancov_percent, y = pm2.5_avg, color = as.factor(time_stamp))) +
+  geom_point(size = 2) +  
+  stat_smooth(method = "gam", method.args = list(family = gaussian)) +  # Add GAM smooth line
+  labs(
+    title = "PM 2.5 Concentrations vs. Tree Canopy Cover by Buffer Size on July 3rd and July 4th",
+    x = "Tree Canopy Cover (%)",
+    y = "PM 2.5 Concentration (µg/m3)",
+    color = "Day", ) +
+  scale_y_continuous(limits = c(0, 20)) +  
+  theme_bw() +
+  theme(legend.position = "bottom",
+        plot.title = element_text(size = 14, face = "bold"))+
+  scale_color_viridis_d(option = "D")+
+  facet_wrap(~canopy_type, scales = "free")  
+
+ggsave("pm25_buffers_plot.png", plot = all_buffers, width = 12, height = 6, dpi = 300)
+
+
+z <-  ggplot(july3_final, aes(x=cancov.800m, y =pm2.5_avg))+
+      geom_point()+
+      stat_smooth(method="gam", method.args=list(family=gaussian))
+    
+
+z1<- ggplot(july4_final, aes(x=cancov.800m, y =pm2.5_avg))+
+  geom_point()+
+  stat_smooth(method="gam", method.args=list(family=gaussian))
+facet_wrap(z, z1 ~time_stamp)
+       
+mod_jul3<-lm(pm2.5_avg~cancov.800m, data=july3_final)
+summary(mod_jul3)
+mod_jul4 <-lm(pm2.5_avg~cancov.800m, data=july4_final)
+summary(mod_jul4)
+
+
+all_filtered <-rbind(july3rd_filtered, july4th_filtered)
+
+all_july3<- read.csv("~/Documents/GitHub/grit/data/PurpleAir/allJuly3rd.csv")
+all_july4<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/allJuly4th.csv")
+pa_datasets <- ls(pattern = "^PA_")
+all_filtered <-rbind(all_july3,all_july4)
+combined_data_filter <-all_filtered %>%
+  filter(pm2.5_correct < 40)
+
+
+###continuous line graph july 3rd - july 4th###
+combined_data_filter$time_stamp<-gsub("T|Z", " ", combined_data_filter$time_stamp)
+combined_data_filter$time_stamp <- substr(combined_data_filter$time_stamp, 1, 16)
+combined_data_filter$time_stamp<-as.POSIXct(combined_data_filter$time_stamp, format = '%Y-%m-%d %H:%M')
+
+
+all_line <- ggplot(combined_data_filter, aes(x = time_stamp, y = pm2.5_correct, group = sensor_index, color = as.factor(sensor_index))) +
+  geom_line(alpha=0.5)+
+  scale_x_datetime(date_breaks = "2 hours", date_labels = "%m-%d %H:%M")+
+  scale_color_viridis_d(name = "Sensor Index") +
+  theme_minimal(base_size = 14) +
+  theme_bw() +
+  labs(color = "Sensor Index", x = "Time", y = "PM 2.5 Concentration (µg/m3)") +
+  ggtitle("PM 2.5 Concentrations July 3rd - July 4th 2024") +
+  theme(plot.title = element_text(face = "bold"),
+        axis.text.x = element_text(angle = 45, hjust = 1))+
+  geom_hline(yintercept = 35, color = "slategray4", linetype = "dashed", linewidth = 0.5)+
+  annotate("text", x = as.POSIXct("2024-07-03 08:00"), y = 36,  label = "EPA Short-Term Standard (35 µg/m3)", 
+           color = "slategray4", size = 3, hjust = 0, vjust = 0) 
+
+all_line <- all_line +
+  theme(
+    legend.position = "bottom",            
+    legend.direction = "horizontal",  
+    legend.title.position = "top",
+    legend.title.align = 0.5,
+    legend.title = element_text(size=8),
+    legend.text = element_text(size = 6),
+   legend.key.width = unit(0.7, "cm"),     
+  legend.box.spacing = unit(1, "cm"),
+   legend.box.margin = ggplot2::margin(t = -20),
+  legend.background = element_rect(
+    color = "black",    
+    size = 0.3,         
+    fill = "white"      
+  ),
+    plot.margin = unit(c(1, 1, 1, 0.5), "lines"))+
+  guides( color = guide_legend(nrow = 3, byrow = TRUE))
+
+  ggsave("pm25_concentration_plot.png", plot = all_line, width = 12, height = 6, dpi = 300)
   
