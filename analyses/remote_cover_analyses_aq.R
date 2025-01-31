@@ -7,6 +7,7 @@
 #clear workspace
 rm(list=ls()) 
 
+
 #set strings default and avoid scientific notation for 6 digits
 options(stringsAsFactors = FALSE, "scipen"=1000, "digits"=6)
 # load libraries
@@ -37,9 +38,8 @@ options("digits" = 15)
 
 #Read in lat/longs of air quality monitors
 #(need to creat this file first based on the loggers chosen frmo PurpleAir Map)
-locs<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/ALL_PA_locs_updated.csv", header=TRUE) 
+locs<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/pa_locations_2025.csv", header=TRUE) 
 #correct mistake in locs
-#locs$longitude[locs$longitude==122.517100000000]<- -122.517100000000
 locs_raw <-rename(locs)#, Longitude = x, Latitude = y)
 
 # locs_raw<-aq_locs
@@ -60,7 +60,8 @@ lcNOAA <-
 st <- states()
 tacoma <- places("WA", cb = TRUE) %>%
   filter(NAME %in% c("Tacoma","Lakewood","University Place",
-                     "Midland","Federal Way","Clover Creek","Fife")) %>%
+                     "Midland","Federal Way","Clover Creek","Fife",
+                     "Gig Harbor","Graham", "Puyallup", "Artondale","Summit")) %>%
   st_transform(6580)
 
 wa_outline <- states(cb = TRUE) %>%
@@ -80,7 +81,7 @@ ggplot() +
 
 #Convert points data frame to sf using these as coordinates:
   
-locs = st_as_sf(locs_raw,coords=c("longitude","latitude"), crs="+proj=longlat +datum=WGS84")
+locs = st_as_sf(locs_raw,coords=c("long","lat"), crs="+proj=longlat +datum=WGS84")
   
 #take the coordinate system of the lc file booths:
     

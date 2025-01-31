@@ -515,12 +515,17 @@ all_cancov_filtered <- all_cancov_long %>%
 all_cancov_filtered$canopy_type <- gsub("cancov\\.|_percent", "", all_cancov_filtered$canopy_type)
 all_cancov_filtered$canopy_type <- trimws(all_cancov_filtered$canopy_type)
 
-all_buffers<- ggplot(all_cancov_filtered, aes(x = cancov_percent, y = pm2.5_avg, color = as.factor(time_stamp))) +
+poster_cancov <- all_cancov_filtered %>% 
+  filter(canopy_type %in% c("10m", "100m", "800m")) %>% 
+  mutate(canopy_type = factor(canopy_type, levels = c("10m", "100m", "800m"))) %>%
+  arrange(canopy_type)
+
+poster_cancov_plot <- ggplot(poster_cancov, aes(x = cancov_percent, y = pm2.5_avg, color = as.factor(time_stamp))) +
   geom_point(size = 2) +  
   stat_smooth(method = "gam", method.args = list(family = gaussian)) +  # Add GAM smooth line
   labs(
     title = "PM 2.5 Concentrations vs. Tree Canopy Cover by Buffer Size on July 3rd and July 4th",
-    x = "Tree Canopy Cover (%)",
+    x = "Tree Canopy Cover",
     y = "PM 2.5 Concentration (µg/m3)",
     color = "Day", ) +
   scale_y_continuous(limits = c(0, 20)) +  
@@ -530,7 +535,7 @@ all_buffers<- ggplot(all_cancov_filtered, aes(x = cancov_percent, y = pm2.5_avg,
   scale_color_viridis_d(option = "D")+
   facet_wrap(~canopy_type, scales = "free")  
 
-ggsave("pm25_buffers_plot.png", plot = all_buffers, width = 12, height = 6, dpi = 300)
+ggsave("agu_buffers_plot.png", plot =poster_cancov_plot, width = 17.5, height =  7.8, dpi = 300)
 
 
 z <-  ggplot(july3_final, aes(x=cancov.800m, y =pm2.5_avg))+
@@ -599,4 +604,35 @@ all_line <- all_line +
   guides( color = guide_legend(nrow = 3, byrow = TRUE))
 
   ggsave("pm25_concentration_plot.png", plot = all_line, width = 12, height = 6, dpi = 300)
+
+  merged_data <- merge(combined_data_filter, all_cancov, by = "sensor_index")
   
+poster_line<- ggplot(merged_data, aes(x = time_stamp.x, y = pm2.5_correct.x, group = sensor_index, color = cancov.100m_percent)) +
+    geom_line(alpha=0.5)+
+    scale_x_datetime(date_breaks = "2 hours", date_labels = "%m-%d %H:%M")+
+    scale_color_gradient(low = "#edf8e9", high = "#006d2c", name = "Tree Canopy Cover Within 100m")+
+   # scale_color_viridis_c(option = "viridis", name = "Tree Canopy Cover (%)")+
+   # scale_color_gradientn(colors=c("#f7f4f9", "#addd8e", "#005a32"), name = "Tree Canopy Cover (%)")+
+    theme_minimal(base_size = 14) +
+    theme_bw() +
+    labs(color = "Sensor Index", x = "Time", y = "PM 2.5 Concentration (µg/m3)") +
+    ggtitle("PM 2.5 Concentrations July 3rd - July 4th 2024") +
+    theme(plot.title = element_text(face = "bold"),
+          axis.text.x = element_text(angle = 45, hjust = 1))+
+    geom_hline(yintercept = 35, color = "slategray4", linetype = "dashed", linewidth = 0.5)+
+    annotate("text", x = as.POSIXct("2024-07-03 08:00"), y = 36,  label = "EPA Short-Term Standard (35 µg/m3)", 
+             color = "slategray4", size = 3, hjust = 0, vjust = 0) 
+  
+poster_line <- poster_line+ theme(
+    legend.position = "bottom",            
+    legend.direction = "horizontal",  
+    legend.title.position = "top",
+    legend.title.align = 0.5,
+    legend.title = element_text(size=8),
+    legend.text = element_text(size = 6),
+    legend.key.width = unit(0.7, "cm"),
+    legend.background = element_rect(
+      color = "black",    
+      size = 0.3,         
+      fill = "white"))
+ggsave("poster_pm2.5_concentration_plot.png", plot = poster_line, width = 17.5, height = 7.78, dpi = 300)
