@@ -34,11 +34,16 @@ library(tigris)
 options(tigris_use_cache = TRUE)
 
 setwd("/Users/samiebaclig/Documents/GitHub/grit") 
+#for ailene's computer:
+#setwd("~/GitHub/grit")
 options("digits" = 15)
 
 #Read in lat/longs of air quality monitors
 #(need to creat this file first based on the loggers chosen frmo PurpleAir Map)
 locs<-read.csv("~/Documents/GitHub/grit/data/PurpleAir/pa_locations_2025.csv", header=TRUE) 
+#For ailene's computer:
+#locs<-read.csv("data/PurpleAir/pa_locations_2025.csv", header=TRUE) 
+#correct mistake in locs
 #correct mistake in locs
 locs_raw <-rename(locs)#, Longitude = x, Latitude = y)
 
@@ -99,7 +104,7 @@ tacoma2<-st_transform(tacoma, crs(lcNOAA))
 bbox <- st_bbox(locs_NOAA)
 
 
-etacrect <- as(raster::extent(bbox$xmin, bbox$xmax,bbox$ymin, bbox$ymax), "SpatialPolygons")
+etacrect <- as(raster::extent(bbox$xmin-2000, bbox$xmax+2000,bbox$ymin-1000, bbox$ymax+1000), "SpatialPolygons")
 proj4string(etacrect) <- crs(lcNOAA)
 plot(etacrect)
 
