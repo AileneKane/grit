@@ -112,6 +112,7 @@ plot(etacrect)
 lc_tacoma_NOAA<-crop(x = lcNOAA, y = etacrect)
 lc_tacoma2_NOAA<-crop(x = lcNOAA, y = tacoma2)
 
+
 #create a polygon bounded by min max of lc
 
 #make a map of points with land cover
@@ -220,14 +221,12 @@ e200sums.df<-as.data.frame(e200sums)
 e400sums.df<-as.data.frame(e400sums)
 e800sums.df<-as.data.frame(e800sums)
 
-e10sums.df <- e10sums.df %>% 
-  setNames(c("sensor_index", "0.10m", "1.10m")) %>%
-  mutate(sensor_index = locs_raw$sensor_index)
+e10sums.df <- e10sums.df %>% mutate(sensor_index = locs_raw$sensor_index) %>%
+  setNames(c("sensor_index", "0.10m", "1.10m", "2.10")) 
 
-e20sums.df<- e20sums.df %>% 
-  setNames(c("sensor_index","0.20m","1.20m","2.20m"))
-e20sums.df<- e20sums.df %>% 
-  mutate(sensor_index = locs_raw$sensor_index)
+
+e20sums.df<- e20sums.df %>% select(-V1)mutate(sensor_index = locs_raw$sensor_index) %>% select(-V1)
+  setNames(c("sensor_index","0.20m","1.20m","2.20m")
     
 e30sums.df<- e30sums.df %>% 
   setNames(c("sensor_index","0.30m","1.30m","2.30m"))
