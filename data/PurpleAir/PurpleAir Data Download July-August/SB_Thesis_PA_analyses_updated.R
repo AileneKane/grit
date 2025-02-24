@@ -21,7 +21,7 @@ PA_locs<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_up
 
 ###separated DF
 df <-
-  list.files(path = "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August", pattern = "*.csv") %>% 
+  list.files(path = "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August", pattern = "*.csv", full.names = TRUE) %>% 
   map_df(~read_csv(.))
 
 ##using PA correction factor they used Cf_1 values but used atm since used for outdoor monitoring 
@@ -103,24 +103,18 @@ lc<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_updated
 combined_df <- full_join(average_df, lc)
 combined_df<- subset(combined_df, sensor_index !=177455)
 
-###Separating July and August 
-jul_7384<- pa_7384 %>%
-  filter(grepl("2024-07", time_stamp))
+###AQ threshold 
+#jul_7384<- pa_7384 %>%
+  #filter(grepl("2024-07", time_stamp))
 
-jul_7384_above9<-length(which(jul_7384$pm2.5_correct>9))/2
+pa_7384_above9<-length(which(pa_7384$pm2.5_correct>9))/2
 
-pa_183863 <- PA[['183863']]
-jul_183863 <- pa_183863 %>%
-  filter(grepl("2024-07", time_stamp))
-jul_183863_above10<-length(which(jul_183863$pm2.5_correct>10))/2
+pa_183863 <- PA[['183863']]  
+pa_183863_above9<-length(which(pa_183863$pm2.5_correct>9))/2
 
 pa_71029 <- PA[['71029']]
-pa_71029_above10<-length(which(pa_71029$pm2.5_correct>9))/2
+pa_71029_above9<-length(which(pa_71029$pm2.5_correct>9))/2
 
-pa_7102 
-jul_71029 <- pa_71029 %>%
-  filter(grepl("2024-07", time_stamp))
-jul_71029_above10<-length(which(jul_71029$pm2.5_correct>10))/2
 
 
 ####Plots###
@@ -128,10 +122,16 @@ jul_71029_above10<-length(which(jul_71029$pm2.5_correct>10))/2
 
 PM2.5_EPA_annual <- data.frame(yintercept = 9, Lines = 'Annual') # long-term standard (annual average)
 
-ggplot(combined_df, aes(x=cancov.10m, y=(avg_pm2.5)+
+
+##cancov avg, changing radii when saving plots
+cancov_avg<- ggplot(combined_df, aes(cancov.800m,avg_pm2.5))+
   geom_point()+
-  stat_smooth(method = "gam")+
-geom_hline(data = PM2.5_EPA_annual, aes(yintercept = yintercept, color = "Annual Standard", linetype = "Annual"), linetype = "dashed")+
-  theme(legend.position = c(0.89, 0.89))
+  stat_smooth(method = "gam", 
+              method.args = list(family = gaussian))+
+  geom_hline(data = PM2.5_EPA_annual, aes(yintercept = yintercept, color = "Annual Standard", linetype = "Annual"), 
+           linetype = "dashed")+
+  theme(legend.position= c(0.89, 0.89))
+
+
   
 

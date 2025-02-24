@@ -4,7 +4,6 @@ options(stringsAsFactors = FALSE)
 install.packages("patchwork")
 install.packages("gridExtra")
 
-
 # load libraries
 library(tidyverse)
 library(ggplot2)
@@ -15,12 +14,61 @@ library(gridExtra)
 library(scales)
 library(mgcv)
 
+
 ##reading in data##
 setwd("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August")
-PA_locs<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug.csv")
+PA_locs<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_updated.csv")
+
+##### loading all PA data
+
+df <-
+  list.files(path = "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August", pattern = "*.csv") %>% 
+  map_df(~read_csv(.))
+df
+
+read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/7384 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/9732 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/15203 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/17663 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/50485 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/51969 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/71029 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/80321 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/94745 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/96765 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/98105 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/135354 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/136172 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/152162 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/154963 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/156499 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/167047 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/167065 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/167257 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/167399 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/167413 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/171177 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/171217 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/171237 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/173501 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/174613 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/175733 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/177455 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/177979 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/183851 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/183853 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/183863 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/183883 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/185377 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/190605 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/192199 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/194473 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/205579 2024-07-01 2024-09-01 30-Minute Average.csv",
+  "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August/224449 2024-07-01 2024-09-01 30-Minute Average.csv"
+)
 
 
-## 30 minute time intervals represents Purple Air averaging period, PA takes measurements average PM 2.5 of 30 min intervals, 
+## 30 minute time intervaji8juniijls represents Purple Air averaging period, PA takes measurements average PM 2.5 of 30 min intervals, 
 PA_7384<-read.csv("7384 2024-07-01 2024-09-01 30-Minute Average.csv")
 PA_7384_jul<- PA_7384%>% slice(1:1488) 
 PA_7384_aug<-PA_7384%>% slice(1489:2975)

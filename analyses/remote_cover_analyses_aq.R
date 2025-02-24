@@ -221,46 +221,43 @@ e200sums.df<-as.data.frame(e200sums)
 e400sums.df<-as.data.frame(e400sums)
 e800sums.df<-as.data.frame(e800sums)
 
-e10sums.df <- e10sums.df %>% mutate(sensor_index = locs_raw$sensor_index) %>%
-  setNames(c("sensor_index", "0.10m", "1.10m", "2.10")) 
+e10sums.df <- e10sums.df %>% dplyr::select(-c(V1)) %>%
+mutate(sensor_index = locs_raw$sensor_index) %>%
+  setNames(c( "0.10m", "1.10m", "2.10","sensor_index")) 
 
 
-e20sums.df<- e20sums.df %>% select(-V1)mutate(sensor_index = locs_raw$sensor_index) %>% select(-V1)
-  setNames(c("sensor_index","0.20m","1.20m","2.20m")
+e20sums.df<- e20sums.df %>% dplyr::select(-c(V1)) %>%
+mutate(sensor_index = locs_raw$sensor_index) %>% 
+  setNames(c("0.20m","1.20m","2.20m","sensor_index"))
     
-e30sums.df<- e30sums.df %>% 
-  setNames(c("sensor_index","0.30m","1.30m","2.30m"))
-e30sums.df<- e30sums.df %>% 
-  mutate(sensor_index = locs_raw$sensor_index)
+e30sums.df<- e30sums.df %>% dplyr::select(-c(V1)) %>%
+  mutate(sensor_index = locs_raw$sensor_index)  %>%
+  setNames(c("0.30m","1.30m","2.30m","sensor_index"))
 
-e40sums.df <- e40sums.df %>% 
-  setNames(c("sensor_index","0.40m","1.40m","2.40m"))
-e40sums.df <- e40sums.df%>%
-  mutate(sensor_index = locs_raw$sensor_index)
+e40sums.df <- e40sums.df %>% dplyr::select(-c(V1)) %>%
+  mutate(sensor_index = locs_raw$sensor_index) %>%
+  setNames(c("0.40m","1.40m","2.40m","sensor_index"))
 
-e50sums.df<- e50sums.df %>% 
-  setNames(c("sensor_index","0.50m","1.50m","2.50m"))
-e50sums.df <- e50sums.df %>%
-  mutate(sensor_index = locs_raw$sensor_index)
+e50sums.df<- e50sums.df %>% dplyr::select(-c(V1)) %>%
+  mutate(sensor_index = locs_raw$sensor_index) %>%
+  setNames(c("0.50m","1.50m","2.50m","sensor_index"))
 
-e100sums.df <- e100sums.df %>%
-  setNames(c("sensor_index","0.100m","1.100m","2.100m"))
-e100sums.df <- e100sums.df%>%
-  mutate(sensor_index = locs_raw$sensor_index)
+e100sums.df <- e100sums.df %>% dplyr::select(-c(V1)) %>%
+  mutate(sensor_index = locs_raw$sensor_index) %>%
+  setNames(c("0.100m","1.100m","2.100m","sensor_index"))
   
-e200sums.df <- e200sums.df %>%
-  setNames(c("sensor_index", "0.200m", "1.200m", "2.200m")) 
-e200sums.df <- e200sums.df %>%
-  mutate(sensor_index = locs_raw$sensor_index)
+e200sums.df <- e200sums.df %>% dplyr::select(-c(V1)) %>%
+  mutate(sensor_index = locs_raw$sensor_index) %>%
+  setNames(c("0.200m", "1.200m", "2.200m","sensor_index"))
 
-e400sums.df <- e400sums.df %>%
-  setNames(c("sensor_index","0.400m","1.400m","2.400m")) %>%
-  mutate(sensor_index=locs_raw$sensor_index)
+e400sums.df <- e400sums.df %>% dplyr::select(-c(V1)) %>%
+  mutate(sensor_index=locs_raw$sensor_index) %>%
+  setNames(c("0.400m","1.400m","2.400m","sensor_index"))
 
-e800sums.df <- e800sums.df %>%
-  setNames(c("sensor_index", "0.800m", "1.800m", "2.800m"))
-e800sums.df <- e800sums.df %>%
-  mutate(sensor_index = locs_raw$sensor_index)
+e800sums.df <- e800sums.df %>% dplyr::select(-c(V1)) %>%
+  mutate(sensor_index = locs_raw$sensor_index) %>%
+  setNames(c("0.800m", "1.800m", "2.800m","sensor_index"))
+
 
 #locs_raw$ID<-substr(locs_raw$ID,1,28)
 
