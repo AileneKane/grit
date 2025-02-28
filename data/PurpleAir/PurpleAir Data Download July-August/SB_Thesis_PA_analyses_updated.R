@@ -47,7 +47,7 @@ avg_98105<-mean(PA[["98105"]]$pm2.5_correct)
 avg_135354<-mean(PA[["135354"]]$pm2.5_correct)
 avg_136172<-mean(PA[["136172"]]$pm2.5_correct)
 avg_152162<-mean(PA[["152162"]]$pm2.5_correct)
-avg_154963<-mean(PA[["154963"]]$pm2.5_correct) #not in lc
+# avg_154963<-mean(PA[["154963"]]$pm2.5_correct) #not in lc
 avg_156499<-mean(PA[["156499"]]$pm2.5_correct)
 avg_167047<-mean(PA[["167047"]]$pm2.5_correct)
 avg_167065<-mean(PA[["167065"]]$pm2.5_correct)
@@ -67,7 +67,7 @@ avg_183853<-mean(PA[["183853"]][["pm2.5_correct"]])
 avg_183863<-mean(PA[["183863"]][["pm2.5_correct"]])
 avg_183883<-mean(PA[["183883"]][["pm2.5_correct"]])
 avg_185377<-mean(PA[["185377"]][["pm2.5_correct"]])
-avg_190605<-mean(PA[["190605"]][["pm2.5_correct"]]) # not in lc
+#avg_190605<-mean(PA[["190605"]][["pm2.5_correct"]]) # not in lc
 avg_192199<-mean(PA[["192199"]][["pm2.5_correct"]])
 avg_194473<-mean(PA[["194473"]][["pm2.5_correct"]])
 avg_205579<-mean(PA[["205579"]][["pm2.5_correct"]])
@@ -101,24 +101,61 @@ average_df <- data.frame(sensor_index= sensor_indices,avg_pm2.5 = pm2.5_avg)
 lc<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_updated.csv")
 
 combined_df <- full_join(average_df, lc)
-combined_df<- subset(combined_df, sensor_index !=177455)
 
 ###AQ threshold 
 #jul_7384<- pa_7384 %>%
   #filter(grepl("2024-07", time_stamp))
 
-pa_7384_above9<-length(which(pa_7384$pm2.5_correct>9))/2
+above9_list <- list(
+  pa_135354_above9 = length(which(PA[['135354']]$pm2.5_correct > 9)) / 2,
+  pa_136172_above9 = length(which(PA[['136172']]$pm2.5_correct > 9)) / 2,
+  pa_15203_above9  = length(which(PA[['15203']]$pm2.5_correct > 9)) / 2,
+  pa_152162_above9 = length(which(PA[['152162']]$pm2.5_correct > 9)) / 2,
+  pa_156499_above9 = length(which(PA[['156499']]$pm2.5_correct > 9)) / 2,
+  pa_167047_above9 = length(which(PA[['167047']]$pm2.5_correct > 9)) / 2,
+  pa_167065_above9 = length(which(PA[['167065']]$pm2.5_correct > 9)) / 2,
+  pa_167257_above9 = length(which(PA[['167257']]$pm2.5_correct > 9)) / 2,
+  pa_167399_above9 = length(which(PA[['167399']]$pm2.5_correct > 9)) / 2,
+  pa_167413_above9 = length(which(PA[['167413']]$pm2.5_correct > 9)) / 2,
+  pa_171177_above9 = length(which(PA[['171177']]$pm2.5_correct > 9)) / 2,
+  pa_171217_above9 = length(which(PA[['171217']]$pm2.5_correct > 9)) / 2,
+  pa_171237_above9 = length(which(PA[['171237']]$pm2.5_correct > 9)) / 2,
+  pa_173501_above9 = length(which(PA[['173501']]$pm2.5_correct > 9)) / 2,
+  pa_174613_above9 = length(which(PA[['174613']]$pm2.5_correct > 9)) / 2,
+  pa_175733_above9 = length(which(PA[['175733']]$pm2.5_correct > 9)) / 2,
+  pa_17663_above9  = length(which(PA[['17663']]$pm2.5_correct > 9)) / 2,
+  pa_177455_above9 = length(which(PA[['177455']]$pm2.5_correct > 9)) / 2,
+  pa_177979_above9 = length(which(PA[['177979']]$pm2.5_correct > 9)) / 2,
+  pa_183851_above9 = length(which(PA[['183851']]$pm2.5_correct > 9)) / 2,
+  pa_183853_above9 = length(which(PA[['183853']]$pm2.5_correct > 9)) / 2,
+  pa_183863_above9 = length(which(PA[['183863']]$pm2.5_correct > 9)) / 2,
+  pa_183883_above9 = length(which(PA[['183883']]$pm2.5_correct > 9)) / 2,
+  pa_185377_above9 = length(which(PA[['185377']]$pm2.5_correct > 9)) / 2,
+  pa_192199_above9 = length(which(PA[['192199']]$pm2.5_correct > 9)) / 2,
+  pa_194473_above9 = length(which(PA[['194473']]$pm2.5_correct > 9)) / 2,
+  pa_205579_above9 = length(which(PA[['205579']]$pm2.5_correct > 9)) / 2,
+  pa_224449_above9 = length(which(PA[['224449']]$pm2.5_correct > 9)) / 2,
+  pa_50485_above9  = length(which(PA[['50485']]$pm2.5_correct > 9)) / 2,
+  pa_51969_above9  = length(which(PA[['51969']]$pm2.5_correct > 9)) / 2,
+  pa_71029_above9  = length(which(PA[['71029']]$pm2.5_correct > 9)) / 2,
+  pa_7384_above9   = length(which(PA[['7384']]$pm2.5_correct > 9)) / 2,
+  pa_80321_above9  = length(which(PA[['80321']]$pm2.5_correct > 9)) / 2,
+  pa_94745_above9  = length(which(PA[['94745']]$pm2.5_correct > 9)) / 2,
+  pa_96765_above9  = length(which(PA[['96765']]$pm2.5_correct > 9)) / 2,
+  pa_9732_above9   = length(which(PA[['9732']]$pm2.5_correct > 9)) / 2,
+  pa_98105_above9  = length(which(PA[['98105']]$pm2.5_correct > 9)) / 2
+)
 
-pa_183863 <- PA[['183863']]  
-pa_183863_above9<-length(which(pa_183863$pm2.5_correct>9))/2
+above9_df <- data.frame(
+  sensor_index = sensor_indices,
+  above9_hour = unlist(above9_list),
+  above9_days = (unlist(above9_list) /24)
+)
 
-pa_71029 <- PA[['71029']]
-pa_71029_above9<-length(which(pa_71029$pm2.5_correct>9))/2
-
+combined_df <- dplyr::left_join(combined_df, above9_df, by = "sensor_index")
 
 
 ####Plots###
-##july + august 
 
 PM2.5_EPA_annual <- data.frame(yintercept = 9, Lines = 'Annual') # long-term standard (annual average)
 
@@ -132,6 +169,13 @@ cancov_avg<- ggplot(combined_df, aes(cancov.800m,avg_pm2.5))+
            linetype = "dashed")+
   theme(legend.position= c(0.89, 0.89))
 
-
+##days above EPA PM2.5 long term standard (9)
+above9_days <- ggplot(combined_df, aes(cancov.800m, above9_days))+
+  geom_point()+
+  stat_smooth(method = "gam", 
+              method.args = list(family = gaussian))+
+  labs(x = "Proportion of Tree Canopy Cover within 800m",
+       y = "Number of Days above 9 μg/m3")+
+  ggtitle("Number of Days above EPA PM2.5 Annual Standard vs Tree Canopy Cover")
   
 
