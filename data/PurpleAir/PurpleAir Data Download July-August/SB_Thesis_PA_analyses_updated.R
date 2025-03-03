@@ -14,9 +14,16 @@ library(plotly)
 library(gridExtra)
 library(scales)
 library(mgcv)
+library(sf)
 
 setwd("/Users/samiebaclig/Documents/GitHub/grit") 
 PA_locs<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_updated.csv")
+
+###New Data###
+##Roads##
+roads <- st_read("~/Documents/GitHub/grit/data/pierce county roads/tl_2023_53053_roads.shp")
+
+
 
 
 ###separated DF
