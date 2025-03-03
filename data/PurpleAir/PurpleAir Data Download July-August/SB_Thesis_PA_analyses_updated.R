@@ -18,6 +18,8 @@ library(sf)
 
 setwd("/Users/samiebaclig/Documents/GitHub/grit") 
 PA_locs<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_updated.csv")
+#for ailene
+#PA_locs<-read.csv("analyses/output/grit_aq_lc_jul_aug_updated.csv")
 
 ###New Data###
 ##Roads##
@@ -30,6 +32,10 @@ roads <- st_read("~/Documents/GitHub/grit/data/pierce county roads/tl_2023_53053
 df <-
   list.files(path = "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August", pattern = "*.csv", full.names = TRUE) %>% 
   map_df(~read_csv(.))
+#for ailene
+#df <-
+#  list.files(path = "data/PurpleAir/PurpleAir Data Download July-August", pattern = "*.csv", full.names = TRUE) %>% 
+#  map_df(~read_csv(.))
 
 ##using PA correction factor they used Cf_1 values but used atm since used for outdoor monitoring 
 PA <- df %>% select(time_stamp,humidity,pressure,pm2.5_atm,temperature, sensor_index) %>%
@@ -106,6 +112,8 @@ sensor_indices <- c(135354, 136172, 15203, 152162,
                     98105) 
 average_df <- data.frame(sensor_index= sensor_indices,avg_pm2.5 = pm2.5_avg)
 lc<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_updated.csv")
+#for ailene
+#lc<-read.csv("analyses/output/grit_aq_lc_jul_aug_updated.csv")
 
 combined_df <- full_join(average_df, lc)
 
@@ -184,5 +192,19 @@ above9_days <- ggplot(combined_df, aes(cancov.800m, above9_days))+
   labs(x = "Proportion of Tree Canopy Cover within 800m",
        y = "Number of Days above 9 μg/m3")+
   ggtitle("Number of Days above EPA PM2.5 Annual Standard vs Tree Canopy Cover")
-  
+ 
+#added by ailene 28 feb 2025 
+#fit a linear model- since plot looks linear
+hrm10<-lm(above9_hour~cancov.10m, data=combined_df)
+hrm20<-lm(above9_hour~cancov.20m, data=combined_df)
+hrm30<-lm(above9_hour~cancov.30m, data=combined_df)
+hrm40<-lm(above9_hour~cancov.40m, data=combined_df)
+hrm50<-lm(above9_hour~cancov.50m, data=combined_df)
+hrm100<-lm(above9_hour~cancov.100m, data=combined_df)
+hrm200<-lm(above9_hour~cancov.200m, data=combined_df)
+hrm400<-lm(above9_hour~cancov.400m, data=combined_df)
+hrm800<-lm(above9_hour~cancov.800m, data=combined_df)
 
+summary(hrm10)
+coef(hrm10)
+#canopy cover within 10 m has a negative effect on hours with air quality above the threshold!

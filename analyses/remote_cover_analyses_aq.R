@@ -61,7 +61,6 @@ lcNOAA <-
 #lc <-  raster("data/psLandCover_mosaic.tif")
 
 #read in polygon for Tacoma
-
 st <- states()
 tacoma <- places("WA", cb = TRUE) %>%
   filter(NAME %in% c("Tacoma","Lakewood","University Place",
@@ -80,10 +79,7 @@ ggplot() +
   geom_sf(data = tacoma, fill = "red", color = NA) + 
   theme_void()
 
-
-
 #Useful websitehttps://gis.stackexchange.com/questions/292327/creating-buffers-around-points-and-merging-with-spatialpolygonsdataframe-to-crea
-
 #Convert points data frame to sf using these as coordinates:
   
 locs = st_as_sf(locs_raw,coords=c("long","lat"), crs="+proj=longlat +datum=WGS84")
@@ -227,7 +223,7 @@ mutate(sensor_index = locs_raw$sensor_index) %>%
 
 
 e20sums.df<- e20sums.df %>% dplyr::select(-c(V1)) %>%
-mutate(sensor_index = locs_raw$sensor_index) %>% 
+  mutate(sensor_index = locs_raw$sensor_index) %>% 
   setNames(c("0.20m","1.20m","2.20m","sensor_index"))
     
 e30sums.df<- e30sums.df %>% dplyr::select(-c(V1)) %>%
@@ -286,3 +282,5 @@ locslc$cancov.400m<-as.numeric(locslc$"1.400m")/ sum(as.numeric(locslc$"0.400m")
 locslc$cancov.800m<-as.numeric(locslc$"1.800m")/ sum(as.numeric(locslc$"0.800m"),as.numeric(locslc$"1.800m"), as.numeric(locslc$"2.800"), na.rm = TRUE)
 
 write.csv(locslc,"~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_updated.csv", row.names = FALSE)
+#for ailene:
+#write.csv(locslc,"analyses/output/grit_aq_lc_jul_aug_updated.csv", row.names = FALSE)
