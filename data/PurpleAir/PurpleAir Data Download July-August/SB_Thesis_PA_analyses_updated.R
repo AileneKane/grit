@@ -15,7 +15,10 @@ library(gridExtra)
 library(scales)
 library(mgcv)
 library(sf)
-
+library(tigris)
+library(sf)
+library(dplyr)
+library(readr)
 setwd("/Users/samiebaclig/Documents/GitHub/grit") 
 PA_locs<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_updated.csv")
 #for ailene
@@ -24,9 +27,6 @@ PA_locs<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_up
 ###New Data###
 ##Roads##
 roads <- st_read("~/Documents/GitHub/grit/data/pierce county roads/tl_2023_53053_roads.shp")
-
-
-
 
 ###separated DF
 df <-
@@ -112,10 +112,32 @@ sensor_indices <- c(135354, 136172, 15203, 152162,
                     98105) 
 average_df <- data.frame(sensor_index= sensor_indices,avg_pm2.5 = pm2.5_avg)
 lc<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_updated.csv")
+imp<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_imp_jul_aug_updated.csv")
+imp<- imp %>% as.numeric(imp$sensor_index) 
+
+shrub_tree<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_shrub&canopy_jul_aug_updated.csv")
+shrub_tree <- shrub_tree %>% 
+  rename(
+    shrubcov.10m = cancov.10m,
+    shrubcov.20m = cancov.20m,
+    shrubcov.30m = cancov.30m,
+    shrubcov.40m = cancov.40m,
+    shrubcov.50m = cancov.50m,
+    shrubcov.100m = cancov.100m,
+    shrubcov.200m = cancov.200m,
+    shrubcov.400m = cancov.400m,
+    shrubcov.800m = cancov.800m
+  )
 #for ailene
 #lc<-read.csv("analyses/output/grit_aq_lc_jul_aug_updated.csv")
 
-combined_df <- full_join(average_df, lc)
+combined_df <- left_join(average_df, lc, by = "sensor_index")
+combined_df <- left_join(combined_df,imp, by = "sensor_index")
+combined_df <- left_join(combined_df,shrub_tree, by = "sensor_index")
+combined_df <- combined_df %>% select (sensor_index, avg_pm2.5,long,lat,name,
+                                       cancov.10m,cancov.20m,cancov.30m, cancov.40m, cancov.50m, cancov.100m, cancov.200m, cancov.400m, cancov.800m,
+                                       impcov.10m, impcov.10m, impcov.20m, impcov.30m, impcov.40m, impcov.50m,impcov.100m,impcov.200m,impcov.400m,impcov.800m,
+                                       shrubcov.10m,shrubcov.20m,shrubcov.30m,shrubcov.40m,shrubcov.50m,shrubcov.100m,shrubcov.200m,shrubcov.400m,shrubcov.800m)
 
 ###AQ threshold 
 #jul_7384<- pa_7384 %>%
@@ -170,13 +192,14 @@ above9_df <- data.frame(
 combined_df <- dplyr::left_join(combined_df, above9_df, by = "sensor_index")
 
 
+
 ####Plots###
 
 PM2.5_EPA_annual <- data.frame(yintercept = 9, Lines = 'Annual') # long-term standard (annual average)
 
 
-##cancov avg, changing radii when saving plots
-cancov_avg<- ggplot(combined_df, aes(cancov.800m,avg_pm2.5))+
+##tree canopy cancov avg, changing radii when saving plots
+cancov_avg<- ggplot(combined_df, aes(shrubcov.00m,avg_pm2.5))+
   geom_point()+
   stat_smooth(method = "gam", 
               method.args = list(family = gaussian))+
@@ -192,7 +215,9 @@ above9_days <- ggplot(combined_df, aes(cancov.800m, above9_days))+
   labs(x = "Proportion of Tree Canopy Cover within 800m",
        y = "Number of Days above 9 μg/m3")+
   ggtitle("Number of Days above EPA PM2.5 Annual Standard vs Tree Canopy Cover")
- 
+
+
+
 #added by ailene 28 feb 2025 
 #fit a linear model- since plot looks linear
 hrm10<-lm(above9_hour~cancov.10m, data=combined_df)
@@ -208,3 +233,39 @@ hrm800<-lm(above9_hour~cancov.800m, data=combined_df)
 summary(hrm10)
 coef(hrm10)
 #canopy cover within 10 m has a negative effect on hours with air quality above the threshold!
+
+
+
+###Census Information to include for proximity to hwys###
+install.packages("tidycensus")
+library(tidycensus)
+equity_index <- st_read("~/Downloads/Equity_Index_1749294806086202155/Equity_Index.shp")
+equity_index <- st_transform(equity_index, crs = 4326)
+filtered_equity_index <- equity_index[grepl("^53053", equity_index$GEOID), ]
+
+census_api_key("480d1711be5ee649f10d69553e6b42950bcf8ac3", install = TRUE)
+locs <- read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_updated.csv")
+locs_sf <- st_as_sf(locs,coords = c("long", "lat"), crs = 4326)
+cbg <- block_groups(state = "WA", class = "sf", year = 2024)
+locs_sf <- st_transform(locs_sf, st_crs(cbg))
+
+joined <- st_join(locs_sf, cbg, join = st_within) 
+joined <- st_transform(joined, crs = 4326)
+joined_filtered <- st_join(filtered_equity_index,joined)
+joined <- joined %>%
+  mutate(GEOID = as.character(GEOID))
+filtered_equity_index <- filtered_equity_index %>%
+  mutate(GEOID = as.character(GEOID))
+joined_equity <- st_join(joined, filtered_equity_index)
+joined_equity <- joined_equity %>% select(sensor_index, pov_rate, 
+                                          FPLPct,RparkPct,CparkPct, NparkPct, PerOpSpc,
+                                          AvgRdScr,TranRatScr,SelfRtHlth,
+                                          PM2_5,PTRAF,AccIndx,Accessibil,EcoIndx,EconomicIn,
+                                          EduIndx,EducationI,EquityInde,EquityIn_1,EnvIndx,Environmen,
+                                          LivIndx,Livability)
+joined_equity_df <- st_drop_geometry(joined_equity)
+
+combined_df <- dplyr::left_join(combined_df, joined_equity_df, by = "sensor_index")
+write.csv(combined_df,"~/Documents/GitHub/grit/analyses/output/grit_aq_lc&pm2.5_jul_aug_updated.csv", row.names = FALSE)
+
+

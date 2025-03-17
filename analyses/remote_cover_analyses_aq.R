@@ -5,7 +5,7 @@
 ##############################
 
 #clear workspace
-rm(list=ls()) 
+rm(list=ls())
 
 
 #set strings default and avoid scientific notation for 6 digits
@@ -32,6 +32,8 @@ library(maps)
 library(mapdata)
 library(tigris) 
 options(tigris_use_cache = TRUE)
+library(terra)
+
 
 setwd("/Users/samiebaclig/Documents/GitHub/grit") 
 #for ailene's computer:
@@ -54,8 +56,11 @@ locs_raw <-rename(locs)#, Longitude = x, Latitude = y)
 lc <- 
   raster("~/Documents/Land Cover/psLandCover_mosaic.tif")
 
-lcNOAA <-
-  raster("~/Documents/Land Cover/wa_2021_ccap_v2_hires_canopy_20240402.tif")
+lcNOAA <-raster("~/Documents/Land Cover/wa_2021_ccap_v2_hires_canopy_20240402.tif")
+imperviousNOAA <- rast("~/Documents/Impervious Surface/wa_2021_ccap_v2_hires_impervious_20240402.tif")
+imperviousNOAA <- raster(imperviousNOAA)
+
+
 #For ailene:
 #lcNOAA <-  raster("data/C-CAP/wa_2021_ccap_v2_hires_canopy_20240402.tif")
 #lc <-  raster("data/psLandCover_mosaic.tif")
@@ -88,25 +93,31 @@ locs = st_as_sf(locs_raw,coords=c("long","lat"), crs="+proj=longlat +datum=WGS84
     
 locs <- st_transform(locs, crs(lc))
 locs_NOAA <- st_transform(locs, crs(lcNOAA))
+#for impervious cover
+#locs_impervious <- st_transform(locs,crs(imperviousNOAA))
 
 #tacoma2<-st_transform(tacoma, crs(lc))
 tacoma2<-st_transform(tacoma, crs(lcNOAA))
 
+#for impervious cover
+#tacoma2<-st_transform(tacoma, crs(imperviousNOAA))
 #crop lc raster to just Tacoma:
 #lc_tacoma<-crop(x = lc, y = tacoma2)
 
 #using the Tacoma polygon seems to cut out one of our AQ monitors- not sure why. To get around this, create a new, larger, rectangular polygon that is a bit bigger than Tacoma, and use this to crop the landcover
 
 bbox <- st_bbox(locs_NOAA)
+#bbox <- st_bbox(imperviousNOAA)
 
 
 etacrect <- as(raster::extent(bbox$xmin-2000, bbox$xmax+2000,bbox$ymin-1000, bbox$ymax+1000), "SpatialPolygons")
-proj4string(etacrect) <- crs(lcNOAA)
+proj4string(etacrect) <- crs(lcNOAA) #change to impervious
 plot(etacrect)
 
 #instead of using tacoma2 shapefile, use tacrect_
 lc_tacoma_NOAA<-crop(x = lcNOAA, y = etacrect)
 lc_tacoma2_NOAA<-crop(x = lcNOAA, y = tacoma2)
+lc_impervious<- crop(x= imperviousNOAA, y=etacrect)
 
 
 #create a polygon bounded by min max of lc
@@ -152,7 +163,7 @@ locs_buffer400m$area_sqm <- st_area(locs_buffer400m)#
 locs_buffer800m$area_sqm <- st_area(locs_buffer800m)#
 
 #locs_buffer10m$area_sqm <- st_area(locs_buffer100m)
-
+#change x to lc_impervious for impervious cover
 e10 <- raster::extract(x = lc_tacoma_NOAA, 
                         y = locs_buffer10m, 
                         df = TRUE,method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, 
@@ -161,7 +172,7 @@ e20 <- raster::extract(x = lc_tacoma_NOAA,
                         y = locs_buffer20m, 
                        df = TRUE,method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, 
                        na.rm=FALSE, factors=FALSE)
-e30 <- raster::extract(x = lc_tacoma_NOAA, 
+e30 <- raster::extract(x =lc_tacoma_NOAA, 
                        y = locs_buffer30m, 
                        df = TRUE,method='simple', buffer=NULL, small=FALSE, cellnumbers=FALSE, 
                        na.rm=FALSE, factors=FALSE)
@@ -203,6 +214,19 @@ e200sums<-cbind(rownames(table(e200$ID,e200$Layer_1)),table(e200$ID,e200$Layer_1
 e400sums<-cbind(rownames(table(e400$ID,e400$Layer_1)),table(e400$ID,e400$Layer_1))
 e800sums<-cbind(rownames(table(e800$ID,e800$Layer_1)),table(e800$ID,e800$Layer_1))
 
+#summarize impervious cover classes
+#1 = developed impervious
+#0 = background
+e10sums<-cbind(rownames(table(e10$ID,e10$Layer_1)),table(e10$ID,e10$Layer_1))
+e20sums<-cbind(rownames(table(e20$ID,e20$Layer_1)),table(e20$ID,e20$Layer_1))
+e30sums<-cbind(rownames(table(e30$ID,e30$Layer_1)),table(e30$ID,e30$Layer_1))
+e40sums<-cbind(rownames(table(e40$ID,e40$Layer_1)),table(e40$ID,e40$Layer_1))
+e50sums<-cbind(rownames(table(e50$ID,e50$Layer_1)),table(e50$ID,e50$Layer_1))
+e100sums<-cbind(rownames(table(e100$ID,e100$Layer_1)),table(e100$ID,e100$Layer_1))
+e200sums<-cbind(rownames(table(e200$ID,e200$Layer_1)),table(e200$ID,e200$Layer_1))
+e400sums<-cbind(rownames(table(e400$ID,e400$Layer_1)),table(e400$ID,e400$Layer_1))
+e800sums<-cbind(rownames(table(e800$ID,e800$Layer_1)),table(e800$ID,e800$Layer_1))
+
 #colnames(e800sums)
 
 
@@ -220,6 +244,8 @@ e800sums.df<-as.data.frame(e800sums)
 e10sums.df <- e10sums.df %>% dplyr::select(-c(V1)) %>%
 mutate(sensor_index = locs_raw$sensor_index) %>%
   setNames(c( "0.10m", "1.10m", "2.10","sensor_index")) 
+colnames(locslc)[colnames(locslc) == "2.10"] <- "2.10m"
+
 
 
 e20sums.df<- e20sums.df %>% dplyr::select(-c(V1)) %>%
@@ -280,7 +306,40 @@ locslc$cancov.100m<-as.numeric(locslc$"1.100m")/ sum(as.numeric(locslc$"0.100m")
 locslc$cancov.200m<-as.numeric(locslc$"1.200m")/ sum(as.numeric(locslc$"0.200m"),as.numeric(locslc$"1.200m"),as.numeric(locslc$"2.200"), na.rm = TRUE)
 locslc$cancov.400m<-as.numeric(locslc$"1.400m")/ sum(as.numeric(locslc$"0.400m"),as.numeric(locslc$"1.400m"), as.numeric(locslc$"2.400"), na.rm = TRUE)
 locslc$cancov.800m<-as.numeric(locslc$"1.800m")/ sum(as.numeric(locslc$"0.800m"),as.numeric(locslc$"1.800m"), as.numeric(locslc$"2.800"), na.rm = TRUE)
-
 write.csv(locslc,"~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_updated.csv", row.names = FALSE)
+
+##for shrub + upland tree forest
+locslc$"1.10m" <- as.numeric(locslc$"1.10m")
+locslc$"2.10m" <- as.numeric(locslc$"2.10m")
+locslc$"0.10m" <- as.numeric(locslc$"0.10m")
+locslc$"0.20m" <- as.numeric(locslc$"0.20m")
+locslc$"1.20m" <- as.numeric(locslc$"1.20m")
+locslc$"2.20m"<- as.numeric(locslc$"2.20m")
+locslc$"0.30m"<- as.numeric(locslc$"0.30m")
+locslc$"1.30m"<- as.numeric(locslc$"1.30m")
+locslc$"2.30m"<- as.numeric(locslc$"2.30m")
+locslc$"0.40m"<- as.numeric(locslc$"0.40m")
+locslc$"1.40m"<- as.numeric(locslc$"1.40m")
+
+locslc$cancov.10m <- (as.numeric(locslc$"1.10m") + as.numeric(locslc$"2.10m")) / 
+  rowSums(locslc[, c("0.10m", "1.10m", "2.10m")], na.rm = TRUE)
+locslc$cancov.20m<-(as.numeric(locslc$"1.20m") +as.numeric(locslc$"2.20m") / 
+  rowSums(locslc[, c("0.20m", "1.20m","2.20m")], na.rm = TRUE)
+
+
+#new col for percent impervious cover 
+locslc$impcov.10m<-as.numeric(locslc$"1.10m")/ sum(as.numeric(locslc$"0.10m"),as.numeric(locslc$"1.10m"), na.rm = TRUE)
+locslc$impcov.20m<-as.numeric(locslc$"1.20m")/ sum(as.numeric(locslc$"0.20m"), as.numeric(locslc$"1.20m"), na.rm = TRUE)
+locslc$impcov.30m<-as.numeric(locslc$"1.30m")/ sum(as.numeric(locslc$"0.30m"), as.numeric(locslc$"1.30m"), na.rm = TRUE)
+locslc$impcov.40m<-as.numeric(locslc$"1.40m")/ sum(as.numeric(locslc$"0.40m"),as.numeric(locslc$"1.40m"), na.rm = TRUE)
+locslc$impcov.50m<-as.numeric(locslc$"1.50m")/ sum(as.numeric(locslc$"0.50m"),as.numeric(locslc$"1.50m"),na.rm = TRUE)
+locslc$impcov.100m<-as.numeric(locslc$"1.100m")/ sum(as.numeric(locslc$"0.100m"), as.numeric(locslc$"1.100m"),na.rm = TRUE)
+locslc$impcov.200m<-as.numeric(locslc$"1.200m")/ sum(as.numeric(locslc$"0.200m"),as.numeric(locslc$"1.200m"), na.rm = TRUE)
+locslc$impcov.400m<-as.numeric(locslc$"1.400m")/ sum(as.numeric(locslc$"0.400m"),as.numeric(locslc$"1.400m"), na.rm = TRUE)
+locslc$impcov.800m<-as.numeric(locslc$"1.800m")/ sum(as.numeric(locslc$"0.800m"),as.numeric(locslc$"1.800m"), na.rm = TRUE)
+
+
+write.csv(locslc,"~/Documents/GitHub/grit/analyses/output/grit_aq_imp_jul_aug_updated.csv", row.names = FALSE)
+
 #for ailene:
 #write.csv(locslc,"analyses/output/grit_aq_lc_jul_aug_updated.csv", row.names = FALSE)
