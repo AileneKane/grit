@@ -113,9 +113,22 @@ sensor_indices <- c(135354, 136172, 15203, 152162,
 average_df <- data.frame(sensor_index= sensor_indices,avg_pm2.5 = pm2.5_avg)
 lc<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_updated.csv")
 imp<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_imp_jul_aug_updated.csv")
+#for ailene:
+#lc<-read.csv("analyses/output/grit_aq_lc_jul_aug_updated.csv")
+#imp<-read.csv("analyses/output/grit_aq_imp_jul_aug_updated.csv")
+
+#for ailene
+#lc<-read.csv("analyses/output/grit_aq_lc_jul_aug_updated.csv")
+#imp<-read.csv("analyses/output/grit_aq_imp_jul_aug_updated.csv")
+
 imp<- imp %>% as.numeric(imp$sensor_index) 
+#for ailene: 
+#imp$sensor_index<- as.numeric(imp$sensor_index) 
 
 shrub_tree<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_shrub&canopy_jul_aug_updated.csv")
+#for ailene:
+#shrub_tree<-read.csv("analyses/output/grit_aq_shrub&canopy_jul_aug_updated.csv")
+
 shrub_tree <- shrub_tree %>% 
   rename(
     shrubcov.10m = cancov.10m,
@@ -233,6 +246,30 @@ hrm800<-lm(above9_hour~cancov.800m, data=combined_df)
 summary(hrm10)
 coef(hrm10)
 #canopy cover within 10 m has a negative effect on hours with air quality above the threshold!
+
+#added by ailene 4/2/2025:
+#Use slopes/effect sizes from above models to make a plot of effect sizes of canopy cover on particulate matter
+
+eff<-c(coef(hrm10)[2],coef(hrm20)[2],coef(hrm30)[2],coef(hrm40)[2],coef(hrm50)[2],
+       coef(hrm100)[2],coef(hrm200)[2],coef(hrm400)[2],coef(hrm800)[2])
+#To make map of loggers by their temperatures, save a csv file with tmax and tmin on hottest days in jun and jult:
+ps<-c(summary(hrm10)$coef[2,4],summary(hrm20)$coef[2,4],summary(hrm30)$coef[2,4],summary(hrm40)$coef[2,4],summary(hrm50)$coef[2,4],
+      summary(hrm100)$coef[2,4],summary(hrm200)$coef[2,4],summary(hrm400)$coef[2,4],summary(hrm800)$coef[2,4])
+cancols=c(rep("darkgreen", times=length(ps)))
+cancols2<-cancols
+cancols2[which(ps>0.1)]<-"white"
+
+png(file="analyses/PurpleAir figs/caneffects.png",width =3000, height =1500 ,res =300)
+x<-barplot(eff, col=cancols2, border=cancols,ylim=c(-8000,8000), 
+           cex.lab=1.3,cex.axis=1.2,cex.names=1.2,
+           ylab="Effect of canopy on hours with bad air quality",xlab="Distance (m)",names.arg=c("10","20","30","40","50","100","200","400","800"))
+error<-c(summary(hrm10)$coef[2,2],summary(hrm20)$coef[2,2],summary(hrm30)$coef[2,2],summary(hrm40)$coef[2,2],summary(hrm50)$coef[2,2],
+         summary(hrm100)$coef[2,2],summary(hrm200)$coef[2,2],summary(hrm400)$coef[2,2],summary(hrm800)$coef[2,2])
+for(i in 1:length(eff)){
+  arrows(x[i],eff[i]+error[i],x[i],eff[i]-error[i], code=3, angle=90, length=0.05,  lwd=2)
+}
+abline(h=0)
+dev.off() 
 
 
 
