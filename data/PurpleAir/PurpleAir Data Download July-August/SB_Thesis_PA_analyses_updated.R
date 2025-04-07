@@ -3,7 +3,7 @@ rm(list=ls())
 options(stringsAsFactors = FALSE)
 install.packages("patchwork")
 install.packages("gridExtra")
-
+install.packages("Metrics")
 
 # load libraries
 library(tidyverse)
@@ -19,14 +19,13 @@ library(tigris)
 library(sf)
 library(dplyr)
 library(readr)
+library(Metrics)
 setwd("/Users/samiebaclig/Documents/GitHub/grit") 
-PA_locs<-read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc_jul_aug_updated.csv")
 #for ailene
 #PA_locs<-read.csv("analyses/output/grit_aq_lc_jul_aug_updated.csv")
 
-###New Data###
-##Roads##
-roads <- st_read("~/Documents/GitHub/grit/data/pierce county roads/tl_2023_53053_roads.shp")
+## April 6 Samie Updated data frame with all info
+data <- read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc&pm2.5_jul_aug_updated.csv")
 
 ###separated DF
 df <-
@@ -208,17 +207,43 @@ combined_df <- dplyr::left_join(combined_df, above9_df, by = "sensor_index")
 
 ####Plots###
 
-PM2.5_EPA_annual <- data.frame(yintercept = 9, Lines = 'Annual') # long-term standard (annual average)
-
+PM2.5_EPA_annual <- data.frame(yintercept = 9, Lines = 'Annual') # long-term standard (annual average)a
 
 ##tree canopy cancov avg, changing radii when saving plots
-cancov_avg<- ggplot(combined_df, aes(shrubcov.00m,avg_pm2.5))+
+cancov_avg<- ggplot(data, aes(shrubcov.100m,avg_pm2.5))+
   geom_point()+
   stat_smooth(method = "gam", 
               method.args = list(family = gaussian))+
   geom_hline(data = PM2.5_EPA_annual, aes(yintercept = yintercept, color = "Annual Standard", linetype = "Annual"), 
            linetype = "dashed")+
+  theme_classic()+
   theme(legend.position= c(0.89, 0.89))
+  
+all_cancov_long <- data%>%
+  pivot_longer(cols = starts_with("cancov"), 
+               names_to = "canopy_type", 
+               values_to = "cancov_percent")
+all_cancov_filtered <- all_cancov_long %>%
+  filter(grepl("cancov", canopy_type)) 
+all_cancov_filtered$canopy_type <- gsub("cancov\\.|_percent", "", all_cancov_filtered$canopy_type)
+all_cancov_filtered$canopy_type <- trimws(all_cancov_filtered$canopy_type)
+all_cancov_filter <- all_cancov_filtered %>% 
+  mutate(canopy_type = factor(canopy_type, levels = c("10m", "20m","30m","40m","50m", "100m","200m","400m" ,"800m"))) %>%
+  arrange(canopy_type)
+allcanpm <- ggplot(all_cancov_filter, aes(x = cancov_percent, y = avg_pm2.5)) +
+  geom_point(size = 2) +  
+  stat_smooth(method = "gam", method.args = list(family = gaussian)) +  # Add GAM smooth line
+  labs(
+    title = "PM 2.5 Concentrations vs. Tree Canopy Cover by Buffer Size",
+    x = "Tree Canopy Cover",
+    y = "PM 2.5 Concentration (µg/m3)") +
+  scale_y_continuous(limits = c(0, 20)) +  
+  theme_bw() +
+  theme(legend.position = "bottom",
+        plot.title = element_text(size = 14, face = "bold"))+
+  scale_color_viridis_d(option = "D")+
+  facet_wrap(~canopy_type, scales = "fixed")  
+ggsave("allcanpm.png", width = 8, height = 5, dpi = 300)
 
 ##days above EPA PM2.5 long term standard (9)
 above9_days <- ggplot(combined_df, aes(cancov.800m, above9_days))+
@@ -228,6 +253,7 @@ above9_days <- ggplot(combined_df, aes(cancov.800m, above9_days))+
   labs(x = "Proportion of Tree Canopy Cover within 800m",
        y = "Number of Days above 9 μg/m3")+
   ggtitle("Number of Days above EPA PM2.5 Annual Standard vs Tree Canopy Cover")
+
 
 
 
@@ -304,5 +330,120 @@ joined_equity_df <- st_drop_geometry(joined_equity)
 
 combined_df <- dplyr::left_join(combined_df, joined_equity_df, by = "sensor_index")
 write.csv(combined_df,"~/Documents/GitHub/grit/analyses/output/grit_aq_lc&pm2.5_jul_aug_updated.csv", row.names = FALSE)
+
+#### Creating linear models 4/4/25###
+#response var: above 9 days
+cchrm10<- lm(above9_hour ~ cancov.10m, data=data)
+cchrm20<- lm(above9_hour~cancov.20m,data=data)
+cchrm30<- lm(above9_hour~cancov.30m,data=data)
+cchrm40<- lm(above9_hour~cancov.40m,data=data)
+cchrm50<- lm(above9_hour~cancov.50m,data=data)
+cchrm100<-lm(above9_hour~cancov.100m,data=data)
+cchrm200<-lm(above9_hour~cancov.200m,data=data)
+cchrm400<-lm(above9_hour~cancov.400m,data=data)
+cchrm800<-lm(above9_hour~cancov.800m,data=data)
+
+schrm10<- lm(above9_hour~shrubcov.10m,data=data)
+schrm20<- lm(above9_hour~shrubcov.20m,data=data)
+schrm30<- lm(above9_hour~shrubcov.30m,data=data)
+schrm40<- lm(above9_hour~shrubcov.40m,data=data)
+schrm50<- lm(above9_hour~shrubcov.50m,data=data)
+schrm100<- lm(above9_hour~shrubcov.100m,data=data)
+schrm200<- lm(above9_hour~shrubcov.200m,data=data)
+schrm400<- lm(above9_hour~shrubcov.400m,data=data)
+schrm800<- lm(above9_hour~shrubcov.800m,data=data)
+
+sccchrm10<- lm(above9_hour~cancov.10m + shrubcov.10m, data=data)
+sccchrm20<- lm(above9_hour~cancov.20m + shrubcov.20m, data=data)
+sccchrm30<- lm(above9_hour~cancov.30m + shrubcov.30m, data=data)
+sccchrm40<- lm(above9_hour~cancov.40m + shrubcov.40m, data=data)
+sccchrm50<- lm(above9_hour~cancov.50m +shrubcov.50m, data=data)
+sccchrm100<- lm(above9_hour~cancov.100m + shrubcov.100m, data=data)
+sccchrm200<- lm(above9_hour~cancov.200m + shrubcov.200m, data=data)
+sccchrm400<- lm(above9_hour~cancov.400m + shrubcov.400m, data=data)
+sccchrm800<- lm(above9_hour~cancov.800m + shrubcov.800m, data=data)
+##comparing models
+AIC(cchrm10,cchrm20,cchrm30,cchrm40,cchrm50,cchrm100,cchrm200,cchrm400,cchrm800,
+    schrm10,schrm20,schrm30,schrm40,schrm50,schrm100,schrm200,schrm400,schrm800,
+    sccchrm10,sccchrm20,sccchrm30,sccchrm40,sccchrm50,sccchrm100,sccchrm200,sccchrm400,sccchrm800)
+#sccchrm200 lowest AIC
+summary(sccchrm200)$r.squared 
+summary(sccchrm200)$adj.r.squared
+rmse(data$above9_hour, sccchrm200$fitted.values)
+
+#response var mean pm2.5
+ccmnpm.10<-lm(avg_pm2.5~cancov.10m,data=data)
+ccmnpm.20<-lm(avg_pm2.5~cancov.20m,data=data)
+ccmnpm.30<- lm(avg_pm2.5~cancov.30m,data=data)
+ccmnpm.40<- lm(avg_pm2.5~cancov.40m,data=data)
+ccmnpm.50<- lm(avg_pm2.5~cancov.50m,data=data)
+ccmnpm.100<- lm(avg_pm2.5~cancov.100m, data=data)
+ccmnpm.200<- lm(avg_pm2.5~cancov.200m,data=data)
+ccmnpm.400<- lm(avg_pm2.5~cancov.400m,data=data)
+ccmnpm.800<- lm(avg_pm2.5~cancov.800m,data=data)
+
+scmnpm.10<-lm(avg_pm2.5~shrubcov.10m, data=data)
+scmnpm.20<- lm(avg_pm2.5~shrubcov.20m,data=data)
+scmnpm.30<- lm(avg_pm2.5~shrubcov.30m,data=data)
+scmnpm.40<- lm(avg_pm2.5~shrubcov.40m, data=data)
+scmnpm.50<- lm(avg_pm2.5~shrubcov.50m, data=data)
+scmnpm.100<- lm(avg_pm2.5~shrubcov.100m, data=data)
+scmnpm.200<- lm(avg_pm2.5~shrubcov.200m, data=data)
+scmnpm.400m<- lm(avg_pm2.5~shrubcov.400m, data=data)
+scmnpm.800m<- lm(avg_pm2.5~shrubcov.800m, data=data)
+
+scccmnpm.10<- lm(avg_pm2.5~shrubcov.10m + cancov.10m, data=data)
+scccmnpm.20<- lm(avg_pm2.5~shrubcov.20m + cancov.20m, data=data)
+scccmnpm.30<- lm(avg_pm2.5~shrubcov.30m + cancov.30m, data=data)
+scccmnpm.40<- lm(avg_pm2.5~shrubcov.40m + cancov.40m, data=data)
+scccmnpm.50<- lm(avg_pm2.5~shrubcov.50m + cancov.50m, data=data)
+scccmnpm.100<- lm(avg_pm2.5~shrubcov.100m + cancov.100m, data=data)
+scccmnpm.200<- lm(avg_pm2.5~shrubcov.200m + cancov.200m, data=data)
+scccmnpm.400<-lm(avg_pm2.5~shrubcov.400m+cancov.400m, data=data)
+scccmnpm.800<-lm(avg_pm2.5~shrubcov.800m+cancov.800m, data=data)
+##comparing models
+AIC(ccmnpm.10,ccmnpm.20,ccmnpm.30,ccmnpm.40,ccmnpm.50,ccmnpm.100,ccmnpm.200,ccmnpm.400,ccmnpm.800,
+    scmnpm.10,scmnpm.20,scmnpm.30,scmnpm.40,scmnpm.50,scmnpm.100,scmnpm.200,scmnpm.400m,scmnpm.800m,
+    scccmnpm.10, scccmnpm.20,scccmnpm.30,scccmnpm.40,scccmnpm.50,scccmnpm.200,scccmnpm.400,scccmnpm.800)
+##200 lowest AIC shrub + cc
+summary(scccmnpm.200)$r.squared
+summary(scccmnpm.200)$adj.r.squared
+rmse(data$above9_hour, scccmnpm.200$fitted.values)
+
+
+###Equity Index Plots###
+data$EquityInde <- factor(data$EquityInde, levels = c("Very Low", "Low", "Moderate","High","Very High"))
+
+equityindex10<- data %>% filter(!is.na(EquityInde)) %>%
+  ggplot(aes(x=EquityInde,y=(cancov.10m * 100),fill=EquityInde))+
+    geom_boxplot(na.rm=TRUE)+
+    labs(x = "Equity Index", y = "Tree Canopy Cover Within 10m (%)")+
+    scale_fill_brewer(palette="Greens")+
+    theme_bw(base_size=14)+
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    axis.title = element_text(face = "bold"),
+    legend.position="none")+
+    ggtitle("Tree Canopy Cover vs. Equity Index")
+ggsave("equityindex10.png", width = 8, height = 5, dpi = 300)
+
+plotdata <- data %>% filter(!is.na(EquityInde)) %>% group_by(EquityInde)%>% summarise(mean_above9hr = mean(above9_hour),
+                                                                                      median_above9 = median(above9_hour))
+x <- ggplot(data = plotdata,
+            aes(x=EquityInde, y = median_above9))+
+  geom_bar(stat="identity")
+
+above9equity<- data %>%   filter(!is.na(EquityInde)) %>%
+  ggplot(aes(x= EquityInde, y = above9_hour, fill=EquityInde)) +
+  geom_boxplot() +
+  theme_bw(base_size=14)+
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    axis.title = element_text(face = "bold"),
+    legend.position="none")+
+  scale_fill_brewer(palette="Greens")+
+  labs(y= "Number of Hours Above 9 μg/m3", x = "Equity Index")+
+  ggtitle("Hours Above Threshold vs Equity Index")
+ggsave("above9equity.png", width = 8, height = 5, dpi = 300)
 
 
