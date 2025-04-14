@@ -226,23 +226,42 @@ cancov_avg<- ggplot(data, aes(x = (cancov.200m * 100) ,y = avg_pm2.5))+
     plot.title = element_text(hjust = 0.5, face = "bold"),
     axis.title = element_text(face = "bold"),
     legend.position= "none")+
-    labs(y= "Average PM2.5", x = "Tree Canopy Cover Within 200m (%)")+
+    labs(y= "Average PM2.5", x = "Tree Canopy Cover Within 200m (%)")
     #ggtitle("Tree Canopy Cover Within 200m (%) vs Average PM2.5")
 ggsave("cancov200.png", width = 5, height = 5, dpi = 300)
 
+shrubcov_avg<- ggplot(data, aes(x = (shrubcov.200m * 100) ,y = avg_pm2.5))+
+  geom_point(color="darkgreen")+
+  stat_smooth(method = "gam", 
+              method.args = list(family = gaussian), color="black", size=0.5)+
+  geom_hline(data = PM2.5_EPA_annual, aes(yintercept = yintercept, color = "Annual Standard", linetype = "Annual"), 
+             linetype = "dashed")+
+  scale_y_continuous(limits = c(0, 27))+  #there is an outlier artondale, that got cut off from
+  scale_color_manual(values = c("Annual Standard" = "black"))+
+  annotate("text", label ="EPA Annual Standard (9.0 μg/m3)", x=75, y = 10, size = 3)+
+  theme_classic()+
+  theme(
+    plot.title = element_text(hjust = 0.5, face = "bold"),
+    axis.title = element_text(face = "bold"),
+    legend.position= "none")+
+  labs(y= "Average PM2.5", x = "Shrub Cover Within 200m (%)")
+ggsave("shrubcov_avg.png", width = 5, height = 5, dpi = 300)
+cancov_shrub_200 <- cancov_avg + shrubcov_avg
+ggsave("cancov_shrub_200.png", width = 8, height = 5, dpi = 300)
 
 ##hours above EPA PM2.5 long term standard (9)
-above9_hours <- ggplot(data, aes((cancov.200m * 100) , above9_hour))+
+above9_hours_shrub <- ggplot(data, aes((shrubcov.200m * 100) , above9_hour))+
   geom_point(color = "darkgreen")+
   stat_smooth(method = "gam", 
               method.args = list(family = gaussian), color="black", size=0.5)+
   theme_classic()+
-  labs(x = "Tree Canopy Cover within 200m (%)", y = "Number of Hours above 9.0 μg/m3")+
+  labs(x = "Shrub Cover within 200m (%)", y = "Number of Hours above 9.0 μg/m3")+
   theme(axis.title = element_text(face="bold"))
-ggsave("cancov200hr.png", width = 5, height = 5, dpi = 300)
+ggsave("shrubcov200hr.png", width = 5, height = 5, dpi = 300)
  # ggtitle("Number of Hours above EPA PM2.5 Annual Standard vs Tree Canopy Cover")+
-  
-  
+cancov_shrub_above9hr<- above9_hours_can + above9_hours_shrub
+ggsave("cancov_shrub_above9hr.png", width = 8, height = 5, dpi = 300)
+
 
 all_cancov_long <- data%>%
   pivot_longer(cols = starts_with("cancov"), 
@@ -278,7 +297,7 @@ ggsave("allcanpm.png", width = 8, height = 5, dpi = 300)
 
 #added by ailene 28 feb 2025 
 #fit a linear model- since plot looks linear
-hrm10<-lm(above9_hour~cancov.10m, data=combined_df)
+hrm10<-lm(above9_hour~cancov.10m, data=data)
 hrm20<-lm(above9_hour~cancov.20m, data=combined_df)
 hrm30<-lm(above9_hour~cancov.30m, data=combined_df)
 hrm40<-lm(above9_hour~cancov.40m, data=combined_df)
@@ -387,6 +406,7 @@ AIC(cchrm10,cchrm20,cchrm30,cchrm40,cchrm50,cchrm100,cchrm200,cchrm400,cchrm800,
     sccchrm10,sccchrm20,sccchrm30,sccchrm40,sccchrm50,sccchrm100,sccchrm200,sccchrm400,sccchrm800)
 #sccchrm200 lowest AIC
 summary(sccchrm200)
+confint(sccchrm200)
 summary(sccchrm200)$r.squared 
 summary(sccchrm200)$adj.r.squared
 rmse(data$above9_hour, sccchrm200$fitted.values)
@@ -427,6 +447,7 @@ AIC(ccmnpm.10,ccmnpm.20,ccmnpm.30,ccmnpm.40,ccmnpm.50,ccmnpm.100,ccmnpm.200,ccmn
     scccmnpm.10, scccmnpm.20,scccmnpm.30,scccmnpm.40,scccmnpm.50,scccmnpm.200,scccmnpm.400,scccmnpm.800)
 ##200 lowest AIC shrub + cc
 summary(scccmnpm.200)
+confint(scccmnpm.200)
 summary(scccmnpm.200)$r.squared
 summary(scccmnpm.200)$adj.r.squared
 rmse(data$avg_pm2.5, scccmnpm.200$fitted.values)
@@ -435,9 +456,15 @@ rmse(data$avg_pm2.5, scccmnpm.200$fitted.values)
 data$EquityInde<-as.factor(data$EquityInde)
 data$EquityInde <- relevel(as.factor(data$EquityInde), ref = "Very Low")
 ccequitymod<-lm(cancov.200m ~EquityInde, data=data)
+ccequitymod_shrub<-lm(shrubcov.200m ~EquityInde, data=data)
 
 summary(ccequitymod)
+summary(ccequitymod_shrub)
+summary(ccequitymod_hr)
+
 anova(ccequitymod)
+anova(ccequitymod_shrub)
+
 
 post.hoc<-glht(ccequitymod,linfct=mcp(EquityInde='Tukey'))
 summary(post.hoc)
@@ -446,7 +473,7 @@ summary(post.hoc)
 data$EquityInde <- factor(data$EquityInde, levels = c("Very Low", "Low", "Moderate","High","Very High"))
 
 equityindex10<- data %>% filter(!is.na(EquityInde)) %>%
-  ggplot(aes(x=EquityInde,y=(cancov.10m * 100),fill=EquityInde))+
+  ggplot(aes(x=EquityInde,y=(cancov.200m * 100),fill=EquityInde))+
     geom_boxplot(na.rm=TRUE)+
     labs(x = "Equity Index", y = "Tree Canopy Cover Within 10m (%)")+
     scale_fill_brewer(palette="Greens")+
@@ -472,10 +499,10 @@ above9equity<- data %>%   filter(!is.na(EquityInde)) %>%
     plot.title = element_text(hjust = 0.5, face = "bold"),
     axis.title = element_text(face = "bold"),
     legend.position="none")+
-  scale_fill_brewer(palette="Greens")+
+    scale_fill_brewer(palette="Greens")+
   labs(y= "Number of Hours Above 9 μg/m3", x = "Equity Index")+
   ggtitle("Hours Above Threshold vs Equity Index")
 ggsave("above9equity.png", width = 8, height = 5, dpi = 300)
-
+scale_fil
 
 
