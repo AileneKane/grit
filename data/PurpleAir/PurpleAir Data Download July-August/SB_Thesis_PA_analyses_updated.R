@@ -17,7 +17,6 @@ library(scales)
 library(mgcv)
 library(sf)
 library(tigris)
-library(sf)
 library(dplyr)
 library(readr)
 library(Metrics)
@@ -28,6 +27,9 @@ setwd("/Users/samiebaclig/Documents/GitHub/grit")
 
 ## April 6 Samie Updated data frame with all info
 data <- read.csv("~/Documents/GitHub/grit/analyses/output/grit_aq_lc&pm2.5_jul_aug_updated.csv")
+#for ailene
+#data<-read.csv("analyses/output/grit_aq_lc&pm2.5_jul_aug_updated.csv")
+
 data <- data %>%  mutate(shrubcancov.200m = shrubcov.200m + cancov.200m)
 ###separated DF
 #df <-
@@ -39,7 +41,7 @@ data <- data %>%  mutate(shrubcancov.200m = shrubcov.200m + cancov.200m)
 #  map_df(~read_csv(.))
 
 ##using PA correction factor they used Cf_1 values but used atm since used for outdoor monitoring 
-PA <- df %>% select(time_stamp,humidity,pressure,pm2.5_atm,temperature, sensor_index) %>%
+PA <- df %>% dplyr::select(time_stamp,humidity,pressure,pm2.5_atm,temperature, sensor_index) %>%
     mutate (pm2.5_correct =(0.541*pm2.5_atm)-(0.0618*humidity) +(0.00534*temperature +3.634)) %>%
   group_by(sensor_index) %>% group_split()%>%
   setNames(df %>% group_by(sensor_index) %>% 
@@ -118,10 +120,6 @@ sensor_indices <- c(135354, 136172, 15203, 152162,
 #lc<-read.csv("analyses/output/grit_aq_lc_jul_aug_updated.csv")
 #imp<-read.csv("analyses/output/grit_aq_imp_jul_aug_updated.csv")
 
-#for ailene
-#lc<-read.csv("analyses/output/grit_aq_lc_jul_aug_updated.csv")
-#imp<-read.csv("analyses/output/grit_aq_imp_jul_aug_updated.csv")
-
 #imp<- imp %>% as.numeric(imp$sensor_index) 
 #for ailene: 
 #imp$sensor_index<- as.numeric(imp$sensor_index) 
@@ -143,15 +141,13 @@ shrub_tree <- shrub_tree %>%
     shrubcov.800m = cancov.800m
   )
 #for ailene
-#lc<-read.csv("analyses/output/grit_aq_lc_jul_aug_updated.csv")
-
 #combined_df <- left_join(average_df, lc, by = "sensor_index")
 #combined_df <- left_join(combined_df,imp, by = "sensor_index")
 #combined_df <- left_join(combined_df,shrub_tree, by = "sensor_index")
-#combined_df <- combined_df %>% select (sensor_index, avg_pm2.5,long,lat,name,
-                                       cancov.10m,cancov.20m,cancov.30m, cancov.40m, cancov.50m, cancov.100m, cancov.200m, cancov.400m, cancov.800m,
-                                       impcov.10m, impcov.10m, impcov.20m, impcov.30m, impcov.40m, impcov.50m,impcov.100m,impcov.200m,impcov.400m,impcov.800m,
-                                       shrubcov.10m,shrubcov.20m,shrubcov.30m,shrubcov.40m,shrubcov.50m,shrubcov.100m,shrubcov.200m,shrubcov.400m,shrubcov.800m)
+#combined_df <- combined_df %>% dplyr::select (sensor_index, avg_pm2.5,long,lat,name,
+#                                       cancov.10m,cancov.20m,cancov.30m, cancov.40m, cancov.50m, cancov.100m, cancov.200m, cancov.400m, cancov.800m,
+#                                       impcov.10m, impcov.10m, impcov.20m, impcov.30m, impcov.40m, impcov.50m,impcov.100m,impcov.200m,impcov.400m,impcov.800m,
+#                                       shrubcov.10m,shrubcov.20m,shrubcov.30m,shrubcov.40m,shrubcov.50m,shrubcov.100m,shrubcov.200m,shrubcov.400m,shrubcov.800m)
 
 ###AQ threshold 
 #jul_7384<- pa_7384 %>%
@@ -298,14 +294,14 @@ ggsave("allcanpm.png", width = 8, height = 5, dpi = 300)
 #added by ailene 28 feb 2025 
 #fit a linear model- since plot looks linear
 hrm10<-lm(above9_hour~cancov.10m, data=data)
-hrm20<-lm(above9_hour~cancov.20m, data=combined_df)
-hrm30<-lm(above9_hour~cancov.30m, data=combined_df)
-hrm40<-lm(above9_hour~cancov.40m, data=combined_df)
-hrm50<-lm(above9_hour~cancov.50m, data=combined_df)
-hrm100<-lm(above9_hour~cancov.100m, data=combined_df)
-hrm200<-lm(above9_hour~cancov.200m, data=combined_df)
-hrm400<-lm(above9_hour~cancov.400m, data=combined_df)
-hrm800<-lm(above9_hour~cancov.800m, data=combined_df)
+hrm20<-lm(above9_hour~cancov.20m, data=data)
+hrm30<-lm(above9_hour~cancov.30m, data=data)
+hrm40<-lm(above9_hour~cancov.40m, data=data)
+hrm50<-lm(above9_hour~cancov.50m, data=data)
+hrm100<-lm(above9_hour~cancov.100m, data=data)
+hrm200<-lm(above9_hour~cancov.200m, data=data)
+hrm400<-lm(above9_hour~cancov.400m, data=data)
+hrm800<-lm(above9_hour~cancov.800m, data=data)
 
 summary(hrm10)
 coef(hrm10)
@@ -335,6 +331,7 @@ for(i in 1:length(eff)){
 abline(h=0)
 dev.off() 
 
+#added april 16, 2025: shrubs
 
 
 ###Census Information to include for proximity to hwys###
@@ -504,5 +501,28 @@ above9equity<- data %>%   filter(!is.na(EquityInde)) %>%
   ggtitle("Hours Above Threshold vs Equity Index")
 ggsave("above9equity.png", width = 8, height = 5, dpi = 300)
 scale_fil
+
+#added april 16, 2025: shrubs
+#Use slopes/effect sizes from shrub models to make a plot of effect sizes of shrubcover on particulate matter (like we did for canopy)
+
+shrubeff<-c(coef(schrm10)[2],coef(schrm20)[2],coef(schrm30)[2],coef(schrm40)[2],coef(schrm50)[2],
+       coef(schrm100)[2],coef(schrm200)[2],coef(schrm400)[2],coef(schrm800)[2])
+shrubps<-c(summary(schrm10)$coef[2,4],summary(schrm20)$coef[2,4],summary(schrm30)$coef[2,4],summary(schrm40)$coef[2,4],summary(schrm50)$coef[2,4],
+      summary(schrm100)$coef[2,4],summary(schrm200)$coef[2,4],summary(schrm400)$coef[2,4],summary(schrm800)$coef[2,4])
+shrubcols=c(rep("seagreen3", times=length(ps)))
+shrubcols2<-shrubcols
+shrubcols2[which(shrubps>0.1)]<-"white"
+
+png(file="analyses/PurpleAir figs/shrubeffects.png",width =3000, height =1500 ,res =300)
+sx<-barplot(shrubeff, col=shrubcols2, border=shrubcols,ylim=c(-160,160), 
+           cex.lab=1.3,cex.axis=1.2,cex.names=1.2,
+           ylab="Effect of canopy on hours with bad air quality",xlab="Distance (m)",names.arg=c("10","20","30","40","50","100","200","400","800"))
+serror<-c(summary(schrm10)$coef[2,2],summary(schrm20)$coef[2,2],summary(schrm30)$coef[2,2],summary(schrm40)$coef[2,2],summary(schrm50)$coef[2,2],
+         summary(schrm100)$coef[2,2],summary(schrm200)$coef[2,2],summary(schrm400)$coef[2,2],summary(schrm800)$coef[2,2])
+for(i in 1:length(shrubeff)){
+  arrows(sx[i],shrubeff[i]+serror[i],sx[i],shrubeff[i]-serror[i], code=3, angle=90, length=0.05,  lwd=2)
+}
+abline(h=0)
+dev.off() 
 
 
