@@ -509,7 +509,7 @@ shrubeff<-c(coef(schrm10)[2],coef(schrm20)[2],coef(schrm30)[2],coef(schrm40)[2],
        coef(schrm100)[2],coef(schrm200)[2],coef(schrm400)[2],coef(schrm800)[2])
 shrubps<-c(summary(schrm10)$coef[2,4],summary(schrm20)$coef[2,4],summary(schrm30)$coef[2,4],summary(schrm40)$coef[2,4],summary(schrm50)$coef[2,4],
       summary(schrm100)$coef[2,4],summary(schrm200)$coef[2,4],summary(schrm400)$coef[2,4],summary(schrm800)$coef[2,4])
-shrubcols=c(rep("seagreen3", times=length(ps)))
+shrubcols=c(rep("seagreen3", times=length(shrubps)))
 shrubcols2<-shrubcols
 shrubcols2[which(shrubps>0.1)]<-"white"
 
@@ -532,3 +532,50 @@ allm<- lm(above9_hour~cancov.10m + shrubcov.10m+cancov.20m + shrubcov.20m+cancov
 dredge(allm)
 dredgetab<-as.data.frame(dredge(allm,beta="none",evaluate=TRUE))
 dredgetab$model <- apply(!is.na(dredgetab[,1:11]), 1, function(x) paste(colnames(dredgetab[,1:11])[x], collapse = "+"))
+
+
+
+#added by ailene 5/9/2025:
+#Use slopes/effect sizes from average pm2.5 models to make plots of effect sizes of canopy and shrub cover on particulate matter
+#tree canopy
+avgpmeff<-c(coef(ccmnpm.10)[2],coef(ccmnpm.20)[2],coef(ccmnpm.30)[2],coef(ccmnpm.40)[2],coef(ccmnpm.50)[2],
+       coef(ccmnpm.100)[2],coef(ccmnpm.200)[2],coef(ccmnpm.400)[2],coef(ccmnpm.800)[2])
+#To make map of loggers by their temperatures, save a csv file with tmax and tmin on hottest days in jun and jult:
+avgpmps<-c(summary(ccmnpm.10)$coef[2,4],summary(ccmnpm.20)$coef[2,4],summary(ccmnpm.30)$coef[2,4],summary(ccmnpm.40)$coef[2,4],summary(ccmnpm.50)$coef[2,4],
+      summary(ccmnpm.100)$coef[2,4],summary(ccmnpm.200)$coef[2,4],summary(ccmnpm.400)$coef[2,4],summary(ccmnpm.800)$coef[2,4])
+cancols=c(rep("darkgreen", times=length(avgpmps)))
+cancols2<-cancols
+cancols2[which(avgpmps>0.1)]<-"white"
+
+png(file="analyses/PurpleAir figs/caneffects.avgpm.png",width =3000, height =1500 ,res =300)
+x<-barplot(avgpmeff, col=cancols2, border=cancols,ylim=c(-8000,8000), 
+           cex.lab=1.3,cex.axis=1.2,cex.names=1.2,
+           ylab="Effect of tree cover on average PM 2.5 (µg/m3) ",xlab="Distance (m)",names.arg=c("10","20","30","40","50","100","200","400","800"))
+avgpmerror<-c(summary(ccmnpm.10)$coef[2,2],summary(ccmnpm.20)$coef[2,2],summary(ccmnpm.30)$coef[2,2],summary(ccmnpm.40)$coef[2,2],summary(ccmnpm.50)$coef[2,2],
+         summary(ccmnpm.100)$coef[2,2],summary(ccmnpm.200)$coef[2,2],summary(ccmnpm.400)$coef[2,2],summary(ccmnpm.800)$coef[2,2])
+for(i in 1:length(eff)){
+  arrows(x[i],avgpmeff[i]+avgpmerror[i],x[i],avgpmeff[i]-avgpmerror[i], code=3, angle=90, length=0.05,  lwd=2)
+}
+abline(h=0)
+dev.off() 
+#shrub cover
+avgpmshrubeff<-c(coef(scmnpm.10)[2],coef(scmnpm.20)[2],coef(scmnpm.30)[2],coef(scmnpm.40)[2],coef(scmnpm.50)[2],
+            coef(scmnpm.100)[2],coef(scmnpm.200)[2],coef(scmnpm.400m)[2],coef(scmnpm.800m)[2])
+#To make map of loggers by their temperatures, save a csv file with tmax and tmin on hottest days in jun and jult:
+avgpmshrubps<-c(summary(scmnpm.10)$coef[2,4],summary(scmnpm.20)$coef[2,4],summary(scmnpm.30)$coef[2,4],summary(scmnpm.40)$coef[2,4],summary(scmnpm.50)$coef[2,4],
+           summary(scmnpm.100)$coef[2,4],summary(scmnpm.200)$coef[2,4],summary(scmnpm.400m)$coef[2,4],summary(scmnpm.800m)$coef[2,4])
+shrubcols=c(rep("seagreen3", times=length(avgpmshrubps)))
+shrubcols2<-shrubcols
+shrubcols2[which(avgpmshrubps>0.1)]<-"white"
+
+png(file="analyses/PurpleAir figs/shrubeffects.avgpm.png",width =3000, height =1500 ,res =300)
+x<-barplot(avgpmshrubeff, col=shrubcols2, border=shrubcols,ylim=c(-110,110), 
+           cex.lab=1.3,cex.axis=1.2,cex.names=1.2,
+           ylab="Effect of shrub cover on average PM 2.5 (µg/m3) ",xlab="Distance (m)",names.arg=c("10","20","30","40","50","100","200","400","800"))
+avgpmerror<-c(summary(scmnpm.10)$coef[2,2],summary(scmnpm.20)$coef[2,2],summary(scmnpm.30)$coef[2,2],summary(scmnpm.40)$coef[2,2],summary(scmnpm.50)$coef[2,2],
+              summary(scmnpm.100)$coef[2,2],summary(scmnpm.200)$coef[2,2],summary(scmnpm.400m)$coef[2,2],summary(scmnpm.800m)$coef[2,2])
+for(i in 1:length(eff)){
+  arrows(x[i],avgpmshrubeff[i]+avgpmerror[i],x[i],avgpmshrubeff[i]-avgpmerror[i], code=3, angle=90, length=0.05,  lwd=2)
+}
+abline(h=0)
+dev.off() 
