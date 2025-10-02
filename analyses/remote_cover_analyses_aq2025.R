@@ -40,7 +40,12 @@ setwd("~/GitHub/grit")
 options("digits" = 15)
 
 #Read in lat/longs of potential locations for air quality monitors
-potlocs<-read.csv("data/PurpleAirPotentialLocations2025GRIT.csv", header=TRUE, skip=1) 
+#potlocs<-read.csv("data/PurpleAirPotentialLocations2025GRIT.csv", header=TRUE, skip=1) 
+# used potlocs for locs_raw below to quantify tree cover
+# now using code below to quantify tree cover around existing purple air locations from survey123
+survey123_merged<-read.csv("data/PurpleAir/purpleair2024locs.csv", header=TRUE) 
+
+
 locs_raw <- potlocs %>%
   subset (select=c(Address,Latitude_degN,Longitude_degW))
 colnames(locs_raw)<-c("Address","Latitude","Longitude") 
