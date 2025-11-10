@@ -1,0 +1,12 @@
+GRIT PurpleAir Downloaded through API on
+November 10, 2025:
+
+SensorIndeces:
+183853,183863,183883,183851,183865,183855,183843,183499,183639,183869,183877,183841,183885,183871,183873,183815,183817,183879,183525,183515,183523,183513,183545,183637,183493,183641,183479,183467,183473,183487,183867,183489,177979
+
+Real-time (not averaged)
+
+August 1, 2025 through November 1, 2025
+
+Fields:
+humidity_a, humidity_b, temperature_a, temperature_b, pressure_a, pressure_b, pm2.5_atm_a, pm2.5_atm_b
