@@ -1,0 +1,1052 @@
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/08/05T00:05:05z: c4:5b:be:e7:8:af
+ 0h00:03.964 2025/08/05T00:05:05z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/08/05T00:24:45z: c4:5b:be:e7:8:af
+ 0h00:03.968 2025/08/05T00:24:45z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/08/05T01:44:26z: c4:5b:be:e7:8:af
+ 0h00:03.965 2025/08/05T01:44:26z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/08/05T02:18:06z: c4:5b:be:e7:8:af
+ 0h00:03.962 2025/08/05T02:18:06z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/08/05T02:37:46z: c4:5b:be:e7:8:af
+ 0h00:03.966 2025/08/05T02:37:46z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/08/05T02:57:27z: c4:5b:be:e7:8:af
+ 0h00:03.962 2025/08/05T02:57:27z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/08/05T03:17:07z: c4:5b:be:e7:8:af
+ 0h00:03.968 2025/08/05T03:17:07z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.286 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/08/05T03:36:48z: c4:5b:be:e7:8:af
+ 0h00:03.961 2025/08/05T03:36:48z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/08/05T04:02:28z: c4:5b:be:e7:8:af
+ 0h00:03.967 2025/08/05T04:02:28z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/08/05T04:22:08z: c4:5b:be:e7:8:af
+ 0h00:03.967 2025/08/05T04:22:08z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/08/05T04:41:48z: c4:5b:be:e7:8:af
+ 0h00:03.965 2025/08/05T04:41:48z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/08/05T05:01:28z: c4:5b:be:e7:8:af
+ 0h00:03.966 2025/08/05T05:01:28z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/08/05T05:21:09z: c4:5b:be:e7:8:af
+ 0h00:03.962 2025/08/05T05:21:09z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/08/05T05:40:49z: c4:5b:be:e7:8:af
+ 0h00:03.968 2025/08/05T05:40:49z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/08/05T06:00:29z: c4:5b:be:e7:8:af
+ 0h00:03.967 2025/08/05T06:00:29z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/08/05T06:20:10z: c4:5b:be:e7:8:af
+ 0h00:03.967 2025/08/05T06:20:10z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/08/05T06:39:51z: c4:5b:be:e7:8:af
+ 0h00:03.962 2025/08/05T06:39:51z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/08/05T06:59:31z: c4:5b:be:e7:8:af
+ 0h00:03.962 2025/08/05T06:59:31z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/08/05T07:19:11z: c4:5b:be:e7:8:af
+ 0h00:03.968 2025/08/05T07:19:11z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/08/05T07:38:52z: c4:5b:be:e7:8:af
+ 0h00:03.964 2025/08/05T07:38:52z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/08/05T07:58:33z: c4:5b:be:e7:8:af
+ 0h00:03.965 2025/08/05T07:58:33z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/08/05T08:18:13z: c4:5b:be:e7:8:af
+ 0h00:03.965 2025/08/05T08:18:13z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/08/05T08:37:53z: c4:5b:be:e7:8:af
+ 0h00:03.966 2025/08/05T08:37:53z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/08/05T08:57:34z: c4:5b:be:e7:8:af
+ 0h00:03.967 2025/08/05T08:57:34z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/08/05T09:17:14z: c4:5b:be:e7:8:af
+ 0h00:03.964 2025/08/05T09:17:14z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/08/05T09:36:54z: c4:5b:be:e7:8:af
+ 0h00:03.966 2025/08/05T09:36:54z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/08/05T09:56:34z: c4:5b:be:e7:8:af
+ 0h00:03.967 2025/08/05T09:56:34z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/08/05T10:16:15z: c4:5b:be:e7:8:af
+ 0h00:03.964 2025/08/05T10:16:15z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/08/05T11:03:56z: c4:5b:be:e7:8:af
+ 0h00:03.966 2025/08/05T11:03:56z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/08/05T11:23:36z: c4:5b:be:e7:8:af
+ 0h00:03.967 2025/08/05T11:23:36z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/08/05T11:43:16z: c4:5b:be:e7:8:af
+ 0h00:03.965 2025/08/05T11:43:16z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/08/05T12:02:57z: c4:5b:be:e7:8:af
+ 0h00:03.968 2025/08/05T12:02:57z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/08/05T12:22:37z: c4:5b:be:e7:8:af
+ 0h00:03.965 2025/08/05T12:22:37z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/08/05T13:42:17z: c4:5b:be:e7:8:af
+ 0h00:03.965 2025/08/05T13:42:17z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/08/05T14:09:57z: c4:5b:be:e7:8:af
+ 0h00:03.967 2025/08/05T14:09:57z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/08/05T14:29:38z: c4:5b:be:e7:8:af
+ 0h00:03.966 2025/08/05T14:29:38z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/08/05T15:49:18z: c4:5b:be:e7:8:af
+ 0h00:03.967 2025/08/05T15:49:18z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/08/05T16:08:58z: c4:5b:be:e7:8:af
+ 0h00:03.963 2025/08/05T16:08:58z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/08/05T16:28:38z: c4:5b:be:e7:8:af
+ 0h00:03.966 2025/08/05T16:28:38z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/08/05T16:48:19z: c4:5b:be:e7:8:af
+ 0h00:03.965 2025/08/05T16:48:19z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/08/05T17:07:59z: c4:5b:be:e7:8:af
+ 0h00:03.966 2025/08/05T17:07:59z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/08/05T17:27:39z: c4:5b:be:e7:8:af
+ 0h00:03.967 2025/08/05T17:27:39z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/08/05T17:47:20z: c4:5b:be:e7:8:af
+ 0h00:03.968 2025/08/05T17:47:20z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2025/08/05T18:07:00z: c4:5b:be:e7:8:af
+ 0h00:03.963 2025/08/05T18:07:00z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/08/05T18:26:41z: c4:5b:be:e7:8:af
+ 0h00:03.968 2025/08/05T18:26:41z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2025/08/05T18:46:22z: c4:5b:be:e7:8:af
+ 0h00:03.968 2025/08/05T18:46:22z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/08/05T19:06:02z: c4:5b:be:e7:8:af
+ 0h00:03.967 2025/08/05T19:06:02z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/08/05T19:25:43z: c4:5b:be:e7:8:af
+ 0h00:03.962 2025/08/05T19:25:43z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/08/05T19:45:23z: c4:5b:be:e7:8:af
+ 0h00:03.966 2025/08/05T19:45:23z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2025/08/05T20:05:03z: c4:5b:be:e7:8:af
+ 0h00:03.968 2025/08/05T20:05:03z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/08/05T20:24:44z: c4:5b:be:e7:8:af
+ 0h00:03.967 2025/08/05T20:24:44z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/08/05T20:44:24z: c4:5b:be:e7:8:af
+ 0h00:03.967 2025/08/05T20:44:24z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/08/05T21:04:04z: c4:5b:be:e7:8:af
+ 0h00:03.967 2025/08/05T21:04:04z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/08/05T21:23:45z: c4:5b:be:e7:8:af
+ 0h00:03.968 2025/08/05T21:23:45z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/08/05T21:43:25z: c4:5b:be:e7:8:af
+ 0h00:03.966 2025/08/05T21:43:25z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/08/05T22:03:06z: c4:5b:be:e7:8:af
+ 0h00:03.965 2025/08/05T22:03:06z: SSID: Castro
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/08/05T22:22:46z: c4:5b:be:e7:8:af
+ 0h00:03.966 2025/08/05T22:22:46z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2025/08/05T22:42:27z: c4:5b:be:e7:8:af
+ 0h00:03.968 2025/08/05T22:42:27z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2025/08/05T23:02:07z: c4:5b:be:e7:8:af
+ 0h00:03.969 2025/08/05T23:02:07z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2025/08/05T23:21:47z: c4:5b:be:e7:8:af
+ 0h00:03.968 2025/08/05T23:21:47z: SSID: Castro
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2025/08/05T23:41:28z: c4:5b:be:e7:8:af
+ 0h00:03.968 2025/08/05T23:41:28z: SSID: Castro
+1 BSEC warning code : 100

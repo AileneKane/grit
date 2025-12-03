@@ -1,0 +1,1248 @@
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.959 2025/03/24T00:13:31z: c4:5b:be:e7:6:f1
+ 0h00:03.960 2025/03/24T00:13:31z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2025/03/24T00:33:12z: c4:5b:be:e7:6:f1
+ 0h00:03.963 2025/03/24T00:33:12z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/03/24T00:52:52z: c4:5b:be:e7:6:f1
+ 0h00:03.965 2025/03/24T00:52:52z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/03/24T01:12:33z: c4:5b:be:e7:6:f1
+ 0h00:03.965 2025/03/24T01:12:33z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2025/03/24T01:32:13z: c4:5b:be:e7:6:f1
+ 0h00:03.969 2025/03/24T01:32:13z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/03/24T01:51:54z: c4:5b:be:e7:6:f1
+ 0h00:03.966 2025/03/24T01:51:54z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/03/24T02:11:34z: c4:5b:be:e7:6:f1
+ 0h00:03.967 2025/03/24T02:11:34z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/03/24T02:31:14z: c4:5b:be:e7:6:f1
+ 0h00:03.966 2025/03/24T02:31:14z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/03/24T02:50:55z: c4:5b:be:e7:6:f1
+ 0h00:03.965 2025/03/24T02:50:55z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/03/24T03:10:35z: c4:5b:be:e7:6:f1
+ 0h00:03.966 2025/03/24T03:10:35z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2025/03/24T03:30:16z: c4:5b:be:e7:6:f1
+ 0h00:03.968 2025/03/24T03:30:16z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/03/24T03:49:56z: c4:5b:be:e7:6:f1
+ 0h00:03.966 2025/03/24T03:49:56z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/03/24T04:09:36z: c4:5b:be:e7:6:f1
+ 0h00:03.967 2025/03/24T04:09:36z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/03/24T04:29:16z: c4:5b:be:e7:6:f1
+ 0h00:03.966 2025/03/24T04:29:16z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/03/24T04:48:57z: c4:5b:be:e7:6:f1
+ 0h00:03.962 2025/03/24T04:48:57z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/03/24T05:08:38z: c4:5b:be:e7:6:f1
+ 0h00:03.966 2025/03/24T05:08:38z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2025/03/24T05:28:18z: c4:5b:be:e7:6:f1
+ 0h00:03.964 2025/03/24T05:28:18z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/03/24T05:47:59z: c4:5b:be:e7:6:f1
+ 0h00:03.966 2025/03/24T05:47:59z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.283 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.958 2025/03/24T06:07:39z: c4:5b:be:e7:6:f1
+ 0h00:03.960 2025/03/24T06:07:39z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.284 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.959 2025/03/24T06:27:20z: c4:5b:be:e7:6:f1
+ 0h00:03.960 2025/03/24T06:27:20z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.286 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/03/24T06:47:00z: c4:5b:be:e7:6:f1
+ 0h00:03.962 2025/03/24T06:47:00z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2025/03/24T07:06:41z: c4:5b:be:e7:6:f1
+ 0h00:03.964 2025/03/24T07:06:41z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/03/24T07:26:21z: c4:5b:be:e7:6:f1
+ 0h00:03.966 2025/03/24T07:26:21z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/03/24T07:46:02z: c4:5b:be:e7:6:f1
+ 0h00:03.963 2025/03/24T07:46:02z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2025/03/24T08:05:42z: c4:5b:be:e7:6:f1
+ 0h00:03.963 2025/03/24T08:05:42z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2025/03/24T08:25:23z: c4:5b:be:e7:6:f1
+ 0h00:03.968 2025/03/24T08:25:23z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/03/24T08:45:03z: c4:5b:be:e7:6:f1
+ 0h00:03.965 2025/03/24T08:45:03z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/03/24T09:04:44z: c4:5b:be:e7:6:f1
+ 0h00:03.965 2025/03/24T09:04:44z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.286 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/03/24T09:24:25z: c4:5b:be:e7:6:f1
+ 0h00:03.962 2025/03/24T09:24:25z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/03/24T09:44:05z: c4:5b:be:e7:6:f1
+ 0h00:03.964 2025/03/24T09:44:05z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/03/24T10:03:46z: c4:5b:be:e7:6:f1
+ 0h00:03.963 2025/03/24T10:03:46z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.284 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/03/24T10:23:26z: c4:5b:be:e7:6:f1
+ 0h00:03.962 2025/03/24T10:23:26z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/03/24T10:43:06z: c4:5b:be:e7:6:f1
+ 0h00:03.965 2025/03/24T10:43:06z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/03/24T11:02:47z: c4:5b:be:e7:6:f1
+ 0h00:03.964 2025/03/24T11:02:47z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2025/03/24T11:22:28z: c4:5b:be:e7:6:f1
+ 0h00:03.964 2025/03/24T11:22:28z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2025/03/24T11:42:09z: c4:5b:be:e7:6:f1
+ 0h00:03.963 2025/03/24T11:42:09z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/03/24T12:01:49z: c4:5b:be:e7:6:f1
+ 0h00:03.962 2025/03/24T12:01:49z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.283 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.958 2025/03/24T12:21:29z: c4:5b:be:e7:6:f1
+ 0h00:03.959 2025/03/24T12:21:29z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/03/24T12:41:10z: c4:5b:be:e7:6:f1
+ 0h00:03.965 2025/03/24T12:41:10z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/03/24T13:00:51z: c4:5b:be:e7:6:f1
+ 0h00:03.961 2025/03/24T13:00:51z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.284 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.957 2025/03/24T13:20:31z: c4:5b:be:e7:6:f1
+ 0h00:03.958 2025/03/24T13:20:31z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/03/24T13:40:11z: c4:5b:be:e7:6:f1
+ 0h00:03.963 2025/03/24T13:40:11z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.958 2025/03/24T13:59:51z: c4:5b:be:e7:6:f1
+ 0h00:03.960 2025/03/24T13:59:51z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/03/24T14:19:31z: c4:5b:be:e7:6:f1
+ 0h00:03.965 2025/03/24T14:19:31z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.958 2025/03/24T14:39:12z: c4:5b:be:e7:6:f1
+ 0h00:03.959 2025/03/24T14:39:12z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.282 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.956 2025/03/24T14:58:52z: c4:5b:be:e7:6:f1
+ 0h00:03.957 2025/03/24T14:58:52z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.281 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.955 2025/03/24T15:18:32z: c4:5b:be:e7:6:f1
+ 0h00:03.957 2025/03/24T15:18:32z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/03/24T15:38:13z: c4:5b:be:e7:6:f1
+ 0h00:03.962 2025/03/24T15:38:13z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.958 2025/03/24T15:57:53z: c4:5b:be:e7:6:f1
+ 0h00:03.959 2025/03/24T15:57:53z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/03/24T16:17:33z: c4:5b:be:e7:6:f1
+ 0h00:03.963 2025/03/24T16:17:33z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/03/24T16:37:14z: c4:5b:be:e7:6:f1
+ 0h00:03.967 2025/03/24T16:37:14z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/03/24T16:56:55z: c4:5b:be:e7:6:f1
+ 0h00:03.964 2025/03/24T16:56:55z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/03/24T17:16:35z: c4:5b:be:e7:6:f1
+ 0h00:03.961 2025/03/24T17:16:35z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.958 2025/03/24T17:36:16z: c4:5b:be:e7:6:f1
+ 0h00:03.960 2025/03/24T17:36:16z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.283 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.956 2025/03/24T17:55:56z: c4:5b:be:e7:6:f1
+ 0h00:03.958 2025/03/24T17:55:56z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.284 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.957 2025/03/24T18:15:36z: c4:5b:be:e7:6:f1
+ 0h00:03.959 2025/03/24T18:15:36z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/03/24T18:35:17z: c4:5b:be:e7:6:f1
+ 0h00:03.965 2025/03/24T18:35:17z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.958 2025/03/24T18:54:57z: c4:5b:be:e7:6:f1
+ 0h00:03.960 2025/03/24T18:54:57z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/03/24T19:14:37z: c4:5b:be:e7:6:f1
+ 0h00:03.962 2025/03/24T19:14:37z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/03/24T19:34:19z: c4:5b:be:e7:6:f1
+ 0h00:03.962 2025/03/24T19:34:19z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/03/24T19:53:59z: c4:5b:be:e7:6:f1
+ 0h00:03.962 2025/03/24T19:53:59z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/03/24T20:13:39z: c4:5b:be:e7:6:f1
+ 0h00:03.963 2025/03/24T20:13:39z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.283 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.956 2025/03/24T20:33:19z: c4:5b:be:e7:6:f1
+ 0h00:03.958 2025/03/24T20:33:19z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.959 2025/03/24T20:53:00z: c4:5b:be:e7:6:f1
+ 0h00:03.960 2025/03/24T20:53:00z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.959 2025/03/24T21:12:40z: c4:5b:be:e7:6:f1
+ 0h00:03.961 2025/03/24T21:12:40z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.283 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.956 2025/03/24T21:32:21z: c4:5b:be:e7:6:f1
+ 0h00:03.958 2025/03/24T21:32:21z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.286 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/03/24T21:52:02z: c4:5b:be:e7:6:f1
+ 0h00:03.962 2025/03/24T21:52:02z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/03/24T22:11:42z: c4:5b:be:e7:6:f1
+ 0h00:03.962 2025/03/24T22:11:42z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/03/24T22:31:22z: c4:5b:be:e7:6:f1
+ 0h00:03.963 2025/03/24T22:31:22z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/03/24T22:51:04z: c4:5b:be:e7:6:f1
+ 0h00:03.965 2025/03/24T22:51:04z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/03/24T23:10:44z: c4:5b:be:e7:6:f1
+ 0h00:03.961 2025/03/24T23:10:44z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/03/24T23:30:24z: c4:5b:be:e7:6:f1
+ 0h00:03.963 2025/03/24T23:30:24z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.281 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.955 2025/03/24T23:50:04z: c4:5b:be:e7:6:f1
+ 0h00:03.956 2025/03/24T23:50:04z: SSID: TMOBILE-31A1
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
