@@ -1,11 +1,9 @@
-GRIT Analysis to do list
-January 20, 2023
-1) Check some of the way points that seem to be wrong (i.e. not able to get remote sensed estimates for tree cover because of location)
-2) Fix other mistakes in locs file (i.e., multiple hobo sns per lat long)
-  -
-[1] "Pine at 40th"                                                            
-[2] "near Lincoln Park"                                                       
-[3] "Pine at 42nd (old Sequoia integraticve therapies building, 4042 pine st)"
-/missing BA data for Tacoma wetland
-3) Get GRIT polygon so that i can redo the map more zoomed in
-4) Update temperature data
+#GRIT Analysis to do list
+#December 3, 2025
+#
+#####Air quality#####
+
+#####Temperature####
+#1. Clean and stitch together all temperature data
+#2. Analyze winter vs summer temperature, using new tree cover data
+#-use airtemp_2022_2025.R
