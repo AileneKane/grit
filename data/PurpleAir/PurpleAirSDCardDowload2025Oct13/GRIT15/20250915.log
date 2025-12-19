@@ -1,0 +1,2666 @@
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/09/15T00:00:20z: c4:5b:be:e6:ce:64
+ 0h00:03.966 2025/09/15T00:00:20z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/09/15T00:20:07z: c4:5b:be:e6:ce:64
+ 0h00:03.968 2025/09/15T00:20:07z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2025/09/15T00:39:54z: c4:5b:be:e6:ce:64
+ 0h00:03.963 2025/09/15T00:39:54z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/09/15T00:59:41z: c4:5b:be:e6:ce:64
+ 0h00:03.963 2025/09/15T00:59:41z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/09/15T01:19:35z: c4:5b:be:e6:ce:64
+ 0h00:03.967 2025/09/15T01:19:35z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.959 2025/09/15T01:39:30z: c4:5b:be:e6:ce:64
+ 0h00:03.961 2025/09/15T01:39:30z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/09/15T01:59:17z: c4:5b:be:e6:ce:64
+ 0h00:03.964 2025/09/15T01:59:17z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/09/15T02:19:04z: c4:5b:be:e6:ce:64
+ 0h00:03.965 2025/09/15T02:19:04z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/09/15T02:38:58z: c4:5b:be:e6:ce:64
+ 0h00:03.967 2025/09/15T02:38:58z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/09/15T02:58:45z: c4:5b:be:e6:ce:64
+ 0h00:03.967 2025/09/15T02:58:45z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.968 2025/09/15T03:18:33z: c4:5b:be:e6:ce:64
+ 0h00:03.969 2025/09/15T03:18:33z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/09/15T03:38:20z: c4:5b:be:e6:ce:64
+ 0h00:03.966 2025/09/15T03:38:20z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.294 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.968 2025/09/15T03:58:08z: c4:5b:be:e6:ce:64
+ 0h00:03.970 2025/09/15T03:58:08z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/09/15T04:17:55z: c4:5b:be:e6:ce:64
+ 0h00:03.967 2025/09/15T04:17:55z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/09/15T04:37:42z: c4:5b:be:e6:ce:64
+ 0h00:03.964 2025/09/15T04:37:42z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/09/15T04:57:30z: c4:5b:be:e6:ce:64
+ 0h00:03.965 2025/09/15T04:57:30z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2025/09/15T05:17:17z: c4:5b:be:e6:ce:64
+ 0h00:03.963 2025/09/15T05:17:17z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/09/15T05:37:04z: c4:5b:be:e6:ce:64
+ 0h00:03.966 2025/09/15T05:37:04z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/09/15T05:56:51z: c4:5b:be:e6:ce:64
+ 0h00:03.966 2025/09/15T05:56:51z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/09/15T06:16:38z: c4:5b:be:e6:ce:64
+ 0h00:03.967 2025/09/15T06:16:38z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/09/15T06:36:26z: c4:5b:be:e6:ce:64
+ 0h00:03.966 2025/09/15T06:36:26z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.968 2025/09/15T06:56:20z: c4:5b:be:e6:ce:64
+ 0h00:03.969 2025/09/15T06:56:20z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/09/15T07:16:07z: c4:5b:be:e6:ce:64
+ 0h00:03.967 2025/09/15T07:16:07z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/09/15T07:36:02z: c4:5b:be:e6:ce:64
+ 0h00:03.966 2025/09/15T07:36:02z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/09/15T07:55:49z: c4:5b:be:e6:ce:64
+ 0h00:03.961 2025/09/15T07:55:49z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/09/15T08:15:37z: c4:5b:be:e6:ce:64
+ 0h00:03.966 2025/09/15T08:15:37z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2025/09/15T08:35:24z: c4:5b:be:e6:ce:64
+ 0h00:03.964 2025/09/15T08:35:24z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.286 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/09/15T08:55:18z: c4:5b:be:e6:ce:64
+ 0h00:03.962 2025/09/15T08:55:18z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2025/09/15T09:15:12z: c4:5b:be:e6:ce:64
+ 0h00:03.963 2025/09/15T09:15:12z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/09/15T09:34:59z: c4:5b:be:e6:ce:64
+ 0h00:03.964 2025/09/15T09:34:59z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/09/15T09:54:47z: c4:5b:be:e6:ce:64
+ 0h00:03.962 2025/09/15T09:54:47z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.286 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.959 2025/09/15T10:14:34z: c4:5b:be:e6:ce:64
+ 0h00:03.961 2025/09/15T10:14:34z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.294 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2025/09/15T10:34:28z: c4:5b:be:e6:ce:64
+ 0h00:03.969 2025/09/15T10:34:28z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2025/09/15T10:54:15z: c4:5b:be:e6:ce:64
+ 0h00:03.964 2025/09/15T10:54:15z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.286 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.958 2025/09/15T11:14:02z: c4:5b:be:e6:ce:64
+ 0h00:03.960 2025/09/15T11:14:02z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/09/15T11:33:56z: c4:5b:be:e6:ce:64
+ 0h00:03.964 2025/09/15T11:33:56z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/09/15T11:53:44z: c4:5b:be:e6:ce:64
+ 0h00:03.964 2025/09/15T11:53:44z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/09/15T12:13:38z: c4:5b:be:e6:ce:64
+ 0h00:03.967 2025/09/15T12:13:38z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/09/15T12:33:25z: c4:5b:be:e6:ce:64
+ 0h00:03.967 2025/09/15T12:33:25z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/09/15T12:53:12z: c4:5b:be:e6:ce:64
+ 0h00:03.966 2025/09/15T12:53:12z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2025/09/15T13:13:06z: c4:5b:be:e6:ce:64
+ 0h00:03.963 2025/09/15T13:13:06z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/09/15T13:32:54z: c4:5b:be:e6:ce:64
+ 0h00:03.963 2025/09/15T13:32:54z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/09/15T13:52:48z: c4:5b:be:e6:ce:64
+ 0h00:03.965 2025/09/15T13:52:48z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/09/15T14:12:35z: c4:5b:be:e6:ce:64
+ 0h00:03.963 2025/09/15T14:12:35z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/09/15T14:32:22z: c4:5b:be:e6:ce:64
+ 0h00:03.968 2025/09/15T14:32:22z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.295 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.968 2025/09/15T14:52:09z: c4:5b:be:e6:ce:64
+ 0h00:03.970 2025/09/15T14:52:09z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/09/15T15:12:04z: c4:5b:be:e6:ce:64
+ 0h00:03.966 2025/09/15T15:12:04z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.295 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.968 2025/09/15T15:31:51z: c4:5b:be:e6:ce:64
+ 0h00:03.970 2025/09/15T15:31:51z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/09/15T15:51:38z: c4:5b:be:e6:ce:64
+ 0h00:03.967 2025/09/15T15:51:38z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/09/15T16:11:25z: c4:5b:be:e6:ce:64
+ 0h00:03.966 2025/09/15T16:11:25z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.294 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.968 2025/09/15T16:31:13z: c4:5b:be:e6:ce:64
+ 0h00:03.970 2025/09/15T16:31:13z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/09/15T16:51:02z: c4:5b:be:e6:ce:64
+ 0h00:03.965 2025/09/15T16:51:02z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/09/15T17:10:56z: c4:5b:be:e6:ce:64
+ 0h00:03.967 2025/09/15T17:10:56z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2025/09/15T17:30:44z: c4:5b:be:e6:ce:64
+ 0h00:03.968 2025/09/15T17:30:44z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.297 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.970 2025/09/15T17:50:32z: c4:5b:be:e6:ce:64
+ 0h00:03.972 2025/09/15T17:50:32z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/09/15T18:10:19z: c4:5b:be:e6:ce:64
+ 0h00:03.968 2025/09/15T18:10:19z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.296 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.969 2025/09/15T18:30:15z: c4:5b:be:e6:ce:64
+ 0h00:03.971 2025/09/15T18:30:15z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/09/15T18:50:02z: c4:5b:be:e6:ce:64
+ 0h00:03.966 2025/09/15T18:50:02z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/09/15T19:09:49z: c4:5b:be:e6:ce:64
+ 0h00:03.967 2025/09/15T19:09:49z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2025/09/15T19:29:36z: c4:5b:be:e6:ce:64
+ 0h00:03.963 2025/09/15T19:29:36z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2025/09/15T19:49:23z: c4:5b:be:e6:ce:64
+ 0h00:03.965 2025/09/15T19:49:23z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2025/09/15T20:09:11z: c4:5b:be:e6:ce:64
+ 0h00:03.968 2025/09/15T20:09:11z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2025/09/15T20:28:58z: c4:5b:be:e6:ce:64
+ 0h00:03.968 2025/09/15T20:28:58z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2025/09/15T20:48:45z: c4:5b:be:e6:ce:64
+ 0h00:03.963 2025/09/15T20:48:45z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.294 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.968 2025/09/15T21:08:32z: c4:5b:be:e6:ce:64
+ 0h00:03.969 2025/09/15T21:08:32z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/09/15T21:28:19z: c4:5b:be:e6:ce:64
+ 0h00:03.965 2025/09/15T21:28:19z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BME68X warning code : 2
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.294 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.968 2025/09/15T21:48:07z: c4:5b:be:e6:ce:64
+ 0h00:03.969 2025/09/15T21:48:07z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/09/15T22:07:48z: c4:5b:be:e6:ce:64
+ 0h00:03.967 2025/09/15T22:07:48z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/09/15T22:27:29z: c4:5b:be:e6:ce:64
+ 0h00:03.966 2025/09/15T22:27:29z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.297 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.971 2025/09/15T22:47:09z: c4:5b:be:e6:ce:64
+ 0h00:03.973 2025/09/15T22:47:09z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/09/15T23:06:50z: c4:5b:be:e6:ce:64
+ 0h00:03.962 2025/09/15T23:06:50z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2025/09/15T23:26:31z: c4:5b:be:e6:ce:64
+ 0h00:03.966 2025/09/15T23:26:31z: SSID: Maimai2025
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.959 2025/09/15T23:46:12z: c4:5b:be:e6:ce:64
+ 0h00:03.960 2025/09/15T23:46:12z: SSID: Maimai2025
+1 BSEC warning code : 100
