@@ -106,8 +106,11 @@ harmonize_columns <- function(df, alias_map) {
 }
 # ---- Get immediate subfolders (excluding files) ----
 subfolders <- list.dirs(base_dir, full.names = TRUE, recursive = FALSE)
-#for now
-subfolders<-subfolders[5:7]#the following subfolders give errors: 1,4first one is causing problems so remove for now
+
+#Subfolders 1 & 4 are causing problems so remove for now
+probsubfolds<-c(1,4)
+
+subfolders<-subfolders[-probsubfolds]
 
 if (length(subfolders) == 0) {
   stop("No subfolders found in base_dir. Check path or structure.")
