@@ -4,6 +4,10 @@
 ##Started December 3, 2025
 ##By Ailene, ailene.ettinger@tnc.org
 ##########################################
+# still to do in this code:
+# 1. fix code so it works with problem subfolders
+# 2. convert time to Pacific
+#
 # housekeeping
 rm(list=ls()) 
 options(stringsAsFactors = FALSE)
