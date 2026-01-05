@@ -4,13 +4,15 @@ options(stringsAsFactors = FALSE)
 install.packages("patchwork")
 install.packages("gridExtra")
 install.packages("lubridate")
-
+install.packages("scales")
+install.packages("zoo")
 # load libraries
 library(tidyverse)
 library(ggplot2)
 library(dplyr)
 library(lubridate)
-
+library(scales)
+library(zoo)
 setwd("~/Documents/GitHub/grit/analyses") 
 folder <- "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir_Download_2025Aug_to_Oct/PurpleAir Download 11-10-2025/"
 
@@ -77,4 +79,30 @@ purpleair_missing <- purpleair_all %>%
   group_by(month, day, sensor_index) %>%
   summarize(hours_present = n()) %>%
   mutate(missing_hours = 24 - hours_present) %>% filter(missing_hours != 0)
-write.csv(purpleair_missing, "~/Documents/GitHub/grit/analyses/output/purpleair_missing.csv", row.names = FALSE)        
+write.csv(purpleair_missing, "~/Documents/GitHub/grit/analyses/output/purpleair_missing.csv", row.names = FALSE)  
+
+###Time Series Graphs###
+pa<- read.csv("~/Documents/GitHub/grit/analyses/output/purpleair_all.csv")
+pa$year <- 2025
+pa$datetime <- make_datetime(
+  year = pa$year,
+  month = pa$month,
+  day   = pa$day,
+  hour  = pa$hour)
+pa$date <- as_date(pa$datetime)
+
+p <- ggplot(pa, aes(datetime, avg_pm))+
+  geom_line(alpha = 0.5)+
+  scale_x_datetime(date_breaks = "1 month", 
+                   date_minor_breaks = "1 week",
+                     date_labels = "%B",
+                   limits =  as.POSIXct(c("2025-08-01", "2025-10-31")))+
+  theme_classic()+
+  labs(y ="PM2.5 (µg/m³)", x = "Date", title = "August 1st 2025 - October 31st 2025 Hourly PM2.5 Concentrations (Corrected)")
+
+  ggsave("avg_pm2.5_allsensors.png", dpi = 300)
+  
+
+  
+  
+  
