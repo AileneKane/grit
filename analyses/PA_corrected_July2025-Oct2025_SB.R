@@ -15,7 +15,11 @@ library(scales)
 library(zoo)
 setwd("~/Documents/GitHub/grit/analyses") 
 folder <- "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir_Download_2025Aug_to_Oct/PurpleAir Download 11-10-2025/"
-
+# Setting working directory. Add in ailene's path in an if statement so that it works for her too
+if(length(grep("ailene", getwd()))>0) {
+  setwd("C:/Users/ailene.ettinger/Documents/GitHub/grit/analyses")
+  folder <- "C:/Users/ailene.ettinger/Documents/GitHub/grit/data/PurpleAir/PurpleAir_Download_2025Aug_to_Oct/PurpleAir Download 11-10-2025/"
+}
 ## 720 possible points per day  Barkjohn paper keep 24 hr avg if at leat 90% possible points 
 needed_measurements_120s = 0.9 * 720
                                    
@@ -73,16 +77,16 @@ all_sensors <- lapply(files, function(f) {
 })
 
 purpleair_all <- bind_rows(all_sensors)
-write.csv(purpleair_all, "~/Documents/GitHub/grit/analyses/output/purpleair_all.csv", row.names = FALSE)                                          
+write.csv(purpleair_all, "output/purpleair_all.csv", row.names = FALSE)                                          
 
 purpleair_missing <- purpleair_all %>%
   group_by(month, day, sensor_index) %>%
   summarize(hours_present = n()) %>%
   mutate(missing_hours = 24 - hours_present) %>% filter(missing_hours != 0)
-write.csv(purpleair_missing, "~/Documents/GitHub/grit/analyses/output/purpleair_missing.csv", row.names = FALSE)  
+write.csv(purpleair_missing, "output/purpleair_missing.csv", row.names = FALSE)  
 
 ###Time Series Graphs###
-pa<- read.csv("~/Documents/GitHub/grit/analyses/output/purpleair_all.csv")
+pa<- read.csv("output/purpleair_all.csv")
 pa$year <- 2025
 pa$datetime <- make_datetime(
   year = pa$year,
