@@ -92,16 +92,27 @@ pa$datetime <- make_datetime(
 pa$date <- as_date(pa$datetime)
 
 p <- ggplot(pa, aes(datetime, avg_pm))+
-  geom_line(alpha = 0.5)+
+  geom_line(alpha = 0.5, linewidth = 0.3)+
+  geom_hline(yintercept = 35, linetype = 2)+
   scale_x_datetime(date_breaks = "1 month", 
                    date_minor_breaks = "1 week",
                      date_labels = "%B",
                    limits =  as.POSIXct(c("2025-08-01", "2025-10-31")))+
   theme_classic()+
-  labs(y ="PM2.5 (µg/m³)", x = "Date", title = "August 1st 2025 - October 31st 2025 Hourly PM2.5 Concentrations (Corrected)")
+  labs(y ="PM2.5 (µg/m³)", 
+       x = "Date", 
+       title = "Average PM2.5 Concentration August 2025 - October 2025")
 
-  ggsave("avg_pm2.5_allsensors.png", dpi = 300)
+ggsave("~/Documents/GitHub/grit/analyses/PurpleAir figs/avg_pm2.5_allsensors.png", dpi = 300)
   
+x <- ggplot (pa, aes(datetime, avg_pm))+
+    geom_line()+
+    facet_wrap(~sensor_index)+
+    theme(axis.text.x = element_text(angle = 45, hjust = 1))+
+    labs(y ="PM2.5 (µg/m³)", x = "Date", title = "Average PM 2.5 Concentration by Sensor")
+ggsave("~/Documents/GitHub/grit/analyses/PurpleAir figs/avg_pm2.5_bysensor.png", width = 20, height = 9, dpi = 300)
+  
+
 
   
   
