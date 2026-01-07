@@ -103,7 +103,7 @@ pa <- pa %>%
 pa <- pa[, -c(14, 15)] ## included GRIT sensor names 
 
 
-p <- ggplot(pa, aes(datetime, avg_pm))+
+p <- ggplot(pa, aes(datetime, pm2.5_corrected))+
   geom_line(alpha = 0.5, linewidth = 0.3)+
   geom_hline(yintercept = 35, linetype = 2)+
   scale_x_datetime(date_breaks = "1 month", 
@@ -117,7 +117,7 @@ p <- ggplot(pa, aes(datetime, avg_pm))+
 
 ggsave("~/Documents/GitHub/grit/analyses/PurpleAir figs/avg_pm2.5_allsensors.png", dpi = 300)
   
-x <- ggplot (pa, aes(datetime, avg_pm))+
+x <- ggplot (pa, aes(datetime,pm2.5_corrected))+
     geom_line()+
     facet_wrap(~Name)+
     theme(axis.text.x = element_text(angle = 45, hjust = 1))+
