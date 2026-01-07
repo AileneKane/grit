@@ -87,7 +87,7 @@ write.csv(purpleair_missing, "output/purpleair_missing.csv", row.names = FALSE)
 
 ###Time Series Graphs###
 pa<- read.csv("output/purpleair_all.csv")
-sensornames <- read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAirAPIInfo.csv")
+sensornames <- read.csv("../data/PurpleAir/PurpleAirAPIInfo.csv")
 sensornames <- sensornames %>% drop_na(SensorIndex) %>% rename(sensor_index = SensorIndex)
 pa$year <- 2025
 pa$datetime <- make_datetime(
@@ -123,7 +123,55 @@ x <- ggplot (pa, aes(datetime, avg_pm))+
     theme(axis.text.x = element_text(angle = 45, hjust = 1))+
     labs(y ="PM2.5 (µg/m³)", x = "Date", title = "Average PM 2.5 Concentration by Sensor")
 ggsave("~/Documents/GitHub/grit/analyses/PurpleAir figs/avg_pm2.5_bysensor.png", width = 20, height = 9, dpi = 300)
-  
+#what do average daily pm2.5 values suggest?
+dailyavg<-aggregate(palocs$avg_pm, by=list(palocs$date,palocs$Purple.Air.Name), sum, na.rm=TRUE)
+
+
+#Number of hours above 35.5 mg/m3 across the time series (by sensor and across all sensors)
+locs<-read.csv("output/purpleair_locs_20242025.csv")
+colnames(locs)[3]<-"sensor_index"
+palocs<-left_join(pa,locs, copy=TRUE)
+palocs$hrsabove35.5<-0
+palocs$hrsabove35.5[palocs$pm2.5_corrected >35.5]<-1
+palocs$hrsabove20<-0
+palocs$hrsabove20[palocs$pm2.5_corrected>20]<-1
+date.hrsabove20<-aggregate(palocs$hrsabove20, by=list(palocs$date,palocs$Purple.Air.Name), sum, na.rm=TRUE)
+date.hrsabove35.5<-aggregate(palocs$hrsabove35.5, by=list(palocs$date,palocs$Purple.Air.Name), sum, na.rm=TRUE)
+colnames(date.hrsabove20)<-c("datetime","sensor","hrsabove20")
+
+date.hrsabove20$date <- as.POSIXct(date.hrsabove20$datetime, format = "%Y-%m-%d", tz = "UTC")
+
+h20 <- ggplot(date.hrsabove20, aes(date, hrsabove20))+
+  geom_line(alpha = 0.5, linewidth = 0.3)+
+  scale_x_datetime(date_breaks = "1 month", 
+                   date_minor_breaks = "1 week",
+                   date_labels = "%B",
+                   limits =  as.POSIXct(c("2025-08-01", "2025-10-31")))+
+  theme_classic()+
+  labs(y ="Hours with PM2.5 > 20 µg/m³", 
+       x = "Date", 
+       title = "# of hours with PM2.5 > 20 µg/m³  August - October 2025")
+
+ggsave("PurpleAir figs/hoursabove20_allsensors.png", width = 6, height = 4, units = "in")
+
+#Which sensors had the worst  and best air quality? (highest average and greatest # of hours above threshold)?
+worst10<-head(palocs[order(palocs$pm2.5_corrected, decreasing=TRUE),], n=10)#highest/worst values= 61.71485 58.41759 57.16004 39.46606 38.01056 36.50640
+unique(worst10$date)
+unique(worst10$Purple.Air.Name)
+best10<-tail(palocs[order(palocs$pm2.5_corrected, decreasing=TRUE),], n=10)#highest/worst values= 61.71485 58.41759 57.16004 39.46606 38.01056 36.50640
+
+
+#What days had the worst and best air quality?
+
+#On bad air quality days, where was the the worst  and best air quality? (highest average and greatest # of hours above threshold)?
+
+#average daily air quality across all sensors
+
+date.hrsabove20<-aggregate(palocs$hrsabove20, by=list(palocs$date,palocs$Purple.Air.Name), sum, na.rm=TRUE)
+date.hrsabove35.5<-aggregate(palocs$hrsabove35.5, by=list(palocs$date,palocs$Purple.Air.Name), sum, na.rm=TRUE)
+colnames(date.hrsabove20)<-c("datetime","sensor","hrsabove20")
+
+
 
 
   
