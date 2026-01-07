@@ -87,6 +87,8 @@ write.csv(purpleair_missing, "output/purpleair_missing.csv", row.names = FALSE)
 
 ###Time Series Graphs###
 pa<- read.csv("output/purpleair_all.csv")
+sensornames <- read.csv("~/Documents/GitHub/grit/data/PurpleAir/PurpleAirAPIInfo.csv")
+sensornames <- sensornames %>% drop_na(SensorIndex) %>% rename(sensor_index = SensorIndex)
 pa$year <- 2025
 pa$datetime <- make_datetime(
   year = pa$year,
@@ -94,6 +96,12 @@ pa$datetime <- make_datetime(
   day   = pa$day,
   hour  = pa$hour)
 pa$date <- as_date(pa$datetime)
+sensornames_clean <- sensornames %>%
+  distinct(sensor_index, .keep_all = TRUE)
+pa <- pa %>%
+  left_join(sensornames_clean, by = "sensor_index") 
+pa <- pa[, -c(14, 15)] ## included GRIT sensor names 
+
 
 p <- ggplot(pa, aes(datetime, avg_pm))+
   geom_line(alpha = 0.5, linewidth = 0.3)+
@@ -111,7 +119,7 @@ ggsave("~/Documents/GitHub/grit/analyses/PurpleAir figs/avg_pm2.5_allsensors.png
   
 x <- ggplot (pa, aes(datetime, avg_pm))+
     geom_line()+
-    facet_wrap(~sensor_index)+
+    facet_wrap(~Name)+
     theme(axis.text.x = element_text(angle = 45, hjust = 1))+
     labs(y ="PM2.5 (µg/m³)", x = "Date", title = "Average PM 2.5 Concentration by Sensor")
 ggsave("~/Documents/GitHub/grit/analyses/PurpleAir figs/avg_pm2.5_bysensor.png", width = 20, height = 9, dpi = 300)
