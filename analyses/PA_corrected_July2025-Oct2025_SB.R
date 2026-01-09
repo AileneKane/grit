@@ -115,7 +115,7 @@ p <- ggplot(pa, aes(datetime, pm2.5_corrected))+
        x = "Date", 
        title = "Average PM2.5 Concentration August 2025 - October 2025")
 
-ggsave("~/Documents/GitHub/grit/analyses/PurpleAir figs/avg_pm2.5_allsensors.png", dpi = 300)
+ggsave("~/Documents/GitHub/grit/analyses/PurpleAir figs/avg_pm2.5_allsensors.png", width = 20, height = 9, dpi = 300)
   
 x <- ggplot (pa, aes(datetime,pm2.5_corrected))+
     geom_line()+
