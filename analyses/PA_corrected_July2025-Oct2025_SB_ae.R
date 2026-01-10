@@ -123,6 +123,7 @@ x <- ggplot (pa, aes(datetime,pm2.5_corrected))+
   theme(axis.text.x = element_text(angle = 45, hjust = 1))+
   labs(y ="PM2.5 (µg/m³)", x = "Date", title = "Average PM 2.5 Concentration by Sensor")
 ggsave("PurpleAir figs/avg_pm2.5_bysensor.png", width = 20, height = 9, dpi = 300)
+
 #what do average daily pm2.5 values suggest?
 dailyavg<-aggregate(palocs$avg_pm, by=list(palocs$date,palocs$Purple.Air.Name), sum, na.rm=TRUE)
 
