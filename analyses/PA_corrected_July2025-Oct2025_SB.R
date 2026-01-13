@@ -247,7 +247,7 @@ locpm2.5<-left_join(locs,septpm2.5)
 locpm2.5hrs<-left_join(locpm2.5,est_by_sensor)
 
 write.csv(locpm2.5hrs,"output/purpleairloc_wpmhrs.csv", row.names = FALSE)                                          
-)
+
 #Do lat/long predict pm2.5?
 septlatlongmmod<-lmer(pm2.5_corrected~1+Lat + Long + (1|date),data=palocs_sept)
 summary(septlatlongmmod)
@@ -286,6 +286,40 @@ length(unique(pm2.5_dailyavg_bysens$sensor[pm2.5_dailyavg_bysens$good==1]))# 84 
 unique(pm2.5_dailyavg_bysens$sensor)
 
 
+#what time of day was worst?
+septhrmmod<-lmer(pm2.5_corrected~hour + (1|Purple.Air.Name),data=palocs_sept)
+Anova(septhrmmod)
+summary(septhrmmod)
 
 
+ggplot(palocs_sept, aes(factor(hour), pm2.5_corrected)) +
+  geom_violin(fill = "#f1c40f", color = NA, alpha = 0.5) +
+  geom_boxplot(width = 0.15, outlier.alpha = 0.3) +
+  labs(
+    title = "PM2.5 distributions by hour of day (September, all sensors)",
+    x = "Hour of day", y = "PM2.5 (µg/m³)"
+  ) +
+  theme_minimal(base_size = 12)
+
+
+plot<-ggplot(palocs_sept %>% group_by(Purple.Air.Name, hour) %>% summarise(pm25_mean = mean(pm2.5_corrected), .groups = "drop"),
+       aes(hour, pm25_mean, color = Purple.Air.Name, group = Purple.Air.Name)) +
+  geom_line(size = 1) +
+  scale_x_continuous(breaks = 0:23) +
+  guides(color = guide_legend(ncol = 2)) +
+  labs(
+    title = "Diurnal PM2.5 by Sensor (September)",
+    x = "Hour of day", y = "Mean PM2.5 (µg/m³)", color = "Sensor"
+  ) +
+  theme_minimal(base_size = 12)
+
+
+ggplot(palocs_sept, aes(hour + minute(datetime)/60, pm2.5_corrected, color = Purple.Air.Name)) + geom_smooth(se = FALSE, method = "loess", span = 0.3, size = 0.8) +
+  scale_x_continuous(breaks = 0:23, limits = c(0, 24)) +
+  labs(
+    title = "Smoothed PM2.5 by time of day (September, per sensor)",
+    x = "Hour of day", y = "PM2.5 (µg/m³)", color = "Sensor"
+  ) +
+  theme_minimal(base_size = 12)
+ggsave("PurpleAir figs/pm2.5_byhour_sept.png", plot = plot, width = 8, height = 6, units = "in")
 

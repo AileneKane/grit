@@ -20,6 +20,10 @@ survey123_2024<-survey123_2024[-which(survey123_2024$Purple.Air.Name==""),]
 survey123_2024$Address[survey123_2024$Purple.Air.Name=="GRIT03"]<-"9211 Fawcett Ave, Tacoma, WA, 98444"
 survey123_2024$Purple.Air.Name[survey123_2024$Purple.Air.Name=="GRIt09"]<-"GRIT09"
 survey123_2024$Purple.Air.Name[survey123_2024$Purple.Air.Name=="GRIt 31"]<-"GRIT31"
+#GRIT07 has the wrong lat long. Should be 47.1980794,-122.4021333,452
+survey123_2024$x[survey123_2024$Purple.Air.Name=="GRIT07"]<- -122.4021333
+survey123_2024$y[survey123_2024$Purple.Air.Name=="GRIT07"]<- 47.1980794
+
 #GRIT09 in the 2024 survey123 form is actually GRIT35 on the 2025 form so need to merge these two
 #survey123_2025[survey123_2025$PurpleAir.Name=="GRIT35",]
 #survey123_2024[survey123_2024$Purple.Air.Name=="GRIT09",]

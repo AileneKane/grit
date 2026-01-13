@@ -1,7 +1,7 @@
 ###GRIT###
 ###Using remote-sensed data to quantify greenness/canopy cover around air quality monitors in Tacoma
 ###Started July 9, 2024 by Samie and Ailene###
-###This version created June 2025 by Ailene to evaluate potential PrupleAir high tree cover sites
+###This version created June 2025 by Ailene to evaluate potential PurpleAir high tree cover sites
 ###Goal to quantify greenness in different radii/buffers around points (i.e. purpleair loggers)
 ##############################
 
