@@ -51,3 +51,7 @@ data/C-CAP/wa_2021_ccap_v2_hires_water_20240405.tif
 data/wa_2021_ccap_v2_hires_canopy_20240402.tif
 data/C-CAP/wa_2021_ccap_v2_hires_impervious_20240402.tif
 data/C-CAP/2020 to 2021 CCAP Version 2 Impervious Cover.xml
+
+#tacoma lidar data which is likely too large
+data/tacoma2024lidar
+

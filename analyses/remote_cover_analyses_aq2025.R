@@ -51,7 +51,8 @@ locs_raw <- potlocs %>%
 colnames(locs_raw)<-c("Address","Latitude","Longitude") 
 locs_clean<- locs_raw %>% drop_na()
   
-#read in CCAP landcover layer from NOAA
+#read in CCAP landcover layer from NOAA#UPDATE THIS TO USE THE NEW LiDARdataset
+
 lcNOAA <-raster("data/wa_2021_ccap_v2_hires_canopy_20240402.tif")
 imperviousNOAA <- rast("data/C-CAP/wa_2021_ccap_v2_hires_impervious_20240402.tif")
 imperviousNOAA <- raster(imperviousNOAA)
