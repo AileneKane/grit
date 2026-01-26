@@ -10,13 +10,17 @@ rm(list=ls())
 
 
 #set strings default and avoid scientific notation for 6 digits
-options(stringsAsFactors = FALSE, "scipen"=1000, "digits"=6)
+options(stringsAsFactors = FALSE, "scipen"=1000, "digits"=8)
 # load libraries
 
 library(sf)
 library(dplyr)
 library(purrr)
 library(tidyr)
+library(lwgeom)
+
+#set working directory
+setwd("~/GitHub/grit/analyses")
 
 #-----------------------------
 # 1. READ LAT/LONG POINT LOCATIONS OF AQ Monitors FROM CSV
@@ -52,7 +56,7 @@ buffers <- map_df(radii_m, function(r) {
 
 #-----------------------------
 # 3. READ GDB FILE
-#    (choose the layer you want)
+#    (and summarize tree height and conifer vs deciduous)
 #-----------------------------
 gdb_path <- "../data/tacoma2024lidar/data/LandCover2024.gdb"
 
@@ -62,8 +66,7 @@ print(layers)    # see available layers
 lc_gdb <- st_read(gdb_path, layer = layers[1]) |> 
   st_transform(32610)   # match buffer CRS
 head(lc_gdb)
-unique(lc_gdb$Class);unique(canopy_gdb$Description)
-
+unique(lc_gdb$Class)
 ##below does not work
 # #keep only tree canopy shapes in the canopy file
 # canopy_gdb <- lc_gdb[lc_gdb$Class==1,]
@@ -99,7 +102,6 @@ pttreeht.results <- st_intersection(buffers, pttreeht_ft_gdb) |>
   summarize(mean_treeht_ft = mean(Height_ft, na.rm = TRUE),
             total_conifers  = sum(Conifer, na.rm = TRUE),
             total_nonconifer  = sum(NonConifer, na.rm = TRUE),
-            
             n_features = n(),
             .groups = "drop")
 pttreeht.results.tosave<-as.data.frame(subset(pttreeht.results,select=c(ID,radius_m, mean_treeht_ft, total_conifers,total_nonconifer,n_features)))
@@ -127,28 +129,24 @@ pttreeht.results.tosave<-pttreeht.results.tosave[,1:6]
 write.csv(pttreeht.results.tosave, "output/canheight_within_buffers.csv", row.names = FALSE)
 
 
-
+#now for canopy layer...the below is not ready and needs more work
 #-----------------------------
 # 0) USER INPUTS TO EDIT
 #-----------------------------
-points_csv <- "points.csv"             # your CSV with lon/lat
 lon_col    <- "longitude"              # <-- edit to match your CSV
 lat_col    <- "latitude"               # <-- edit to match your CSV
-id_col     <- "ID"                     # <-- set to your point ID column (or will be created)
+id_col     <- "Purple.Air.Name"                     # <-- set to your point ID column (or will be created)
 
-gdb_path   <- "data/landcover.gdb"     # <-- path to your FileGDB
-lc_layer   <- "LandCoverPolygons"      # <-- layer name inside the GDB
-class_field <- "LC_CLASS"              # <-- column with classes 1..7
+gdb_path  <- "../data/tacoma2024lidar/data/LandCover2024.gdb" # <-- path to your FileGDB
+lc_layer   <- "LandCover2024"      # <-- layer name inside the GDB
+class_field <- "Class"              # <-- column with classes 1..7
 
 target_crs <- 32610                    # UTM Zone 10N (meters)
 
-# Choose buffer radii (meters)
-radii_m <- c(5, 10, 25, 50, 100, 200, 400, 800)
 
 #-----------------------------
 # 1) READ POINTS & MAKE BUFFERS
 #-----------------------------
-pts <- read.csv(points_csv)
 
 # Create sf points (WGS84) and project to meters
 pts_sf <- st_as_sf(pts, coords = c(lon_col, lat_col), crs = 4326) |>
@@ -162,12 +160,7 @@ if (!id_col %in% names(pts_sf)) {
 # Optional sanity check
 message("Unique IDs: ", length(unique(pts_sf[[id_col]])))
 
-# Build buffers (each row = one ID × one radius)
-buffers <- map_df(radii_m, function(r) {
-  pts_sf |>
-    mutate(radius_m = r) |>
-    st_buffer(dist = r)
-})
+
 
 #-----------------------------
 # 2) READ LAND COVER POLYGONS
@@ -184,11 +177,81 @@ if (!class_field %in% names(lc)) {
                class_field, lc_layer, paste(names(lc), collapse = ", ")))
 }
 lc <- lc |>
-  dplyr::select(!!class_field, geometry)
+  dplyr::select(!!class_field, Shape_Area)
 
 # (Optional) Filter polygons to those touching any buffer to speed up
 buffers_union <- st_union(st_geometry(buffers))
 lc <- st_filter(lc, buffers_union, .predicate = st_intersects)
+
+###trying to address scan error and confict error with invalid geometry
+
+# Use planar GEOS ops (we're projected to meters already)
+old_s2 <- sf_use_s2(FALSE)  # remember previous state
+
+# 1) Basic cleaning: drop Z/M, empties; cast to polygonal types
+buffers <- buffers |>
+  st_zm(drop = TRUE, what = "ZM") |>
+  filter(!st_is_empty(geometry))
+
+lc <- lc |>
+  st_zm(drop = TRUE, what = "ZM") |>
+  filter(!st_is_empty(Shape))
+
+# If your land cover is mixed or contains geometry collections, normalize it:
+# (safe even if it's already MULTIPOLYGON)
+lc <- suppressWarnings(st_cast(lc, "MULTIPOLYGON"))
+
+# 2) Snap to a small grid to fix near-coincident edges (1 m here), then "0-buffer" to clean
+prec <- 1  # meters
+buffers <- buffers |>
+  st_set_precision(prec) |>
+  st_snap_to_grid(prec) |>
+  st_buffer(0)
+
+lc <- lc |>
+  st_set_precision(prec) |>
+  st_snap_to_grid(prec) |>
+  st_buffer(0)
+
+# 3) Validate only the bad ones with lwgeom::st_make_valid() if available
+if (requireNamespace("lwgeom", quietly = TRUE)) {
+  bad_b <- which(!st_is_valid(buffers))
+  if (length(bad_b)) {
+    message("Fixing ", length(bad_b), " invalid buffer(s) with st_make_valid()")
+    buffers[bad_b, ] <- lwgeom::st_make_valid(buffers[bad_b, ])
+  }
+  bad_lc <- which(!st_is_valid(lc))
+  if (length(bad_lc)) {
+    message("Fixing ", length(bad_lc), " invalid land-cover polygon(s) with st_make_valid()")
+    lc[bad_lc, ] <- lwgeom::st_make_valid(lc[bad_lc, ])
+  }
+}
+
+# 4) Safe per-buffer intersection with retry
+safe_intersection_one <- function(b) {
+  # Preselect only LC polygons that intersect this buffer (speeds up & reduces failures)
+  idx <- st_intersects(lc, b) |> lengths() > 0
+  lc_sub <- lc[idx, , drop = FALSE]
+  if (nrow(lc_sub) == 0) return(NULL)
+  
+  # First attempt
+  res <- try(st_intersection(b, lc_sub), silent = TRUE)
+  if (!inherits(res, "try-error")) return(res)
+  
+  # Retry with a fresh 0-buffer on both sides (more aggressive clean)
+  message("Retrying ID=", b[[id_col]][1], " r=", b$radius_m[1],
+          " with 0-buffer fallback due to: ", attr(res, "condition")$message)
+  st_intersection(st_buffer(b, 0), st_buffer(lc_sub, 0))
+}
+
+# Run intersections buffer-by-buffer so one failure doesn't stop the run
+int <- map_dfr(seq_len(nrow(buffers)), function(i) {
+  b <- buffers[i, c(id_col, "radius_m")]
+  safe_intersection_one(b)
+})
+
+# Restore s2 setting
+sf_use_s2(old_s2)
 
 #-----------------------------
 # 3) CLIP & MEASURE AREAS

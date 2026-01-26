@@ -31,7 +31,10 @@
     pulls out and summarizes canopy cover, mean height, and 
     conifer abundance from circles of different radii around 
     purpleairs
-4. 
+4. grit_aqvstrees.R
+  plots and fits models to analyze relationships between 
+  number of trees, tree height and identity (conifer vs 
+  angiosperm) on air quality
   
 
 
