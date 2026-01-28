@@ -1,4 +1,6 @@
 #Code to map GRIT Purple Air sensors
+#set working directory
+setwd("~/GitHub/grit/analyses")
 
 # install.packages(c("sf", "ggplot2", "ggspatial", "ggrepel"))
 library(sf)
