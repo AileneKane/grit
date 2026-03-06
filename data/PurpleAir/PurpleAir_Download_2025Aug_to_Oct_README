@@ -1,12 +1,39 @@
 GRIT PurpleAir Downloaded through API on
-November 10, 2025:
+1) November 10, 2025:
 
-SensorIndeces:
-183853,183863,183883,183851,183865,183855,183843,183499,183639,183869,183877,183841,183885,183871,183873,183815,183817,183879,183525,183515,183523,183513,183545,183637,183493,183641,183479,183467,183473,183487,183867,183489,177979
+    GRIT SensorIndeces:
+    183853,183863,183883,183851,183865,183855,183843,183499,183639,183869,183877,183841,183885,183871,183873,183815,183817,183879,183525,183515,183523,183513,183545,183637,183493,183641,183479,183467,183473,183487,183867,183489,177979
 
-Real-time (not averaged)
+    UTC
+    
+    Real-time (not averaged)
 
-August 1, 2025 through November 1, 2025
+    August 1, 2025 through November 1, 2025
 
-Fields:
-humidity_a, humidity_b, temperature_a, temperature_b, pressure_a, pressure_b, pm2.5_atm_a, pm2.5_atm_b
+    Fields:
+    humidity_a, humidity_b, temperature_a, temperature_b, pressure_a, pressure_b, pm2.5_atm_a, pm2.5_atm_b
+
+2) On Februrary 27, 2026:
+    GRIT SensorIndeces:
+    183853,183863,183883,183851,183865,183855,183843,183499,183639,183869,183877,183841,183885,183871,183873,183815,183817,183879,183525,183515,183523,183513,183545,183637,183493,183641,183479,183467,183473,183487,183867,183489,177979
+
+    America/Los Angelos
+    
+    Real-time (not averaged)
+
+    November 1, 2025 through February 26, 2026
+
+    Fields: humidity_a,humidity_b,temperature_a,temperature_b,pressure_a,pressure_b,pm2.5_atm_a,pm2.5_atm_b
+    
+    Total Data Rows Downloaded: 2355166
+    Number of Sensors: 33
+
+3) On March 6, 2026
+    TPCH (only those located in Tacoma) SensorIndeces:
+    173501,167029,136214,167413,167409,171217
+    America/Los Angelos
+    
+    Real-time (not averaged)
+
+    August 1, 2025 through MArch 1, 2026
+

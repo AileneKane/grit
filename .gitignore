@@ -124,5 +124,15 @@ Tacoma 2024 LIDAR data/data/LandCover2024.gdb/a00000001.TablesByName.atx
 Tacoma 2024 LIDAR data/data/LandCover2024.gdb/a00000001.gdbtablx
 Tacoma 2024 LIDAR data/data/LandCover2024.gdb/a00000001.gdbtable
 Tacoma 2024 LIDAR data/data/LandCover2024.gdb/a00000001.gdbindexes
+Tacoma 2024 LIDAR data/data/LandCover2024.gdb/a00000001.gdbindexes
 Tacoma 2024 LIDAR data/data/.DS_Store
 Tacoma 2024 LIDAR data/.DS_Store
+LandCoverData.xlsx
+LandCover2024.lpkx
+
+# gdb files
+*.gdbtable
+*.gdbtablx
+*.gdbindexes
+*.gdb
+
