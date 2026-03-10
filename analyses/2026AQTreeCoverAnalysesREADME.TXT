@@ -25,7 +25,7 @@
 ################ DATA PROCESSING FILES  #################
 #########################################################
 1. analyses/PA_corrected_July2025-Oct2025_SB.R 
-    puts together all PurpleAir data (Data files 1a. and 2a)
+    puts together PurpleAir data (Data files 1a. and 2a)
 2. analyses/format_simcarddat.R
     formats simcard data to match that format of data
     downlowded from the datadownload tool
