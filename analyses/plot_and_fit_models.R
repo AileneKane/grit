@@ -3,6 +3,27 @@
 ######### and fit models to data in #############
 ############### purpleair_all.csv ###############
 #################################################
+# housekeeping
+rm(list=ls()) 
+options(stringsAsFactors = FALSE)
+
+# load libraries
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(scales)
+library(zoo)
+library(lme4)
+library(car)
+
+setwd("~/Documents/GitHub/grit/analyses") 
+folder <- "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir_Download_2025Aug_to_Oct/PurpleAir Download 11-10-2025/"
+# Setting working directory. Add in ailene's path in an if statement so that it works for her too
+if(length(grep("ailene", getwd()))>0) {
+  setwd("C:/Users/ailene.ettinger/Documents/GitHub/grit/analyses")
+  folder <- "C:/Users/ailene.ettinger/Documents/GitHub/grit/data/PurpleAir/PurpleAir_Download_2025Aug_to_Oct/PurpleAir Download 11-10-2025/"
+}
 
 ###Time Series Graphs###
 pa<- read.csv("output/purpleair_all.csv")

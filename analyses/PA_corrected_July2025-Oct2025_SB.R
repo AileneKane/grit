@@ -9,11 +9,12 @@
 # housekeeping
 rm(list=ls()) 
 options(stringsAsFactors = FALSE)
-install.packages("patchwork")
-install.packages("gridExtra")
-install.packages("lubridate")
-install.packages("scales")
-install.packages("zoo")
+#install.packages("patchwork")
+#install.packages("gridExtra")
+#install.packages("lubridate")
+#install.packages("scales")
+#install.packages("zoo")
+
 # load libraries
 library(tidyverse)
 library(ggplot2)
@@ -21,16 +22,16 @@ library(dplyr)
 library(lubridate)
 library(scales)
 library(zoo)
-library(lme4)
-library(car)
 
 setwd("~/Documents/GitHub/grit/analyses") 
 folder <- "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir_Download_2025Aug_to_Oct/PurpleAir Download 11-10-2025/"
+
 # Setting working directory. Add in ailene's path in an if statement so that it works for her too
 if(length(grep("ailene", getwd()))>0) {
   setwd("C:/Users/ailene.ettinger/Documents/GitHub/grit/analyses")
   folder <- "C:/Users/ailene.ettinger/Documents/GitHub/grit/data/PurpleAir/PurpleAir_Download_2025Aug_to_Oct/PurpleAir Download 11-10-2025/"
 }
+
 ## 720 possible points per day  Barkjohn paper keep 24 hr avg if at leat 90% possible points 
 needed_measurements_120s = 0.9 * 720
                                    

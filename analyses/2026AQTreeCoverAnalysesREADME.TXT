@@ -26,16 +26,17 @@
 #########################################################
 ################ DATA PROCESSING FILES  #################
 #########################################################
-1. analyses/PA_corrected_July2025-Oct2025_SB.R 
+1. PA_corrected_July2025-Oct2025_SB.R 
     puts together PurpleAir data (Data files 1a. and 2a)
-2. analyses/format_simcarddat.R
+2. format_simcarddat.R
     formats simcard data to match that format of data
-    downlowded from the datadownload tool
-3. grit_lidar2024_aq2025_analyses.R
+    downloaded from the datadownload tool
+3. plot_and_fit_models.R 
+4. grit_lidar2024_aq2025_analyses.R
     pulls out and summarizes canopy cover, mean height, and 
     conifer abundance from circles of different radii around 
     purpleairs
-4. grit_aqvstrees.R
+5. grit_aqvstrees.R
   plots and fits models to analyze relationships between 
   number of trees, tree height and identity (conifer vs 
   angiosperm) on air quality
