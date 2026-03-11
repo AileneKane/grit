@@ -21,7 +21,8 @@ library(lwgeom)
 
 #set working directory
 setwd("~/GitHub/grit/analyses")
-
+##for samie##
+setwd("~/Documents/GitHub/grit/analyses")
 #-----------------------------
 # 1. READ LAT/LONG POINT LOCATIONS OF AQ Monitors FROM CSV
 #-----------------------------
@@ -58,7 +59,7 @@ buffers <- map_df(radii_m, function(r) {
 # 3. READ GDB FILE
 #    (and summarize tree height and conifer vs deciduous)
 #-----------------------------
-gdb_path <- "../data/tacoma2024lidar/data/LandCover2024.gdb"
+gdb_path <- "~/Documents/GitHub/grit/Tacoma 2024 LIDAR data/data/LandCover2024.gdb"
 
 layers <- st_layers(gdb_path)$name
 print(layers)    # see available layers
@@ -69,20 +70,20 @@ head(lc_gdb)
 unique(lc_gdb$Class)
 ##below does not work
 # #keep only tree canopy shapes in the canopy file
-# canopy_gdb <- lc_gdb[lc_gdb$Class==1,]
+canopy_gdb <- filter(lc_gdb, Class == "1")
 # 
 # #create a noncanopy datafile
-# noncanopy_gdb <- lc_gdb[lc_gdb$Class!=1,]
+noncanopy_gdb <- lc_gdb[lc_gdb$Class!=1,]
 # head(noncanopy_gdb)
 # 
 # #create a vegetation datafile
-# veg_gdb<-lc_gdb[lc_gdb$Class==1|lc_gdb$Class==2,]
+veg_gdb<-lc_gdb[lc_gdb$Class==1|lc_gdb$Class==2,]
 # #create a nonvegetation datafile
-# nonveg_gdb<-lc_gdb[lc_gdb$Class==3|lc_gdb$Class==4|lc_gdb$Class==5|lc_gdb$Class==6|lc_gdb$Class==7,]
-# 
+nonveg_gdb<-lc_gdb[lc_gdb$Class==3|lc_gdb$Class==4|lc_gdb$Class==5|lc_gdb$Class==6|lc_gdb$Class==7,]
+
 # #create an impervious surface datafile
-# imp_gdb<-lc_gdb[lc_gdb$Class==4|lc_gdb$Class==7|lc_gdb$Class==3,]
-# nonimp_gdb<-lc_gdb[lc_gdb$Class==1|lc_gdb$Class==2|lc_gdb$Class==5|lc_gdb$Class==6,]
+imp_gdb<-lc_gdb[lc_gdb$Class==4|lc_gdb$Class==7|lc_gdb$Class==3,]
+nonimp_gdb<-lc_gdb[lc_gdb$Class==1|lc_gdb$Class==2|lc_gdb$Class==5|lc_gdb$Class==6,]
 
 #pull out canopy height layer using tree points
 pttreeht_ft_gdb <- st_read(gdb_path, layer = layers[3]) |> 
@@ -110,24 +111,54 @@ pttreeht.results.tosave<-pttreeht.results.tosave[,1:6]
 # # Get total canopy cover, noncanopy cover, impervious surface, vegetation cover
 # # below does not work! need to fix this
 # #-----------------------------
-# canopy.results <- st_intersection(buffers, canopy_gdb) |>
-#   group_by(ID = Purple.Air.Name, radius_m) |>     # 
-#   summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
-#             
-#             n_features = n(),
-#             .groups = "drop")
-# 
-# veg.results <- st_intersection(buffers, veg_gdb) |>
-#   group_by(ID = Purple.Air.Name, radius_m) |>     # 
-#   summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
-#             
-#             n_features = n(),
-#             .groups = "drop")
+canopy.results <- st_intersection(buffers, st_make_valid(canopy_gdb)) |>
+  group_by(ID = Purple.Air.Name, radius_m) |>     # 
+  summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
+            n_features = n(),
+            .groups = "drop")
+
+veg.results <- st_intersection(buffers, st_make_valid(veg_gdb)) |>
+ group_by(ID = Purple.Air.Name, radius_m) |>     #
+ summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
+  n_features = n(),
+.groups = "drop")
+
+noncanopy.results <- st_intersection(buffers, st_make_valid(noncanopy_gdb)) |>
+  group_by(ID = Purple.Air.Name, radius_m) |>     #
+  summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
+            n_features = n(),
+            .groups = "drop")
+noncanopy.results <- rename(noncanopy.results, total_noncanopy = total_canopy)
+
+nonveg.results <- st_intersection(buffers, st_make_valid(nonveg_gdb)) |>
+  group_by(ID = Purple.Air.Name, radius_m) |>     #
+  summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
+            n_features = n(),
+            .groups = "drop")
+nonveg.results <- rename(nonveg.results, total_nonveg = total_canopy)
+
+imp.results <- st_intersection(buffers, st_make_valid(imp_gdb)) |>
+  group_by(ID = Purple.Air.Name, radius_m) |>     #
+  summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
+            n_features = n(),
+            .groups = "drop")
+imp.results <- rename(imp.results, total_imp = total_canopy)
+
+nonimp.results <- st_intersection(buffers, st_make_valid(nonimp_gdb)) |>
+  group_by(ID = Purple.Air.Name, radius_m) |>     #
+  summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
+            n_features = n(),
+            .groups = "drop")
+
+canopy.results<-as.data.frame(subset(canopy.results, select = c(ID,radius_m,total_canopy,n_features))) ##Class = 1
+veg.results<-as.data.frame(subset(veg.results, select=c(ID,radius_m,total_canopy,n_features))) ## Class = 1 OR 2
+
 #-----------------------------
 # 5. SAVE OUTPUT (optional)
 #-----------------------------
 write.csv(pttreeht.results.tosave, "output/canheight_within_buffers.csv", row.names = FALSE)
-
+write.csv(canopy.results, "output/canopy_within_buffers.csv", row.names = FALSE) 
+write.csv(veg.results, "output/vegetation_within_buffers.csv",row.names = FALSE) 
 
 #now for canopy layer...the below is not ready and needs more work
 #-----------------------------
@@ -137,7 +168,7 @@ lon_col    <- "longitude"              # <-- edit to match your CSV
 lat_col    <- "latitude"               # <-- edit to match your CSV
 id_col     <- "Purple.Air.Name"                     # <-- set to your point ID column (or will be created)
 
-gdb_path  <- "../data/tacoma2024lidar/data/LandCover2024.gdb" # <-- path to your FileGDB
+#gdb_path  <- "../data/tacoma2024lidar/data/LandCover2024.gdb" # <-- path to your FileGDB
 lc_layer   <- "LandCover2024"      # <-- layer name inside the GDB
 class_field <- "Class"              # <-- column with classes 1..7
 
@@ -183,7 +214,7 @@ lc <- lc |>
 buffers_union <- st_union(st_geometry(buffers))
 lc <- st_filter(lc, buffers_union, .predicate = st_intersects)
 
-###trying to address scan error and confict error with invalid geometry
+###trying to address scan error and conflict error with invalid geometry
 
 # Use planar GEOS ops (we're projected to meters already)
 old_s2 <- sf_use_s2(FALSE)  # remember previous state

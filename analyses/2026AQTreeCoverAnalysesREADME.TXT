@@ -19,6 +19,8 @@
     b. 
 3. LiDAR-derived land cover data from City of Tacoma 
     a. data/tacoma2024lidar/data/LandCover2024.gdb 
+4. Pierce County Equity Index (downloaded March 17, 2025)
+    a. Data/pierce county equity index
 
 
 #########################################################

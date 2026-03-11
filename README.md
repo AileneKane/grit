@@ -11,3 +11,5 @@ Other data files:
 2) TacomaWA2022-01-01to2023-01-01.csv downloaded from vc on 31 Jan 2023 for cloud cover data
 
 3) Traffic data from 
+
+4) Pierce County Equity Index Data from https://piercecountywa.communityimpactindex.econw.io/?geoLevel=blockgroup&scoreType=z_score_pct&indexGroup=Community+Impact+Index&activeTab=2&mapCenter=-122.212318%2C47&mapZoom=8

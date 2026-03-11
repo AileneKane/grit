@@ -136,3 +136,9 @@ LandCover2024.lpkx
 *.gdbindexes
 *.gdb
 
+data/pierce county equity index/Equity_Index.cpg
+data/pierce county equity index/Equity_Index.dbf
+data/pierce county equity index/Equity_Index.prj
+data/pierce county equity index/Equity_Index.shp
+data/pierce county equity index/Equity_Index.shp.xml
+data/pierce county equity index/Equity_Index.shx
