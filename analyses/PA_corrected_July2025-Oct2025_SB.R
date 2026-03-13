@@ -89,11 +89,11 @@ all_sensors <- lapply(files, function(f) {
 })
 
 purpleair_all <- bind_rows(all_sensors)
-write.csv(purpleair_all, "output/purpleair_all.csv", row.names = FALSE)                                          
+write.csv(purpleair_all, "output/purpleair_July2025_to_Oct2025.csv", row.names = FALSE)                                          
 
 purpleair_missing <- purpleair_all %>%
   group_by(month, day, sensor_index) %>%
   summarize(hours_present = n()) %>%
   mutate(missing_hours = 24 - hours_present) %>% filter(missing_hours != 0)
-write.csv(purpleair_missing, "output/purpleair_missing.csv", row.names = FALSE)  
+write.csv(purpleair_missing, "output/purpleair_missing_July2025_to_Oct2025.csv", row.names = FALSE)  
 

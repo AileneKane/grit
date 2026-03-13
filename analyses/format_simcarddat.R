@@ -23,8 +23,8 @@ library(stringr)
 setwd("~/GitHub/grit")
 
 #need to convert sd card data files, e.g
-#sd1df <- read_csv("data/PurpleAir/PurpleAirSimCardDowload2025Oct13/GRIT07/20250801.csv",
-#                   col_select = 1:40)
+#sd1df <- read_csv("data/PurpleAir/PurpleAirSDCardDowload2025Oct13/GRIT07/20250801.csv",
+                   col_select = 1:40)
 #colnames(sd1df)
 #head(sd1df$uptime)
 #which are one per day and have ## columns

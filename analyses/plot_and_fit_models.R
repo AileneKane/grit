@@ -260,3 +260,14 @@ ggplot(palocs_sept, aes(hour + minute(datetime)/60, pm2.5_corrected, color = Pur
   theme_minimal(base_size = 12)
 ggsave("PurpleAir figs/pm2.5_byhour_sept.png", plot = plot, width = 8, height = 6, units = "in")
 
+
+
+#averages (rather than model estimates)
+
+pmavg<-aggregate(pa$pm2.5_corrected, by=list(pa$date,pa$sensor_index), mean, na.rm=TRUE)
+colnames(pmavg)<-c("date","sensor_index","pm2.5_avg")
+pmavg$month<-substr(pmavg$date,1,7)
+pmavg_sept<-pmavg[pmavg$month=="2025-09",]
+pmavg_septbysensor<-aggregate(pmavg_sept$pm2.5_avg, by=list(pmavg_sept$sensor_index), mean, na.rm=TRUE)
+colnames(pmavg_septbysensor)<-c("sensor_index","septpm2.5_avg")
+pmavg_septbysensor[pmavg_septbysensor$sensor_index=="183479",]
