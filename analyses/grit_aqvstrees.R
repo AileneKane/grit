@@ -73,12 +73,13 @@ df_plot <- canaq0 %>%
   ) %>%
   mutate(
     radius_m = as.integer(radius_m),
-    metric = recode(metric,
+    metric = dplyr::recode(metric,
                     mean_treeht_ft = "Mean tree height (ft)",
                     total_conifers = "Total conifers",
                     total_conifers = "Total nonconifers",
                     n_features     = "Number of features")
-  )
+)
+
 
 p <- ggplot(df_plot, aes(x = x, y = .data[[aq_col]])) +
   geom_point(alpha = 0.6, size = 2) +
@@ -111,12 +112,13 @@ df_plot <- canaq0 %>%
   ) %>%
   mutate(
     radius_m = as.integer(radius_m),
-    metric = recode(metric,
-                    mean_treeht_ft = "Mean tree height (ft)",
-                    total_conifers = "Total conifers",
-                    total_conifers = "Total nonconifers",
-                    n_features     = "Number of features")
+    metric = dplyr::recode(metric,
+                           mean_treeht_ft = "Mean tree height (ft)",
+                           total_conifers = "Total conifers",
+                           total_conifers = "Total nonconifers",
+                           n_features     = "Number of features")
   )
+
 
 p2 <- ggplot(df_plot, aes(x = x, y = .data[[aq_col2]])) +
   geom_point(alpha = 0.6, size = 2) +
@@ -183,6 +185,21 @@ plot_one_metric <- function(df, metric_name, aq_col = "pm2.5est_sept") {
     theme_bw(base_size = 12)
 }
 
+plot_one_metric_jan <- function(df, metric_name, aq_col = "pm2.5est_jan") {
+  df %>%
+    filter(metric == metric_name) %>%
+    ggplot(aes(x = x, y = .data[[aq_col]])) +
+    geom_point(alpha = 0.6, size = 2) +
+    geom_smooth(method = "lm", se = TRUE, linewidth = 0.9, color = "steelblue") +
+    facet_wrap(~ radius_m, scales = "free_x", nrow = 1) +
+    labs(
+      x = metric_name,
+      y = aq_col,
+      title = paste(aq_col, "vs", metric_name, "by buffer radius")
+    ) +
+    theme_bw(base_size = 12)
+}
+
 p_treeht <- plot_one_metric(df_plot, "Mean tree height (ft)")
 p_nonconif <- plot_one_metric(df_plot, "total_nonconifer")
 p_conif  <- plot_one_metric(df_plot, "Total conifers")
@@ -203,6 +220,18 @@ ggsave("PurpleAir figs/pm2.5vstotaltrees_plot.png", p_totaltrees,
 ggsave("PurpleAir figs/pm2.5vstotaltrees_plot.pdf", p_totaltrees,
        width = 18, height = 4)
 
+p_treeht_jan <- plot_one_metric_jan(df_plot, "Mean tree height (ft)")
+p_nonconif_jan <- plot_one_metric_jan(df_plot, "total_nonconifer")
+p_conif_jan  <- plot_one_metric_jan(df_plot, "Total conifers")
+p_totaltrees_jan  <- plot_one_metric_jan(df_plot, "Number of features")
+p_treeht_jan
+p_nonconif_jan
+p_conif_jan
+p_totaltrees
+ggsave("PurpleAir figs/janpm2.5vstotaltrees_plot.png", p_totaltrees_jan,
+       width = 18, height = 4, dpi = 300)
+ggsave("PurpleAir figs/janpm2.5vstotaltrees_plot.pdf", p_totaltrees_jan,
+       width = 18, height = 4)
 
 df_tree <- canaq0 %>%
   pivot_longer(
@@ -213,7 +242,7 @@ df_tree <- canaq0 %>%
   ) %>%
   mutate(
     radius_m = as.integer(radius_m),
-    metric = recode(metric,
+    metric = dplyr::recode(metric,
                     mean_treeht_ft = "Mean tree height (ft)",
                     total_conifers = "Total conifers",
                     total_conifers = "Total nonconifers",
@@ -244,6 +273,16 @@ pm2.5_200m<-lm(pm2.5est_sept~mean_treeht_ft_200m, data=canaq0)
 pm2.5_400m<-lm(pm2.5est_sept~mean_treeht_ft_400m, data=canaq0)
 pm2.5_800m<-lm(pm2.5est_sept~mean_treeht_ft_800m, data=canaq0)
 
+#Average PM2.5 models vs tree height for jan
+janpm2.5_5m<-lm(pm2.5est_jan~mean_treeht_ft_5m, data=canaq0)
+janpm2.5_10m<-lm(pm2.5est_jan~mean_treeht_ft_10m, data=canaq0)
+janpm2.5_25m<-lm(pm2.5est_jan~mean_treeht_ft_25m, data=canaq0)
+janpm2.5_50m<-lm(pm2.5est_jan~mean_treeht_ft_50m, data=canaq0)
+janpm2.5_100m<-lm(pm2.5est_jan~mean_treeht_ft_100m, data=canaq0)
+janpm2.5_200m<-lm(pm2.5est_jan~mean_treeht_ft_200m, data=canaq0)
+janpm2.5_400m<-lm(pm2.5est_jan~mean_treeht_ft_400m, data=canaq0)
+janpm2.5_800m<-lm(pm2.5est_jan~mean_treeht_ft_800m, data=canaq0)
+
 
 #hours above PM2.5>25 models vs tree height
 hrs_5m<-lm(hrsabove25est~mean_treeht_ft_5m, data=canaq0)
@@ -262,7 +301,7 @@ hrs_800m<-lm(hrsabove25est~mean_treeht_ft_800m, data=canaq0)
 #############################################
 pm2.5_5m_ncon<-lm(pm2.5est_sept~total_conifers_5m, data=canaq0)
 pm2.5_10m_ncon<-lm(pm2.5est_sept~total_conifers_10m, data=canaq0)
-pm2.5_25m_ncon<-lm(pm2.5est_sept~total_cgonifers_25m, data=canaq0)
+pm2.5_25m_ncon<-lm(pm2.5est_sept~total_conifers_25m, data=canaq0)
 pm2.5_50m_ncon<-lm(pm2.5est_sept~total_conifers_50m, data=canaq0)
 pm2.5_100m_ncon<-lm(pm2.5est_sept~total_conifers_100m, data=canaq0)
 pm2.5_200m_ncon<-lm(pm2.5est_sept~total_conifers_200m, data=canaq0)
@@ -274,6 +313,22 @@ summary(pm2.5_50m_ncon)#weakly sig neg
 summary(pm2.5_100m_ncon)#weakly sig neg
 summary(pm2.5_200m_ncon)#sig neg
 summary(pm2.5_400m_ncon)#sig neg
+
+janpm2.5_5m_ncon<-lm(pm2.5est_sept~total_conifers_5m, data=canaq0)
+janpm2.5_10m_ncon<-lm(pm2.5est_sept~total_conifers_10m, data=canaq0)
+janpm2.5_25m_ncon<-lm(pm2.5est_jan~total_conifers_25m, data=canaq0)
+janpm2.5_50m_ncon<-lm(pm2.5est_jan~total_conifers_50m, data=canaq0)
+janpm2.5_100m_ncon<-lm(pm2.5est_jan~total_conifers_100m, data=canaq0)
+janpm2.5_200m_ncon<-lm(pm2.5est_jan~total_conifers_200m, data=canaq0)
+janpm2.5_400m_ncon<-lm(pm2.5est_jan~total_conifers_400m, data=canaq0)
+janpm2.5_800m_ncon<-lm(pm2.5est_jan~total_conifers_800m, data=canaq0)
+
+summary(janpm2.5_25m_ncon)#not sig 
+summary(janpm2.5_50m_ncon)#not sig 
+summary(janpm2.5_100m_ncon)#not sig 
+summary(janpm2.5_200m_ncon)#not sig 
+summary(janpm2.5_400m_ncon)#not sig 
+
 ####################################################
 # hours above PM2.5>25 models vs total_conifers_5m #
 ####################################################
@@ -303,6 +358,23 @@ summary(pm2.5_50m_nnoncon)# sig neg
 summary(pm2.5_100m_nnoncon)# sig neg
 summary(pm2.5_200m_nnoncon)#sig neg
 summary(pm2.5_400m_nnoncon)#sig neg
+
+janpm2.5_5m_nnoncon<-lm(pm2.5est_jan~total_nonconifer_5m, data=canaq0)
+janpm2.5_10m_nnoncon<-lm(pm2.5est_jan~total_nonconifer_10m, data=canaq0)
+janpm2.5_25m_nnoncon<-lm(pm2.5est_jan~total_nonconifer_25m, data=canaq0)
+janpm2.5_50m_nnoncon<-lm(pm2.5est_jan~total_nonconifer_50m, data=canaq0)
+janpm2.5_100m_nnoncon<-lm(pm2.5est_sept~total_nonconifer_100m, data=canaq0)
+janpm2.5_200m_nnoncon<-lm(pm2.5est_sept~total_nonconifer_200m, data=canaq0)
+janpm2.5_400m_nnoncon<-lm(pm2.5est_sept~total_nonconifer_400m, data=canaq0)
+janpm2.5_800m_nnoncon<-lm(pm2.5est_sept~total_nonconifer_800m, data=canaq0)
+
+summary(janpm2.5_25m_nnoncon)#not sig
+summary(janpm2.5_50m_nnoncon)#not sig neg
+summary(janpm2.5_100m_nnoncon)# sig neg
+summary(janpm2.5_200m_nnoncon)#sig neg
+summary(janpm2.5_400m_nnoncon)#sig neg
+
+
 ####################################################
 # hours above PM2.5>25 models vs total nonconifers #
 ####################################################
@@ -334,6 +406,24 @@ summary(pm2.5_50m_tottrees)# sig neg
 summary(pm2.5_100m_tottrees)# sig neg
 summary(pm2.5_200m_nnoncon)#sig neg
 summary(pm2.5_400m_tottrees)#sig neg
+
+
+janpm2.5_5m_tottrees<-lm(pm2.5est_jan~n_features_5m, data=canaq0)
+janpm2.5_10m_tottrees<-lm(pm2.5est_jan~n_features_10m, data=canaq0)
+janpm2.5_25m_tottrees<-lm(pm2.5est_jan~n_features_25m, data=canaq0)
+janpm2.5_50m_tottrees<-lm(pm2.5est_jan~n_features_50m, data=canaq0)
+janpm2.5_100m_tottrees<-lm(pm2.5est_jan~n_features_100m, data=canaq0)
+janpm2.5_200m_tottrees<-lm(pm2.5est_jan~n_features_200m, data=canaq0)
+janpm2.5_400m_tottrees<-lm(pm2.5est_jan~n_features_400m, data=canaq0)
+janpm2.5_800m_tottrees<-lm(pm2.5est_jan~n_features_800m, data=canaq0)
+
+#summary(pm2.5_5m_tottrees)#not sig, not 10m
+summary(janpm2.5_25m_tottrees)#not sig neg
+summary(janpm2.5_50m_tottrees)# not sig neg
+summary(janpm2.5_100m_tottrees)# weakly sig neg
+summary(janpm2.5_200m_nnoncon)#sig neg
+summary(janpm2.5_400m_tottrees)#sig neg
+
 ########################################################
 # hours above PM2.5>25 models vs total number of trees #
 ########################################################

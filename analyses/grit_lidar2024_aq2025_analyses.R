@@ -59,7 +59,7 @@ buffers <- map_df(radii_m, function(r) {
 # 3. READ GDB FILE
 #    (and summarize tree height and conifer vs deciduous)
 #-----------------------------
-gdb_path <- "~/Documents/GitHub/grit/Tacoma 2024 LIDAR data/data/LandCover2024.gdb"
+gdb_path <- "C:/Users/ailene.ettinger/Documents/GitHub/grit/data/tacoma2024lidar/data/LandCover2024.gdb"
 
 layers <- st_layers(gdb_path)$name
 print(layers)    # see available layers

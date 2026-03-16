@@ -10,7 +10,7 @@
     online at, via datadownload tool. Data are in the 
     following folders
     a. data/PurpleAir/PurpleAir_Download_2025Aug_to_Oct
-    b. 
+    b. data/PurpleAir/PurpleAir_Download_2025Nov_to_2026Feb
 2. Purple Air data, downloaded directly from SD cards in 
     GRIT PurpleAir monitors (for those that were not con-
     nected to WiFi for large periods of time) in the fol-
@@ -31,12 +31,14 @@
 2. format_simcarddat.R
     formats simcard data to match that format of data
     downloaded from the datadownload tool
-3. plot_and_fit_models.R 
-4. grit_lidar2024_aq2025_analyses.R
+3. merge_aqdat.R
+    stitches together all the data
+4. plot_and_fit_models.R 
+5. grit_lidar2024_aq2025_analyses.R
     pulls out and summarizes canopy cover, mean height, and 
     conifer abundance from circles of different radii around 
     purpleairs
-5. grit_aqvstrees.R
+6. grit_aqvstrees.R
   plots and fits models to analyze relationships between 
   number of trees, tree height and identity (conifer vs 
   angiosperm) on air quality

@@ -27,33 +27,26 @@ if(length(grep("ailene", getwd()))>0) {
 
 ###Time Series Graphs###
 pa<- read.csv("output/purpleair_all.csv")
-sensornames <- read.csv("../data/PurpleAir/PurpleAirAPIInfo.csv")
-sensornames <- sensornames %>% drop_na(SensorIndex) %>% rename(sensor_index = SensorIndex)
-pa$year <- 2025
 pa$datetime <- make_datetime(
   year = pa$year,
   month = pa$month,
   day   = pa$day,
   hour  = pa$hour)
 pa$date <- as_date(pa$datetime)
-sensornames_clean <- sensornames %>%
-  distinct(sensor_index, .keep_all = TRUE)
-pa <- pa %>%
-  left_join(sensornames_clean, by = "sensor_index") 
-pa <- pa[, -c(14, 15)] ## included GRIT sensor names 
 
-
+#plot to check
 p <- ggplot(pa, aes(datetime, pm2.5_corrected))+
   geom_line(alpha = 0.5, linewidth = 0.3)+
   geom_hline(yintercept = 25, linetype = 2)+
   scale_x_datetime(date_breaks = "1 month", 
                    date_minor_breaks = "1 week",
                    date_labels = "%B",
-                   limits =  as.POSIXct(c("2025-08-01", "2025-10-31")))+
+                   limits =  as.POSIXct(c("2025-08-01", "2026-02-26")))+
   theme_classic()+
   labs(y ="PM2.5 (µg/m³)", 
        x = "Date", 
-       title = "Average PM2.5 Concentration August 2025 - October 2025")
+       title = "Average PM2.5 Concentration August 2025 - February 2026")
+
 
 ggsave("PurpleAir figs/avg_pm2.5_allsensors.png", width = 20, height = 9, dpi = 300)
 
@@ -63,6 +56,7 @@ x <- ggplot (pa, aes(datetime,pm2.5_corrected))+
   theme(axis.text.x = element_text(angle = 45, hjust = 1))+
   labs(y ="PM2.5 (µg/m³)", x = "Date", title = "Average PM 2.5 Concentration by Sensor")
 ggsave("PurpleAir figs/avg_pm2.5_bysensor.png", width = 20, height = 9, dpi = 300)
+
 
 #Number of hours above 35.5 mg/m3 across the time series (by sensor and across all sensors)
 locs<-read.csv("output/purpleair_locs_20242025.csv")
@@ -84,11 +78,11 @@ h25 <- ggplot(date.hrsabove25, aes(date, hrsabove25))+
   scale_x_datetime(date_breaks = "1 month", 
                    date_minor_breaks = "1 week",
                    date_labels = "%B",
-                   limits =  as.POSIXct(c("2025-08-01", "2025-10-31")))+
+                   limits =  as.POSIXct(c("2025-08-01", "2026-02-26")))+
   theme_classic()+
   labs(y ="Hours with PM2.5 > 25 µg/m³", 
        x = "Date", 
-       title = "Hours with PM2.5 > 25 µg/m³  August - October 2025")
+       title = "Hours with PM2.5 > 25 µg/m³  August 2025- February 2026")
 
 ggsave("PurpleAir figs/hoursabove25_allsensors.png", width = 6, height = 4, units = "in")
 
@@ -104,12 +98,16 @@ best10<-tail(palocs[order(palocs$pm2.5_corrected, decreasing=TRUE),], n=10)#high
 unique(worst10$date)
 unique(best10$date)
 #Did air quality differ significantly across sites?
-#select out just september
+#select out distinct nmonths
 palocs_sept<-palocs[palocs$month==9,]
 palocs_oct<-palocs[palocs$month==10,]
+palocs_jan<-palocs[palocs$month==1,]
+palocs_feb<-palocs[palocs$month==2,]
 
 palocs_sept$Sensor<-as.factor(substr(palocs_sept$Purple.Air.Name,5,6))
 palocs_oct$Sensor<-as.factor(substr(palocs_oct$Purple.Air.Name,5,6))
+palocs_jan$Sensor<-as.factor(substr(palocs_jan$Purple.Air.Name,5,6))
+palocs_feb$Sensor<-as.factor(substr(palocs_feb$Purple.Air.Name,5,6))
 
 bp_sept<- ggplot(palocs_sept, aes(Sensor, pm2.5_corrected)) +
   geom_boxplot()
@@ -118,6 +116,10 @@ bp_oct<- ggplot(palocs_oct, aes(Sensor, pm2.5_corrected)) +
   geom_boxplot()
 palocs_sept$Lat<-as.numeric(palocs_sept$Lat)
 palocs_sept$Long<-as.numeric(palocs_sept$Long)
+
+palocs_jan$Lat<-as.numeric(palocs_jan$Lat)
+palocs_jan$Long<-as.numeric(palocs_jan$Long)
+
 palocs$date<-as.factor(palocs$date)
 
 septmmod<-lmer(pm2.5_corrected~-1+Purple.Air.Name + (1|date),data=palocs_sept)
@@ -128,6 +130,16 @@ octmmod<-lmer(pm2.5_corrected~-1+Purple.Air.Name + (1|date),data=palocs_oct)
 Anova(octmmod)
 summary(octmmod)
 sort(fixef(octmmod), decreasing=TRUE)
+
+janmmod<-lmer(pm2.5_corrected~-1+Purple.Air.Name + (1|date),data=palocs_jan)
+Anova(janmmod)
+summary(janmmod)
+sort(fixef(janmmod), decreasing=TRUE)
+
+febmmod<-lmer(pm2.5_corrected~-1+Purple.Air.Name + (1|date),data=palocs_feb)
+Anova(febmmod)
+summary(febmmod)
+sort(fixef(febmmod), decreasing=TRUE)
 
 #there are significant differenecs in air quality acorss purpleair sensors
 
@@ -177,13 +189,24 @@ sept_pm2.5ci<-confint(septmmod)
 sept_pm2.5est<-fixef(septmmod)
 names(sept_pm2.5est)<-substr(names(sept_pm2.5est),16,21)
 septpm2.5<-as.data.frame(cbind(names(sept_pm2.5est),sept_pm2.5est,sept_pm2.5ci[3:30,]))
-colnames(septpm2.5)<-c("Purple.Air.Name", "pm2.5est_sept","pm2.5.lwr","pm2.5_upr")
+colnames(septpm2.5)<-c("Purple.Air.Name", "pm2.5est_sept","pm2.5.lwr_sept","pm2.5.upr_sept")
+
+jan_pm2.5ci<-confint(janmmod)
+jan_pm2.5est<-fixef(janmmod)
+names(jan_pm2.5est)<-substr(names(jan_pm2.5est),16,21)
+janpm2.5<-as.data.frame(cbind(names(jan_pm2.5est),jan_pm2.5est,jan_pm2.5ci[3:31,]))
+colnames(janpm2.5)<-c("Purple.Air.Name", "pm2.5est_jan","pm2.5.lwr_jan","pm2.5.upr_jan")
 
 #merge with location df
-locpm2.5<-left_join(locs,septpm2.5)
-locpm2.5hrs<-left_join(locpm2.5,est_by_sensor)
+locpm2.5_sept<-left_join(locs,septpm2.5)
+locpm2.5hrs_sept<-left_join(locpm2.5_sept,est_by_sensor)
+locpm2.5hrs_septjan<-left_join(locpm2.5_sept,janpm2.5)
 
-write.csv(locpm2.5hrs,"output/purpleairloc_wpmhrs.csv", row.names = FALSE)                                          
+
+write.csv(locpm2.5hrs_septjan,"output/purpleairloc_wpmhrs.csv", row.names = FALSE)                                          
+plot(locpm2.5hrs_septjan$pm2.5est_sept,locpm2.5hrs_septjan$pm2.5est_jan)
+cor(as.numeric(locpm2.5hrs_septjan$pm2.5est_sept),as.numeric(locpm2.5hrs_septjan$pm2.5est_jan), use="pairwise.complete.obs")
+#0.85 highly correlated
 
 #Do lat/long predict pm2.5?
 septlatlongmmod<-lmer(pm2.5_corrected~1+Lat + Long + (1|date),data=palocs_sept)
@@ -191,6 +214,11 @@ summary(septlatlongmmod)
 Anova(septlatlongmmod)
 sort(fixef(septlatlongmmod), decreasing=TRUE)
 #both lat and long were significant predictors.... (pm2.5 decreases further north, and increases further west)
+janlatlongmmod<-lmer(pm2.5_corrected~1+Lat + Long + (1|date),data=palocs_jan)
+summary(janlatlongmmod)
+Anova(janlatlongmmod)
+sort(fixef(septlatlongmmod), decreasing=TRUE)
+
 
 # Save with custom dimensions
 ggsave("PurpleAir figs/pm2.5boxplot_bysensor_sept.png", plot = bp_sept, width = 8, height = 6, units = "in")
@@ -215,10 +243,8 @@ sum(pm2.5_dailyavg_bysens$mod)
 sum(pm2.5_dailyavg_bysens$unhealthysens)
 sum(pm2.5_dailyavg_bysens$unhealthy)
 
-length(unique(pm2.5_dailyavg_bysens$date[pm2.5_dailyavg_bysens$mod==1]))#32 days with moderate air quality average over 24 hours
-length(unique(pm2.5_dailyavg_bysens$sensor[pm2.5_dailyavg_bysens$mod==1]))#32 days with moderate air quality average over 24 hours
-
-length(unique(pm2.5_dailyavg_bysens$sensor[pm2.5_dailyavg_bysens$good==1]))# 84 days with moderate air quality average over 24 hours
+length(unique(pm2.5_dailyavg_bysens$date[pm2.5_dailyavg_bysens$mod==1]))#32 days with moderate air quality average over 24 hours furing sept-oct, 87 during sept-feb
+length(unique(pm2.5_dailyavg_bysens$sensor[pm2.5_dailyavg_bysens$mod==1]))#30 sensors with moderate air quality average over 24 hours
 
 unique(pm2.5_dailyavg_bysens$sensor)
 
@@ -260,6 +286,14 @@ ggplot(palocs_sept, aes(hour + minute(datetime)/60, pm2.5_corrected, color = Pur
   theme_minimal(base_size = 12)
 ggsave("PurpleAir figs/pm2.5_byhour_sept.png", plot = plot, width = 8, height = 6, units = "in")
 
+plotjan<-ggplot(palocs_jan, aes(hour + minute(datetime)/60, pm2.5_corrected, color = Purple.Air.Name)) + geom_smooth(se = FALSE, method = "loess", span = 0.3, size = 0.8) +
+  scale_x_continuous(breaks = 0:23, limits = c(0, 24)) +
+  labs(
+    title = "Smoothed PM2.5 by time of day (January, per sensor)",
+    x = "Hour of day", y = "PM2.5 (µg/m³)", color = "Sensor"
+  ) +
+  theme_minimal(base_size = 12)
+ggsave("PurpleAir figs/pm2.5_byhour_jan.png", plot = plotjan, width = 8, height = 6, units = "in")
 
 
 #averages (rather than model estimates)
@@ -270,4 +304,14 @@ pmavg$month<-substr(pmavg$date,1,7)
 pmavg_sept<-pmavg[pmavg$month=="2025-09",]
 pmavg_septbysensor<-aggregate(pmavg_sept$pm2.5_avg, by=list(pmavg_sept$sensor_index), mean, na.rm=TRUE)
 colnames(pmavg_septbysensor)<-c("sensor_index","septpm2.5_avg")
-pmavg_septbysensor[pmavg_septbysensor$sensor_index=="183479",]
+
+pmavg_jan<-pmavg[pmavg$month=="2026-01",]
+pmavg_janbysensor<-aggregate(pmavg_jan$pm2.5_avg, by=list(pmavg_jan$sensor_index), mean, na.rm=TRUE)
+colnames(pmavg_janbysensor)<-c("sensor_index","janpm2.5_avg")
+
+#month model
+pa$month<-as.factor(pa$month)
+monmmod<-lmer(pm2.5_corrected~-1+month + (1|Name),data=pa)
+Anova(monmmod)
+fixef(monmmod)
+summary(monmmod)
