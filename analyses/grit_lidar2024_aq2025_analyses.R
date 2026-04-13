@@ -59,7 +59,7 @@ buffers <- map_df(radii_m, function(r) {
 # 3. READ GDB FILE
 #    (and summarize tree height and conifer vs deciduous)
 #-----------------------------
-gdb_path <- "C:/Users/ailene.ettinger/Documents/GitHub/grit/data/tacoma2024lidar/data/LandCover2024.gdb"
+gdb_path <- "~/Documents/GitHub/grit/Tacoma 2024 LIDAR data/data/LandCover2024.gdb"
 
 layers <- st_layers(gdb_path)$name
 print(layers)    # see available layers
@@ -110,13 +110,35 @@ pttreeht.results.tosave<-pttreeht.results.tosave[,1:6]
 # # below does not work
 # # Get total canopy cover, noncanopy cover, impervious surface, vegetation cover
 # # below does not work! need to fix this
-# #-----------------------------
-canopy.results <- st_intersection(buffers, st_make_valid(canopy_gdb)) |>
+# #--------------------------
+valid_canopy_gdb <- sf::st_buffer(canopy_gdb, 0)
+
+canopy.results <- st_intersection(buffers, st_make_valid(canopy_gdb, geos_method="valid_linework") |>
   group_by(ID = Purple.Air.Name, radius_m) |>     # 
   summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
             n_features = n(),
             .groups = "drop")
+  
+##New code
+canopy_union <- canopy_gdb |>
+  st_make_valid() |>
+  st_union()
 
+canopy.results <- st_intersection(buffers, canopy_union) |>
+  mutate(area = st_area(geometry)) |>
+  group_by(ID = Purple.Air.Name, radius_m) |>
+  summarize(
+    total_canopy = sum(area, na.rm = TRUE),
+    .groups = "drop"
+  )
+###Manual calculation of area to verify it worked
+test_buffer <- buffers |> 
+  filter(Purple.Air.Name == "GRIT01", radius_m == 100)
+
+test_intersection <- st_intersection(test_buffer, canopy_union)
+manual_area <- sum(st_area(test_intersection)) ##result is 6863 m^2 
+
+manual_area
 veg.results <- st_intersection(buffers, st_make_valid(veg_gdb)) |>
  group_by(ID = Purple.Air.Name, radius_m) |>     #
  summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
@@ -150,7 +172,7 @@ nonimp.results <- st_intersection(buffers, st_make_valid(nonimp_gdb)) |>
             n_features = n(),
             .groups = "drop")
 
-canopy.results<-as.data.frame(subset(canopy.results, select = c(ID,radius_m,total_canopy,n_features))) ##Class = 1
+canopy.results<-as.data.frame(subset(canopy.results, select = c(ID,radius_m,total_canopy))) ##Class = 1
 veg.results<-as.data.frame(subset(veg.results, select=c(ID,radius_m,total_canopy,n_features))) ## Class = 1 OR 2
 
 #-----------------------------
