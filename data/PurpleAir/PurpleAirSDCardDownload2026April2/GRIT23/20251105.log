@@ -1,0 +1,3307 @@
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.286 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2025/11/05T00:33:04z: 48:3f:da:26:d5:3c
+ 0h00:03.962 2025/11/05T00:33:04z: SSID: AkgWarmer5
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+Exception (29):
+epc1=0x4022a6e2 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000100 depc=0x00000000
+
+>>>stack>>>
+
+ctx: cont
+sp: 3ffffa50 end: 3fffffc0 offset: 01a0
+3ffffbf0:  0002e9e0 3fff59c4 3fff8bdc 4023d088  
+3ffffc00:  3fff5e74 3fff8c0c 4023d90c 4023cf34  
+3ffffc10:  ffffffff ffffffff 3fff7e44 4023da0d  
+3ffffc20:  00000040 3fff59c4 3fff8c0c 4023d4be  
+3ffffc30:  3fff638c 3fff59c4 3fff8c0c 4023deb5  
+3ffffc40:  3fff55f4 624cc66e 340bdee0 00000001  
+3ffffc50:  3fff59c4 3fff8bf4 3fff8c0c 00000001  
+3ffffc60:  00000010 3fff59c4 0000000f 4023e11c  
+3ffffc70:  3fff8bdc 3fff5624 0000000f 00000001  
+3ffffc80:  00000001 3fff8bc4 3fff9891 4023cf34  
+3ffffc90:  00000100 3fff55c4 3fff988f 00000000  
+3ffffca0:  00000100 3fff55c4 3fff988f 4023f339  
+3ffffcb0:  3ffffce0 00000000 000000d0 00000030  
+3ffffcc0:  9f6be1ef 3fff4904 3fff5b7c 00000004  
+3ffffcd0:  3fff9889 3fffbbcc 3fff9889 40239e94  
+3ffffce0:  d64f0303 187fb72e 20c64944 b967b520  
+3ffffcf0:  6fb13021 df19f90f bc079295 8691c004  
+3ffffd00:  0db87b23 9d1075de 868ea70c e1ef001a  
+3ffffd10:  3fff9889 00000004 3fffbbcc 4023a38d  
+3ffffd20:  388033dc acea5632 11dbe426 40236c98  
+3ffffd30:  b277e0d5 00000000 3fffbf4c 402327ba  
+3ffffd40:  00000004 00000000 3fff40a4 40210fce  
+3ffffd50:  0000001d 00000000 00000064 40217c96  
+3ffffd60:  00000000 00000020 00000027 00000004  
+3ffffd70:  3fff9889 00000004 3fffbbcc 00000004  
+3ffffd80:  3fff9889 00000004 3fffbbcc 40239c9c  
+3ffffd90:  1cdf1fd8 00000000 00000000 00000028  
+3ffffda0:  0000005d 3fff9889 3fffbbcc 4023a06c  
+3ffffdb0:  00000011 3fff98bc 000001f4 4021af18  
+3ffffdc0:  3ffffe18 0000000e 00000010 3fff40dc  
+3ffffdd0:  00000000 00000000 4bc6a7f0 01000000  
+3ffffde0:  3ffffe18 001482ea 3fffbbcc 40239e04  
+3ffffdf0:  00000000 402712e2 3ffffe10 3fff40dc  
+3ffffe00:  3fff40a4 001482ea 3fff58cc 40211655  
+3ffffe10:  3fffbbcc 3fff59ac 00000014 4022eed2  
+3ffffe20:  00008ca0 3ffffe50 3fff0e58 40211694  
+3ffffe30:  00000000 00000000 3fff0e40 000001bb  
+3ffffe40:  000001bb 402712e2 3fff0e40 402118a3  
+3ffffe50:  00000000 00000000 4bc6a7f0 000001bb  
+3ffffe60:  000001bb 402712e2 3fff0e40 4021195a  
+3ffffe70:  402213a8 798efa8e 402213a8 798efa8e  
+3ffffe80:  3fff0cc8 3fff0e40 3fff0509 4020c83a  
+3ffffe90:  3fff0509 3ffffea0 00000008 40229904  
+3ffffea0:  4026397a 3fff0921 3fff10c4 00000001  
+3ffffeb0:  4020f9e0 3ffffee8 3fff10c4 4022651d  
+3ffffec0:  40271390 0000000a 3fffff68 3fffff6c  
+3ffffed0:  3fffff70 3fff42fc 00000001 40203fbf  
+3ffffee0:  402213a8 00000000 402213a8 00000000  
+3ffffef0:  402712e2 000001bb 3fff0921 40206605  
+3fffff00:  3fffff74 402712e2 000001bb 00000001  
+3fffff10:  3ffe8e05 3fff0509 00000200 00000000  
+3fffff20:  3ffe8e05 00000001 3ffefd51 00000002  
+3fffff30:  00000001 00000001 3ffe8e05 0000000a  
+3fffff40:  7fffffff 3ffefd30 3ffefdb8 3fff226c  
+3fffff50:  3fffdad0 3fff0c4b 3ffefd30 40208ec8  
+3fffff60:  3ffe8e05 0000000a 00000000 4020983c  
+3fffff70:  40205458 4020904c 40217bb4 3fffefa0  
+3fffff80:  00000000 00000000 3fff0c82 40217c96  
+3fffff90:  3fffdad0 00000000 3fff0c82 4020b8f8  
+3fffffa0:  3fffdad0 00000000 3fff223c 40217c64  
+3fffffb0:  feefeffe feefeffe 3ffe8704 40101ded  
+<<<stack<<<
+
+last failed alloc call: 4023CE8E(520)
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.286 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/11/05T00:55:29z: 48:3f:da:26:d5:3c
+ 0h00:03.961 2025/11/05T00:55:29z: SSID: AkgWarmer5
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/11/05T01:29:01z: 48:3f:da:26:d5:3c
+ 0h00:03.962 2025/11/05T01:29:01z: SSID: AkgWarmer5
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+Exception (29):
+epc1=0x4022a6fc epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000404 depc=0x00000000
+
+>>>stack>>>
+
+ctx: cont
+sp: 3ffff5d0 end: 3fffffc0 offset: 01a0
+3ffff770:  3fffa65c 3fffaf6c 00000101 4023db7e  
+3ffff780:  3fff2478 00001046 00001046 4021acd4  
+3ffff790:  3fffaf9c 3fffaf84 00000080 00000000  
+3ffff7a0:  0000000c 3fffb7dc 00000081 00000081  
+3ffff7b0:  00000000 00000001 00000001 4023d114  
+3ffff7c0:  3fffaf54 3fffb7dc 00000000 000000ff  
+3ffff7d0:  3fffaf6c 00000101 3fffaf6c 000000ff  
+3ffff7e0:  3fffaf6c 3fffb7dc 3fffb7dc 4023de41  
+3ffff7f0:  00000002 00000001 3ffffc7c 4023cf34  
+3ffff800:  00000200 00000200 3fffab44 3fffa62c  
+3ffff810:  3fffb794 00000200 3fffb7dc 4023efed  
+3ffff820:  3fffab44 3fffb7d4 00000003 40242cfe  
+3ffff830:  00000000 00000080 00000005 00000000  
+3ffff840:  00000200 3fff69d1 3ffffc7c 4024318f  
+3ffff850:  3fffb7d4 3fffab44 3ffe9636 40243021  
+3ffff860:  3fffb754 0000000b 00000003 40242ec6  
+3ffff870:  4023afb1 3fffb754 3fff69d1 00000000  
+3ffff880:  00000004 3fffb754 3fff69d1 4023b099  
+3ffff890:  00000300 00000000 56d43e00 deb3d18b  
+3ffff8a0:  c41acc61 a766af7c 4bc6c46f 46720e31  
+3ffff8b0:  5d8ea544 b523dcdc 1ea02030 1a861ca0  
+3ffff8c0:  70747468 632f2f3a 696b702e 6f6f672e  
+3ffff8d0:  2f722f67 632e3172 13306c72 1d550306  
+3ffff8e0:  300c0420 0608300a 0c816706 80010201  
+3ffff8f0:  00000000 b8170000 3fffc718 001f3b00  
+3ffff900:  00000100 00000000 40106fe4 00000100  
+3ffff910:  3fff447c 001f3b00 001f3a00 001f3b00  
+3ffff920:  3fffc718 3fff447c 00002222 00000000  
+3ffff930:  001f3a00 402156c5 00000100 001f3b00  
+3ffff940:  61000045 000c0045 00000100 4021a01d  
+3ffff950:  0010425c 82460003 a6e440c2 051441a7  
+3ffff960:  001b421f dbc00005 03b7edc4 00000000  
+3ffff970:  00000000 00010000 1d294e01 09000c56  
+3ffff980:  c4dbc000 0003b7ed 0a000800 abe2bc00  
+3ffff990:  0b003a41 00000000 00000000 00000000  
+3ffff9a0:  00000000 00000000 3fff5684 401008dd  
+3ffff9b0:  00000000 00000000 00000020 40100913  
+3ffff9c0:  00000000 00000000 00000020 40101634  
+3ffff9d0:  00000001 00001900 3fffc230 4000050c  
+3ffff9e0:  4025bd3d 00000030 00000000 ffffffff  
+3ffff9f0:  4025bda6 3ffed560 0000013a 0000000a  
+3ffffa00:  000000ca 9d000000 007fffff f3b85994  
+3ffffa10:  3ffedd00 00ffffff 0000005e 00000000  
+3ffffa20:  ffffffff 00000000 4025bd57 00000001  
+3ffffa30:  00000001 00000000 0000000a 00000000  
+3ffffa40:  00000001 00000000 0000000a 00000000  
+3ffffa50:  4025beb2 3ffed588 3fff3714 3ffed588  
+3ffffa60:  00000000 a0000000 00000000 0000001c  
+3ffffa70:  00001000 4025ae4f 00001000 00000000  
+3ffffa80:  3ffffbe0 00000000 3ffffbe0 40228e8a  
+3ffffa90:  0000a000 3ffffb83 00000000 3ffed588  
+3ffffaa0:  3fffb232 40106107 4025bd57 00000001  
+3ffffab0:  ffffffff 00000000 3ffe9fe1 00000008  
+3ffffac0:  4025bda6 3ffed560 3fff3714 00000001  
+3ffffad0:  4025beb2 3ffed560 3fff3714 3ffed560  
+3ffffae0:  00000002 00000000 00000020 4010267a  
+3ffffaf0:  3ffe9e92 4025ae4f 3ffed560 3fff47b4  
+3ffffb00:  00000000 402479bf 3ffeeab8 00000001  
+3ffffb10:  00000000 00000002 00000000 3ffed560  
+3ffffb20:  3fff368a 40106107 3fff47b4 3fff3fb4  
+3ffffb30:  3fff3654 4025ae4f 3ffed560 3fff47b4  
+3ffffb40:  00000000 4022f001 3fff24b0 3fff3fb4  
+3ffffb50:  3fff368a 00000036 00000000 3ffed560  
+3ffffb60:  00000140 00000000 39d4a599 00fd3562  
+3ffffb70:  61e046dc 38707192 1ca03f03 52c00f50  
+3ffffb80:  f757a8ba 77db7281 966b25b5 45811d72  
+3ffffb90:  c469866f 4c78e6e4 7fa1e631 0a7301a7  
+3ffffba0:  8987ef87 c5d3cc72 0103028d 00800100  
+3ffffbb0:  00000000 00000000 00000000 00000000  
+3ffffbc0:  00000000 30090000 e251cb7d af593104  
+3ffffbd0:  5a804545 a0f45bc2 26a0bd76 00000000  
+3ffffbe0:  00000000 00000000 00000000 00000000  
+3ffffbf0:  00000000 00000000 00000000 00000000  
+3ffffc00:  00000000 00000000 00000000 00000000  
+3ffffc10:  00000000 00000000 00000000 00000000  
+3ffffc20:  00000000 7f470000 003ed456 8bd1b3de  
+3ffffc30:  61cc1ac4 7caf66a7 6fc4c64b 310e7246  
+3ffffc40:  44a58e5d dcdc23b5 00000000 40236c74  
+3ffffc50:  40101a36 00000030 00000010 3fff3bdc  
+3ffffc60:  3fff3be0 3fff3654 00000210 00000243  
+3ffffc70:  00000000 00000002 00000566 00000316  
+3ffffc80:  00000452 00000002 40217bb4 3fffefa0  
+3ffffc90:  000000f0 3fff401c 00002710 40217c96  
+3ffffca0:  00000000 000001fa 00000000 40217cd9  
+3ffffcb0:  40238cc4 0000000c 00000a50 00000002  
+3ffffcc0:  3fff401c 3fff5f81 00000a50 40238b91  
+3ffffcd0:  00000faf 3fff3c84 00000fb6 3fff4014  
+3ffffce0:  3fff3d74 00000007 00860011 3fff3cd8  
+3ffffcf0:  00000566 a2cee64a dc313955 3faa0226  
+3ffffd00:  28110ff5 3fff5bbc 4d504848 00000fb6  
+3ffffd10:  3fff5f81 00000fb6 3fff3c84 4023a2b3  
+3ffffd20:  4b5e0d21 fb58422a d33868ca 30ada999  
+3ffffd30:  ba21d772 00000000 3fff3bdc 4022fa89  
+3ffffd40:  0000003d 3fff6f1a 3fff6f1a 3fff5bbc  
+3ffffd50:  00000000 00000f5d 00000064 40217c96  
+3ffffd60:  00000000 00000020 00000027 00000fb6  
+3ffffd70:  3fff5f81 00000fb6 3fff3c84 00000fb6  
+3ffffd80:  3fff5f81 00000fb6 3fff3c84 40239c9c  
+3ffffd90:  55671eb7 00000000 00000000 00000028  
+3ffffda0:  0000005d 3fff5f81 3fff3c84 4023a06c  
+3ffffdb0:  00000011 3fff5fb4 000001f4 4021af18  
+3ffffdc0:  3ffffe18 0000000b 00000010 3fff58cc  
+3ffffdd0:  00000000 00000000 4bc6a7f0 01000000  
+3ffffde0:  3ffffe18 003e6b50 3fff3c84 40239e04  
+3ffffdf0:  00000000 402712e2 3ffffe10 3fff58cc  
+3ffffe00:  3fff560c 003e6b50 3fff3ee4 40211655  
+3ffffe10:  3fff3c84 3fff3d5c 00000014 4022eed2  
+3ffffe20:  00008ca0 3ffffe50 3fff0e58 40211694  
+3ffffe30:  00000000 00000000 3fff0e40 000001bb  
+3ffffe40:  000001bb 402712e2 3fff0e40 402118a3  
+3ffffe50:  00000000 00000000 4bc6a7f0 000001bb  
+3ffffe60:  000001bb 402712e2 3fff0e40 4021195a  
+3ffffe70:  402213a8 53d9fa8e 402213a8 53d9fa8e  
+3ffffe80:  3fff0cc8 3fff0e40 3fff0509 4020c83a  
+3ffffe90:  4021a4a2 00000001 3fff42e4 40229904  
+3ffffea0:  4026397a 3fff0921 3fff10c4 00000001  
+3ffffeb0:  4020f9e0 3ffffee8 3fff10c4 4022651d  
+3ffffec0:  40271390 0000000a 3fffff68 3fffff6c  
+3ffffed0:  3fffff70 3fff42fc 00000001 40203fbf  
+3ffffee0:  402213a8 00000000 402213a8 00000000  
+3ffffef0:  402712e2 000001bb 3fff0921 40206605  
+3fffff00:  3fffff74 402712e2 000001bb 00000001  
+3fffff10:  3ffe8e05 3fff0509 00000200 00000000  
+3fffff20:  3ffe8e05 00000001 3ffefd51 00000002  
+3fffff30:  00000001 00000001 3ffe8e05 0000000a  
+3fffff40:  7fffffff 3ffefd30 3ffefdb8 3fff226c  
+3fffff50:  3fffdad0 3fff0c4b 3ffefd30 40208ec8  
+3fffff60:  3ffe8e05 0000000a 00000000 4020983c  
+3fffff70:  40205458 4020904c 40217bb4 3fffefa0  
+3fffff80:  00000000 00000000 3fff0c82 40217c96  
+3fffff90:  3fffdad0 00000000 3fff0c82 4020b8f8  
+3fffffa0:  3fffdad0 00000000 3fff223c 40217c64  
+3fffffb0:  feefeffe feefeffe 3ffe8704 40101ded  
+<<<stack<<<
+
+last failed alloc call: 4023CE8E(2056)
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.959 2025/11/05T02:37:13z: 48:3f:da:26:d5:3c
+ 0h00:03.960 2025/11/05T02:37:13z: SSID: AkgWarmer5
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+Exception (29):
+epc1=0x4022a6fc epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000404 depc=0x00000000
+
+>>>stack>>>
+
+ctx: cont
+sp: 3ffff5d0 end: 3fffffc0 offset: 01a0
+3ffff770:  3fffb80c 3fffb83c 00000101 4023db7e  
+3ffff780:  3fff2478 00001047 00001047 4021acd4  
+3ffff790:  3fffb86c 3fffb854 00000080 00000000  
+3ffff7a0:  0000000c 3fff5af4 00000081 00000081  
+3ffff7b0:  00000000 00000001 00000001 4023d114  
+3ffff7c0:  3fffb824 3fff5af4 00000000 000000ff  
+3ffff7d0:  3fffb83c 00000101 3fffb83c 000000ff  
+3ffff7e0:  3fffb83c 3fff5af4 3fff5af4 4023de41  
+3ffff7f0:  00000002 00000001 3ffffc7c 4023cf34  
+3ffff800:  00000200 00000200 3fffbcdc 3fffb7dc  
+3ffff810:  3fff5a84 00000200 3fff5af4 4023efed  
+3ffff820:  3fffbcdc 3fff5aec 00000003 40242cfe  
+3ffff830:  00000000 00000080 00000005 00000000  
+3ffff840:  00000200 3fff9b19 3ffffc7c 4024318f  
+3ffff850:  3fff5aec 3fffbcdc 3ffe9636 40243021  
+3ffff860:  3fff5a44 0000000b 00000003 40242ec6  
+3ffff870:  4023afb1 3fff5a44 3fff9b19 00000000  
+3ffff880:  00000004 3fff5a44 3fff9b19 4023b099  
+3ffff890:  00000300 00000000 56d43e00 deb3d18b  
+3ffff8a0:  c41acc61 a766af7c 4bc6c46f 46720e31  
+3ffff8b0:  5d8ea544 b523dcdc 1ea02030 1a861ca0  
+3ffff8c0:  70747468 632f2f3a 696b702e 6f6f672e  
+3ffff8d0:  2f722f67 632e3172 13306c72 1d550306  
+3ffff8e0:  300c0420 0608300a 0c816706 80010201  
+3ffff8f0:  00000000 b8170000 00000000 00000d01  
+3ffff900:  f6c580c0 00001547 41519ecc 00000e01  
+3ffff910:  f6c580c0 00001547 42b45c0d 00000f01  
+3ffff920:  00000000 00000000 00000000 00000000  
+3ffff930:  00000000 00000000 00000000 00000000  
+3ffff940:  00000000 00000000 00000000 00000000  
+3ffff950:  00000000 00000000 00000000 00000000  
+3ffff960:  00000000 00000000 00000000 00000000  
+3ffff970:  00000000 00000000 00000000 00000000  
+3ffff980:  00000000 00000000 00000000 00000000  
+3ffff990:  00000000 00000000 00000000 00000000  
+3ffff9a0:  00000000 00000000 00000000 00000000  
+3ffff9b0:  401049cd 00040000 7fffffff 00000000  
+3ffff9c0:  00000022 401049ca 00040000 00000001  
+3ffff9d0:  3ffee058 401038ea 03f802e8 78142d00  
+3ffff9e0:  06add39c 65e80012 00002200 4000050c  
+3ffff9f0:  3fffc278 40103740 3fffc200 00000022  
+3ffffa00:  3ffffa10 00002a01 402123c0 4021233c  
+3ffffa10:  402407d6 00000030 00000002 ffffffff  
+3ffffa20:  40242194 06c6c6c6 02d32859 e7272727  
+3ffffa30:  e803546f 10d19786 f0c21a32 43465e18  
+3ffffa40:  d62bbd86 43465e18 e5c1b477 78dcef22  
+3ffffa50:  40445c08 9d1d5b55 720fcfb2 00000030  
+3ffffa60:  00000000 00000000 00000000 00000000  
+3ffffa70:  00000000 00000000 00000000 00010001  
+3ffffa80:  00000202 00000000 32604ac0 00001548  
+3ffffa90:  0000200f 03840140 00640140 00640064  
+3ffffaa0:  00c800c8 014000c8 4025bd57 00000001  
+3ffffab0:  ffffffff 00000000 3ffe9fe1 00000008  
+3ffffac0:  4025bda6 3ffed5d8 3fff3724 00000001  
+3ffffad0:  4025beb2 3ffed5d8 3fff3724 3ffed5d8  
+3ffffae0:  00000002 00000000 00000020 4010267a  
+3ffffaf0:  3ffe9e92 4025ae4f 3ffed5d8 3fff55b0  
+3ffffb00:  00000000 402479bf 3ffeeab8 40106361  
+3ffffb10:  00000000 00000002 00000000 3ffed5d8  
+3ffffb20:  3fff8e62 40106107 3fff55b0 3fff3b1c  
+3ffffb30:  3fff8e2c 00000023 0000000f 0000005b  
+3ffffb40:  0000000b 4022f001 3fff24b0 3fff3b1c  
+3ffffb50:  3fff8e62 00000036 00000001 3fff8e98  
+3ffffb60:  00000140 00000000 39d4a599 00fd3562  
+3ffffb70:  61e046dc 38707192 1ca03f03 52c00f50  
+3ffffb80:  f757a8ba 77db7281 966b25b5 45811d72  
+3ffffb90:  c469866f 4c78e6e4 7fa1e631 0a7301a7  
+3ffffba0:  8987ef87 c5d3cc72 0103028d 00800100  
+3ffffbb0:  00000000 00000000 00000000 00000000  
+3ffffbc0:  00000000 30090000 e251cb7d af593104  
+3ffffbd0:  5a804545 a0f45bc2 26a0bd76 00000000  
+3ffffbe0:  00000000 00000000 00000000 00000000  
+3ffffbf0:  00000000 00000000 00000000 00000000  
+3ffffc00:  00000000 00000000 00000000 00000000  
+3ffffc10:  00000000 00000000 00000000 00000000  
+3ffffc20:  00000000 00000000 003ed456 8bd1b3de  
+3ffffc30:  61cc1ac4 7caf66a7 6fc4c64b 310e7246  
+3ffffc40:  44a58e5d dcdc23b5 00000000 40236c74  
+3ffffc50:  00000001 00004a88 0000001f 3fff6bd4  
+3ffffc60:  3fff6bd8 3fff8e2c 00000210 00000243  
+3ffffc70:  00000000 00000002 00000566 00000316  
+3ffffc80:  00000452 00000002 40217bb4 3fffefa0  
+3ffffc90:  000000f0 3fff54e4 00002710 40217c96  
+3ffffca0:  00000000 000001fa 00000000 40217cd9  
+3ffffcb0:  40238cc4 0000000c 00000a50 00000002  
+3ffffcc0:  3fff54e4 3fff90c9 00000a50 40238b91  
+3ffffcd0:  00000faf 3fff53f4 00000fb6 3fff54dc  
+3ffffce0:  3fff512c 00000007 00860011 3fff5448  
+3ffffcf0:  00000566 a2cee64a dc313955 3faa0226  
+3ffffd00:  28110ff5 3fff66b4 71716b32 00000fb6  
+3ffffd10:  3fff90c9 00000fb6 3fff53f4 4023a2b3  
+3ffffd20:  35deb163 93354afc cd014e54 cef0c695  
+3ffffd30:  ba8bf64f 00000000 3fff6bd4 4022fa89  
+3ffffd40:  0000003d 3fffa062 3fffa062 3fff66b4  
+3ffffd50:  00000000 00000f5d 00000064 40217c96  
+3ffffd60:  00000000 00000020 00000027 00000fb6  
+3ffffd70:  3fff90c9 00000fb6 3fff53f4 00000fb6  
+3ffffd80:  3fff90c9 00000fb6 3fff53f4 40239c9c  
+3ffffd90:  3a9f0675 00000362 00000362 00000028  
+3ffffda0:  0000005d 3fff90c9 3fff53f4 4023a06c  
+3ffffdb0:  00000011 3fff90fc 000001f4 4021af18  
+3ffffdc0:  3ffffe18 0000000b 00000010 3fff54cc  
+3ffffdd0:  00000005 00000000 4bc6a7f0 01000000  
+3ffffde0:  3ffffe18 016512fb 3fff53f4 40239e04  
+3ffffdf0:  00000005 3fff512c 3ffffe10 3fff54cc  
+3ffffe00:  3fff5974 016512fb 3fff5054 40211655  
+3ffffe10:  3fff53f4 3fff54f4 40217bb4 3fffefa0  
+3ffffe20:  00008ca0 00008ca0 00008ca0 40218893  
+3ffffe30:  00000000 3fff5974 3fff0e40 000001bb  
+3ffffe40:  000001bb 402712e2 3fff0e40 402118a3  
+3ffffe50:  00000005 00000000 4bc6a7f0 000001bb  
+3ffffe60:  000001bb 402712e2 3fff0e40 4021195a  
+3ffffe70:  402213a8 d322fb8e 402213a8 d322fb8e  
+3ffffe80:  3fff0cc8 3fff0e40 3fff0509 4020c83a  
+3ffffe90:  4021a4a2 00000001 3fff3d04 40229904  
+3ffffea0:  4026397a 3fff0921 3fff10c4 00000001  
+3ffffeb0:  4020f9e0 3ffffee8 3fff10c4 4022651d  
+3ffffec0:  40271390 0000000a 3fffff68 3fffff6c  
+3ffffed0:  3fffff70 3fff3d1c 00000001 40203fbf  
+3ffffee0:  402213a8 00000000 402213a8 00000000  
+3ffffef0:  402712e2 000001bb 3fff0921 40206605  
+3fffff00:  3fffff74 402712e2 000001bb 00000001  
+3fffff10:  3ffe8e05 3fff0509 00000200 00000000  
+3fffff20:  3ffe8e05 00000001 3ffefd51 00000002  
+3fffff30:  00000001 00000001 3ffe8e05 0000000a  
+3fffff40:  7fffffff 3ffefd30 3ffefdb8 3fff226c  
+3fffff50:  3fffdad0 3fff0c4b 3ffefd30 40208ec8  
+3fffff60:  3ffe8e05 0000000a 00000000 4020983c  
+3fffff70:  40205458 4020904c 40217bb4 3fffefa0  
+3fffff80:  00000000 00000000 3fff0c82 40217c96  
+3fffff90:  3fffdad0 00000000 3fff0c82 4020b8f8  
+3fffffa0:  3fffdad0 00000000 3fff223c 40217c64  
+3fffffb0:  feefeffe feefeffe 3ffe8704 40101ded  
+<<<stack<<<
+
+last failed alloc call: 4023CE8E(2056)
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.284 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/11/05T09:07:16z: 48:3f:da:26:d5:3c
+ 0h00:03.961 2025/11/05T09:07:16z: SSID: AkgWarmer5
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+Exception (29):
+epc1=0x4022a6e2 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000000 depc=0x00000000
+
+>>>stack>>>
+
+ctx: cont
+sp: 3ffff5e0 end: 3fffffc0 offset: 01a0
+3ffff780:  3fff2478 00000523 00000523 4021acd4  
+3ffff790:  3fff5f4c 3fff5f34 00000080 00000000  
+3ffff7a0:  0000000c 3fff9d6c 00000081 00000081  
+3ffff7b0:  00000000 00000001 00000001 4023d114  
+3ffff7c0:  3fff5f04 3fff9d6c 00000000 000000ff  
+3ffff7d0:  3fff5f1c 00000101 3fff5f1c 000000ff  
+3ffff7e0:  3fff5f1c 3fff9d6c 3fff9d6c 4023de41  
+3ffff7f0:  00000002 00000001 3ffffc7c 4023cf34  
+3ffff800:  00000200 00000200 3fff63d4 3fff5ebc  
+3ffff810:  3fff558c 00000200 3fff9d6c 4023efed  
+3ffff820:  3fff63d4 3fff9d64 00000003 40242cfe  
+3ffff830:  00000000 00000080 00000005 00000000  
+3ffff840:  00000200 3ffface9 3ffffc7c 4024318f  
+3ffff850:  3fff9d64 3fff63d4 3ffe9636 40243021  
+3ffff860:  3fff554c 0000000b 00000003 40242ec6  
+3ffff870:  4023afb1 3fff554c 3ffface9 00000000  
+3ffff880:  00000004 3fff554c 3ffface9 4023b099  
+3ffff890:  00000300 00000000 56d43e00 deb3d18b  
+3ffff8a0:  c41acc61 a766af7c 4bc6c46f 46720e31  
+3ffff8b0:  5d8ea544 b523dcdc 1ea02030 1a861ca0  
+3ffff8c0:  70747468 632f2f3a 696b702e 6f6f672e  
+3ffff8d0:  2f722f67 632e3172 13306c72 1d550306  
+3ffff8e0:  300c0420 0608300a 0c816706 80010201  
+3ffff8f0:  00000000 b8170000 3f800000 00000d01  
+3ffff900:  8cc06580 0000099b 418c0f56 00000e01  
+3ffff910:  8cc06580 0000099b 427edb25 00000f01  
+3ffff920:  00000000 00000000 00000000 00000000  
+3ffff930:  00000000 00000000 00000000 00000000  
+3ffff940:  00000000 00000000 00000000 00000000  
+3ffff950:  00000000 00000000 00000000 00000000  
+3ffff960:  00000000 00000000 00000000 00000000  
+3ffff970:  00000000 00000000 00000000 00000000  
+3ffff980:  00000000 00000000 00000000 00000000  
+3ffff990:  00000000 00000000 00000000 00000000  
+3ffff9a0:  00000000 00000000 00000000 00000000  
+3ffff9b0:  401049cd 00040000 7fffffff 00000000  
+3ffff9c0:  00000022 401049ca 00040000 00000001  
+3ffff9d0:  3ffee058 401038ea 03f802e8 78142d00  
+3ffff9e0:  06add39c 65e80012 00002200 4000050c  
+3ffff9f0:  3fffc278 40103740 3fffc200 00000022  
+3ffffa00:  3ffffa10 00002a01 402123c0 4021233c  
+3ffffa10:  4023fb05 00000030 00000016 ffffffff  
+3ffffa20:  40242194 3ffffc88 81c7cc79 8d852457  
+3ffffa30:  d11a8c64 dcbd79c9 6406a0ff b3912a66  
+3ffffa40:  0bd874e6 0bd800e6 000000e6 b8bbd936  
+3ffffa50:  bbdd4996 1c8c1b27 c1dd253c 00000030  
+3ffffa60:  00000000 00000000 00000000 00000000  
+3ffffa70:  00000000 00000000 00000000 00010001  
+3ffffa80:  00000202 00000000 c85b2f80 0000099b  
+3ffffa90:  0000200f 03840140 00640140 00640064  
+3ffffaa0:  00c800c8 014000c8 01400140 00020005  
+3ffffab0:  7ffe635c 00000000 e790a89f 000000ff  
+3ffffac0:  0000005c 00000001 401059ca 3ffee058  
+3ffffad0:  3ffedfe0 00000000 1a803642 000000ff  
+3ffffae0:  0000005c 00000001 401059ca 3ffee058  
+3ffffaf0:  3ffedfe0 00000000 3ffe9fe1 00000008  
+3ffffb00:  4025bda6 3ffed5b0 3fff3724 00000001  
+3ffffb10:  401055cf 3ffee058 3fff3724 3ffed5b0  
+3ffffb20:  00000002 40104f42 3ffee058 4010267a  
+3ffffb30:  3ffe9e92 4025ae4f 3ffed5b0 3fff5634  
+3ffffb40:  401054d9 3ffee058 3ffed5b0 00000002  
+3ffffb50:  0000007f 00040000 7fffffff 00000000  
+3ffffb60:  00000140 00000000 39d4a599 00fd3562  
+3ffffb70:  61e046dc 38707192 1ca03f03 52c00f50  
+3ffffb80:  f757a8ba 77db7281 966b25b5 45811d72  
+3ffffb90:  c469866f 4c78e6e4 7fa1e631 0a7301a7  
+3ffffba0:  8987ef87 c5d3cc72 0103028d 00800100  
+3ffffbb0:  00000000 00000000 00000000 00000000  
+3ffffbc0:  00000000 30090000 e251cb7d af593104  
+3ffffbd0:  5a804545 a0f45bc2 26a0bd76 00000000  
+3ffffbe0:  00000000 00000000 00000000 00000000  
+3ffffbf0:  00000000 00000000 00000000 00000000  
+3ffffc00:  00000000 00000000 00000000 00000000  
+3ffffc10:  00000000 00000000 00000000 00000000  
+3ffffc20:  00000000 75c00000 003ed456 8bd1b3de  
+3ffffc30:  61cc1ac4 7caf66a7 6fc4c64b 310e7246  
+3ffffc40:  44a58e5d dcdc23b5 00002200 4000050c  
+3ffffc50:  00000000 75c0b7e8 00002200 4000050c  
+3ffffc60:  3fffc278 40103740 00000210 00000243  
+3ffffc70:  00000000 00000002 00000566 00000316  
+3ffffc80:  00000452 00000002 40217bb4 3fffefa0  
+3ffffc90:  000000f0 3fff512c 00002710 40217c96  
+3ffffca0:  00000000 000001fa ffffffff 40217cd9  
+3ffffcb0:  40238cc4 0000000c 00000a50 00000002  
+3ffffcc0:  3fff512c 3fffa299 00000a50 40238b91  
+3ffffcd0:  00000faf 3fff8c8c 00000fb6 3fff5124  
+3ffffce0:  3fffbf64 00000007 00860011 3fff8ce0  
+3ffffcf0:  00000566 a2cee64a dc313955 3faa0226  
+3ffffd00:  28110ff5 3fff7094 89fdc9fc 00000fb6  
+3ffffd10:  3fffa299 00000fb6 3fff8c8c 4023a2b3  
+3ffffd20:  ee90cfda ea7286f1 0873beac b6586067  
+3ffffd30:  5738cdd2 978d4fe0 3ffe8704 00000000  
+3ffffd40:  0000003d 3fffb232 3fffb232 3fff7094  
+3ffffd50:  00000000 00000f5d 00000064 40217c96  
+3ffffd60:  00000000 00000020 00000027 00000fb6  
+3ffffd70:  3fffa299 00000fb6 3fff8c8c 00000fb6  
+3ffffd80:  3fffa299 00000fb6 3fff8c8c 40239c9c  
+3ffffd90:  a5da7e83 00000cc9 00000cc9 00000028  
+3ffffda0:  0000005d 3fffa299 3fff8c8c 4023a06c  
+3ffffdb0:  00000011 3fffa2cc 000001f4 4021af18  
+3ffffdc0:  3ffffe18 0000000b 00000010 3fff6eec  
+3ffffdd0:  00000002 00000000 4bc6a7f0 01000000  
+3ffffde0:  3ffffe18 00a136e9 3fff8c8c 40239e04  
+3ffffdf0:  00000002 3fff9c64 3ffffe10 3fff6eec  
+3ffffe00:  3fff54fc 00a136e9 3fff903c 40211655  
+3ffffe10:  3fff8c8c 3fff9c64 40217bb4 3fffefa0  
+3ffffe20:  00008ca0 00008ca0 00008ca0 40218893  
+3ffffe30:  00000000 3fff54fc 3fff0e40 000001bb  
+3ffffe40:  000001bb 402712e2 3fff0e40 402118a3  
+3ffffe50:  00000002 00000000 4bc6a7f0 000001bb  
+3ffffe60:  000001bb 402712e2 3fff0e40 4021195a  
+3ffffe70:  402213a8 53d9fa8e 402213a8 53d9fa8e  
+3ffffe80:  3fff0cc8 3fff0e40 3fff0509 4020c83a  
+3ffffe90:  3fff0509 3ffffea0 00000008 40229904  
+3ffffea0:  4026397a 3fff0921 3fff10c4 00000001  
+3ffffeb0:  4020f9e0 3ffffee8 3fff10c4 4022651d  
+3ffffec0:  40271390 0000000a 3fffff68 3fffff6c  
+3ffffed0:  3fffff70 3fff3d1c 00000001 40203fbf  
+3ffffee0:  402213a8 00000000 402213a8 00000000  
+3ffffef0:  402712e2 000001bb 3fff0921 40206605  
+3fffff00:  3fffff74 402712e2 000001bb 00000001  
+3fffff10:  3ffe8e05 3fff0509 00000200 00000000  
+3fffff20:  3ffe8e05 00000001 3ffefd51 00000002  
+3fffff30:  00000001 00000001 3ffe8e05 0000000a  
+3fffff40:  7fffffff 3ffefd30 3ffefdb8 3fff226c  
+3fffff50:  3fffdad0 3fff0c4b 3ffefd30 40208ec8  
+3fffff60:  3ffe8e05 0000000a 00000000 4020983c  
+3fffff70:  40205458 4020904c 40217bb4 3fffefa0  
+3fffff80:  00000000 00000000 3fff0c82 40217c96  
+3fffff90:  3fffdad0 00000000 3fff0c82 4020b8f8  
+3fffffa0:  3fffdad0 00000000 3fff223c 40217c64  
+3fffffb0:  feefeffe feefeffe 3ffe8704 40101ded  
+<<<stack<<<
+
+last failed alloc call: 4023D0A0(516)
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2025/11/05T12:03:22z: 48:3f:da:26:d5:3c
+ 0h00:03.965 2025/11/05T12:03:22z: SSID: AkgWarmer5
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+Exception (29):
+epc1=0x4022a5e5 epc2=0x00000000 epc3=0x00000000 excvaddr=0x00000010 depc=0x00000000
+
+>>>stack>>>
+
+ctx: cont
+sp: 3ffff8d0 end: 3fffffc0 offset: 01a0
+3ffffa70:  02030317 00000007 00000000 3ffaaaaa  
+3ffffa80:  00000207 00000017 00000240 3fff0c69  
+3ffffa90:  3ffef802 3fff0e40 3fff0509 00000000  
+3ffffaa0:  3fff9c74 3fff0509 00000207 40239040  
+3ffffab0:  00000207 7fffffff 7fffffed 3ffe8de2  
+3ffffac0:  4026e7f8 00000002 3ffe8db0 00000005  
+3ffffad0:  3fff0e40 00000207 3fff5294 40211747  
+3ffffae0:  3fff0921 7fffffff 00000000 00000022  
+3ffffaf0:  3fff0511 00ff0000 ff000000 3f800000  
+3ffffb00:  00000000 00000002 3ffffb30 00000005  
+3ffffb10:  3ffef804 3fff0e40 3fff0e40 40215ce9  
+3ffffb20:  3fff0509 7fffffff 00000200 0000ff00  
+3ffffb30:  00ff0000 ff000000 3fff0509 40215e0c  
+3ffffb40:  00000002 3fff0e40 40217bb4 4020531c  
+3ffffb50:  400005e1 40101894 3ffe8704 40229904  
+3ffffb60:  3fff0c69 3fff0e40 40217bb4 3fffefa0  
+3ffffb70:  00000012 0000005b 3fff0921 3fff0e40  
+3ffffb80:  00000002 3ffef80c 3fff0921 40205422  
+3ffffb90:  00000003 3ffe8db0 3ffe8de2 3ffef7e8  
+3ffffba0:  4026e7f8 3ffe8e05 40217bb4 3ffe8de2  
+3ffffbb0:  4026e7f8 00000002 3ffe8db0 402075ca  
+3ffffbc0:  3ffef7e8 3ffe8db0 a0000000 3ffaaaaa  
+3ffffbd0:  3fff0e40 00000000 00000002 3ffe8e05  
+3ffffbe0:  3f800000 00000000 c0000000 3f800000  
+3ffffbf0:  3ffe8de2 00000002 3fff0e40 40209117  
+3ffffc00:  3fd55555 00000002 000000bc 40239040  
+3ffffc10:  00000002 bf5ff724 3fff4f64 00000003  
+3ffffc20:  00000000 0006a01e 3ffe8704 00000078  
+3ffffc30:  00000002 3fff0e40 3fff4ff4 40209337  
+3ffffc40:  3fd55555 4026f9da 4026f9e8 3ffefe64  
+3ffffc50:  00000078 3f800000 3ffe8de2 40205445  
+3ffffc60:  3ffe8cea 3fff4fc4 c0000000 3f92a48b  
+3ffffc70:  38000000 00000000 3fff0a1b 3fff4fc4  
+3ffffc80:  3ffefbd0 00000002 3fff0e40 40209571  
+3ffffc90:  3f800000 3ffffd78 3fff0cc8 40215e0c  
+3ffffca0:  3fff4ed4 3fff0e40 3fff0cc8 4020c4b3  
+3ffffcb0:  3fff0a1b 40271390 3fff0b15 3fffff28  
+3ffffcc0:  3fffff2c 3fff0cc8 3fff0e40 40209644  
+3ffffcd0:  3fffff2c 3fff0cc8 3fff0e40 4020c539  
+3ffffce0:  3fff0509 00000200 3fffff28 ffffffff  
+3ffffcf0:  3ffefee2 3fff0e40 3fff0509 402298d0  
+3ffffd00:  3fff0519 6414d505 7fffffef ffff0208  
+3ffffd10:  3fff0509 7fffffff 000001f4 4021af18  
+3ffffd20:  00000000 4bc6a7f0 00198eec 3fffa01c  
+3ffffd30:  00000000 00000000 4bc6a7f0 00000000  
+3ffffd40:  3ffffd78 00198d6a 40101762 c083126e  
+3ffffd50:  00000000 3fff9d4c 3ffffd70 3fffa01c  
+3ffffd60:  3fff52fc 00198d6a 3fff5294 40211648  
+3ffffd70:  3fff9c74 3fff9d64 40217bb4 3fffefa0  
+3ffffd80:  00008ca0 00008ca0 00008ca0 40229904  
+3ffffd90:  00000000 3fff52fc 3fff0e40 000001bb  
+3ffffda0:  00000000 3fffff24 3fffff20 00000001  
+3ffffdb0:  00000000 00000000 4bc6a7f0 00000000  
+3ffffdc0:  000001bb 3fff0b15 40101762 fa1cac08  
+3ffffdd0:  00000000 3fff0e40 3fff0509 00000001  
+3ffffde0:  3fff0cc8 3fff0e40 3fff0509 4020c944  
+3ffffdf0:  3fffff2c 3fff0e40 00000002 3fff0b15  
+3ffffe00:  3fff0a1b 3fff0509 00000200 00000000  
+3ffffe10:  3ffefee2 00020005 001e000a 00050005  
+3ffffe20:  40271390 0000000a 3fffff20 3fffff24  
+3ffffe30:  3fffff28 00000000 d67f23c0 00000183  
+3ffffe40:  42a7d451 00010101 d67f23c0 40271390  
+3ffffe50:  3fff0cc8 3fff0b15 3fff0a1b 4020caaf  
+3ffffe60:  3fffff2c 3fff0b15 000001bb 00000002  
+3ffffe70:  00000000 3fff0509 00000200 3fff0a1b  
+3ffffe80:  3ffefee2 00000001 3fff10c4 00000183  
+3ffffe90:  0000000a 3fffff20 3fffff24 3fffff28  
+3ffffea0:  3fff0a23 00000c01 00000001 40203fbf  
+3ffffeb0:  402213a8 00000000 402213a8 3fff0b15  
+3ffffec0:  00000002 3fff0a1b 3ffef810 4020682d  
+3ffffed0:  3fffff2c 00000002 00000000 3fff0509  
+3ffffee0:  00000200 3fff0a1b 3fff0b15 3ffefee2  
+3ffffef0:  3ffefee2 00000000 0000000a 00000000  
+3fffff00:  00000000 00000000 00000000 40206228  
+3fffff10:  3ffefee2 3fff0a1b 3ffeffdc 4020695a  
+3fffff20:  00000000 40206228 00000000 40209638  
+3fffff30:  00000002 40209638 3ffefc34 4022021a  
+3fffff40:  00000000 00000000 00000000 3fff226c  
+3fffff50:  3fffdad0 00000000 3ffeffdc 40208f4c  
+3fffff60:  00000000 00000000 3ffe8704 00000000  
+3fffff70:  3fffdad0 3fff226c 40217bb4 3fffefa0  
+3fffff80:  00000000 00000000 3fff0c82 40217c96  
+3fffff90:  3fffdad0 00000000 3fff0c82 4020b8f8  
+3fffffa0:  3fffdad0 00000000 3fff223c 40217c64  
+3fffffb0:  feefeffe feefeffe 3ffe8704 40101ded  
+<<<stack<<<
+
+last failed alloc call: 40238F00(576)
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.283 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2025/11/05T12:31:18z: 48:3f:da:26:d5:3c
+ 0h00:03.961 2025/11/05T12:31:18z: SSID: AkgWarmer5
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100

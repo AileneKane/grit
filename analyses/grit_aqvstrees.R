@@ -61,7 +61,7 @@ canaq0 <- canaq %>%
 #one plot with all relationships between air quality and tree height, number of trees, etc
 
 # ---- SET THESE ----
-aq_col <- "pm2.5est_sept"   # <-- change to your air quality column name
+aq_col <- "pm2.5est_jan"   # <-- change to your air quality column name
 id_col <- "Purple.Air.Name"            # <-- your site/sensor id column
 
 df_plot <- canaq0 %>%
@@ -200,10 +200,10 @@ plot_one_metric_jan <- function(df, metric_name, aq_col = "pm2.5est_jan") {
     theme_bw(base_size = 12)
 }
 
-p_treeht <- plot_one_metric(df_plot, "Mean tree height (ft)")
-p_nonconif <- plot_one_metric(df_plot, "total_nonconifer")
-p_conif  <- plot_one_metric(df_plot, "Total conifers")
-p_totaltrees  <- plot_one_metric(df_plot, "Number of features")
+p_treeht <- plot_one_metric_jan(df_plot, "Mean tree height (ft)")
+p_nonconif <- plot_one_metric_jan(df_plot, "total_nonconifer")
+p_conif  <- plot_one_metric_jan(df_plot, "Total conifers")
+p_totaltrees  <- plot_one_metric_jan(df_plot, "Number of features")
 
 p_treeht
 p_nonconif

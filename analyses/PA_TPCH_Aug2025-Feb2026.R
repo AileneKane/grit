@@ -1,0 +1,96 @@
+#################################################
+#### Script to pull together PurpleAir data ##### 
+### from Tacoma-Pierce County Health sensors ####
+######### from August 2025 to Feb 2026 ########## 
+############### downloaded via the ##############
+######### PurpleAir Data Download Tool ##########
+########## writes out csv file called ########### 
+####### purpleair_TPCH_Aug2025_to_Feb2026.csv #######
+#################################################
+
+# housekeeping
+rm(list=ls()) 
+options(stringsAsFactors = FALSE)
+
+# load libraries
+library(tidyverse)
+library(ggplot2)
+library(dplyr)
+library(lubridate)
+library(scales)
+library(zoo)
+library(lme4)
+library(car)
+
+setwd("~/Documents/GitHub/grit/analyses") 
+folder <- "~/Documents/GitHub/grit/data/PurpleAir/AQ_API_Download_TPCHTacomaPAs_02272026/"
+# Setting working directory. Add in ailene's path in an if statement so that it works for her too
+if(length(grep("ailene", getwd()))>0) {
+  setwd("C:/Users/ailene.ettinger/Documents/GitHub/grit/analyses")
+  folder <- "C:/Users/ailene.ettinger/Documents/GitHub/grit/data/PurpleAir/PurpleAir_Download_2025Nov1_to_2026Feb26/"
+}
+## 720 possible points per day  Barkjohn paper keep 24 hr avg if at leat 90% possible points 
+needed_measurements_120s = 0.9 * 720
+                                   
+
+process_sensor <- function(file_path, needed_measurements_120s) {
+  
+  sensor_index <- stringr::str_extract(basename(file_path), "^[0-9]+")
+  
+  df <- read.csv(file_path, header = TRUE)
+  
+  if (nrow(df) == 0 || !"time_stamp" %in% names(df)) {
+    message("Skipping empty or invalid file: ", file_path)
+    return(NULL)
+  }
+  df$sensor_index <- sensor_index
+  
+  df <- df %>% 
+    mutate(
+      time_stamp = as.POSIXct(time_stamp, format="%Y-%m-%dT%H:%M", tz="PST8PDT"),
+      day = day(time_stamp),
+      month = month(time_stamp),
+      hour = hour(time_stamp),
+      avg_pm = (pm2.5_atm_a + pm2.5_atm_b) / 2,
+      avg_rh = (humidity_a + humidity_b) / 2
+    )
+  
+  valid_dates <- df %>% 
+    group_by(month, day) %>% 
+    summarize(n_rows = n()) %>% 
+    filter(n_rows >= needed_measurements_120s)
+  
+  df_filtered <- df %>% 
+    inner_join(valid_dates, by=c("month", "day")) %>% 
+    mutate(channel_diff = abs(pm2.5_atm_a - pm2.5_atm_b)) %>% 
+    filter(channel_diff <= 5) %>% 
+    group_by(month, day, hour) %>% 
+    summarize(
+      avg_pm = mean(avg_pm),
+      avg_rh = mean(avg_rh),
+      .groups = "drop"
+    ) %>%
+    mutate(
+      pm2.5_corrected = ( avg_pm * 0.524) - (0.0862 * avg_rh) + 5.75,
+      sensor_index = sensor_index
+    )
+  
+  return(df_filtered)
+}
+
+
+files <- list.files(folder, pattern="\\.csv$", full.names = TRUE)
+
+all_sensors <- lapply(files, function(f) {
+  process_sensor(f, needed_measurements_120s)
+})
+
+purpleair_all <- bind_rows(all_sensors)
+write.csv(purpleair_all, "output/purpleair_Nov2025_to_Feb2026.csv", row.names = FALSE)                                          
+
+purpleair_missing <- purpleair_all %>%
+  group_by(month, day, sensor_index) %>%
+  summarize(hours_present = n()) %>%
+  mutate(missing_hours = 24 - hours_present) %>% filter(missing_hours != 0)
+write.csv(purpleair_missing, "output/purpleair_missing_Nov2025_to_Feb2026.csv", row.names = FALSE)  
+

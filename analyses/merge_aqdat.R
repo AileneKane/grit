@@ -1,5 +1,5 @@
 #################################################
-######## Script to plot  PurpleAir data #########
+######## Script to merge purpleair data plot  PurpleAir data #########
 ######### and fit models to data in #############
 ############### purpleair_all.csv ###############
 #################################################

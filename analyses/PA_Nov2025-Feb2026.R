@@ -22,11 +22,11 @@ library(lme4)
 library(car)
 
 setwd("~/Documents/GitHub/grit/analyses") 
-folder <- "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Download_2025Nov1_to_2026Feb26/"
+folder <- "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir_Download_2025Nov1_to_2026Feb26/"
 # Setting working directory. Add in ailene's path in an if statement so that it works for her too
 if(length(grep("ailene", getwd()))>0) {
   setwd("C:/Users/ailene.ettinger/Documents/GitHub/grit/analyses")
-  folder <- "C:/Users/ailene.ettinger/Documents/GitHub/grit/data/PurpleAir/PurpleAir Download_2025Nov1_to_2026Feb26/"
+  folder <- "C:/Users/ailene.ettinger/Documents/GitHub/grit/data/PurpleAir/PurpleAir_Download_2025Nov1_to_2026Feb26/"
 }
 ## 720 possible points per day  Barkjohn paper keep 24 hr avg if at leat 90% possible points 
 needed_measurements_120s = 0.9 * 720

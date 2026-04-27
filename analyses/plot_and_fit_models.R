@@ -33,6 +33,8 @@ pa$datetime <- make_datetime(
   day   = pa$day,
   hour  = pa$hour)
 pa$date <- as_date(pa$datetime)
+#remove GRIT 41, since this one is located outside tacoma
+pa<-pa[!pa$Name=="GRIT41",]
 
 #plot to check
 p <- ggplot(pa, aes(datetime, pm2.5_corrected))+
@@ -237,11 +239,15 @@ pm2.5_dailyavg_bysens$mod[pm2.5_dailyavg_bysens$avg_pm2.5_corrected>9.0 & pm2.5_
 pm2.5_dailyavg_bysens$unhealthysens<-0
 pm2.5_dailyavg_bysens$unhealthysens[pm2.5_dailyavg_bysens$avg_pm2.5_corrected>35.5 & pm2.5_dailyavg_bysens$avg_pm2.5_corrected <=55.5]<-1
 pm2.5_dailyavg_bysens$unhealthy<-0
-pm2.5_dailyavg_bysens$unhealthy[pm2.5_dailyavg_bysens$avg_pm2.5_corrected>55.5]<-1
+pm2.5_dailyavg_bysens$unhealthy[pm2.5_dailyavg_bysens$avg_pm2.5_corrected>55.5 & pm2.5_dailyavg_bysens$avg_pm2.5_corrected <=125.5]<-1
+pm2.5_dailyavg_bysens$veryunhealthy<-0
+pm2.5_dailyavg_bysens$veryunhealthy[pm2.5_dailyavg_bysens$avg_pm2.5_corrected>125.5]<-1
+
 sum(pm2.5_dailyavg_bysens$good)
 sum(pm2.5_dailyavg_bysens$mod)
 sum(pm2.5_dailyavg_bysens$unhealthysens)
 sum(pm2.5_dailyavg_bysens$unhealthy)
+sum(pm2.5_dailyavg_bysens$veryunhealthy)
 
 length(unique(pm2.5_dailyavg_bysens$date[pm2.5_dailyavg_bysens$mod==1]))#32 days with moderate air quality average over 24 hours furing sept-oct, 87 during sept-feb
 length(unique(pm2.5_dailyavg_bysens$sensor[pm2.5_dailyavg_bysens$mod==1]))#30 sensors with moderate air quality average over 24 hours
@@ -315,3 +321,14 @@ monmmod<-lmer(pm2.5_corrected~-1+month + (1|Name),data=pa)
 Anova(monmmod)
 fixef(monmmod)
 summary(monmmod)
+
+
+monplot<-ggplot(pa, aes(factor(month), pm2.5_corrected)) +
+#  geom_violin(fill = "#f1c40f", color = NA, alpha = 0.5) +
+  geom_boxplot(width = 0.15, outlier.alpha = 0.3) +
+  labs(
+    title = "PM2.5 distributions month (across all sensors)",
+    x = "Month", y = "PM2.5 (µg/m³)"
+  ) +
+  theme_minimal(base_size = 12)
+

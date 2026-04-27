@@ -1,0 +1,1950 @@
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.286 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.959 2026/02/10T00:13:23z: a4:e5:7c:26:24:d4
+ 0h00:03.960 2026/02/10T00:13:23z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.282 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.955 2026/02/10T00:33:09z: a4:e5:7c:26:24:d4
+ 0h00:03.957 2026/02/10T00:33:09z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2026/02/10T00:52:55z: a4:e5:7c:26:24:d4
+ 0h00:03.963 2026/02/10T00:52:55z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2026/02/10T01:12:41z: a4:e5:7c:26:24:d4
+ 0h00:03.966 2026/02/10T01:12:41z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2026/02/10T01:32:27z: a4:e5:7c:26:24:d4
+ 0h00:03.965 2026/02/10T01:32:27z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2026/02/10T01:52:13z: a4:e5:7c:26:24:d4
+ 0h00:03.965 2026/02/10T01:52:13z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.282 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.955 2026/02/10T02:11:59z: a4:e5:7c:26:24:d4
+ 0h00:03.957 2026/02/10T02:11:59z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2026/02/10T02:31:45z: a4:e5:7c:26:24:d4
+ 0h00:03.965 2026/02/10T02:31:45z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.286 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2026/02/10T02:51:31z: a4:e5:7c:26:24:d4
+ 0h00:03.961 2026/02/10T02:51:31z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.283 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.956 2026/02/10T03:11:18z: a4:e5:7c:26:24:d4
+ 0h00:03.958 2026/02/10T03:11:18z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2026/02/10T03:31:03z: a4:e5:7c:26:24:d4
+ 0h00:03.967 2026/02/10T03:31:03z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.286 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.959 2026/02/10T03:50:49z: a4:e5:7c:26:24:d4
+ 0h00:03.961 2026/02/10T03:50:49z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.283 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.957 2026/02/10T04:10:35z: a4:e5:7c:26:24:d4
+ 0h00:03.958 2026/02/10T04:10:35z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.286 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.959 2026/02/10T04:30:21z: a4:e5:7c:26:24:d4
+ 0h00:03.961 2026/02/10T04:30:21z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.286 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2026/02/10T04:50:07z: a4:e5:7c:26:24:d4
+ 0h00:03.961 2026/02/10T04:50:07z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.295 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.968 2026/02/10T05:09:54z: a4:e5:7c:26:24:d4
+ 0h00:03.970 2026/02/10T05:09:54z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.286 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.959 2026/02/10T05:29:39z: a4:e5:7c:26:24:d4
+ 0h00:03.961 2026/02/10T05:29:39z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.959 2026/02/10T05:49:25z: a4:e5:7c:26:24:d4
+ 0h00:03.960 2026/02/10T05:49:25z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2026/02/10T06:09:10z: a4:e5:7c:26:24:d4
+ 0h00:03.965 2026/02/10T06:09:10z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2026/02/10T06:28:55z: a4:e5:7c:26:24:d4
+ 0h00:03.963 2026/02/10T06:28:55z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2026/02/10T06:48:40z: a4:e5:7c:26:24:d4
+ 0h00:03.965 2026/02/10T06:48:40z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2026/02/10T07:08:26z: a4:e5:7c:26:24:d4
+ 0h00:03.964 2026/02/10T07:08:26z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2026/02/10T07:28:12z: a4:e5:7c:26:24:d4
+ 0h00:03.964 2026/02/10T07:28:12z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.295 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.969 2026/02/10T07:47:58z: a4:e5:7c:26:24:d4
+ 0h00:03.970 2026/02/10T07:47:58z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.284 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.958 2026/02/10T08:07:44z: a4:e5:7c:26:24:d4
+ 0h00:03.959 2026/02/10T08:07:44z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.288 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2026/02/10T08:27:31z: a4:e5:7c:26:24:d4
+ 0h00:03.964 2026/02/10T08:27:31z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2026/02/10T08:47:17z: a4:e5:7c:26:24:d4
+ 0h00:03.965 2026/02/10T08:47:17z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.279 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.953 2026/02/10T09:07:03z: a4:e5:7c:26:24:d4
+ 0h00:03.954 2026/02/10T09:07:03z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.282 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.956 2026/02/10T09:26:49z: a4:e5:7c:26:24:d4
+ 0h00:03.958 2026/02/10T09:26:49z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.963 2026/02/10T09:46:35z: a4:e5:7c:26:24:d4
+ 0h00:03.964 2026/02/10T09:46:35z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2026/02/10T10:06:21z: a4:e5:7c:26:24:d4
+ 0h00:03.963 2026/02/10T10:06:21z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.961 2026/02/10T10:26:07z: a4:e5:7c:26:24:d4
+ 0h00:03.963 2026/02/10T10:26:07z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.295 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.969 2026/02/10T10:45:52z: a4:e5:7c:26:24:d4
+ 0h00:03.971 2026/02/10T10:45:52z: SSID: NothingButSunshine
+ 0h00:12.285 2026/02/10T10:46:00z: PMSX003-A (1308ms)
+ 0h00:13.286 2026/02/10T10:46:01z: PMSX003-B (1000ms)
+ 0h00:13.288 2026/02/10T10:46:01z: 3.0+RV3028+BME68X+PMSX003-A+PMSX003-B
+ 0h00:14.303 2026/02/10T10:46:02z: p:1008.32 gasR:487851.34 iaq:166.19(0) T:8.08(11.08) H:79.41(44.57) sIaq:663.37(0) Stabilization:1 Run in:0
+ 0h00:14.871 2026/02/10T10:46:03z: DATA A(2),46,79,39,1008.32,0.05,26448,0,14,2,3,3,2,3,3,13,13,453,133,14,3,0,0,663.37
+ 0h00:15.303 2026/02/10T10:46:03z: p:1008.41 gasR:492781.53 iaq:166.19(0) T:8.69(14.29) H:76.57(45.36) sIaq:663.37(0) Stabilization:1 Run in:0
+ 0h00:15.705 2026/02/10T10:46:04z: DATA A(3),47,76,40,1008.41,0.05,26448,0,15,2,3,3,2,3,3,13,13,453,133,14,3,0,0,663.37
+ 0h00:16.302 2026/02/10T10:46:04z: p:1008.42 gasR:495284.16 iaq:166.19(0) T:9.51(15.11) H:72.27(45.57) sIaq:663.37(0) Stabilization:1 Run in:0
+ 0h00:16.609 2026/02/10T10:46:05z: DATA A(4),49,72,40,1008.42,0.05,26448,0,16,2,3,3,2,3,3,13,13,441,125,13,3,0,0,663.37
+ 0h00:17.303 2026/02/10T10:46:05z: p:1008.44 gasR:500733.50 iaq:166.19(0) T:9.86(15.47) H:70.16(45.56) sIaq:663.37(0) Stabilization:1 Run in:0
+ 0h00:17.443 2026/02/10T10:46:06z: DATA A(5),49,70,39,1008.44,0.05,26448,0,17,2,3,3,2,3,3,13,13,441,125,13,3,0,0,663.37
+ 0h00:18.277 2026/02/10T10:46:06z: DATA A(6),49,70,39,1008.44,0.05,26448,0,18,2,3,3,2,3,3,13,13,441,125,13,3,0,0,663.37
+ 0h00:18.302 2026/02/10T10:46:06z: p:1008.44 gasR:502946.97 iaq:166.20(0) T:10.06(15.67) H:68.75(45.43) sIaq:663.37(0) Stabilization:1 Run in:0
+ 0h00:19.302 2026/02/10T10:46:07z: p:1008.45 gasR:502206.97 iaq:166.20(0) T:10.20(15.80) H:67.64(45.23) sIaq:663.37(0) Stabilization:1 Run in:0
+ 0h00:20.194 2026/02/10T10:46:08z: DATA B(2),50,67,39,1008.45,0.05,26448,0,20,2,2,2,2,2,2,8,8,420,118,17,1,0,0,663.37
+ 0h00:20.302 2026/02/10T10:46:08z: p:1008.42 gasR:504061.03 iaq:166.20(0) T:10.29(15.89) H:66.77(45.03) sIaq:663.37(0) Stabilization:1 Run in:0
+ 0h00:21.029 2026/02/10T10:46:09z: DATA B(3),50,66,39,1008.42,0.05,26448,0,21,2,2,2,2,2,2,8,8,420,118,17,1,0,0,663.37
+ 0h00:21.303 2026/02/10T10:46:09z: p:1008.43 gasR:507433.09 iaq:166.20(0) T:10.38(15.98) H:65.95(44.82) sIaq:663.37(0) Stabilization:1 Run in:0
+ 0h00:21.935 2026/02/10T10:46:10z: DATA B(4),50,65,39,1008.43,0.05,26448,0,21,2,3,3,2,3,3,13,13,444,122,21,1,0,0,663.37
+ 0h00:22.303 2026/02/10T10:46:10z: p:1008.43 gasR:505180.06 iaq:166.20(0) T:10.45(16.05) H:65.26(44.61) sIaq:663.38(0) Stabilization:1 Run in:0
+ 0h00:22.771 2026/02/10T10:46:11z: DATA B(5),50,65,38,1008.43,0.05,26448,0,22,2,3,3,2,3,3,13,13,444,122,21,1,0,0,663.38
+ 0h00:23.303 2026/02/10T10:46:11z: p:1008.45 gasR:510850.59 iaq:166.20(0) T:10.51(16.11) H:64.63(44.41) sIaq:663.38(0) Stabilization:1 Run in:0
+ 0h00:24.303 2026/02/10T10:46:12z: p:1008.46 gasR:507056.19 iaq:166.20(0) T:10.57(16.17) H:64.13(44.25) sIaq:663.38(0) Stabilization:1 Run in:0
+ 0h00:25.162 2026/02/10T10:46:13z: DATA A(7),51,64,39,1008.46,0.05,26448,0,25,2,3,3,2,3,3,13,13,474,137,13,3,0,0,663.38
+ 0h00:25.303 2026/02/10T10:46:13z: p:1008.45 gasR:509326.03 iaq:166.20(0) T:10.61(16.21) H:63.64(44.06) sIaq:663.39(0) Stabilization:1 Run in:0
+ 0h00:25.996 2026/02/10T10:46:14z: DATA A(8),51,63,39,1008.45,0.05,26448,0,25,2,3,3,2,3,3,13,13,474,137,13,3,0,0,663.39
+ 0h00:26.303 2026/02/10T10:46:14z: p:1008.44 gasR:510850.59 iaq:166.20(0) T:10.67(16.27) H:63.19(43.91) sIaq:663.39(0) Stabilization:1 Run in:0
+ 0h00:26.900 2026/02/10T10:46:15z: DATA A(9),51,63,38,1008.44,0.05,26448,0,26,2,3,3,2,3,3,13,13,450,129,13,3,0,0,663.39
+ 0h00:27.302 2026/02/10T10:46:15z: p:1008.44 gasR:510850.59 iaq:166.20(0) T:10.71(16.31) H:62.82(43.76) sIaq:663.39(0) Stabilization:1 Run in:0
+ 0h00:27.734 2026/02/10T10:46:16z: DATA A(10),51,62,38,1008.44,0.05,26448,0,27,2,3,3,2,3,3,13,13,450,129,13,3,0,0,663.39
+ 0h00:28.303 2026/02/10T10:46:16z: p:1008.44 gasR:509706.31 iaq:166.20(0) T:10.76(16.36) H:62.46(43.63) sIaq:663.40(0) Stabilization:1 Run in:0
+ 0h00:28.569 2026/02/10T10:46:17z: DATA A(11),51,62,38,1008.44,0.05,26448,0,28,2,3,3,2,3,3,13,13,450,129,13,3,0,0,663.40
+ 0h00:29.303 2026/02/10T10:46:17z: p:1008.44 gasR:512769.16 iaq:166.20(0) T:10.80(16.40) H:62.15(43.51) sIaq:663.40(0) Stabilization:1 Run in:0
+ 0h00:29.665 2026/02/10T10:46:18z: DATA B(6),51,62,38,1008.44,0.05,26448,0,29,1,2,2,1,2,2,8,8,408,112,16,0,0,0,663.40
+ 0h00:30.303 2026/02/10T10:46:18z: p:1008.42 gasR:515090.53 iaq:166.20(0) T:10.83(16.43) H:61.91(43.39) sIaq:663.41(0) Stabilization:1 Run in:0
+ 0h00:30.501 2026/02/10T10:46:19z: DATA B(7),51,61,38,1008.42,0.05,26448,0,30,1,2,2,1,2,2,8,8,408,112,16,0,0,0,663.41
+ 0h00:31.303 2026/02/10T10:46:19z: p:1008.42 gasR:517433.06 iaq:166.20(0) T:10.86(16.47) H:61.67(43.29) sIaq:663.41(0) Stabilization:1 Run in:0
+ 0h00:31.336 2026/02/10T10:46:20z: DATA B(8),51,61,38,1008.42,0.05,26448,0,31,1,2,2,1,2,2,8,8,408,112,16,0,0,0,663.41
+ 0h00:32.242 2026/02/10T10:46:20z: DATA B(9),51,61,38,1008.42,0.05,26448,0,32,1,2,2,1,2,2,8,8,396,110,16,0,0,0,663.41
+ 0h00:32.302 2026/02/10T10:46:20z: p:1008.41 gasR:517433.06 iaq:166.20(0) T:10.89(16.49) H:61.51(43.20) sIaq:663.41(0) Stabilization:1 Run in:0
+ 0h00:33.077 2026/02/10T10:46:21z: DATA B(10),51,61,38,1008.41,0.05,26448,0,33,1,2,2,1,2,2,8,8,396,110,16,0,0,0,663.41
+ 0h00:33.303 2026/02/10T10:46:21z: p:1008.41 gasR:519401.47 iaq:166.20(0) T:10.92(16.52) H:61.29(43.09) sIaq:663.42(0) Stabilization:1 Run in:0
+ 0h00:34.303 2026/02/10T10:46:22z: p:1008.42 gasR:517041.16 iaq:166.21(0) T:10.94(16.54) H:61.17(43.04) sIaq:663.42(0) Stabilization:1 Run in:0
+ 0h00:35.303 2026/02/10T10:46:23z: p:1008.41 gasR:516649.84 iaq:166.21(0) T:10.97(16.57) H:61.00(42.95) sIaq:663.43(0) Stabilization:1 Run in:0
+ 0h00:35.453 2026/02/10T10:46:24z: DATA A(12),51,61,38,1008.41,0.05,26448,0,35,2,3,3,2,3,3,13,13,477,138,15,3,1,0,663.43
+ 0h00:36.287 2026/02/10T10:46:24z: DATA A(13),51,61,38,1008.41,0.05,26448,0,36,2,3,3,2,3,3,13,13,477,138,15,3,1,0,663.43
+ 0h00:36.309 2026/02/10T10:46:24z: p:1008.42 gasR:520193.03 iaq:166.21(0) T:11.05(16.60) H:60.68(42.89) sIaq:663.43(0) Stabilization:1 Run in:0
+ 0h00:37.192 2026/02/10T10:46:25z: DATA A(14),51,60,37,1008.42,0.05,25824,0,37,2,2,3,2,2,3,8,8,459,134,12,2,1,0,663.43
+ 0h00:37.309 2026/02/10T10:46:25z: p:1008.42 gasR:522182.56 iaq:166.21(0) T:10.99(16.59) H:60.88(42.82) sIaq:663.44(0) Stabilization:1 Run in:0
+ 0h00:38.026 2026/02/10T10:46:26z: DATA A(15),51,60,37,1008.42,0.05,25200,0,38,2,2,3,2,2,3,8,8,459,134,12,2,1,0,663.44
+ 0h00:38.309 2026/02/10T10:46:26z: p:1008.42 gasR:522982.62 iaq:166.21(0) T:11.03(16.63) H:60.64(42.72) sIaq:663.44(0) Stabilization:1 Run in:0
+ 0h00:38.860 2026/02/10T10:46:27z: DATA A(16),51,60,37,1008.42,0.05,26352,0,38,2,2,3,2,2,3,8,8,459,134,12,2,1,0,663.44
+ 0h00:39.309 2026/02/10T10:46:27z: p:1008.41 gasR:520193.03 iaq:166.21(0) T:11.05(16.65) H:60.58(42.69) sIaq:663.45(0) Stabilization:1 Run in:0
+ 0h00:39.972 2026/02/10T10:46:28z: DATA B(11),51,60,37,1008.41,0.05,26352,0,39,2,3,4,2,3,4,13,13,462,132,19,2,2,2,663.45
+ 0h00:40.309 2026/02/10T10:46:28z: p:1008.42 gasR:520193.03 iaq:166.21(0) T:11.07(16.68) H:60.48(42.64) sIaq:663.46(0) Stabilization:1 Run in:0
+ 0h00:40.808 2026/02/10T10:46:29z: DATA B(12),51,60,37,1008.42,0.05,26352,0,40,2,3,5,2,3,5,13,13,462,132,19,2,2,2,663.46
+ 0h00:41.308 2026/02/10T10:46:29z: p:1008.43 gasR:524187.34 iaq:166.21(0) T:11.09(16.69) H:60.44(42.61) sIaq:663.46(0) Stabilization:1 Run in:0
+ 0h00:41.643 2026/02/10T10:46:30z: DATA B(13),51,60,37,1008.43,0.05,26352,0,41,2,3,5,2,3,5,13,13,462,132,19,2,2,2,663.46
+ 0h00:42.309 2026/02/10T10:46:30z: p:1008.40 gasR:520589.72 iaq:166.21(0) T:11.10(16.70) H:60.41(42.57) sIaq:663.47(0) Stabilization:1 Run in:0
+ 0h00:42.549 2026/02/10T10:46:31z: DATA B(14),51,60,37,1008.40,0.05,26352,0,42,2,3,5,2,3,5,13,13,480,136,18,2,2,2,663.47
+ 0h00:43.309 2026/02/10T10:46:31z: p:1008.43 gasR:525397.62 iaq:166.21(0) T:11.12(16.72) H:60.31(42.51) sIaq:663.47(0) Stabilization:1 Run in:0
+ 0h00:43.385 2026/02/10T10:46:32z: DATA B(15),52,60,38,1008.43,0.05,26352,0,43,2,3,5,2,3,5,13,13,480,136,18,2,2,2,663.47
+ 0h00:44.309 2026/02/10T10:46:32z: p:1008.42 gasR:520589.72 iaq:166.22(0) T:11.13(16.73) H:60.29(42.48) sIaq:663.48(0) Stabilization:1 Run in:0
+ 0h00:45.309 2026/02/10T10:46:33z: p:1008.41 gasR:522982.62 iaq:166.22(0) T:11.15(16.75) H:60.20(42.42) sIaq:663.48(0) Stabilization:1 Run in:0
+ 0h00:45.744 2026/02/10T10:46:34z: DATA A(17),52,60,38,1008.41,0.05,26352,0,45,2,2,3,2,2,3,8,8,462,133,9,1,1,0,663.48
+ 0h00:46.309 2026/02/10T10:46:34z: p:1008.43 gasR:527020.06 iaq:166.22(0) T:11.17(16.77) H:60.14(42.38) sIaq:663.49(0) Stabilization:1 Run in:0
+ 0h00:46.578 2026/02/10T10:46:35z: DATA A(18),52,60,38,1008.43,0.05,26352,0,46,2,2,3,2,2,3,8,8,462,133,9,1,1,0,663.49
+ 0h00:47.309 2026/02/10T10:46:35z: p:1008.40 gasR:528652.56 iaq:166.22(0) T:11.18(16.78) H:60.13(42.37) sIaq:663.49(0) Stabilization:1 Run in:0
+ 0h00:47.483 2026/02/10T10:46:36z: DATA A(19),52,60,38,1008.40,0.05,26352,0,47,2,2,3,2,2,3,8,8,462,133,9,1,1,0,663.49
+ 0h00:48.309 2026/02/10T10:46:36z: p:1008.43 gasR:535284.88 iaq:166.22(0) T:11.20(16.80) H:60.08(42.34) sIaq:663.49(0) Stabilization:1 Run in:0
+ 0h00:48.326 2026/02/10T10:46:37z: DATA A(20),52,60,38,1008.43,0.05,26352,0,48,2,2,3,2,2,3,8,8,462,133,9,1,1,0,663.49
+ 0h00:49.309 2026/02/10T10:46:37z: p:1008.41 gasR:529472.62 iaq:166.22(0) T:11.21(16.81) H:60.08(42.31) sIaq:663.50(0) Stabilization:1 Run in:0
+ 0h00:50.279 2026/02/10T10:46:38z: DATA B(16),52,60,38,1008.41,0.05,26352,0,50,2,2,3,2,2,3,8,8,426,118,11,2,2,2,663.50
+ 0h00:50.308 2026/02/10T10:46:38z: p:1008.42 gasR:530707.44 iaq:166.22(0) T:11.22(16.83) H:60.00(42.26) sIaq:663.50(0) Stabilization:1 Run in:0
+ 0h00:51.115 2026/02/10T10:46:39z: DATA B(17),52,60,38,1008.42,0.05,26352,0,51,2,2,3,2,2,3,8,8,426,118,11,2,2,2,663.50
+ 0h00:51.309 2026/02/10T10:46:39z: p:1008.41 gasR:522582.28 iaq:166.22(0) T:11.23(16.84) H:60.00(42.25) sIaq:663.51(0) Stabilization:1 Run in:0
+ 0h00:51.950 2026/02/10T10:46:40z: DATA B(18),52,60,38,1008.41,0.05,26352,0,51,2,2,3,2,2,3,8,8,426,118,11,2,2,2,663.51
+ 0h00:52.309 2026/02/10T10:46:40z: p:1008.41 gasR:529472.62 iaq:166.22(0) T:11.25(16.85) H:59.99(42.24) sIaq:663.51(0) Stabilization:1 Run in:0
+ 0h00:52.856 2026/02/10T10:46:41z: DATA B(19),52,59,38,1008.41,0.05,26352,0,52,2,2,5,2,2,5,8,8,450,124,11,2,2,2,663.51
+ 0h00:53.309 2026/02/10T10:46:41z: p:1008.43 gasR:525397.62 iaq:166.22(0) T:11.26(16.87) H:59.95(42.21) sIaq:663.52(0) Stabilization:1 Run in:0
+ 0h00:53.691 2026/02/10T10:46:42z: DATA B(20),52,59,38,1008.43,0.05,26352,0,53,2,2,5,2,2,5,8,8,450,124,11,2,2,2,663.52
+ 0h00:54.309 2026/02/10T10:46:42z: p:1008.42 gasR:523785.16 iaq:166.23(0) T:11.28(16.88) H:59.90(42.17) sIaq:663.53(0) Stabilization:1 Run in:0
+ 0h00:55.202 2026/02/10T10:46:43z: DATA A(21),52,59,38,1008.42,0.05,26352,0,55,2,2,3,2,2,3,8,8,492,145,8,1,1,0,663.53
+ 0h00:55.309 2026/02/10T10:46:43z: p:1008.42 gasR:530295.19 iaq:166.23(0) T:11.29(16.89) H:59.89(42.17) sIaq:663.53(0) Stabilization:1 Run in:0
+ 0h00:56.036 2026/02/10T10:46:44z: DATA A(22),52,59,38,1008.42,0.05,26352,0,56,2,2,3,2,2,3,8,8,492,145,8,1,1,0,663.53
+ 0h00:56.309 2026/02/10T10:46:44z: p:1008.42 gasR:527020.06 iaq:166.23(0) T:11.30(16.90) H:59.91(42.15) sIaq:663.54(0) Stabilization:1 Run in:0
+ 0h00:56.870 2026/02/10T10:46:45z: DATA A(23),52,59,38,1008.42,0.05,26352,0,56,2,2,3,2,2,3,8,8,492,145,8,1,1,0,663.54
+ 0h00:57.308 2026/02/10T10:46:45z: p:1008.42 gasR:527020.06 iaq:166.23(0) T:11.31(16.92) H:59.86(42.13) sIaq:663.55(0) Stabilization:1 Run in:0
+ 0h00:57.775 2026/02/10T10:46:46z: DATA A(24),52,59,38,1008.42,0.05,26352,0,57,2,3,4,2,3,4,13,13,492,145,15,2,2,1,663.55
+ 0h00:58.309 2026/02/10T10:46:46z: p:1008.41 gasR:536125.62 iaq:166.23(0) T:11.32(16.92) H:59.86(42.11) sIaq:663.55(0) Stabilization:1 Run in:0
+ 0h00:58.609 2026/02/10T10:46:47z: DATA A(25),52,59,38,1008.41,0.05,26352,0,58,2,3,4,2,3,4,13,13,492,145,15,2,2,1,663.55
+ 0h00:59.308 2026/02/10T10:46:47z: p:1008.41 gasR:536547.00 iaq:166.23(0) T:11.33(16.93) H:59.89(42.11) sIaq:663.55(0) Stabilization:1 Run in:0
+ 0h01:00.308 2026/02/10T10:46:48z: p:1008.44 gasR:536969.06 iaq:166.23(0) T:11.34(16.94) H:59.87(42.09) sIaq:663.55(0) Stabilization:1 Run in:0
+ 0h01:00.587 2026/02/10T10:46:49z: DATA B(21),52,59,38,1008.44,0.05,26352,0,60,2,2,5,2,2,5,8,8,528,148,10,2,2,2,663.55
+ 0h01:01.308 2026/02/10T10:46:49z: p:1008.43 gasR:527020.06 iaq:166.23(0) T:11.35(16.95) H:59.86(42.07) sIaq:663.56(0) Stabilization:1 Run in:0
+ 0h01:01.422 2026/02/10T10:46:50z: DATA B(22),52,59,38,1008.43,0.05,26352,0,61,2,2,5,2,2,5,8,8,528,148,10,2,2,2,663.56
+ 0h01:02.258 2026/02/10T10:46:50z: DATA B(23),52,59,38,1008.43,0.05,26352,0,62,2,2,5,2,2,5,8,8,528,148,10,2,2,2,663.56
+ 0h01:02.309 2026/02/10T10:46:50z: p:1008.42 gasR:523785.16 iaq:166.23(0) T:11.35(16.95) H:59.88(42.06) sIaq:663.57(0) Stabilization:1 Run in:0
+ 0h01:03.163 2026/02/10T10:46:51z: DATA B(24),52,59,38,1008.42,0.05,26352,0,63,2,2,3,2,2,3,8,8,516,142,10,1,1,1,663.57
+ 0h01:03.309 2026/02/10T10:46:51z: p:1008.43 gasR:535284.88 iaq:166.23(0) T:11.35(16.95) H:59.89(42.04) sIaq:663.57(0) Stabilization:1 Run in:0
+ 0h01:03.999 2026/02/10T10:46:52z: DATA B(25),52,59,38,1008.43,0.05,26352,0,64,2,2,3,2,2,3,8,8,516,142,10,1,1,1,663.57
+ 0h01:04.309 2026/02/10T10:46:52z: p:1008.42 gasR:535284.88 iaq:166.23(0) T:11.36(16.96) H:59.87(42.01) sIaq:663.57(0) Stabilization:1 Run in:0
+ 0h01:05.308 2026/02/10T10:46:53z: p:1008.43 gasR:533611.25 iaq:166.23(0) T:11.36(16.96) H:59.88(42.01) sIaq:663.58(0) Stabilization:1 Run in:0
+ 0h01:05.494 2026/02/10T10:46:54z: DATA A(26),52,59,38,1008.43,0.05,26352,0,65,2,3,4,2,3,4,13,13,516,155,15,1,1,1,663.58
+ 0h01:06.309 2026/02/10T10:46:54z: p:1008.42 gasR:536547.00 iaq:166.23(0) T:11.37(16.98) H:59.87(42.01) sIaq:663.58(0) Stabilization:1 Run in:0
+ 0h01:06.328 2026/02/10T10:46:55z: DATA A(27),52,59,38,1008.42,0.05,26352,0,66,2,3,4,2,3,4,13,13,516,155,15,1,1,1,663.58
+ 0h01:07.162 2026/02/10T10:46:55z: DATA A(28),52,59,38,1008.42,0.05,26352,0,67,2,3,4,2,3,4,13,13,516,155,15,1,1,1,663.58
+ 0h01:07.308 2026/02/10T10:46:55z: p:1008.41 gasR:535704.94 iaq:166.24(0) T:11.38(16.98) H:59.86(41.98) sIaq:663.58(0) Stabilization:1 Run in:0
+ 0h01:08.067 2026/02/10T10:46:56z: DATA A(29),52,59,38,1008.41,0.05,26352,0,68,2,3,4,2,3,4,13,13,522,157,16,1,1,1,663.58
+ 0h01:08.308 2026/02/10T10:46:56z: p:1008.41 gasR:538239.19 iaq:166.24(0) T:11.39(16.99) H:59.83(41.97) sIaq:663.58(0) Stabilization:1 Run in:0
+ 0h01:08.901 2026/02/10T10:46:57z: DATA A(30),52,59,38,1008.41,0.05,26352,0,68,2,3,4,2,3,4,13,13,522,157,16,1,1,1,663.58
+ 0h01:09.309 2026/02/10T10:46:57z: p:1008.41 gasR:527020.06 iaq:166.24(0) T:11.40(17.00) H:59.82(41.96) sIaq:663.60(0) Stabilization:1 Run in:0
+ 0h01:10.309 2026/02/10T10:46:58z: p:1008.41 gasR:529472.62 iaq:166.24(0) T:11.41(17.01) H:59.80(41.93) sIaq:663.61(0) Stabilization:1 Run in:0
+ 0h01:10.894 2026/02/10T10:46:59z: DATA B(26),52,59,38,1008.41,0.05,26352,0,70,2,3,3,2,3,3,13,13,492,142,15,0,0,0,663.61
+ 0h01:11.308 2026/02/10T10:46:59z: p:1008.39 gasR:534028.69 iaq:166.24(0) T:11.41(17.01) H:59.82(41.92) sIaq:663.62(0) Stabilization:1 Run in:0
+ 0h01:11.730 2026/02/10T10:47:00z: DATA B(27),52,59,38,1008.39,0.05,26352,0,71,2,3,3,2,3,3,13,13,492,142,15,0,0,0,663.62
+ 0h01:12.309 2026/02/10T10:47:00z: p:1008.41 gasR:538239.19 iaq:166.24(0) T:11.41(17.01) H:59.79(41.89) sIaq:663.61(0) Stabilization:1 Run in:0
+ 0h01:12.565 2026/02/10T10:47:01z: DATA B(28),52,59,38,1008.41,0.05,26352,0,72,2,3,3,2,3,3,13,13,492,142,15,0,0,0,663.61
+ 0h01:13.309 2026/02/10T10:47:01z: p:1008.42 gasR:539515.25 iaq:166.24(0) T:11.40(17.00) H:59.84(41.88) sIaq:663.61(0) Stabilization:1 Run in:0
+ 0h01:13.471 2026/02/10T10:47:02z: DATA B(29),52,59,38,1008.42,0.05,26352,0,73,2,3,3,2,3,3,13,13,486,138,15,0,0,0,663.61
+ 0h01:14.307 2026/02/10T10:47:02z: DATA B(30),52,59,38,1008.42,0.05,26352,0,74,2,3,3,2,3,3,13,13,486,138,15,0,0,0,663.61
+ 0h01:14.327 2026/02/10T10:47:03z: p:1008.41 gasR:541655.62 iaq:166.24(0) T:11.53(17.00) H:59.29(41.84) sIaq:663.61(0) Stabilization:1 Run in:0
+ 0h01:15.327 2026/02/10T10:47:04z: p:1008.42 gasR:538239.19 iaq:166.24(0) T:11.29(16.90) H:60.17(41.80) sIaq:663.61(0) Stabilization:1 Run in:0
+ 0h01:15.785 2026/02/10T10:47:04z: DATA A(31),52,60,38,1008.42,0.05,26352,0,75,2,3,5,2,3,5,13,13,483,143,22,2,2,1,663.61
+ 0h01:16.327 2026/02/10T10:47:05z: p:1008.41 gasR:531120.31 iaq:166.24(0) T:11.38(16.99) H:59.83(41.80) sIaq:663.62(0) Stabilization:1 Run in:0
+ 0h01:16.619 2026/02/10T10:47:05z: DATA A(32),52,59,38,1008.41,0.05,26352,0,76,2,3,5,2,3,5,13,13,483,143,22,2,2,1,663.62
+ 0h01:17.327 2026/02/10T10:47:06z: p:1008.41 gasR:527427.25 iaq:166.25(0) T:11.40(17.00) H:59.78(41.79) sIaq:663.65(0) Stabilization:1 Run in:0
+ 0h01:17.453 2026/02/10T10:47:06z: DATA A(33),52,59,38,1008.41,0.05,26352,0,77,2,3,5,2,3,5,13,13,483,143,22,2,2,1,663.65
+ 0h01:18.327 2026/02/10T10:47:07z: p:1008.41 gasR:538663.88 iaq:166.25(0) T:11.41(17.01) H:59.71(41.75) sIaq:663.65(0) Stabilization:1 Run in:0
+ 0h01:18.358 2026/02/10T10:47:07z: DATA A(34),52,59,38,1008.41,0.05,26352,0,78,2,3,5,2,3,5,13,13,507,149,23,2,2,1,663.65
+ 0h01:19.192 2026/02/10T10:47:07z: DATA A(35),52,59,38,1008.41,0.05,26352,0,79,2,3,5,2,3,5,13,13,507,149,23,2,2,1,663.65
+ 0h01:19.327 2026/02/10T10:47:08z: p:1008.38 gasR:536125.62 iaq:166.25(0) T:11.40(17.00) H:59.72(41.73) sIaq:663.65(0) Stabilization:1 Run in:0
+ 0h01:20.327 2026/02/10T10:47:09z: p:1008.40 gasR:532778.38 iaq:166.25(0) T:11.41(17.01) H:59.66(41.68) sIaq:663.67(0) Stabilization:1 Run in:0
+ 0h01:21.202 2026/02/10T10:47:09z: DATA B(31),52,59,38,1008.40,0.05,26352,0,81,1,3,3,1,3,3,13,13,450,128,27,1,0,0,663.67
+ 0h01:21.327 2026/02/10T10:47:10z: p:1008.40 gasR:538239.19 iaq:166.25(0) T:11.41(17.01) H:59.64(41.66) sIaq:663.67(0) Stabilization:1 Run in:0
+ 0h01:22.037 2026/02/10T10:47:10z: DATA B(32),52,59,38,1008.40,0.05,26352,0,82,1,3,3,1,3,3,13,13,450,128,27,1,0,0,663.67
+ 0h01:22.326 2026/02/10T10:47:11z: p:1008.42 gasR:533194.50 iaq:166.25(0) T:11.41(17.01) H:59.64(41.65) sIaq:663.68(0) Stabilization:1 Run in:0
+ 0h01:22.872 2026/02/10T10:47:11z: DATA B(33),52,59,38,1008.42,0.05,26352,0,82,1,3,3,1,3,3,13,13,450,128,27,1,0,0,663.68
+ 0h01:23.327 2026/02/10T10:47:12z: p:1008.41 gasR:537391.75 iaq:166.25(0) T:11.41(17.01) H:59.59(41.60) sIaq:663.68(0) Stabilization:1 Run in:0
+ 0h01:23.778 2026/02/10T10:47:12z: DATA B(34),52,59,38,1008.41,0.05,26352,0,83,2,3,3,2,3,3,13,13,456,130,29,1,0,0,663.68
+ 0h01:24.326 2026/02/10T10:47:13z: p:1008.39 gasR:534028.69 iaq:166.26(0) T:11.39(16.99) H:59.63(41.58) sIaq:663.70(0) Stabilization:1 Run in:0
+ 0h01:24.614 2026/02/10T10:47:13z: DATA B(35),52,59,38,1008.39,0.05,26352,0,84,2,3,3,2,3,3,13,13,456,130,29,1,0,0,663.70
+ 0h01:25.327 2026/02/10T10:47:14z: p:1008.39 gasR:539089.25 iaq:166.26(0) T:11.39(17.00) H:59.59(41.55) sIaq:663.70(0) Stabilization:1 Run in:0
+ 0h01:26.076 2026/02/10T10:47:14z: DATA A(36),52,59,38,1008.39,0.05,26352,0,86,2,3,7,2,3,7,13,13,456,134,23,5,5,2,663.70
+ 0h01:26.327 2026/02/10T10:47:15z: p:1008.42 gasR:541226.19 iaq:166.26(0) T:11.40(17.00) H:59.52(41.51) sIaq:663.69(0) Stabilization:1 Run in:0
+ 0h01:26.910 2026/02/10T10:47:15z: DATA A(37),52,59,38,1008.42,0.05,26352,0,86,2,3,7,2,3,7,13,13,456,134,23,5,5,2,663.69
+ 0h01:27.327 2026/02/10T10:47:16z: p:1008.41 gasR:541655.62 iaq:166.26(0) T:11.41(17.01) H:59.49(41.50) sIaq:663.69(0) Stabilization:1 Run in:0
+ 0h01:27.744 2026/02/10T10:47:16z: DATA A(38),52,59,38,1008.41,0.05,26352,0,87,2,3,7,2,3,7,13,13,456,134,23,5,5,2,663.69
+ 0h01:28.327 2026/02/10T10:47:17z: p:1008.41 gasR:544680.88 iaq:166.25(0) T:11.42(17.02) H:59.41(41.46) sIaq:663.68(0) Stabilization:1 Run in:0
+ 0h01:28.649 2026/02/10T10:47:17z: DATA A(39),52,59,38,1008.41,0.05,26352,0,88,2,3,7,2,3,7,13,13,483,141,26,5,5,2,663.68
+ 0h01:29.326 2026/02/10T10:47:18z: p:1008.41 gasR:539515.25 iaq:166.25(0) T:11.42(17.02) H:59.40(41.45) sIaq:663.68(0) Stabilization:1 Run in:0
+ 0h01:29.483 2026/02/10T10:47:18z: DATA A(40),52,59,38,1008.41,0.05,26352,0,89,2,3,7,2,3,7,13,13,483,141,26,5,5,2,663.68
+ 0h01:30.327 2026/02/10T10:47:19z: p:1008.41 gasR:530295.19 iaq:166.26(0) T:11.43(17.03) H:59.35(41.44) sIaq:663.71(0) Stabilization:1 Run in:0
+ 0h01:31.327 2026/02/10T10:47:20z: p:1008.40 gasR:536969.06 iaq:166.26(0) T:11.43(17.03) H:59.33(41.41) sIaq:663.72(0) Stabilization:1 Run in:0
+ 0h01:31.508 2026/02/10T10:47:20z: DATA B(36),52,59,38,1008.40,0.05,26352,0,91,1,2,2,1,2,2,8,8,396,106,30,1,0,0,663.72
+ 0h01:32.327 2026/02/10T10:47:21z: p:1008.40 gasR:542948.06 iaq:166.26(0) T:11.44(17.04) H:59.30(41.40) sIaq:663.71(0) Stabilization:1 Run in:0
+ 0h01:32.344 2026/02/10T10:47:21z: DATA B(37),52,59,38,1008.40,0.05,26352,0,92,1,2,2,1,2,2,8,8,396,106,30,1,0,0,663.71
+ 0h01:33.179 2026/02/10T10:47:21z: DATA B(38),52,59,38,1008.40,0.05,26352,0,93,1,2,2,1,2,2,8,8,396,106,30,1,0,0,663.71
+ 0h01:33.326 2026/02/10T10:47:22z: p:1008.40 gasR:540797.44 iaq:166.26(0) T:11.45(17.05) H:59.28(41.40) sIaq:663.72(0) Stabilization:1 Run in:0
+ 0h01:34.085 2026/02/10T10:47:22z: DATA B(39),52,59,38,1008.40,0.05,26352,0,94,1,2,2,1,2,2,8,8,402,110,25,1,0,0,663.72
+ 0h01:34.327 2026/02/10T10:47:23z: p:1008.40 gasR:542085.75 iaq:166.26(0) T:11.45(17.05) H:59.26(41.39) sIaq:663.71(0) Stabilization:1 Run in:0
+ 0h01:34.920 2026/02/10T10:47:23z: DATA B(40),52,59,38,1008.40,0.05,26352,0,94,1,2,2,1,2,2,8,8,402,110,25,1,0,0,663.71
+ 0h01:35.327 2026/02/10T10:47:24z: p:1008.39 gasR:531948.06 iaq:166.27(0) T:11.46(17.07) H:59.22(41.38) sIaq:663.75(0) Stabilization:1 Run in:0
+ 0h01:36.327 2026/02/10T10:47:25z: p:1008.41 gasR:539515.25 iaq:166.27(0) T:11.47(17.08) H:59.19(41.38) sIaq:663.75(0) Stabilization:1 Run in:0
+ 0h01:36.367 2026/02/10T10:47:25z: DATA A(41),52,59,38,1008.41,0.05,26352,0,96,1,3,7,1,3,7,13,13,474,138,27,6,5,2,663.75
+ 0h01:37.201 2026/02/10T10:47:25z: DATA A(42),52,59,38,1008.41,0.05,26352,0,97,1,3,7,1,3,7,13,13,474,138,27,6,5,2,663.75
+ 0h01:37.327 2026/02/10T10:47:26z: p:1008.41 gasR:538239.19 iaq:166.27(0) T:11.48(17.08) H:59.16(41.35) sIaq:663.76(0) Stabilization:1 Run in:0
+ 0h01:38.035 2026/02/10T10:47:26z: DATA A(43),52,59,38,1008.41,0.05,25416,0,98,1,3,7,1,3,7,13,13,474,138,27,6,5,2,663.76
+ 0h01:38.326 2026/02/10T10:47:27z: p:1008.40 gasR:539942.00 iaq:166.27(0) T:11.48(17.08) H:59.23(41.39) sIaq:663.77(0) Stabilization:1 Run in:0
+ 0h01:38.940 2026/02/10T10:47:27z: DATA A(44),52,59,38,1008.40,0.05,26352,0,98,1,2,9,1,2,9,8,8,450,129,27,10,9,3,663.77
+ 0h01:39.327 2026/02/10T10:47:28z: p:1008.40 gasR:545115.81 iaq:166.27(0) T:11.48(17.09) H:59.22(41.38) sIaq:663.75(0) Stabilization:1 Run in:0
+ 0h01:39.774 2026/02/10T10:47:28z: DATA A(45),52,59,38,1008.40,0.05,26352,0,99,1,2,9,1,2,9,8,8,450,129,27,10,9,3,663.75
+ 0h01:40.327 2026/02/10T10:47:29z: p:1008.40 gasR:539515.25 iaq:166.27(0) T:11.49(17.09) H:59.23(41.40) sIaq:663.76(0) Stabilization:1 Run in:0
+ 0h01:41.327 2026/02/10T10:47:30z: p:1008.39 gasR:540797.44 iaq:166.27(0) T:11.49(17.09) H:59.24(41.38) sIaq:663.77(0) Stabilization:1 Run in:0
+ 0h01:41.815 2026/02/10T10:47:30z: DATA B(41),52,59,38,1008.39,0.05,26352,0,101,2,3,3,2,3,3,13,13,444,122,29,1,0,0,663.77
+ 0h01:42.327 2026/02/10T10:47:31z: p:1008.41 gasR:540797.44 iaq:166.27(0) T:11.50(17.11) H:59.23(41.40) sIaq:663.77(0) Stabilization:1 Run in:0
+ 0h01:42.651 2026/02/10T10:47:31z: DATA B(42),52,59,38,1008.41,0.05,26352,0,102,2,3,3,2,3,3,13,13,444,122,29,1,0,0,663.77
+{"SensorId":"a4:e5:7c:26:24:d4","DateTime":"2026/02/10T10:47:31z","Geo":"PurpleAir-24d4","Mem":26352,"memfrag":2,"memfb":25968,"memcs":496,"Id":1,"lat":0.000000,"lon":0.000000,"Adc":"nan","loggingrate":15,"place":"outside","version":"7.04","uptime":103,"rssi":0,"period":103,"httpsuccess":0,"httpsends":0,"hardwareversion":"3.0","hardwarediscovered":"3.0+RV3028+BME68X+PMSX003-A+PMSX003-B","current_temp_f":52,"current_humidity":59,"current_dewpoint_f":38,"pressure":1008.41,"current_temp_f_680":52,"current_humidity_680":59,"current_dewpoint_f_680":38,"pressure_680":1008.41,"gas_680":"nan","p25aqic_b":"rgb(2,228,0)","pm2.5_aqi_b":10,"pm1_0_cf_1_b":1.67,"p_0_3_um_b":448.86,"pm2_5_cf_1_b":2.45,"p_0_5_um_b":125.29,"pm10_0_cf_1_b":3.14,"p_1_0_um_b":18.48,"pm1_0_atm_b":1.67,"p_2_5_um_b":1.07,"pm2_5_atm_b":2.45,"p_5_0_um_b":0.67,"pm10_0_atm_b":3.14,"p_10_0_um_b":0.67,"p25aqic":"rgb(3,228,0)","pm2.5_aqi":11,"pm1_0_cf_1":1.89,"p_0_3_um":475.27,"pm2_5_cf_1":2.73,"p_0_5_um":138.87,"pm10_0_cf_1":4.36,"p_1_0_um":16.49,"pm1_0_atm":1.89,"p_2_5_um":2.96,"pm2_5_atm":2.73,"p_5_0_um":1.98,"pm10_0_atm":4.36,"p_10_0_um":0.76,"wlstate":"No SSID","status_0":0,"status_1":0,"status_2":0,"status_3":0,"status_4":2,"status_5":2,"status_7":0,"status_8":2,"status_9":2}
+ 0h01:43.427 2026/02/10T10:47:32z: update.purpleair.com:80/firmware/2mb/update.asp
+ 0h01:43.434 2026/02/10T10:47:32z: Error: -1
+1 BSEC warning code : 100
+
+UTCDateTime,mac_address,firmware_ver,hardware,current_temp_f,current_humidity,current_dewpoint_f,pressure,adc,mem,rssi,uptime,pm1_0_cf_1,pm2_5_cf_1,pm10_0_cf_1,pm1_0_atm,pm2_5_atm,pm10_0_atm,pm2.5_aqi_cf_1,pm2.5_aqi_atm,p_0_3_um,p_0_5_um,p_1_0_um,p_2_5_um,p_5_0_um,p_10_0_um,pm1_0_cf_1_b,pm2_5_cf_1_b,pm10_0_cf_1_b,pm1_0_atm_b,pm2_5_atm_b,pm10_0_atm_b,pm2.5_aqi_cf_1_b,pm2.5_aqi_atm_b,p_0_3_um_b,p_0_5_um_b,p_1_0_um_b,p_2_5_um_b,p_5_0_um_b,p_10_0_um_b,gas
+2026/02/10T10:47:32z,a4:e5:7c:26:24:d4,7.04,3.0+RV3028+BME68X+PMSX003-A+PMSX003-B,52,59,38,1008.41,nan,26352,0,103,1.89,2.73,4.36,1.89,2.73,4.36,11,11,475.27,138.87,16.49,2.96,1.98,0.76,1.67,2.45,3.14,1.67,2.45,3.14,10,10,448.86,125.29,18.48,1.07,0.67,0.67,nan
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2026/02/10T18:00:08z: a4:e5:7c:26:24:d4
+ 0h00:03.967 2026/02/10T18:00:08z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2026/02/10T18:19:54z: a4:e5:7c:26:24:d4
+ 0h00:03.969 2026/02/10T18:19:54z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.960 2026/02/10T18:39:39z: a4:e5:7c:26:24:d4
+ 0h00:03.961 2026/02/10T18:39:39z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.290 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2026/02/10T18:59:26z: a4:e5:7c:26:24:d4
+ 0h00:03.966 2026/02/10T18:59:26z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.280 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.954 2026/02/10T19:19:11z: a4:e5:7c:26:24:d4
+ 0h00:03.956 2026/02/10T19:19:11z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.965 2026/02/10T19:38:57z: a4:e5:7c:26:24:d4
+ 0h00:03.967 2026/02/10T19:38:57z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2026/02/10T19:58:43z: a4:e5:7c:26:24:d4
+ 0h00:03.965 2026/02/10T19:58:43z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.291 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.966 2026/02/10T20:18:29z: a4:e5:7c:26:24:d4
+ 0h00:03.967 2026/02/10T20:18:29z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.285 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.959 2026/02/10T20:38:15z: a4:e5:7c:26:24:d4
+ 0h00:03.961 2026/02/10T20:38:15z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2026/02/10T20:58:00z: a4:e5:7c:26:24:d4
+ 0h00:03.963 2026/02/10T20:58:00z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2026/02/10T21:17:46z: a4:e5:7c:26:24:d4
+ 0h00:03.968 2026/02/10T21:17:46z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2026/02/10T21:37:32z: a4:e5:7c:26:24:d4
+ 0h00:03.968 2026/02/10T21:37:32z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2026/02/10T21:57:19z: a4:e5:7c:26:24:d4
+ 0h00:03.966 2026/02/10T21:57:19z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.292 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.967 2026/02/10T22:17:04z: a4:e5:7c:26:24:d4
+ 0h00:03.968 2026/02/10T22:17:04z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.287 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.962 2026/02/10T22:36:51z: a4:e5:7c:26:24:d4
+ 0h00:03.964 2026/02/10T22:36:51z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.968 2026/02/10T22:56:36z: a4:e5:7c:26:24:d4
+ 0h00:03.969 2026/02/10T22:56:36z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.295 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.969 2026/02/10T23:16:22z: a4:e5:7c:26:24:d4
+ 0h00:03.971 2026/02/10T23:16:22z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.293 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.968 2026/02/10T23:36:08z: a4:e5:7c:26:24:d4
+ 0h00:03.970 2026/02/10T23:36:08z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
+
+ ets Jan  8 2013,rst cause:1, boot mode:(3,7)
+
+load 0x4010f000, len 1384, room 16 
+tail 8
+chksum 0x2d
+csum 0x2d
+v8b899c12
+~ld
+
+
+7.04
+ 0h00:00.289 1970/01/01T08:00:00z: SPIFFS Active
+ 0h00:03.964 2026/02/10T23:55:54z: a4:e5:7c:26:24:d4
+ 0h00:03.965 2026/02/10T23:55:54z: SSID: NothingButSunshine
+1 BSEC warning code : 100
+
+1 BSEC warning code : 100
