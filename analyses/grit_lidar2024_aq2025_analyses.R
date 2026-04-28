@@ -109,17 +109,10 @@ pttreeht.results.tosave<-as.data.frame(subset(pttreeht.results,select=c(ID,radiu
 pttreeht.results.tosave<-pttreeht.results.tosave[,1:6]
 # # below does not work
 # # Get total canopy cover, noncanopy cover, impervious surface, vegetation cover
-# # below does not work! need to fix this
+# # Samie updated code to work 4/27/2026 
 # #--------------------------
 valid_canopy_gdb <- sf::st_buffer(canopy_gdb, 0)
 
-canopy.results <- st_intersection(buffers, st_make_valid(canopy_gdb, geos_method="valid_linework") |>
-  group_by(ID = Purple.Air.Name, radius_m) |>     # 
-  summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
-            n_features = n(),
-            .groups = "drop")
-  
-##New code
 canopy_union <- canopy_gdb |>
   st_make_valid() |>
   st_union()
@@ -129,29 +122,38 @@ canopy.results <- st_intersection(buffers, canopy_union) |>
   group_by(ID = Purple.Air.Name, radius_m) |>
   summarize(
     total_canopy = sum(area, na.rm = TRUE),
-    .groups = "drop"
-  )
+    .groups = "drop")
 ###Manual calculation of area to verify it worked
 test_buffer <- buffers |> 
   filter(Purple.Air.Name == "GRIT01", radius_m == 100)
-
 test_intersection <- st_intersection(test_buffer, canopy_union)
 manual_area <- sum(st_area(test_intersection)) ##result is 6863 m^2 
 
-manual_area
-veg.results <- st_intersection(buffers, st_make_valid(veg_gdb)) |>
- group_by(ID = Purple.Air.Name, radius_m) |>     #
- summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
-  n_features = n(),
-.groups = "drop")
 
+
+veg_union <- veg_gdb |>
+  st_make_valid() |>
+  st_union()
+veg.results <- st_intersection(buffers, veg_union) |>
+  mutate(area = st_area(geometry)) |>
+  group_by(ID = Purple.Air.Name, radius_m) |>
+  summarize(
+    total_canopy = sum(area, na.rm = TRUE),
+    .groups = "drop")
+##Slower code###
+noncanopy_union <- noncanopy_gdb |>
+  st_make_valid() |>
+  st_combine() |>
+  st_union()
 noncanopy.results <- st_intersection(buffers, st_make_valid(noncanopy_gdb)) |>
   group_by(ID = Purple.Air.Name, radius_m) |>     #
-  summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
+  summarize(total_noncanopy  = sum(Shape_Area, na.rm = TRUE),
             n_features = n(),
             .groups = "drop")
-noncanopy.results <- rename(noncanopy.results, total_noncanopy = total_canopy)
 
+nonveg_union <- nonveg_gdb |>
+  st_make_valid() |>
+  st_union()
 nonveg.results <- st_intersection(buffers, st_make_valid(nonveg_gdb)) |>
   group_by(ID = Purple.Air.Name, radius_m) |>     #
   summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
@@ -159,6 +161,9 @@ nonveg.results <- st_intersection(buffers, st_make_valid(nonveg_gdb)) |>
             .groups = "drop")
 nonveg.results <- rename(nonveg.results, total_nonveg = total_canopy)
 
+imp_union <- imp_gdb |>
+  st_make_valid() |>
+  st_union()
 imp.results <- st_intersection(buffers, st_make_valid(imp_gdb)) |>
   group_by(ID = Purple.Air.Name, radius_m) |>     #
   summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
@@ -166,13 +171,17 @@ imp.results <- st_intersection(buffers, st_make_valid(imp_gdb)) |>
             .groups = "drop")
 imp.results <- rename(imp.results, total_imp = total_canopy)
 
+nonimp_union <- nonimp_gdb |>
+  st_make_valid() |>
+  st_union()
 nonimp.results <- st_intersection(buffers, st_make_valid(nonimp_gdb)) |>
   group_by(ID = Purple.Air.Name, radius_m) |>     #
-  summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
+  summarize(total_nonimp = sum(Shape_Area, na.rm = TRUE),
             n_features = n(),
             .groups = "drop")
 
 canopy.results<-as.data.frame(subset(canopy.results, select = c(ID,radius_m,total_canopy))) ##Class = 1
+noncanopy.results<-as.data.frame(subset(noncanopy.results, select = c(ID,radius_m,total_noncanopy)))
 veg.results<-as.data.frame(subset(veg.results, select=c(ID,radius_m,total_canopy,n_features))) ## Class = 1 OR 2
 
 #-----------------------------
