@@ -9,6 +9,7 @@
 # housekeeping
 rm(list=ls()) 
 options(stringsAsFactors = FALSE)
+
 #install.packages("patchwork")
 #install.packages("gridExtra")
 #install.packages("lubridate")
@@ -55,7 +56,8 @@ process_sensor <- function(file_path, needed_measurements_120s) {
       month = month(time_stamp),
       hour = hour(time_stamp),
       avg_pm = (pm2.5_atm_a + pm2.5_atm_b) / 2,
-      avg_rh = (humidity_a + humidity_b) / 2
+      avg_rh = (humidity_a + humidity_b) / 2,
+      avg_temp = (temperature_a + temperature_b) / 2
     )
   
   valid_dates <- df %>% 
@@ -71,6 +73,8 @@ process_sensor <- function(file_path, needed_measurements_120s) {
     summarize(
       avg_pm = mean(avg_pm),
       avg_rh = mean(avg_rh),
+      avg_temp = mean(avg_temp),
+      
       .groups = "drop"
     ) %>%
     mutate(

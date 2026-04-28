@@ -51,7 +51,8 @@ process_sensor <- function(file_path, needed_measurements_120s) {
       month = month(time_stamp),
       hour = hour(time_stamp),
       avg_pm = (pm2.5_atm_a + pm2.5_atm_b) / 2,
-      avg_rh = (humidity_a + humidity_b) / 2
+      avg_rh = (humidity_a + humidity_b) / 2,
+      avg_temp = (temperature_a + temperature_b) / 2
     )
   
   valid_dates <- df %>% 
@@ -67,6 +68,7 @@ process_sensor <- function(file_path, needed_measurements_120s) {
     summarize(
       avg_pm = mean(avg_pm),
       avg_rh = mean(avg_rh),
+      avg_temp = mean(avg_temp),
       .groups = "drop"
     ) %>%
     mutate(
@@ -85,11 +87,13 @@ all_sensors <- lapply(files, function(f) {
 })
 
 purpleair_all <- bind_rows(all_sensors)
+
 write.csv(purpleair_all, "output/purpleair_Nov2025_to_Feb2026.csv", row.names = FALSE)                                          
 
 purpleair_missing <- purpleair_all %>%
   group_by(month, day, sensor_index) %>%
   summarize(hours_present = n()) %>%
   mutate(missing_hours = 24 - hours_present) %>% filter(missing_hours != 0)
+
 write.csv(purpleair_missing, "output/purpleair_missing_Nov2025_to_Feb2026.csv", row.names = FALSE)  
 
