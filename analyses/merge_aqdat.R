@@ -20,13 +20,18 @@ if(length(grep("ailene", getwd()))>0) {
 ###read in air quality data###
 pa_jul_oct_2025<- read.csv("output/purpleair_July2025_to_Oct2025.csv")
 pa_nov2025_feb2026<- read.csv("output/purpleair_Nov2025_to_Feb2026.csv")
-pa_tpch_nov2025_feb2026<- read.csv("output/purpleair_Nov2025_to_Feb2026.csv")
+pa_tpch<- read.csv("output/purpleair_TPCH_Aug2025_to_Feb2026.csv")
+pa_sd<- read.csv("output/purpleair_SDCARDS_Aug2025_to_Feb2026.csv")
 
-### read in sensor data
+### read in sensor data from GRIT and TPCH
 sensornames <- read.csv("../data/PurpleAir/PurpleAirAPIInfo.csv")
+tpchsensors <- read.csv("../data/PurpleAir/TPCH_PurpleAirMonitors.csv")
+
 sensornames <- sensornames %>% drop_na(SensorIndex) %>% rename(sensor_index = SensorIndex)
 sensornames_clean <- sensornames %>%
   distinct(sensor_index, .keep_all = TRUE)
+#merge tpchsensors with grit sensors
+#########ADD CODE TO MERGE
 
 #add year to air quality data
 pa_jul_oct_2025$year <- 2025 

@@ -5,6 +5,13 @@
 ###in different radii/buffers around points (i.e. purpleair loggers)
 ####################################
 
+#####################################################
+###### TO DO ON THIS FILE:
+##### 1) add in TPCH points
+##### 2) create noncanopy veg summary
+##### 3) do we want to separate out impervious more? 
+#####################################################
+
 #clear workspace
 rm(list=ls())
 
@@ -28,7 +35,9 @@ setwd("~/Documents/GitHub/grit/analyses")
 #-----------------------------
 
 #read in csv file with lat long and other info about locations of GRIT sensors
+#NOTE: need to update this to include TPCH purple airs
 locpm2.5hrs<-read.csv("output/purpleairloc_wpmhrs.csv", header=TRUE)                                          
+
 #remove rows with NAs
 pm2.5<-locpm2.5hrs[!is.na(locpm2.5hrs$Long),]
 pm2.5<-subset(locpm2.5hrs,select=c("Purple.Air.Name", "Long","Lat","pm2.5est_sept" ))
@@ -60,7 +69,9 @@ buffers <- map_df(radii_m, function(r) {
 #    (and summarize tree height and conifer vs deciduous)
 #-----------------------------
 gdb_path <- "~/Documents/GitHub/grit/Tacoma 2024 LIDAR data/data/LandCover2024.gdb"
-
+if(length(grep("ailene", getwd()))>0) {
+  gdb_path <- "../data/tacoma2024lidar/data/LandCover2024.gdb"
+}
 layers <- st_layers(gdb_path)$name
 print(layers)    # see available layers
 #create a datafile for tree canopy
@@ -76,12 +87,13 @@ canopy_gdb <- filter(lc_gdb, Class == "1")
 noncanopy_gdb <- lc_gdb[lc_gdb$Class!=1,]
 # head(noncanopy_gdb)
 # 
-# #create a vegetation datafile
+# #create a vegetation datafile this includes canopy and noncanopy vegetation
 veg_gdb<-lc_gdb[lc_gdb$Class==1|lc_gdb$Class==2,]
 # #create a nonvegetation datafile
 nonveg_gdb<-lc_gdb[lc_gdb$Class==3|lc_gdb$Class==4|lc_gdb$Class==5|lc_gdb$Class==6|lc_gdb$Class==7,]
 
 # #create an impervious surface datafile
+# 3 =Building; 4 =Other Impervious; 7= roads
 imp_gdb<-lc_gdb[lc_gdb$Class==4|lc_gdb$Class==7|lc_gdb$Class==3,]
 nonimp_gdb<-lc_gdb[lc_gdb$Class==1|lc_gdb$Class==2|lc_gdb$Class==5|lc_gdb$Class==6,]
 
@@ -129,8 +141,6 @@ test_buffer <- buffers |>
 test_intersection <- st_intersection(test_buffer, canopy_union)
 manual_area <- sum(st_area(test_intersection)) ##result is 6863 m^2 
 
-
-
 veg_union <- veg_gdb |>
   st_make_valid() |>
   st_union()
@@ -140,26 +150,28 @@ veg.results <- st_intersection(buffers, veg_union) |>
   summarize(
     total_canopy = sum(area, na.rm = TRUE),
     .groups = "drop")
-##Slower code###
-noncanopy_union <- noncanopy_gdb |>
-  st_make_valid() |>
-  st_combine() |>
-  st_union()
-noncanopy.results <- st_intersection(buffers, st_make_valid(noncanopy_gdb)) |>
-  group_by(ID = Purple.Air.Name, radius_m) |>     #
-  summarize(total_noncanopy  = sum(Shape_Area, na.rm = TRUE),
-            n_features = n(),
-            .groups = "drop")
+veg.results <- rename(veg.results, total_veg = total_canopy)
 
-nonveg_union <- nonveg_gdb |>
-  st_make_valid() |>
-  st_union()
-nonveg.results <- st_intersection(buffers, st_make_valid(nonveg_gdb)) |>
-  group_by(ID = Purple.Air.Name, radius_m) |>     #
-  summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
-            n_features = n(),
-            .groups = "drop")
-nonveg.results <- rename(nonveg.results, total_nonveg = total_canopy)
+##Slower code###
+#noncanopy_union <- noncanopy_gdb |>
+#  st_make_valid() |>
+#  st_combine() |>
+#  st_union()
+#noncanopy.results <- st_intersection(buffers, st_make_valid(noncanopy_gdb)) |>
+#  group_by(ID = Purple.Air.Name, radius_m) |>     #
+#  summarize(total_noncanopy  = sum(Shape_Area, na.rm = TRUE),
+#            n_features = n(),
+#            .groups = "drop")
+
+#nonveg_union <- nonveg_gdb |>
+#  st_make_valid() |>
+#  st_union()
+#nonveg.results <- st_intersection(buffers, st_make_valid(nonveg_gdb)) |>
+#  group_by(ID = Purple.Air.Name, radius_m) |>     #
+#  summarize(total_canopy  = sum(Shape_Area, na.rm = TRUE),
+#            n_features = n(),
+#            .groups = "drop")
+#nonveg.results <- rename(nonveg.results, total_nonveg = total_canopy)
 
 imp_union <- imp_gdb |>
   st_make_valid() |>
@@ -174,6 +186,8 @@ imp.results <- rename(imp.results, total_imp = total_canopy)
 nonimp_union <- nonimp_gdb |>
   st_make_valid() |>
   st_union()
+
+
 nonimp.results <- st_intersection(buffers, st_make_valid(nonimp_gdb)) |>
   group_by(ID = Purple.Air.Name, radius_m) |>     #
   summarize(total_nonimp = sum(Shape_Area, na.rm = TRUE),
@@ -181,8 +195,9 @@ nonimp.results <- st_intersection(buffers, st_make_valid(nonimp_gdb)) |>
             .groups = "drop")
 
 canopy.results<-as.data.frame(subset(canopy.results, select = c(ID,radius_m,total_canopy))) ##Class = 1
-noncanopy.results<-as.data.frame(subset(noncanopy.results, select = c(ID,radius_m,total_noncanopy)))
-veg.results<-as.data.frame(subset(veg.results, select=c(ID,radius_m,total_canopy,n_features))) ## Class = 1 OR 2
+#noncanopy.results<-as.data.frame(subset(noncanopy.results, select = c(ID,radius_m,total_noncanopy)))
+veg.results<-as.data.frame(subset(veg.results, select=c(ID,radius_m,total_veg))) ## Class = 1 OR 2
+imp.results<-as.data.frame(subset(imp.results, select = c(ID,radius_m,total_imp))) ##Class = 1
 
 #-----------------------------
 # 5. SAVE OUTPUT (optional)
@@ -190,201 +205,215 @@ veg.results<-as.data.frame(subset(veg.results, select=c(ID,radius_m,total_canopy
 write.csv(pttreeht.results.tosave, "output/canheight_within_buffers.csv", row.names = FALSE)
 write.csv(canopy.results, "output/canopy_within_buffers.csv", row.names = FALSE) 
 write.csv(veg.results, "output/vegetation_within_buffers.csv",row.names = FALSE) 
+write.csv(imp.results, "output/impervious_within_buffers.csv",row.names = FALSE) 
 
+#put together impervious, total_canopy, treeheigt, other tree data results
+canimp<-left_join(imp.results,canopy.results)
+canimp$total_canopy[is.na(canimp$total_canopy)]<-0
+canimpht<-left_join(canimp,pttreeht.results.tosave)
+canimpht$total_conifers[is.na(canimpht$total_conifers)]<-0
+canimpht$total_nonconifer[is.na(canimpht$total_nonconifer)]<-0
+canimpht$n_features[is.na(canimpht$n_features)]<-0
+colnames(canimpht)[which(colnames(canimpht)=="n_features")]<-"n_trees"
+write.csv(canimpht, "output/alltree_and_impervious_within_buffers.csv",row.names = FALSE) 
+
+##################################################
+###I think the below can all be deleted....
+#############################################
 #now for canopy layer...the below is not ready and needs more work
 #-----------------------------
 # 0) USER INPUTS TO EDIT
 #-----------------------------
-lon_col    <- "longitude"              # <-- edit to match your CSV
-lat_col    <- "latitude"               # <-- edit to match your CSV
-id_col     <- "Purple.Air.Name"                     # <-- set to your point ID column (or will be created)
-
-#gdb_path  <- "../data/tacoma2024lidar/data/LandCover2024.gdb" # <-- path to your FileGDB
-lc_layer   <- "LandCover2024"      # <-- layer name inside the GDB
-class_field <- "Class"              # <-- column with classes 1..7
-
-target_crs <- 32610                    # UTM Zone 10N (meters)
-
-
-#-----------------------------
-# 1) READ POINTS & MAKE BUFFERS
-#-----------------------------
-
-# Create sf points (WGS84) and project to meters
-pts_sf <- st_as_sf(pts, coords = c(lon_col, lat_col), crs = 4326) |>
-  st_transform(target_crs)
-
-# Ensure a unique ID
-if (!id_col %in% names(pts_sf)) {
-  pts_sf[[id_col]] <- seq_len(nrow(pts_sf))
-}
-
-# Optional sanity check
-message("Unique IDs: ", length(unique(pts_sf[[id_col]])))
-
-
-
-#-----------------------------
-# 2) READ LAND COVER POLYGONS
-#-----------------------------
-message("Listing GDB layers:")
-print(st_layers(gdb_path)$name)
-
-lc <- st_read(gdb_path, layer = lc_layer, quiet = TRUE) |>
-  st_transform(target_crs)
-
-# Keep only needed attributes + geometry
-if (!class_field %in% names(lc)) {
-  stop(sprintf("Field '%s' not found in layer '%s'. Available: %s",
-               class_field, lc_layer, paste(names(lc), collapse = ", ")))
-}
-lc <- lc |>
-  dplyr::select(!!class_field, Shape_Area)
-
-# (Optional) Filter polygons to those touching any buffer to speed up
-buffers_union <- st_union(st_geometry(buffers))
-lc <- st_filter(lc, buffers_union, .predicate = st_intersects)
-
-###trying to address scan error and conflict error with invalid geometry
-
-# Use planar GEOS ops (we're projected to meters already)
-old_s2 <- sf_use_s2(FALSE)  # remember previous state
-
-# 1) Basic cleaning: drop Z/M, empties; cast to polygonal types
-buffers <- buffers |>
-  st_zm(drop = TRUE, what = "ZM") |>
-  filter(!st_is_empty(geometry))
-
-lc <- lc |>
-  st_zm(drop = TRUE, what = "ZM") |>
-  filter(!st_is_empty(Shape))
-
-# If your land cover is mixed or contains geometry collections, normalize it:
-# (safe even if it's already MULTIPOLYGON)
-lc <- suppressWarnings(st_cast(lc, "MULTIPOLYGON"))
-
-# 2) Snap to a small grid to fix near-coincident edges (1 m here), then "0-buffer" to clean
-prec <- 1  # meters
-buffers <- buffers |>
-  st_set_precision(prec) |>
-  st_snap_to_grid(prec) |>
-  st_buffer(0)
-
-lc <- lc |>
-  st_set_precision(prec) |>
-  st_snap_to_grid(prec) |>
-  st_buffer(0)
-
-# 3) Validate only the bad ones with lwgeom::st_make_valid() if available
-if (requireNamespace("lwgeom", quietly = TRUE)) {
-  bad_b <- which(!st_is_valid(buffers))
-  if (length(bad_b)) {
-    message("Fixing ", length(bad_b), " invalid buffer(s) with st_make_valid()")
-    buffers[bad_b, ] <- lwgeom::st_make_valid(buffers[bad_b, ])
-  }
-  bad_lc <- which(!st_is_valid(lc))
-  if (length(bad_lc)) {
-    message("Fixing ", length(bad_lc), " invalid land-cover polygon(s) with st_make_valid()")
-    lc[bad_lc, ] <- lwgeom::st_make_valid(lc[bad_lc, ])
-  }
-}
-
-# 4) Safe per-buffer intersection with retry
-safe_intersection_one <- function(b) {
-  # Preselect only LC polygons that intersect this buffer (speeds up & reduces failures)
-  idx <- st_intersects(lc, b) |> lengths() > 0
-  lc_sub <- lc[idx, , drop = FALSE]
-  if (nrow(lc_sub) == 0) return(NULL)
-  
-  # First attempt
-  res <- try(st_intersection(b, lc_sub), silent = TRUE)
-  if (!inherits(res, "try-error")) return(res)
-  
-  # Retry with a fresh 0-buffer on both sides (more aggressive clean)
-  message("Retrying ID=", b[[id_col]][1], " r=", b$radius_m[1],
-          " with 0-buffer fallback due to: ", attr(res, "condition")$message)
-  st_intersection(st_buffer(b, 0), st_buffer(lc_sub, 0))
-}
-
-# Run intersections buffer-by-buffer so one failure doesn't stop the run
-int <- map_dfr(seq_len(nrow(buffers)), function(i) {
-  b <- buffers[i, c(id_col, "radius_m")]
-  safe_intersection_one(b)
-})
-
-# Restore s2 setting
-sf_use_s2(old_s2)
-
-#-----------------------------
-# 3) CLIP & MEASURE AREAS
-#-----------------------------
-# Intersection: returns clipped pieces with both buffer attributes (ID, radius_m)
-# and the land cover class.
-int <- st_intersection(
-  buffers |> dplyr::select(all_of(id_col), radius_m),
-  lc      |> dplyr::select(all_of(class_field))
-)
-
-# Compute area of each clipped piece (square meters)
-int <- int |>
-  mutate(area_m2 = as.numeric(st_area(geometry)))  # units -> numeric m^2
-
-#-----------------------------
-# 4) SUM BY ID × RADIUS × CLASS
-#-----------------------------
-# Long format: one row per ID, radius, class
-sum_long <- int |>
-  st_drop_geometry() |>
-  group_by(
-    !!sym(id_col),
-    radius_m,
-    class = .data[[class_field]]
-  ) |>
-  summarize(area_m2 = sum(area_m2, na.rm = TRUE), .groups = "drop")
-
-# Compute buffer area for proportions
-buf_area <- buffers |>
-  mutate(buffer_area_m2 = as.numeric(st_area(geometry))) |>
-  st_drop_geometry() |>
-  dplyr::select(all_of(id_col), radius_m, buffer_area_m2)
-
-sum_long <- sum_long |>
-  left_join(buf_area, by = c(id_col, "radius_m")) |>
-  mutate(prop_of_buffer = ifelse(buffer_area_m2 > 0, area_m2 / buffer_area_m2, NA_real_))
-
-# Wide format: columns class_1 ... class_7 (areas in m^2)
-sum_wide_area <- sum_long |>
-  mutate(class = paste0("class_", class)) |>
-  select(all_of(id_col), radius_m, class, area_m2) |>
-  tidyr::pivot_wider(names_from = class, values_from = area_m2, values_fill = 0)
-
-# Wide format: proportions per buffer
-sum_wide_prop <- sum_long |>
-  mutate(class = paste0("class_", class)) |>
-  select(all_of(id_col), radius_m, class, prop_of_buffer) |>
-  tidyr::pivot_wider(names_from = class, values_from = prop_of_buffer, values_fill = 0)
-
-#-----------------------------
-# 5) SAVE RESULTS
-#-----------------------------
-write.csv(sum_long,      "lc_area_by_ID_radius_class_long.csv", row.names = FALSE)
-write.csv(sum_wide_area, "lc_area_by_ID_radius_class_wide_area_m2.csv", row.names = FALSE)
-write.csv(sum_wide_prop, "lc_prop_by_ID_radius_class_wide.csv", row.names = FALSE)
-
-# Optional: save buffers and intersection for GIS QA/QC
-st_write(buffers, "buffers.gpkg", delete_dsn = TRUE, quiet = TRUE)
-st_write(int,     "lc_clipped_to_buffers.gpkg", delete_dsn = TRUE, quiet = TRUE)
-
-message("Done. Files written:\n",
-        " - lc_area_by_ID_radius_class_long.csv\n",
-        " - lc_area_by_ID_radius_class_wide_area_m2.csv\n",
-        " - lc_prop_by_ID_radius_class_wide.csv\n",
-        " - buffers.gpkg\n",
-        " - lc_clipped_to_buffers.gpkg")
-
-
-
-
-
-#for ailene:
-#write.csv(locslc,"analyses/output/grit_aq_lc_jul_aug_updated.csv", row.names = FALSE)
+# lon_col    <- "longitude"              # <-- edit to match your CSV
+# lat_col    <- "latitude"               # <-- edit to match your CSV
+# id_col     <- "Purple.Air.Name"                     # <-- set to your point ID column (or will be created)
+# 
+# #gdb_path  <- "../data/tacoma2024lidar/data/LandCover2024.gdb" # <-- path to your FileGDB
+# lc_layer   <- "LandCover2024"      # <-- layer name inside the GDB
+# class_field <- "Class"              # <-- column with classes 1..7
+# 
+# target_crs <- 32610                    # UTM Zone 10N (meters)
+# 
+# 
+# #-----------------------------
+# # 1) READ POINTS & MAKE BUFFERS
+# #-----------------------------
+# 
+# # Create sf points (WGS84) and project to meters
+# pts_sf <- st_as_sf(pts, coords = c(lon_col, lat_col), crs = 4326) |>
+#   st_transform(target_crs)
+# 
+# # Ensure a unique ID
+# if (!id_col %in% names(pts_sf)) {
+#   pts_sf[[id_col]] <- seq_len(nrow(pts_sf))
+# }
+# 
+# # Optional sanity check
+# message("Unique IDs: ", length(unique(pts_sf[[id_col]])))
+# 
+# 
+# 
+# #-----------------------------
+# # 2) READ LAND COVER POLYGONS
+# #-----------------------------
+# message("Listing GDB layers:")
+# print(st_layers(gdb_path)$name)
+# 
+# lc <- st_read(gdb_path, layer = lc_layer, quiet = TRUE) |>
+#   st_transform(target_crs)
+# 
+# # Keep only needed attributes + geometry
+# if (!class_field %in% names(lc)) {
+#   stop(sprintf("Field '%s' not found in layer '%s'. Available: %s",
+#                class_field, lc_layer, paste(names(lc), collapse = ", ")))
+# }
+# lc <- lc |>
+#   dplyr::select(!!class_field, Shape_Area)
+# 
+# # (Optional) Filter polygons to those touching any buffer to speed up
+# buffers_union <- st_union(st_geometry(buffers))
+# lc <- st_filter(lc, buffers_union, .predicate = st_intersects)
+# 
+# ###trying to address scan error and conflict error with invalid geometry
+# 
+# # Use planar GEOS ops (we're projected to meters already)
+# old_s2 <- sf_use_s2(FALSE)  # remember previous state
+# 
+# # 1) Basic cleaning: drop Z/M, empties; cast to polygonal types
+# buffers <- buffers |>
+#   st_zm(drop = TRUE, what = "ZM") |>
+#   filter(!st_is_empty(geometry))
+# 
+# lc <- lc |>
+#   st_zm(drop = TRUE, what = "ZM") |>
+#   filter(!st_is_empty(Shape))
+# 
+# # If your land cover is mixed or contains geometry collections, normalize it:
+# # (safe even if it's already MULTIPOLYGON)
+# lc <- suppressWarnings(st_cast(lc, "MULTIPOLYGON"))
+# 
+# # 2) Snap to a small grid to fix near-coincident edges (1 m here), then "0-buffer" to clean
+# prec <- 1  # meters
+# buffers <- buffers |>
+#   st_set_precision(prec) |>
+#   st_snap_to_grid(prec) |>
+#   st_buffer(0)
+# 
+# lc <- lc |>
+#   st_set_precision(prec) |>
+#   st_snap_to_grid(prec) |>
+#   st_buffer(0)
+# 
+# # 3) Validate only the bad ones with lwgeom::st_make_valid() if available
+# if (requireNamespace("lwgeom", quietly = TRUE)) {
+#   bad_b <- which(!st_is_valid(buffers))
+#   if (length(bad_b)) {
+#     message("Fixing ", length(bad_b), " invalid buffer(s) with st_make_valid()")
+#     buffers[bad_b, ] <- lwgeom::st_make_valid(buffers[bad_b, ])
+#   }
+#   bad_lc <- which(!st_is_valid(lc))
+#   if (length(bad_lc)) {
+#     message("Fixing ", length(bad_lc), " invalid land-cover polygon(s) with st_make_valid()")
+#     lc[bad_lc, ] <- lwgeom::st_make_valid(lc[bad_lc, ])
+#   }
+# }
+# 
+# # 4) Safe per-buffer intersection with retry
+# safe_intersection_one <- function(b) {
+#   # Preselect only LC polygons that intersect this buffer (speeds up & reduces failures)
+#   idx <- st_intersects(lc, b) |> lengths() > 0
+#   lc_sub <- lc[idx, , drop = FALSE]
+#   if (nrow(lc_sub) == 0) return(NULL)
+#   
+#   # First attempt
+#   res <- try(st_intersection(b, lc_sub), silent = TRUE)
+#   if (!inherits(res, "try-error")) return(res)
+#   
+#   # Retry with a fresh 0-buffer on both sides (more aggressive clean)
+#   message("Retrying ID=", b[[id_col]][1], " r=", b$radius_m[1],
+#           " with 0-buffer fallback due to: ", attr(res, "condition")$message)
+#   st_intersection(st_buffer(b, 0), st_buffer(lc_sub, 0))
+# }
+# 
+# # Run intersections buffer-by-buffer so one failure doesn't stop the run
+# int <- map_dfr(seq_len(nrow(buffers)), function(i) {
+#   b <- buffers[i, c(id_col, "radius_m")]
+#   safe_intersection_one(b)
+# })
+# 
+# # Restore s2 setting
+# sf_use_s2(old_s2)
+# 
+# #-----------------------------
+# # 3) CLIP & MEASURE AREAS
+# #-----------------------------
+# # Intersection: returns clipped pieces with both buffer attributes (ID, radius_m)
+# # and the land cover class.
+# int <- st_intersection(
+#   buffers |> dplyr::select(all_of(id_col), radius_m),
+#   lc      |> dplyr::select(all_of(class_field))
+# )
+# 
+# # Compute area of each clipped piece (square meters)
+# int <- int |>
+#   mutate(area_m2 = as.numeric(st_area(geometry)))  # units -> numeric m^2
+# 
+# #-----------------------------
+# # 4) SUM BY ID × RADIUS × CLASS
+# #-----------------------------
+# # Long format: one row per ID, radius, class
+# sum_long <- int |>
+#   st_drop_geometry() |>
+#   group_by(
+#     !!sym(id_col),
+#     radius_m,
+#     class = .data[[class_field]]
+#   ) |>
+#   summarize(area_m2 = sum(area_m2, na.rm = TRUE), .groups = "drop")
+# 
+# # Compute buffer area for proportions
+# buf_area <- buffers |>
+#   mutate(buffer_area_m2 = as.numeric(st_area(geometry))) |>
+#   st_drop_geometry() |>
+#   dplyr::select(all_of(id_col), radius_m, buffer_area_m2)
+# 
+# sum_long <- sum_long |>
+#   left_join(buf_area, by = c(id_col, "radius_m")) |>
+#   mutate(prop_of_buffer = ifelse(buffer_area_m2 > 0, area_m2 / buffer_area_m2, NA_real_))
+# 
+# # Wide format: columns class_1 ... class_7 (areas in m^2)
+# sum_wide_area <- sum_long |>
+#   mutate(class = paste0("class_", class)) |>
+#   select(all_of(id_col), radius_m, class, area_m2) |>
+#   tidyr::pivot_wider(names_from = class, values_from = area_m2, values_fill = 0)
+# 
+# # Wide format: proportions per buffer
+# sum_wide_prop <- sum_long |>
+#   mutate(class = paste0("class_", class)) |>
+#   select(all_of(id_col), radius_m, class, prop_of_buffer) |>
+#   tidyr::pivot_wider(names_from = class, values_from = prop_of_buffer, values_fill = 0)
+# 
+# #-----------------------------
+# # 5) SAVE RESULTS
+# #-----------------------------
+# write.csv(sum_long,      "lc_area_by_ID_radius_class_long.csv", row.names = FALSE)
+# write.csv(sum_wide_area, "lc_area_by_ID_radius_class_wide_area_m2.csv", row.names = FALSE)
+# write.csv(sum_wide_prop, "lc_prop_by_ID_radius_class_wide.csv", row.names = FALSE)
+# 
+# # Optional: save buffers and intersection for GIS QA/QC
+# st_write(buffers, "buffers.gpkg", delete_dsn = TRUE, quiet = TRUE)
+# st_write(int,     "lc_clipped_to_buffers.gpkg", delete_dsn = TRUE, quiet = TRUE)
+# 
+# message("Done. Files written:\n",
+#         " - lc_area_by_ID_radius_class_long.csv\n",
+#         " - lc_area_by_ID_radius_class_wide_area_m2.csv\n",
+#         " - lc_prop_by_ID_radius_class_wide.csv\n",
+#         " - buffers.gpkg\n",
+#         " - lc_clipped_to_buffers.gpkg")
+# 
+# 
+# 
+# 
+# 
+# #for ailene:
+# #write.csv(locslc,"analyses/output/grit_aq_lc_jul_aug_updated.csv", row.names = FALSE)
