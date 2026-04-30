@@ -56,7 +56,7 @@ convert_time <- function(x, tz = "America/Los_Angeles") {
 
 dat <- read.csv("output/ALLPASDCARD_combined_2026March.csv", header = TRUE)
 pa_info <- read.csv("../data/PurpleAir/PurpleAirAPIInfo.csv", header = TRUE)
-
+pa_info$Name[pa_info$Name=="N Tacoma N 9th and Stevens"]<-"Hannah"
 #remove rows when id is missing- these are mostly (all?) frmo GRIT 23 and might be recoverable witht the PurpleAir data download tool
 dat<-dat[!dat$id=="20251211.csv",]
 dat<-dat[!dat$id=="",]
@@ -77,6 +77,7 @@ df <- df %>%
       time_stamp = as.POSIXct(time_stamp, format="%Y-%m-%dT%H:%M", tz="PST8PDT"),
       day = day(time_stamp),
       month = month(time_stamp),
+      year = year(time_stamp),
       hour = hour(time_stamp),
       avg_pm = (pm2_5_atm_a + pm2_5_atm_b) / 2,
       avg_rh = current_humidity,
@@ -85,40 +86,28 @@ df <- df %>%
     )
   
   valid_dates <- df %>% 
-    group_by(month, day) %>% 
+    group_by(year, month, day) %>% 
     summarize(n_rows = n()) %>% 
     filter(n_rows >= needed_measurements_120s)
   
+  
   df_filtered <- df %>% 
-    inner_join(valid_dates, by=c("month", "day")) %>% 
+    inner_join(valid_dates, by=c("year","month", "day")) %>% 
     mutate(channel_diff = abs(pm2_5_atm_a - pm2_5_atm_b)) %>% 
     filter(channel_diff <= 5) %>% 
-    group_by(month, day, hour) %>% 
+    group_by(sensor_index,year,month, day, hour) %>% 
     summarize(
       avg_pm = mean(avg_pm),
       avg_rh = mean(avg_rh),
-      avg_temp = mean(avg_temp),
-      .groups = "keep"
-    ) %>%
+      avg_temp = mean(avg_temp)
+    )  %>%
     mutate(
       pm2.5_corrected = ( avg_pm * 0.524) - (0.0862 * avg_rh) + 5.75,
-      sensor_index = sensor_index
     )
-  
 
+purpleair_sds <- bind_rows(df_filtered)
+purpleair_sds<-purpleair_sds[!is.na(purpleair_sds$year),]
+#remove measurements from 2024
+purpleair_sds<-purpleair_sds[purpleair_sds$year>2024,]
 
-
-all_sensors <- lapply(files, function(f) {
-  process_sensor(f, needed_measurements_120s)
-})
-
-purpleair_all <- bind_rows(all_sensors)
-write.csv(purpleair_all, "output/"purpleair_SDCARDS_Aug2025_to_Feb2026.csv", row.names = FALSE)                                          
-
-purpleair_missing <- purpleair_all %>%
-  group_by(month, day, sensor_index) %>%
-  summarize(hours_present = n()) %>%
-  mutate(missing_hours = 24 - hours_present) %>% filter(missing_hours != 0)
-write.csv(purpleair_missing, "output/purpleair_missing_SDCARDS_Aug2025_to_Feb2026.csv", row.names = FALSE)  
-
-head(purpleair_all)
+write.csv(purpleair_sds, "output/purpleair_SDCARDS_Aug2025_to_Feb2026.csv", row.names = FALSE)                                          

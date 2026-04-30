@@ -24,35 +24,58 @@ pa_tpch<- read.csv("output/purpleair_TPCH_Aug2025_to_Feb2026.csv")
 pa_sd<- read.csv("output/purpleair_SDCARDS_Aug2025_to_Feb2026.csv")
 
 ### read in sensor data from GRIT and TPCH
-sensornames <- read.csv("../data/PurpleAir/PurpleAirAPIInfo.csv")
+gritsensors <- read.csv("../data/PurpleAir/PurpleAirAPIInfo.csv")
 tpchsensors <- read.csv("../data/PurpleAir/TPCH_PurpleAirMonitors.csv")
 
-sensornames <- sensornames %>% drop_na(SensorIndex) %>% rename(sensor_index = SensorIndex)
-sensornames_clean <- sensornames %>%
+gritsensors <- gritsensors %>% drop_na(SensorIndex) %>% rename(sensor_index = SensorIndex)
+
+gritsensors_clean <- gritsensors %>%
   distinct(sensor_index, .keep_all = TRUE)
+gritsensors_clean<-subset(gritsensors_clean, select=c(Name,sensor_index))
+
 #merge tpchsensors with grit sensors
-#########ADD CODE TO MERGE
+tpchsensors_to_use<-tpchsensors[tpchsensors$Data.downloaded.=="yes",]
+tpchsensors_to_use<- tpchsensors_to_use %>% 
+    rename(sensor_index = SensorIndex, Name = Place.Name)
+tpchsensors_to_use<-subset(tpchsensors_to_use, select=c(Name,sensor_index))
 
-#add year to air quality data
-pa_jul_oct_2025$year <- 2025 
-pa_nov2025_feb2026$year<-2025
-pa_nov2025_feb2026$year[pa_nov2025_feb2026$month==1]<-2026
-pa_nov2025_feb2026$year[pa_nov2025_feb2026$month==2]<-2026
+sensornames_clean<-rbind(gritsensors_clean,tpchsensors_to_use)
 
-pa<-rbind(pa_jul_oct_2025,pa_nov2025_feb2026)
+pa<-rbind(pa_jul_oct_2025,pa_nov2025_feb2026,pa_tpch,pa_sd)
 
 pa$datetime <- make_datetime(
   year = pa$year,
   month = pa$month,
   day   = pa$day,
-  hour  = pa$hour)
+  hour  = pa$hour,
+  tz = "America/Los_Angeles")
 pa$date <- as_date(pa$datetime)
 
-
+#check din before joining
+#dim(pa)#181690     11
 #join purple air data with sensor data
 pa <- pa %>%
   left_join(sensornames_clean, by = "sensor_index") 
-pa <- pa[, -c(14, 15)] ## included GRIT sensor names 
+#pa <- pa[, -c(12, 13)] ## included GRIT sensor names 
+# dim(pa)#181690     12
+#check that all names made it
+#unique(pa$Name)
+#head(pa[pa$Name=="N Tacoma N 9th and Stevens",])
+#check for duplicates
+#dim(pa[which(duplicated(pa[c("year", "month","day","hour","sensor_index","avg_pm")])),])#287
+#remove these!
+pa<- pa[-which(duplicated(pa[c("year", "month","day","hour","sensor_index","avg_pm")])),]
 
-head(pa)
+#for now, also remove duplicates in sensor index, year, month, day and hour- i should take care of this in a better way
+pa<- pa[-which(duplicated(pa[c("year", "month","day","hour","sensor_index")])),]#16724
+
+dim(pa)
 write.csv(pa,"output/purpleair_all.csv")
+
+#check for duplicates in sensor index, year, month, day and hour
+dim(pa[which(duplicated(pa[c("year", "month","day","hour","sensor_index")])),])#16724
+
+unique(pa$Name[which(duplicated(pa[c("year", "month","day","hour","sensor_index")]))])
+table(pa$Name[which(duplicated(pa[c("year", "month","day","hour","sensor_index")]))])
+
+#none!

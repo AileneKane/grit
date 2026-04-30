@@ -65,9 +65,10 @@
   takes "ALLPASDCARD_combined_2026March.csv", formats 
   it like the purpleair out files in step 1, and saves it as:
   "purpleair_SDCARDS_Aug2025_to_Feb2026.csv"
-  
+
 4. merge_aqdat.R
-    stitches together all the API and sdcard-derived data
+    stitches together all the API and sdcard-derived data into 
+    a csv file called "output/purpleair_all.csv"
     
 5. plot_and_fit_models.R 
 

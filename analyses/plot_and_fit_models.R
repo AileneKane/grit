@@ -25,15 +25,33 @@ if(length(grep("ailene", getwd()))>0) {
   folder <- "C:/Users/ailene.ettinger/Documents/GitHub/grit/data/PurpleAir/PurpleAir_Download_2025Aug_to_Oct/PurpleAir Download 11-10-2025/"
 }
 
-###Time Series Graphs###
+###pa data###
 pa<- read.csv("output/purpleair_all.csv")
+
+#location data
+gritlocs<-read.csv("output/purpleair_locs_20242025.csv")
+colnames(gritlocs)[3]<-"sensor_index"
+gritlocs_subs<-subset(gritlocs, select=c(Purple.Air.Name,sensor_index, Long, Lat))
+
+tpchsensors <- read.csv("../data/PurpleAir/TPCH_PurpleAirMonitors.csv")
+tpchsensors_to_use<-tpchsensors[tpchsensors$Data.downloaded.=="yes",]
+tpchsensors_to_use<- tpchsensors_to_use %>% 
+  rename(sensor_index = SensorIndex, Purple.Air.Name = Place.Name, Long = Longitude, Lat = Latitude)
+tpchsensors_to_use<-subset(tpchsensors_to_use, select=c(Purple.Air.Name,sensor_index, Long, Lat))
+locs<-rbind(gritlocs_subs,tpchsensors_to_use)
+#remove GRIT 41, since this one is located outside tacoma
+#save comnbined grit/tpch location purple air location file
+locs<-locs[!locs$Purple.Air.Name =="GRIT41",]
+
+write.csv(locs,"output/grit_tpch_purpleair_locs_20242025.csv")
+
+##time series graphs
 pa$datetime <- make_datetime(
   year = pa$year,
   month = pa$month,
   day   = pa$day,
   hour  = pa$hour)
 pa$date <- as_date(pa$datetime)
-#remove GRIT 41, since this one is located outside tacoma
 pa<-pa[!pa$Name=="GRIT41",]
 
 #plot to check
@@ -61,8 +79,12 @@ ggsave("PurpleAir figs/avg_pm2.5_bysensor.png", width = 20, height = 9, dpi = 30
 
 
 #Number of hours above 35.5 mg/m3 across the time series (by sensor and across all sensors)
-locs<-read.csv("output/purpleair_locs_20242025.csv")
-colnames(locs)[3]<-"sensor_index"
+
+pa<-subset(pa,
+           select=c(sensor_index,year,month,day,hour,
+                    avg_pm,avg_rh,avg_temp,pm2.5_corrected,
+                    datetime,date))
+
 palocs<-left_join(pa,locs, copy=TRUE)
 palocs$hrsabove35.5<-0#EPA standard = 35.5
 palocs$hrsabove35.5[palocs$pm2.5_corrected >35.5]<-1
@@ -124,26 +146,31 @@ palocs_jan$Long<-as.numeric(palocs_jan$Long)
 
 palocs$date<-as.factor(palocs$date)
 
+palocs_sept$Purple.Air.Name<-as.factor(palocs_sept$Purple.Air.Name)
+
 septmmod<-lmer(pm2.5_corrected~-1+Purple.Air.Name + (1|date),data=palocs_sept)
 Anova(septmmod)
 summary(septmmod)
 
+palocs_oct$Purple.Air.Name<-as.factor(palocs_oct$Purple.Air.Name)
 octmmod<-lmer(pm2.5_corrected~-1+Purple.Air.Name + (1|date),data=palocs_oct)
 Anova(octmmod)
 summary(octmmod)
 sort(fixef(octmmod), decreasing=TRUE)
 
+palocs_jan$Purple.Air.Name<-as.factor(palocs_jan$Purple.Air.Name)
 janmmod<-lmer(pm2.5_corrected~-1+Purple.Air.Name + (1|date),data=palocs_jan)
 Anova(janmmod)
 summary(janmmod)
 sort(fixef(janmmod), decreasing=TRUE)
 
+palocs_feb$Purple.Air.Name<-as.factor(palocs_feb$Purple.Air.Name)
 febmmod<-lmer(pm2.5_corrected~-1+Purple.Air.Name + (1|date),data=palocs_feb)
 Anova(febmmod)
 summary(febmmod)
 sort(fixef(febmmod), decreasing=TRUE)
 
-#there are significant differenecs in air quality acorss purpleair sensors
+#there are significant differenes in air quality acorss purpleair sensors
 
 #now a model for sept hours with pm2.5 greater than 25
 date.hrsabove25$hrsabove25<-as.integer(date.hrsabove25$hrsabove25)
@@ -189,15 +216,22 @@ colnames(est_by_sensor)<-c("Purple.Air.Name", "hrsabove25est","hrsabove25.lwr","
 #let's save these in a format that we can map them...
 sept_pm2.5ci<-confint(septmmod)
 sept_pm2.5est<-fixef(septmmod)
-names(sept_pm2.5est)<-substr(names(sept_pm2.5est),16,21)
-septpm2.5<-as.data.frame(cbind(names(sept_pm2.5est),sept_pm2.5est,sept_pm2.5ci[3:30,]))
+septpm2.5<-as.data.frame(cbind(names(sept_pm2.5est),sept_pm2.5est,sept_pm2.5ci[3:35,]))
 colnames(septpm2.5)<-c("Purple.Air.Name", "pm2.5est_sept","pm2.5.lwr_sept","pm2.5.upr_sept")
+septpm2.5$Purple.Air.Name[septpm2.5$Purple.Air.Name=="Manito"]<-"Manitou Park Elementary School"
+septpm2.5$Purple.Air.Name[septpm2.5$Purple.Air.Name=="N Taco"]<-"N Tacoma N 9th and Stevens"
+septpm2.5$Purple.Air.Name[septpm2.5$Purple.Air.Name=="Seabur"]<-"Seabury School"
+septpm2.5$Purple.Air.Name[septpm2.5$Purple.Air.Name=="Tacoma"]<-"Tacoma Center YMCA"
 
 jan_pm2.5ci<-confint(janmmod)
 jan_pm2.5est<-fixef(janmmod)
-names(jan_pm2.5est)<-substr(names(jan_pm2.5est),16,21)
-janpm2.5<-as.data.frame(cbind(names(jan_pm2.5est),jan_pm2.5est,jan_pm2.5ci[3:31,]))
+names(jan_pm2.5est)
+janpm2.5<-as.data.frame(cbind(names(jan_pm2.5est),jan_pm2.5est,jan_pm2.5ci[3:35,]))
 colnames(janpm2.5)<-c("Purple.Air.Name", "pm2.5est_jan","pm2.5.lwr_jan","pm2.5.upr_jan")
+janpm2.5$Purple.Air.Name[janpm2.5$Purple.Air.Name=="Manito"]<-"Manitou Park Elementary School"
+janpm2.5$Purple.Air.Name[janpm2.5$Purple.Air.Name=="N Taco"]<-"N Tacoma N 9th and Stevens"
+janpm2.5$Purple.Air.Name[janpm2.5$Purple.Air.Name=="Seabur"]<-"Seabury School"
+janpm2.5$Purple.Air.Name[janpm2.5$Purple.Air.Name=="Tacoma"]<-"Tacoma Center YMCA"
 
 #merge with location df
 locpm2.5_sept<-left_join(locs,septpm2.5)
@@ -208,7 +242,7 @@ locpm2.5hrs_septjan<-left_join(locpm2.5_sept,janpm2.5)
 write.csv(locpm2.5hrs_septjan,"output/purpleairloc_wpmhrs.csv", row.names = FALSE)                                          
 plot(locpm2.5hrs_septjan$pm2.5est_sept,locpm2.5hrs_septjan$pm2.5est_jan)
 cor(as.numeric(locpm2.5hrs_septjan$pm2.5est_sept),as.numeric(locpm2.5hrs_septjan$pm2.5est_jan), use="pairwise.complete.obs")
-#0.85 highly correlated
+#0.84 highly correlated
 
 #Do lat/long predict pm2.5?
 septlatlongmmod<-lmer(pm2.5_corrected~1+Lat + Long + (1|date),data=palocs_sept)
@@ -219,7 +253,7 @@ sort(fixef(septlatlongmmod), decreasing=TRUE)
 janlatlongmmod<-lmer(pm2.5_corrected~1+Lat + Long + (1|date),data=palocs_jan)
 summary(janlatlongmmod)
 Anova(janlatlongmmod)
-sort(fixef(septlatlongmmod), decreasing=TRUE)
+sort(fixef(janlatlongmmod), decreasing=TRUE)
 
 
 # Save with custom dimensions
@@ -317,7 +351,7 @@ colnames(pmavg_janbysensor)<-c("sensor_index","janpm2.5_avg")
 
 #month model
 pa$month<-as.factor(pa$month)
-monmmod<-lmer(pm2.5_corrected~-1+month + (1|Name),data=pa)
+monmmod<-lmer(pm2.5_corrected~-1+month + (1|sensor_index),data=pa)
 Anova(monmmod)
 fixef(monmmod)
 summary(monmmod)
