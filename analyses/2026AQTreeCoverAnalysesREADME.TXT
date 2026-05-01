@@ -71,6 +71,8 @@
     a csv file called "output/purpleair_all.csv"
     
 5. plot_and_fit_models.R 
+    makes presliminary plots of air quality data over time
+    and space, also fits some basic models (without tree canopy data)
 
 6. grit_lidar2024_aq2025_analyses.R
     pulls out and summarizes canopy cover, mean height, and 

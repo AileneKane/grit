@@ -7,9 +7,8 @@
 
 #####################################################
 ###### TO DO ON THIS FILE:
-##### 1) add in TPCH points
-##### 2) create noncanopy veg summary
-##### 3) do we want to separate out impervious more? 
+##### 1) create noncanopy veg summary
+##### 2) do we want to separate out impervious more? 
 #####################################################
 
 #clear workspace
@@ -35,12 +34,11 @@ setwd("~/Documents/GitHub/grit/analyses")
 #-----------------------------
 
 #read in csv file with lat long and other info about locations of GRIT sensors
-#NOTE: need to update this to include TPCH purple airs
 locpm2.5hrs<-read.csv("output/purpleairloc_wpmhrs.csv", header=TRUE)                                          
 
 #remove rows with NAs
 pm2.5<-locpm2.5hrs[!is.na(locpm2.5hrs$Long),]
-pm2.5<-subset(locpm2.5hrs,select=c("Purple.Air.Name", "Long","Lat","pm2.5est_sept" ))
+pm2.5<-subset(locpm2.5hrs,select=c("Purple.Air.Name", "Long","Lat","pm2.5est_sept","pm2.5est_jan"))
 pts<-pm2.5[!is.na(pm2.5$pm2.5est_sept),]
 colnames(pts)[2:3]<-c("longitude", "latitude")
 pts<-pts[!is.na(pts$longitude),]
@@ -74,12 +72,11 @@ if(length(grep("ailene", getwd()))>0) {
 }
 layers <- st_layers(gdb_path)$name
 print(layers)    # see available layers
-#create a datafile for tree canopy
+#create a datafile for tree canopy, which is i the "LandCover2024" layer
 lc_gdb <- st_read(gdb_path, layer = layers[1]) |> 
   st_transform(32610)   # match buffer CRS
 head(lc_gdb)
 unique(lc_gdb$Class)
-##below does not work
 # #keep only tree canopy shapes in the canopy file
 canopy_gdb <- filter(lc_gdb, Class == "1")
 # 
@@ -100,8 +97,8 @@ nonimp_gdb<-lc_gdb[lc_gdb$Class==1|lc_gdb$Class==2|lc_gdb$Class==5|lc_gdb$Class=
 #pull out canopy height layer using tree points
 pttreeht_ft_gdb <- st_read(gdb_path, layer = layers[3]) |> 
   st_transform(32610)   # match buffer CRS
-head(pttreeht_ft_gdb)
-unique(pttreeht_ft_gdb$Conifer)
+#head(pttreeht_ft_gdb)
+#unique(pttreeht_ft_gdb$Conifer)
 #add a column for deciduous
 pttreeht_ft_gdb$NonConifer<-1
 pttreeht_ft_gdb$NonConifer[pttreeht_ft_gdb$Conifer==1]<-0
@@ -119,7 +116,6 @@ pttreeht.results <- st_intersection(buffers, pttreeht_ft_gdb) |>
             .groups = "drop")
 pttreeht.results.tosave<-as.data.frame(subset(pttreeht.results,select=c(ID,radius_m, mean_treeht_ft, total_conifers,total_nonconifer,n_features)))
 pttreeht.results.tosave<-pttreeht.results.tosave[,1:6]
-# # below does not work
 # # Get total canopy cover, noncanopy cover, impervious surface, vegetation cover
 # # Samie updated code to work 4/27/2026 
 # #--------------------------
