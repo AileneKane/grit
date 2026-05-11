@@ -94,7 +94,7 @@ date.hrsabove25<-aggregate(palocs$hrsabove25, by=list(palocs$date,palocs$Purple.
 date.hrsabove35.5<-aggregate(palocs$hrsabove35.5, by=list(palocs$date,palocs$Purple.Air.Name), sum, na.rm=TRUE)
 colnames(date.hrsabove25)<-c("datetime","sensor","hrsabove25")
 
-date.hrsabove25$date <- as.POSIXct(date.hrsabove25$datetime, format = "%Y-%m-%d", tz = "UTC")
+date.hrsabove25$date <- as.POSIXct(date.hrsabove25$datetime, format = "%Y-%m-%d")
 date.hrsabove25<-date.hrsabove25[order(date.hrsabove25$date),]
 
 h25 <- ggplot(date.hrsabove25, aes(date, hrsabove25))+
@@ -111,27 +111,43 @@ h25 <- ggplot(date.hrsabove25, aes(date, hrsabove25))+
 ggsave("PurpleAir figs/hoursabove25_allsensors.png", width = 6, height = 4, units = "in")
 
 #what do average daily pm2.5 values suggest?
-dailyavg<-aggregate(palocs$avg_pm, by=list(palocs$date,palocs$Purple.Air.Name), sum, na.rm=TRUE)
-
+dailyavg<-aggregate(palocs$pm2.5_corrected, by=list(palocs$date,palocs$Purple.Air.Name), sum, na.rm=TRUE)
+colnames(dailyavg)<-c("date","sensor","pm2.5_avg_day")
+dailyavg$date<-as.POSIXct(dailyavg$date, format = "%Y-%m-%d")
+date.hrsabove25$sensor<-as.character(date.hrsabove25$sensor)
+date.hrsabove25<-date.hrsabove25[,-(which(colnames(date.hrsabove25)=="datetime"))]
+#merge dailyavg with daily hours above 25
+dailyavg_hrsabove25<-left_join(date.hrsabove25,dailyavg)
 #Which sensors had the worst  and best air quality? (highest average and greatest # of hours above threshold)?
-worst10<-head(palocs[order(palocs$pm2.5_corrected, decreasing=TRUE),], n=10)#highest/worst values= 61.71485 58.41759 57.16004 39.46606 38.01056 36.50640
-unique(worst10$Purple.Air.Name)
-best10<-tail(palocs[order(palocs$pm2.5_corrected, decreasing=TRUE),], n=10)#highest/worst values= 61.71485 58.41759 57.16004 39.46606 38.01056 36.50640
-
+worst10<-head(dailyavg_hrsabove25[order(dailyavg_hrsabove25$pm2.5_avg_day, decreasing=TRUE),], n=10)#highest/worst values= 61.71485 58.41759 57.16004 39.46606 38.01056 36.50640
+unique(worst10$sensor)
+best10<-tail(dailyavg_hrsabove25[order(dailyavg_hrsabove25$pm2.5_avg_day, decreasing=TRUE),], n=10)#highest/worst values= 61.71485 58.41759 57.16004 39.46606 38.01056 36.50640
+unique(best10$sensor)
 #What days had the worst and best air quality?
 unique(worst10$date)
 unique(best10$date)
 #Did air quality differ significantly across sites?
-#select out distinct nmonths
-palocs_sept<-palocs[palocs$month==9,]
-palocs_oct<-palocs[palocs$month==10,]
-palocs_jan<-palocs[palocs$month==1,]
-palocs_feb<-palocs[palocs$month==2,]
+#select out distinct months
+palocs_sept<-palocs[palocs$month==9 & palocs$year==2025,]
+palocs_oct<-palocs[palocs$month==10 & palocs$year==2025,]
+palocs_nov<-palocs[palocs$month==11 & palocs$year==2025,]
+palocs_dec<-palocs[palocs$month==12 & palocs$year==2025,]
+palocs_jan<-palocs[palocs$month==1 & palocs$year==2026,]
+palocs_feb<-palocs[palocs$month==2 & palocs$year==2026,]
 
 palocs_sept$Sensor<-as.factor(substr(palocs_sept$Purple.Air.Name,5,6))
 palocs_oct$Sensor<-as.factor(substr(palocs_oct$Purple.Air.Name,5,6))
+palocs_nov$Sensor<-as.factor(substr(palocs_nov$Purple.Air.Name,5,6))
+palocs_dec$Sensor<-as.factor(substr(palocs_dec$Purple.Air.Name,5,6))
 palocs_jan$Sensor<-as.factor(substr(palocs_jan$Purple.Air.Name,5,6))
 palocs_feb$Sensor<-as.factor(substr(palocs_feb$Purple.Air.Name,5,6))
+
+dailyavg_sept<-dailyavg_hrsabove25[substr(dailyavg_hrsabove25$date,1,7)=="2025-09",]
+dailyavg_oct<-dailyavg_hrsabove25[substr(dailyavg_hrsabove25$date,1,7)=="2025-10",]
+dailyavg_nov<-dailyavg_hrsabove25[substr(dailyavg_hrsabove25$date,1,7)=="2025-11",]
+dailyavg_dec<-dailyavg_hrsabove25[substr(dailyavg_hrsabove25$date,1,7)=="2025-12",]
+dailyavg_jan<-dailyavg_hrsabove25[substr(dailyavg_hrsabove25$date,1,7)=="2026-01",]
+dailyavg_feb<-dailyavg_hrsabove25[substr(dailyavg_hrsabove25$date,1,7)=="2026-02",]
 
 bp_sept<- ggplot(palocs_sept, aes(Sensor, pm2.5_corrected)) +
   geom_boxplot()
@@ -144,43 +160,53 @@ palocs_sept$Long<-as.numeric(palocs_sept$Long)
 palocs_jan$Lat<-as.numeric(palocs_jan$Lat)
 palocs_jan$Long<-as.numeric(palocs_jan$Long)
 
-palocs$date<-as.factor(palocs$date)
 
 palocs_sept$Purple.Air.Name<-as.factor(palocs_sept$Purple.Air.Name)
-
 septmmod<-lmer(pm2.5_corrected~-1+Purple.Air.Name + (1|date),data=palocs_sept)
-Anova(septmmod)
-summary(septmmod)
+sept_temp_mmod<-lmer(avg_temp~-1+Purple.Air.Name + (1|date),data=palocs_sept)
 
 palocs_oct$Purple.Air.Name<-as.factor(palocs_oct$Purple.Air.Name)
 octmmod<-lmer(pm2.5_corrected~-1+Purple.Air.Name + (1|date),data=palocs_oct)
-Anova(octmmod)
-summary(octmmod)
-sort(fixef(octmmod), decreasing=TRUE)
+oct_temp_mmod<-lmer(avg_temp~-1+Purple.Air.Name + (1|date),data=palocs_oct)
+
+palocs_nov$Purple.Air.Name<-as.factor(palocs_nov$Purple.Air.Name)
+novmmod<-lmer(pm2.5_corrected~-1+Purple.Air.Name + (1|date),data=palocs_nov)
+nov_temp_mmod<-lmer(avg_temp~-1+Purple.Air.Name + (1|date),data=palocs_nov)
+
+palocs_dec$Purple.Air.Name<-as.factor(palocs_dec$Purple.Air.Name)
+decmmod<-lmer(pm2.5_corrected~-1+Purple.Air.Name + (1|date),data=palocs_dec)
+dec_temp_mmod<-lmer(avg_temp~-1+Purple.Air.Name + (1|date),data=palocs_dec)
 
 palocs_jan$Purple.Air.Name<-as.factor(palocs_jan$Purple.Air.Name)
 janmmod<-lmer(pm2.5_corrected~-1+Purple.Air.Name + (1|date),data=palocs_jan)
-Anova(janmmod)
-summary(janmmod)
-sort(fixef(janmmod), decreasing=TRUE)
+jan_temp_mmod<-lmer(avg_temp~-1+Purple.Air.Name + (1|date),data=palocs_jan)
 
 palocs_feb$Purple.Air.Name<-as.factor(palocs_feb$Purple.Air.Name)
 febmmod<-lmer(pm2.5_corrected~-1+Purple.Air.Name + (1|date),data=palocs_feb)
-Anova(febmmod)
-summary(febmmod)
-sort(fixef(febmmod), decreasing=TRUE)
+feb_temp_mmod<-lmer(avg_temp~-1+Purple.Air.Name + (1|date),data=palocs_feb)
 
-#there are significant differenes in air quality acorss purpleair sensors
+#there are significant differences in air quality acorss purpleair sensors
 
 #now a model for sept hours with pm2.5 greater than 25
+
 date.hrsabove25$hrsabove25<-as.integer(date.hrsabove25$hrsabove25)
 date.hrsabove25$sensor<-as.factor(date.hrsabove25$sensor)
 date.hrsabove25$date<-as.factor(date.hrsabove25$date)
 
-#hrsmmod<-glm(hrsabove25~sensor + (1|date),family="poisson",data=date.hrsabove25)
+#hrsmmod<-glmer(hrsabove25~sensor + (1|date),family="poisson",data=date.hrsabove25)
+#model did not converge
+dailyavg_sept$hrsabove25<-as.integer(dailyavg_sept$hrsabove25)
+dailyavg_oct$hrsabove25<-as.integer(dailyavg_oct$hrsabove25)
+dailyavg_nov$hrsabove25<-as.integer(dailyavg_nov$hrsabove25)
+dailyavg_dec$hrsabove25<-as.integer(dailyavg_dec$hrsabove25)
+dailyavg_jan$hrsabove25<-as.integer(dailyavg_jan$hrsabove25)
+dailyavg_feb$hrsabove25<-as.integer(dailyavg_feb$hrsabove25)
+
+sept_hrsmmod<-glm(hrsabove25~-1+sensor,family="poisson",data=dailyavg_sept)
+(sept_hrsmmod)
 hrsmod<-glm(hrsabove25~sensor,family="poisson",data=date.hrsabove25)
 #test for overdispersion
-#hrsmod$deviance / hrsmod$df.residual#no overdispersion (<1)
+#hrsmod$deviance / hrsmod$df.residual#overdispersed(>1,so try negative binomial
 
 Anova(hrsmod)
 summary(hrsmod)
@@ -225,7 +251,6 @@ septpm2.5$Purple.Air.Name[septpm2.5$Purple.Air.Name=="Tacoma"]<-"Tacoma Center Y
 
 jan_pm2.5ci<-confint(janmmod)
 jan_pm2.5est<-fixef(janmmod)
-names(jan_pm2.5est)
 janpm2.5<-as.data.frame(cbind(names(jan_pm2.5est),jan_pm2.5est,jan_pm2.5ci[3:35,]))
 colnames(janpm2.5)<-c("Purple.Air.Name", "pm2.5est_jan","pm2.5.lwr_jan","pm2.5.upr_jan")
 janpm2.5$Purple.Air.Name[janpm2.5$Purple.Air.Name=="Manito"]<-"Manitou Park Elementary School"
@@ -233,15 +258,53 @@ janpm2.5$Purple.Air.Name[janpm2.5$Purple.Air.Name=="N Taco"]<-"N Tacoma N 9th an
 janpm2.5$Purple.Air.Name[janpm2.5$Purple.Air.Name=="Seabur"]<-"Seabury School"
 janpm2.5$Purple.Air.Name[janpm2.5$Purple.Air.Name=="Tacoma"]<-"Tacoma Center YMCA"
 
+#temperature mods
+sept_tempci<-confint(sept_temp_mmod)
+sept_tempest<-fixef(sept_temp_mmod)
+sept_temp<-as.data.frame(cbind(names(sept_tempest),sept_tempest,sept_tempci[3:35,]))
+colnames(sept_temp)<-c("Purple.Air.Name", "tempest_sept","temp.lwr_sept","temp.upr_sept")
+sept_temp$Purple.Air.Name[sept_temp$Purple.Air.Name=="Manito"]<-"Manitou Park Elementary School"
+sept_temp$Purple.Air.Name[sept_temp$Purple.Air.Name=="N Taco"]<-"N Tacoma N 9th and Stevens"
+sept_temp$Purple.Air.Name[sept_temp$Purple.Air.Name=="Seabur"]<-"Seabury School"
+sept_temp$Purple.Air.Name[sept_temp$Purple.Air.Name=="Tacoma"]<-"Tacoma Center YMCA"
+
+jan_tempci<-confint(jan_temp_mmod)
+jan_tempest<-fixef(jan_temp_mmod)
+jan_temp<-as.data.frame(cbind(names(jan_tempest),jan_tempest,jan_tempci[3:35,]))
+colnames(jan_temp)<-c("Purple.Air.Name", "tempest_jan","temp.lwr_jan","temp.upr_jan")
+jan_temp$Purple.Air.Name[jan_temp$Purple.Air.Name=="Manito"]<-"Manitou Park Elementary School"
+jan_temp$Purple.Air.Name[jan_temp$Purple.Air.Name=="N Taco"]<-"N Tacoma N 9th and Stevens"
+jan_temp$Purple.Air.Name[jan_temp$Purple.Air.Name=="Seabur"]<-"Seabury School"
+jan_temp$Purple.Air.Name[jan_temp$Purple.Air.Name=="Tacoma"]<-"Tacoma Center YMCA"
+septjan_temp<-left_join(sept_temp,jan_temp)
+septjan_temp$tempest_sept<-round(as.numeric(septjan_temp$tempest_sept), digits=3)
+septjan_temp$tempest_jan<-round(as.numeric(septjan_temp$tempest_jan), digits=3)
+septjan_temp$temp.lwr_sept<-round(as.numeric(septjan_temp$temp.lwr_sept), digits=3)
+septjan_temp$temp.upr_sept<-round(as.numeric(septjan_temp$temp.upr_sept), digits=3)
+septjan_temp$temp.lwr_jan<-round(as.numeric(septjan_temp$temp.lwr_jan), digits=3)
+septjan_temp$temp.upr_jan<-round(as.numeric(septjan_temp$temp.upr_jan), digits=3)
+
 #merge with location df
-locpm2.5_sept<-left_join(locs,septpm2.5)
+rownames(septpm2.5)<-NULL
+septpm2.5$Purple.Air.Name<- sub("^Purple\\.Air\\.Name", "", septpm2.5$Purple.Air.Name)
+rownames(janpm2.5)<-NULL
+janpm2.5$Purple.Air.Name<- sub("^Purple\\.Air\\.Name", "", janpm2.5$Purple.Air.Name)
+
+locpm2.5_sept<-left_jNULLlocpm2.5_sept<-left_join(locs,septpm2.5)
 locpm2.5hrs_sept<-left_join(locpm2.5_sept,est_by_sensor)
 locpm2.5hrs_septjan<-left_join(locpm2.5_sept,janpm2.5)
 
+#add temperature to this file
+septjan_temp$Purple.Air.Name<- sub("^Purple\\.Air\\.Name", "", septjan_temp$Purple.Air.Name)
 
-write.csv(locpm2.5hrs_septjan,"output/purpleairloc_wpmhrs.csv", row.names = FALSE)                                          
+locpm2.5hrs_septjan_temp<-left_join(locpm2.5hrs_septjan,septjan_temp)
+
+
+write.csv(locpm2.5hrs_septjan_temp,"output/purpleairloc_wpmhrs.csv", row.names = FALSE)                                          
 plot(locpm2.5hrs_septjan$pm2.5est_sept,locpm2.5hrs_septjan$pm2.5est_jan)
 cor(as.numeric(locpm2.5hrs_septjan$pm2.5est_sept),as.numeric(locpm2.5hrs_septjan$pm2.5est_jan), use="pairwise.complete.obs")
+#add other months, too
+
 #0.84 highly correlated
 
 #Do lat/long predict pm2.5?
