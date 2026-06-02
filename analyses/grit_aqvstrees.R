@@ -30,14 +30,16 @@ setwd("~/GitHub/grit/analyses")
 # read in tree canopy, air quality, and location data
 # csv file with lat long and other info about locations of GRIT sensors
 locpm2.5hrs<-read.csv("output/purpleairloc_wpmhrs.csv", header=TRUE)                                          
-
+###remove GRIT04- its missing from candat
+locpm2.5hrs<-locpm2.5hrs[-which(locpm2.5hrs$Purple.Air.Name=="GRIT04"),]
 # csv file with summary tree canopy data from lidar 
 candat<-read.csv("output/alltree_and_impervious_within_buffers.csv", header=TRUE)
 
-candat$total_area_m2<-pi*(candat$radius_m*candat$radius_m)
+candat$total_area_m2<-(pi*(candat$radius_m*candat$radius_m))
 
 candat$imperv_perc<-(candat$total_imp/candat$total_area_m2)*100
 #impervious numbers are very large- something is weird
+
 candat$canopy_perc<-(candat$total_canopy/candat$total_area_m2)*100
 
 # convert candat to wide format
@@ -58,7 +60,6 @@ canaq<-left_join(locpm2.5hrs,can_wide)
 #remove rows with NAs for pm.5
 canaq<-canaq[!is.na(canaq$pm2.5est_sept),]
 unique(canaq$n_trees_200m)
-unique(canaq$total_canopy_200m)
 
 #NAs in average height, number of conifers, etc should be 0s
 
@@ -265,6 +266,11 @@ ggsave("PurpleAir figs/pm25vscancov_sept_plot.pdf", p_cancov,
 
 
 #fit models to test and compare across lc variables
+#some of n_trees are NAs when they should be 0s- fix this
+canaq0$n_trees_800m[which(is.na(canaq0$n_trees_800))]
+
+canaq0 <- canaq0 %>%
+  mutate(across(33:56, ~replace_na(., 0)))
 
 #Average PM2.5 models vs tree height
 pm2.5_5m<-lm(pm2.5est_sept~mean_treeht_ft_5m, data=canaq0)
@@ -373,7 +379,7 @@ janpm2.5_400m_nnoncon<-lm(pm2.5est_sept~total_nonconifer_400m, data=canaq0)
 janpm2.5_800m_nnoncon<-lm(pm2.5est_sept~total_nonconifer_800m, data=canaq0)
 
 summary(janpm2.5_25m_nnoncon)#not sig
-summary(janpm2.5_50m_nnoncon)#weakly sig neg
+summary(janpm2.5_50m_nnoncon)#sig neg
 summary(janpm2.5_100m_nnoncon)# sig neg
 summary(janpm2.5_200m_nnoncon)#sig neg
 summary(janpm2.5_400m_nnoncon)#sig neg
@@ -526,14 +532,16 @@ summary(janpm2.5_800m_cancov)#weakly sig neg
   cols=c(rep("darkgreen", times=7))
   cols[which(ps>0.1)]<-"white"
   png(file="PurpleAir figs/cancovffects.png",width =3000, height =1500 ,res =300)
+  #pdf(file="PurpleAir figs/cancovffects.png",width =3000, height =1500 ,res =300)
   
-  x<-barplot(eff, col=cols, border="darkgreen", lwd=2,ylim=c(-0.1,0.1), 
+  x<-barplot(eff, col=cols, border="darkgreen", lwd=2,ylim=c(-0.15,0.15), 
              cex.lab=1.3,cex.axis=1.2,cex.names=1.2,
              ylab="Effect on Average PM 2.5",xlab="Distance (m)",names.arg=c("10","25","50","100","200","400","800"))
   
   error<-c(summary(pm2.5_10m_cancov)$coef[2,2],summary(pm2.5_25m_cancov)$coef[2,2],summary(pm2.5_50m_cancov)$coef[2,2],
            summary(pm2.5_100m_cancov)$coef[2,2],summary(pm2.5_200m_cancov)$coef[2,2],summary(pm2.5_400m_cancov)$coef[2,2],
            summary(pm2.5_800m_cancov)$coef[2,2])
+  
   
   for(i in 1:length(eff)){
     arrows(x[i],eff[i]+error[i],x[i],eff[i]-error[i], code=3, angle=90, length=0.05,  lwd=2)
@@ -542,12 +550,14 @@ summary(janpm2.5_800m_cancov)#weakly sig neg
   
   dev.off() 
   
-  png(file="PurpleAir figs/septjancancovffects.png",width =5000, height =2000 ,res =300)
+  png(file="PurpleAir figs/jancancovffects.png",width =3000, height =1500 ,res =300)
+  #png(file="PurpleAir figs/septjancancovffects.png",width =5000, height =2000 ,res =300)
   
-  par(mfrow = c(1, 2))
-  mtext("A) September")
+  #par(mfrow = c(1, 2))
+  #mtext("A) September")
   
-  mtext("B) January")
+  
+  #mtext("B) January")
   
   #plot Januaryeffect sizes
   eff<-c(coef(janpm2.5_10m_cancov)[2],coef(janpm2.5_25m_cancov)[2],coef(janpm2.5_50m_cancov)[2],
@@ -561,7 +571,7 @@ summary(janpm2.5_800m_cancov)#weakly sig neg
   cols=c(rep("darkgreen", times=7))
   cols[which(ps>0.1)]<-"white"
   
-  x<-barplot(eff, col=cols, border="darkgreen", lwd=2,ylim=c(-0.1,0.1), 
+  x<-barplot(eff, col=cols, border="darkgreen", lwd=2,ylim=c(-0.15,0.15), 
              cex.lab=1.3,cex.axis=1.2,cex.names=1.2,
              ylab="Effect on Average PM 2.5",xlab="Distance (m)",names.arg=c("10","25","50","100","200","400","800"))
   
@@ -575,4 +585,104 @@ summary(janpm2.5_800m_cancov)#weakly sig neg
   abline(h=0)
   
   dev.off() 
+
+  
+  #IS number of trees or canopy cover a better predictor
+  AIC(janpm2.5_25m_tottrees,janpm2.5_25m_ncon,janpm2.5_25m_nnoncon, janpm2.5_25m_cancov)    #ncons is best predictor for january#
+
+  AIC(janpm2.5_50m_tottrees,janpm2.5_50m_ncon,janpm2.5_50m_nnoncon, janpm2.5_50m_cancov)
+  
+  
+  AIC(pm2.5_25m_tottrees,pm2.5_25m_ncon,pm2.5_25m_nnoncon, pm2.5_25m_cancov)
+  AIC(pm2.5_50m_tottrees,pm2.5_50m_ncon,pm2.5_50m_nnoncon, pm2.5_50m_cancov)
+  AIC(pm2.5_100m_tottrees,pm2.5_100m_ncon,pm2.5_100m_nnoncon, pm2.5_100m_cancov)
+  
+  #n of cons is best predictor for september
+  cbind(coef(pm2.5_25m_tottrees), coef(pm2.5_25m_ncon),coef(pm2.5_25m_nnoncon))
+  cbind(coef(janpm2.5_25m_tottrees), coef(janpm2.5_25m_ncon),coef(janpm2.5_25m_nnoncon))
+  cbind(coef(pm2.5_50m_tottrees), coef(pm2.5_50m_ncon),coef(pm2.5_50m_nnoncon))
+  cbind(coef(janpm2.5_50m_tottrees), coef(janpm2.5_50m_ncon),coef(janpm2.5_50m_nnoncon))
+  
+  summary(pm2.5_25m_tottrees)
+  summary(pm2.5_25m_ncon)
+  summary(pm2.5_25m_nnoncon)
+  
+  summary(janpm2.5_25m_tottrees)
+  summary(janpm2.5_25m_ncon)
+  summary(janpm2.5_25m_nnoncon)
+  
+  summary(janpm2.5_50m_tottrees)
+  summary(janpm2.5_50m_ncon)
+  summary(janpm2.5_50m_nnoncon)
+  
+  #look at nconifers 
+  
+  #plot
+  
+  eff<-c(coef(pm2.5_10m_ncon)[2],coef(pm2.5_25m_ncon)[2],coef(pm2.5_50m_ncon)[2],
+         coef(pm2.5_100m_ncon)[2],coef(pm2.5_200m_ncon)[2],coef(pm2.5_400m_ncon)[2],
+         coef(pm2.5_800m_ncon)[2])
+  #To make plot effect sizes
+  ps<-c(Anova(pm2.5_10m_ncon)[1,4],Anova(pm2.5_25m_ncon)[1,4],Anova(pm2.5_50m_ncon)[1,4],
+        Anova(pm2.5_100m_ncon)[1,4],Anova(pm2.5_200m_ncon)[1,4],Anova(pm2.5_400m_ncon)[1,4],
+        Anova(pm2.5_800m_ncon)[1,4])
+  
+  cols=c(rep("darkgreen", times=7))
+  cols[which(ps>0.1)]<-"white"
+  png(file="PurpleAir figs/coniferffects.png",width =3000, height =1500 ,res =300)
+  #pdf(file="PurpleAir figs/cancovffects.png",width =3000, height =1500 ,res =300)
+  
+  x<-barplot(eff, col=cols, border="darkgreen", lwd=2,ylim=c(-0.15,0.15), 
+             cex.lab=1.3,cex.axis=1.2,cex.names=1.2,
+             ylab="Effect on Average PM 2.5",xlab="Distance (m)",names.arg=c("10","25","50","100","200","400","800"))
+  
+  error<-c(summary(pm2.5_10m_ncon)$coef[2,2],summary(pm2.5_25m_ncon)$coef[2,2],summary(pm2.5_50m_ncon)$coef[2,2],
+           summary(pm2.5_100m_ncon)$coef[2,2],summary(pm2.5_200m_ncon)$coef[2,2],summary(pm2.5_400m_ncon)$coef[2,2],
+           summary(pm2.5_800m_ncon)$coef[2,2])
+  
+  
+  for(i in 1:length(eff)){
+    arrows(x[i],eff[i]+error[i],x[i],eff[i]-error[i], code=3, angle=90, length=0.05,  lwd=2)
+  }
+  abline(h=0)
+  
+  dev.off() 
+  
+  png(file="PurpleAir figs/jancancovffects.png",width =3000, height =1500 ,res =300)
+  #png(file="PurpleAir figs/septjancancovffects.png",width =5000, height =2000 ,res =300)
+  
+  #par(mfrow = c(1, 2))
+  #mtext("A) September")
+  
+  
+  #mtext("B) January")
+  
+  #plot Januaryeffect sizes
+  eff<-c(coef(janpm2.5_10m_cancov)[2],coef(janpm2.5_25m_cancov)[2],coef(janpm2.5_50m_cancov)[2],
+         coef(janpm2.5_100m_cancov)[2],coef(janpm2.5_200m_cancov)[2],coef(janpm2.5_400m_cancov)[2],
+         coef(janpm2.5_800m_cancov)[2])
+  
+  ps<-c(Anova(janpm2.5_10m_cancov)[1,4],Anova(janpm2.5_25m_cancov)[1,4],Anova(janpm2.5_50m_cancov)[1,4],
+        Anova(janpm2.5_100m_cancov)[1,4],Anova(janpm2.5_200m_cancov)[1,4],Anova(janpm2.5_400m_cancov)[1,4],
+        Anova(janpm2.5_800m_cancov)[1,4])
+  
+  cols=c(rep("darkgreen", times=7))
+  cols[which(ps>0.1)]<-"white"
+  
+  x<-barplot(eff, col=cols, border="darkgreen", lwd=2,ylim=c(-0.15,0.15), 
+             cex.lab=1.3,cex.axis=1.2,cex.names=1.2,
+             ylab="Effect on Average PM 2.5",xlab="Distance (m)",names.arg=c("10","25","50","100","200","400","800"))
+  
+  error<-c(summary(janpm2.5_10m_cancov)$coef[2,2],summary(janpm2.5_25m_cancov)$coef[2,2],summary(janpm2.5_50m_cancov)$coef[2,2],
+           summary(janpm2.5_100m_cancov)$coef[2,2],summary(janpm2.5_200m_cancov)$coef[2,2],summary(janpm2.5_400m_cancov)$coef[2,2],
+           summary(janpm2.5_800m_cancov)$coef[2,2])
+  
+  for(i in 1:length(eff)){
+    arrows(x[i],eff[i]+error[i],x[i],eff[i]-error[i], code=3, angle=90, length=0.05,  lwd=2)
+  }
+  abline(h=0)
+  
+  dev.off() 
+  
+  
   
