@@ -6,6 +6,7 @@ install.packages("patchwork")
 install.packages("gridExtra")
 install.packages("Metrics")
 install.packages("multcomp")
+install.packages("car")
 
 # load libraries
 library(tidyverse)
@@ -22,6 +23,7 @@ library(dplyr)
 library(readr)
 library(Metrics)
 library(multcomp)
+library(car)
 setwd("/Users/samiebaclig/Documents/GitHub/grit") 
 #for ailene
 #PA_locs<-read.csv("analyses/output/grit_aq_lc_jul_aug_updated.csv")
@@ -32,10 +34,10 @@ data <- data %>%  mutate(shrubcancov.200m = shrubcov.200m + cancov.200m)
 
 ###June 2026 Data USE###
 all_tree <- read.csv("~/Documents/GitHub/grit/analyses/output/alltree_and_impervious_within_buffers.csv")
-pa_locs <- read.csv("~/Documents/GitHub/grit/analyses/output/purpleair_locs_20242025.csv")
+all_tree <- all_tree %>% rename(Purple.Air.Name = ID)
+pa_locs <- read.csv("~/Documents/GitHub/grit/analyses/output/purpleairloc_wpmhrs.csv")
 pa_locs<- data.frame(pa_locs) 
 pa_locs<- na.omit(pa_locs)
-pa_pm2.5<- read.csv("~/Documents/GitHub/grit/analyses/output/purpleair_all.csv")
 ###separated DF
 #df <-
   #list.files(path = "~/Documents/GitHub/grit/data/PurpleAir/PurpleAir Data Download July-August", pattern = "*.csv", full.names = TRUE) %>% 
@@ -357,7 +359,7 @@ census_api_key("480d1711be5ee649f10d69553e6b42950bcf8ac3", install = TRUE)
 
 sensors_sf <- pa_locs %>%
   st_as_sf(coords = c("Long", "Lat"), crs = 4326)
-community_index <- read.csv("~/Documents/GitHub/grit/data/pierce county community index/communityindex_census block_2026.csv")
+community_index <- read.csv("~/Documents/GitHub/grit/data/pierce county community index/communityindex_censusblock_2026/communityindex_census block_2026.csv")
 community_index<- community_index %>% rename(GEOID = geoid)
 cbg <-block_groups(state = "WA", class = "sf", year = 2024)
 sensors_sf <- st_transform(sensors_sf, st_crs(cbg))
@@ -367,11 +369,19 @@ joined <- st_transform(joined, crs = 4326)
 joined <- joined %>%
   mutate(GEOID = as.character(GEOID))
 community_index_cbg <-merge(joined, community_index, by = "GEOID", all.x = TRUE) 
-community_index_cbg <- commmunity_index_cbg %>% select(Purple.Air.Name,SensorIndex,TRACTCE,
-                                                        BLKGRPCE,indicator_title, z_score, score, geometry, Number.of.Trees)
-community_index_cbg<- data.frame(community_index_cbg)
-sensor_CI_score <- community_index_cbg %>% filter(indicator_title == "Community Impact Index") %>% select(-z_score) %>% rename(ID=Purple.Air.Name)
+community_index_cbg <- community_index_cbg %>% select(Purple.Air.Name,TRACTCE,
+                                                        BLKGRPCE,indicator_title, z_score, 
+                                                       score, geometry)
+community_index_cbg <- data.frame(community_index_cbg)
+sensor_CI_score <- community_index_cbg %>% filter(indicator_title == "Community Impact Index") %>% select(-z_score) 
 write.csv(sensor_CI_score,"~/Documents/GitHub/grit/analyses/output/pa_locs_Community_Impact_index.csv")
+pa_locs_CI <- left_join(sensor_CI_score,pa_locs, by ="Purple.Air.Name")
+pa_locs_CI_numtrees <- left_join(all_tree, pa_locs_CI, by = "Purple.Air.Name")
+pa_locs_CI_numtrees$mean_treeht_ft[is.na(pa_locs_CI_numtrees$mean_treeht_ft)] <-0
+pa_locs_CI_numtrees<- pa_locs_CI_numtrees %>% mutate(total_area_m2 = (pi*radius_m^2),
+                               canopy_perc = (total_canopy/total_area_m2)*100)
+write.csv(pa_locs_CI_numtrees,"~/Documents/GitHub/grit/analyses/output/pa_locs_CI_numtrees.csv") #combines purpleairloc_wpmhrs.csv,alltree_and_impervious_within_buffers.csv, and Community Index (CI) scores
+
 ####
 
 
@@ -505,8 +515,7 @@ ggplot(aes(x=level, y = (total_canopy)))+
   geom_boxplot(na.rm=TRUE)+
   labs(x= "Community Impact Index Z- Score", y =" Total Canopy within 10m")
 ggsave("communityimpactindex10.png",width = 8, height = 5,dpi = 300)
-#plotdata <- data %>% filter(!is.na(EquityInde)) %>% group_by(EquityInde)%>% summarise(mean_above9hr = mean(above9_hour),
-                                                                                      median_above9 = median(above9_hour))
+
 x <- ggplot(data = plotdata,
             aes(x=EquityInde, y = median_above9))+
   geom_bar(stat="identity")
@@ -524,5 +533,154 @@ above9equity<- data %>%   filter(!is.na(EquityInde)) %>%
   ggtitle("Hours Above Threshold vs Equity Index")
 ggsave("above9equity.png", width = 8, height = 5, dpi = 300)
 scale_fil
+
+# June 2026 Analyses ------------------------------------------------------
+## tree type vs pm2.5est, group by radius? 
+pa_summary<- pa_locs_CI_numtrees %>% mutate (conifer_pct =(total_conifers / n_trees)*100)
+pa_summary$conifer_pct[is.na(pa_summary$conifer_pct)] <-0
+
+pa_summary_5m <- pa_summary %>% filter(radius_m == "5")
+pa_summary_10m <- pa_summary %>% filter(radius_m == "10")
+pa_summary_25m <- pa_summary %>% filter(radius_m == "25")
+pa_summary_50m <- pa_summary %>% filter(radius_m == "50")
+pa_summary_100m <- pa_summary %>% filter(radius_m == "100")
+pa_summary_200m <- pa_summary %>% filter(radius_m == "200")
+pa_summary_400m <- pa_summary %>% filter(radius_m == "400")
+pa_summary_800m <- pa_summary %>% filter(radius_m == "800")
+
+
+pm2.5sept_totalconifers <- lm(pm2.5est_sept~ total_conifers, data = pa_summary)
+pm2.5sept_totalnonconifer <- lm(pm2.5est_sept~ total_nonconifer, data = pa_summary) 
+pm2.5jan_totalconifers <- lm(pm2.5est_jan~ total_conifers, data = pa_summary)
+pm2.5jan_totalnonconifer <- lm(pm2.5est_jan~ total_nonconifer, data = pa_summary) 
+pm2.5sept_conifer_pct <- lm(pm2.5est_sept~ conifer_pct, data = pa_summary) 
+pm2.5jan_conifer_pct <- lm(pm2.5est_jan ~ conifer_pct, data = pa_summary) 
+summary(pm2.5sept_totalconifers) #nosig
+summary(pm2.5sept_totalnonconifer) #nosig
+summary(pm2.5jan_totalconifers) #nosig
+summary(pm2.5jan_totalnonconifer)#nosig
+summary(pm2.5sept_conifer_pct) #nosig
+summary(pm2.5jan_conifer_pct) #nosig
+
+###5m####
+pm2.5sept_totalconifers5m <- lm(pm2.5est_sept~ total_conifers, data = pa_summary_5m)
+pm2.5jan_totalconifers5m <- lm(pm2.5est_jan ~ total_conifers, data = pa_summary_5m)
+pm2.5sept_conifer_pct5m <- lm(pm2.5est_sept~ conifer_pct, data = pa_summary_5m) 
+pm2.5jan_conifer_pct5m <- lm(pm2.5est_jan ~ conifer_pct, data = pa_summary_5m) 
+
+
+###10m###
+pm2.5sept_totalconifers10m <- lm(pm2.5est_sept~ total_conifers, data = pa_summary_10m)
+pm2.5sept_totalnonconifer10m <- lm(pm2.5est_sept~ total_nonconifer, data = pa_summary_10m) 
+pm2.5jan_totalconifers10m <- lm(pm2.5est_jan ~ total_conifers, data = pa_summary_10m)
+pm2.5jan_totalnonconifer10m <- lm(pm2.5est_jan ~ total_nonconifer, data = pa_summary_10m) 
+pm2.5sept_conifer_pct10m <- lm(pm2.5est_sept~ conifer_pct, data = pa_summary_10m) 
+pm2.5jan_conifer_pct10m <- lm(pm2.5est_jan ~ conifer_pct, data = pa_summary_10m) 
+summary(pm2.5sept_totalconifers10m) #nosig
+summary(pm2.5sept_totalnonconifer10m) #nosig
+summary(pm2.5jan_totalconifers10m) #nosig
+summary(pm2.5sept_conifer_pct10m) #nosig
+summary(pm2.5jan_conifer_pct10m) #nosig
+
+###25m###
+pm2.5sept_totalconifers25m <- lm(pm2.5est_sept~ total_conifers, data = pa_summary_25m)
+pm2.5sept_totalnonconifer25m <- lm(pm2.5est_sept~ total_nonconifer, data = pa_summary_25m) 
+pm2.5jan_totalconifers25m <- lm(pm2.5est_jan ~ total_conifers, data = pa_summary_25m)
+pm2.5jan_totalnonconifer25m <- lm(pm2.5est_jan ~ total_nonconifer, data = pa_summary_25m) 
+pm2.5sept_conifer_pct25m <- lm(pm2.5est_sept~ conifer_pct, data = pa_summary_25m) 
+pm2.5jan_conifer_pct25m <- lm(pm2.5est_jan ~ conifer_pct, data = pa_summary_25m) 
+summary(pm2.5sept_totalconifers25m) #slightly insig
+summary(pm2.5sept_totalnonconifer25m) #notsig
+summary(pm2.5jan_totalconifers25m) #notsig
+summary(pm2.5sept_conifer_pct25m) #notsig
+summary(pm2.5jan_conifer_pct25m) #notsig
+
+###50m###
+pm2.5sept_totalconifers50m <- lm(pm2.5est_sept~ total_conifers, data = pa_summary_50m)
+pm2.5sept_totalnonconifer50m <- lm(pm2.5est_sept~ total_nonconifer, data = pa_summary_50m) 
+pm2.5jan_totalconifers50m <- lm(pm2.5est_jan ~ total_conifers, data = pa_summary_50m)
+pm2.5jan_totalnonconifer50m <- lm(pm2.5est_jan ~ total_nonconifer, data = pa_summary_50m) 
+pm2.5sept_conifer_pct50m <- lm(pm2.5est_sept~ conifer_pct, data = pa_summary_50m) 
+pm2.5jan_conifer_pct50m <- lm(pm2.5est_jan ~ conifer_pct, data = pa_summary_50m) 
+summary(pm2.5sept_totalconifers50m) #notsig
+summary(pm2.5sept_totalnonconifer50m) #slightly insig
+summary(pm2.5jan_totalconifers50m)#notsig
+summary(pm2.5sept_conifer_pct50m) #notsig
+summary(pm2.5jan_conifer_pct50m) #notsig
+
+###100m###
+pm2.5sept_totalconifers100m <- lm(pm2.5est_sept~ total_conifers, data = pa_summary_100m)
+pm2.5sept_totalnonconifer100m <- lm(pm2.5est_sept~ total_nonconifer, data = pa_summary_100m) 
+pm2.5jan_totalconifers100m <- lm(pm2.5est_jan ~ total_conifers, data = pa_summary_100m)
+pm2.5jan_totalnonconifer100m <- lm(pm2.5est_jan ~ total_nonconifer, data = pa_summary_100m) 
+pm2.5sept_conifer_pct100m <- lm(pm2.5est_sept~ conifer_pct, data = pa_summary_100m) 
+pm2.5jan_conifer_pct100m <- lm(pm2.5est_jan ~ conifer_pct, data = pa_summary_100m) 
+summary(pm2.5sept_totalconifers100m) #notsig
+summary(pm2.5sept_totalnonconifer100m) #significant
+summary(pm2.5jan_totalconifers100m)#notsig
+summary(pm2.5sept_conifer_pct100m) #notsig
+summary(pm2.5jan_conifer_pct100m) #notsig
+
+###200m###
+pm2.5sept_totalconifers200m <- lm(pm2.5est_sept~ total_conifers, data = pa_summary_200m)
+pm2.5sept_totalnonconifer200m <- lm(pm2.5est_sept~ total_nonconifer, data = pa_summary_200m) 
+pm2.5jan_totalconifers200m <- lm(pm2.5est_jan ~ total_conifers, data = pa_summary_200m)
+pm2.5jan_totalnonconifer200m <- lm(pm2.5est_jan ~ total_nonconifer, data = pa_summary_200m) 
+pm2.5sept_conifer_pct200m <- lm(pm2.5est_sept~ conifer_pct, data = pa_summary_200m) 
+pm2.5jan_conifer_pct200m <- lm(pm2.5est_jan ~ conifer_pct, data = pa_summary_200m) 
+summary(pm2.5sept_totalconifers200m) #notsig
+summary(pm2.5sept_totalnonconifer200m) #significant
+summary(pm2.5jan_totalconifers200m)#notsig
+summary(pm2.5sept_conifer_pct200m) #notsig
+summary(pm2.5jan_conifer_pct200m) #notsig
+
+###400m###
+pm2.5sept_totalconifers400m <- lm(pm2.5est_sept~ total_conifers, data = pa_summary_400m)
+pm2.5sept_totalnonconifer400m <- lm(pm2.5est_sept~ total_nonconifer, data = pa_summary_400m) 
+pm2.5jan_totalconifers400m <- lm(pm2.5est_jan ~ total_conifers, data = pa_summary_400m)
+pm2.5jan_totalnonconifer400m <- lm(pm2.5est_jan ~ total_nonconifer, data = pa_summary_400m) 
+pm2.5sept_conifer_pct400m <- lm(pm2.5est_sept~ conifer_pct, data = pa_summary_400m) 
+pm2.5jan_conifer_pct400m <- lm(pm2.5est_jan ~ conifer_pct, data = pa_summary_400m) 
+summary(pm2.5sept_totalconifers400m) #significant
+summary(pm2.5sept_totalnonconifer400m) #significant
+summary(pm2.5jan_totalconifers400m)#p=0.05597 slightly nosig
+summary(pm2.5sept_conifer_pct400m) #notsig
+summary(pm2.5jan_conifer_pct400m) #notsig
+
+###800m###
+pm2.5sept_totalconifers800m <- lm(pm2.5est_sept~ total_conifers, data = pa_summary_800m)
+pm2.5sept_totalnonconifer800m <- lm(pm2.5est_sept~ total_nonconifer, data = pa_summary_800m) 
+pm2.5jan_totalconifers800m <- lm(pm2.5est_jan ~ total_conifers, data = pa_summary_800m)
+pm2.5jan_totalnonconifer800m <- lm(pm2.5est_jan ~ total_nonconifer, data = pa_summary_800m) 
+pm2.5sept_conifer_pct800m <- lm(pm2.5est_sept~ conifer_pct, data = pa_summary_800m) 
+pm2.5jan_conifer_pct800m <- lm(pm2.5est_jan ~ conifer_pct, data = pa_summary_800m) 
+summary(pm2.5sept_totalconifers800m) #notisg
+summary(pm2.5sept_totalnonconifer800m) #significant
+summary(pm2.5jan_totalconifers800m)#notsig
+summary(pm2.5sept_conifer_pct800m) #notsig
+summary(pm2.5jan_conifer_pct800m) #notsig
+
+
+
+###Multiple Linear Regressions###
+mlm_1 <- lm(pm2.5est_sept ~ total_conifers + score + total_imp, data = pa_summary)
+summary(mlm_1) #significant 
+cor(pa_summary$total_imp, pa_summary$score) ##colinn. low <0.80
+car::vif(lm(pm2.5est_sept ~ total_conifers + score + total_imp, data = pa_summary)) ##multicollin. ~1
+mlm_2 <- lm(pm2.5est_jan ~ total_conifers + score + total_imp, data = pa_summary)
+summary(mlm_2) #significant
+car::vif(lm(pm2.5est_jan ~ total_conifers + score + total_imp, data = pa_summary)) ##multicollin. ~1
+mlm_3 <- lm(pm2.5est_sept ~ canopy_perc + score + , data = pa_summary)
+summary(mlm_3)
+
+
+###graphs###
+ggplot(data=pa_summary, aes(score, pm2.5est_sept))+
+  geom_point()+
+  geom_smooth(method ="lm")
+x <- ggplot(pa_summary, aes(x = cut(canopy_perc, breaks = 4), y = pm2.5est_sept)) +
+  geom_boxplot() +
+  labs(x = "Canopy Percentile Quartiles", y = "September PM2.5")+
+  scale_x_discrete(labels = c("Low", "Low-Med", "Med-High", "High"))
 
 
