@@ -42,9 +42,11 @@ locs<-rbind(gritlocs_subs,tpchsensors_to_use)
 #remove GRIT 41, since this one is located outside tacoma
 #save comnbined grit/tpch location purple air location file
 locs<-locs[!locs$Purple.Air.Name =="GRIT41",]
+#for some reason, sensor index 173501 ("Baker Middle School") has avg_pm but does not have avg_rh, avg_temp, or pm2.5_corrected
+#temporaily remove
+locs<-locs[!locs$Purple.Air.Name =="Baker Middle School",]
 
 write.csv(locs,"output/grit_tpch_purpleair_locs_20242025.csv")
-
 ##time series graphs
 pa$datetime <- make_datetime(
   year = pa$year,
@@ -55,20 +57,30 @@ pa$date <- as_date(pa$datetime)
 pa<-pa[!pa$Name=="GRIT41",]
 
 #plot to check
+
 p <- ggplot(pa, aes(datetime, pm2.5_corrected))+
   geom_line(alpha = 0.5, linewidth = 0.3)+
-  geom_hline(yintercept = 25, linetype = 2)+
+  geom_hline(yintercept = 25, linetype = 2, col="gold", linewidth = 1)+
+  geom_hline(yintercept = 9, linetype = 2, col="darkgreen", linewidth = 1)+
   scale_x_datetime(date_breaks = "1 month", 
                    date_minor_breaks = "1 week",
                    date_labels = "%B",
-                   limits =  as.POSIXct(c("2025-08-01", "2026-02-26")))+
+                   limits =  as.POSIXct(c("2025-09-01", "2026-03-01")))+
   theme_classic()+
+  
+  #theme(
+  #  axis.text = element_text(size = 18),      # tick labels (x & y)
+  #  axis.title = element_text(size = 20),      # axis titles
+  #  plot.title = element_text(size = 24)  # adjust size as needed
+  #  
+  #)+
   labs(y ="PM2.5 (µg/m³)", 
        x = "Date", 
-       title = "Average PM2.5 Concentration August 2025 - February 2026")
+       title = "Average PM2.5 Concentration, 1 Sept 2025 - 1 Mar 2026")
 
 
-ggsave("PurpleAir figs/avg_pm2.5_allsensors.png", width = 20, height = 9, dpi = 300)
+ggsave("PurpleAir figs/avg_pm2.5_allsensors.png", width = 6, height = 4, units = "in")
+
 
 x <- ggplot (pa, aes(datetime,pm2.5_corrected))+
   geom_line()+
@@ -90,28 +102,79 @@ palocs$hrsabove35.5<-0#EPA standard = 35.5
 palocs$hrsabove35.5[palocs$pm2.5_corrected >35.5]<-1
 palocs$hrsabove25<-0#Puget Sound Clean Air health goal=25
 palocs$hrsabove25[palocs$pm2.5_corrected>25]<-1
+palocs<-palocs[-which(is.na(palocs$Purple.Air.Name)),]
 date.hrsabove25<-aggregate(palocs$hrsabove25, by=list(palocs$date,palocs$Purple.Air.Name), sum, na.rm=TRUE)
 date.hrsabove35.5<-aggregate(palocs$hrsabove35.5, by=list(palocs$date,palocs$Purple.Air.Name), sum, na.rm=TRUE)
 colnames(date.hrsabove25)<-c("datetime","sensor","hrsabove25")
 
 date.hrsabove25$date <- as.POSIXct(date.hrsabove25$datetime, format = "%Y-%m-%d")
 date.hrsabove25<-date.hrsabove25[order(date.hrsabove25$date),]
+#remove dates before Sept 1,2025 and after MArch 1, 2026
+date.hrsabove25<-date.hrsabove25[which(date.hrsabove25$date>"2025-08-31"),]
+date.hrsabove25<-date.hrsabove25[which(date.hrsabove25$date<"2026-03-01"),]
+
+date.hrsabove25$month<-as.factor(substr(date.hrsabove25$date,6,7))
+
+monthsumtab<-aggregate(date.hrsabove25$hrsabove25, by=list(date.hrsabove25$month), sum, na.rm=TRUE)
+colnames(monthsumtab)<-c("month","hrsabove24")
 
 h25 <- ggplot(date.hrsabove25, aes(date, hrsabove25))+
   geom_line(alpha = 0.5, linewidth = 0.3)+
   scale_x_datetime(date_breaks = "1 month", 
                    date_minor_breaks = "1 week",
                    date_labels = "%B",
-                   limits =  as.POSIXct(c("2025-08-01", "2026-02-26")))+
+                   limits =  as.POSIXct(c("2025-09-01", "2026-03-01")))+
   theme_classic()+
+  
   labs(y ="Hours with PM2.5 > 25 µg/m³", 
        x = "Date", 
-       title = "Hours with PM2.5 > 25 µg/m³  August 2025- February 2026")
+       title = "Hours with PM2.5 > 25 µg/m³, 1 Sept 2025 - 1 Mar 2026")
 
 ggsave("PurpleAir figs/hoursabove25_allsensors.png", width = 6, height = 4, units = "in")
 
 #what do average daily pm2.5 values suggest?
-dailyavg<-aggregate(palocs$pm2.5_corrected, by=list(palocs$date,palocs$Purple.Air.Name), sum, na.rm=TRUE)
+
+dailyavg_allsens<-aggregate(palocs$pm2.5_corrected, by=list(palocs$date), mean, na.rm=TRUE)
+colnames(dailyavg_allsens)<-c("date","pm2.5_avg_day")
+dailyavg_allsens<-dailyavg_allsens[which(dailyavg_allsens$date>"2025-08-31"),]
+dailyavg_allsens<-date.hrsabove25[which(dailyavg_allsens$date<"2026-03-01"),]
+
+dailyavg_allsens$date<-as.POSIXct(dailyavg_allsens$date, format = "%Y-%m-%d")
+
+# Example: df has columns datetime and pm25
+# Convert datetime to Date and calculate daily mean
+daily_avg <- palocs %>%
+  mutate(date = as.Date(datetime)) %>%
+  group_by(date) %>%
+  summarise(avg_pm25 = mean(pm2.5_corrected, na.rm = TRUE)) %>%
+  ungroup()
+daily_avg<-daily_avg[which(daily_avg$date>"2025-08-31"),]
+daily_avg<-daily_avg[which(daily_avg$date<"2026-03-01"),]
+
+# Plot
+ggplot(daily_avg, aes(x = date, y = avg_pm25)) +
+  geom_line(color = "black", lwd=.8) +
+  geom_hline(yintercept = 25, linetype = 2, col="gold", linewidth = 1)+
+  geom_hline(yintercept = 9, linetype = 2, col="darkgreen", linewidth = 1)+
+  scale_x_datetime(date_breaks = "1 month", 
+                   date_minor_breaks = "1 week",
+                   date_labels = "%B",
+                   limits =  as.POSIXct(c("2025-09-01", "2026-03-01")))+
+  
+  labs(
+    title = "Daily Average PM2.5",
+    x = "Date",
+    y = "PM2.5 (µg/m³)"
+  ) +
+  theme_minimal()
+#+ geom_smooth(se = FALSE, color = "red")
+ggsave("PurpleAir figs/dailyavg_allsensors.png", width = 6, height = 4, units = "in")
+
+
+#make a plot with the sensors with worst data and no trees within 25m
+# then make a plot with the sensor with lots of trees
+#what do average daily pm2.5 values suggest?
+dailyavg<-aggregate(palocs$pm2.5_corrected, by=list(palocs$date,palocs$Purple.Air.Name), mean, na.rm=TRUE)
 colnames(dailyavg)<-c("date","sensor","pm2.5_avg_day")
 dailyavg$date<-as.POSIXct(dailyavg$date, format = "%Y-%m-%d")
 date.hrsabove25$sensor<-as.character(date.hrsabove25$sensor)
@@ -268,7 +331,8 @@ sept_temp$Purple.Air.Name[sept_temp$Purple.Air.Name=="N Taco"]<-"N Tacoma N 9th 
 sept_temp$Purple.Air.Name[sept_temp$Purple.Air.Name=="Seabur"]<-"Seabury School"
 sept_temp$Purple.Air.Name[sept_temp$Purple.Air.Name=="Tacoma"]<-"Tacoma Center YMCA"
 
-jan_tempci<-confint(jan_temp_mmod)
+jan_tempci<-confint(jan_temp_mmod).
+
 jan_tempest<-fixef(jan_temp_mmod)
 jan_temp<-as.data.frame(cbind(names(jan_tempest),jan_tempest,jan_tempci[3:35,]))
 colnames(jan_temp)<-c("Purple.Air.Name", "tempest_jan","temp.lwr_jan","temp.upr_jan")
@@ -301,6 +365,7 @@ locpm2.5hrs_septjan_temp<-left_join(locpm2.5hrs_septjan,septjan_temp)
 
 
 write.csv(locpm2.5hrs_septjan_temp,"output/purpleairloc_wpmhrs.csv", row.names = FALSE)                                          
+
 plot(locpm2.5hrs_septjan$pm2.5est_sept,locpm2.5hrs_septjan$pm2.5est_jan)
 cor(as.numeric(locpm2.5hrs_septjan$pm2.5est_sept),as.numeric(locpm2.5hrs_septjan$pm2.5est_jan), use="pairwise.complete.obs")
 #add other months, too
@@ -318,7 +383,6 @@ summary(janlatlongmmod)
 Anova(janlatlongmmod)
 sort(fixef(janlatlongmmod), decreasing=TRUE)
 
-
 # Save with custom dimensions
 ggsave("PurpleAir figs/pm2.5boxplot_bysensor_sept.png", plot = bp_sept, width = 8, height = 6, units = "in")
 ggsave("PurpleAir figs/pm2.5boxplot_bysensor_oct.png", plot = bp_oct, width = 8, height = 6, units = "in")
@@ -327,6 +391,10 @@ ggsave("PurpleAir figs/pm2.5boxplot_bysensor_oct.png", plot = bp_oct, width = 8,
 #On bad air quality days, where was the the worst  and best air quality? (highest average and greatest # of hours above threshold)?
 
 #average daily air quality categories across all sensors
+#remove dates before Sept 1,2025 and after MArch 1, 2026
+palocs<-palocs[which(palocs$date>"2025-08-31"),]
+palocs<-palocs[which(palocs$date<"2026-03-01"),]
+
 pm2.5_dailyavg_bysens<-aggregate(palocs$pm2.5_corrected, by=list(palocs$date,palocs$Purple.Air.Name), mean, na.rm=TRUE)
 colnames(pm2.5_dailyavg_bysens)<-c("date","sensor","avg_pm2.5_corrected")
 pm2.5_dailyavg_bysens$good<-0
@@ -340,18 +408,62 @@ pm2.5_dailyavg_bysens$unhealthy[pm2.5_dailyavg_bysens$avg_pm2.5_corrected>55.5 &
 pm2.5_dailyavg_bysens$veryunhealthy<-0
 pm2.5_dailyavg_bysens$veryunhealthy[pm2.5_dailyavg_bysens$avg_pm2.5_corrected>125.5]<-1
 
+dim(pm2.5_dailyavg_bysens)
+
 sum(pm2.5_dailyavg_bysens$good)
 sum(pm2.5_dailyavg_bysens$mod)
 sum(pm2.5_dailyavg_bysens$unhealthysens)
 sum(pm2.5_dailyavg_bysens$unhealthy)
 sum(pm2.5_dailyavg_bysens$veryunhealthy)
 
-length(unique(pm2.5_dailyavg_bysens$date[pm2.5_dailyavg_bysens$mod==1]))#32 days with moderate air quality average over 24 hours furing sept-oct, 87 during sept-feb
-length(unique(pm2.5_dailyavg_bysens$sensor[pm2.5_dailyavg_bysens$mod==1]))#30 sensors with moderate air quality average over 24 hours
+
+length(unique(pm2.5_dailyavg_bysens$date[pm2.5_dailyavg_bysens$unhealthysens==1]))#1 day with unhealthysens air quality average over 24 hours during sept-feb
+unhsensdates<-unique(unique(pm2.5_dailyavg_bysens$date[pm2.5_dailyavg_bysens$unhealthysens==1]))
+unique(pm2.5_dailyavg_bysens$sensor[pm2.5_dailyavg_bysens$unhealthysens==1])#1 sensor with unhealthysens "GRIT25"
+
+length(unique(pm2.5_dailyavg_bysens$date[pm2.5_dailyavg_bysens$unhealthy==1]))#1 day with unhealthy air quality average over 24 hours during sept-feb
+unhdates<-unique(pm2.5_dailyavg_bysens$date[pm2.5_dailyavg_bysens$unhealthy==1])
+unique(pm2.5_dailyavg_bysens$sensor[pm2.5_dailyavg_bysens$unhealthy==1])#1 sensor with unhealthysens "GRIT03"
+
+length(unique(pm2.5_dailyavg_bysens$date[pm2.5_dailyavg_bysens$veryunhealthy==1]))#0 day with very unhealthy air quality average over 24 hours during sept-feb
+
+length(unique(pm2.5_dailyavg_bysens$sensor[pm2.5_dailyavg_bysens$mod==1]))#35 sensors with moderate air quality average over 24 hours
+
+length(unique(pm2.5_dailyavg_bysens$date[pm2.5_dailyavg_bysens$mod==1]))#78 days with moderate air quality average over 24 hours during sept-feb
+moddates<-unique(pm2.5_dailyavg_bysens$date[pm2.5_dailyavg_bysens$mod==1])
+mod_dates <- setdiff(moddates,unhdates)
+mod_dates <- setdiff(mod_dates,unhsensdates)
+length(mod_dates)
+unique(pm2.5_dailyavg_bysens$sensor[pm2.5_dailyavg_bysens$mod==1])#34 sensors
+
+length(unique(pm2.5_dailyavg_bysens$date[pm2.5_dailyavg_bysens$good==1]))#167 days with good air quality average over 24 hours during sept-feb
+gooddates<-unique(pm2.5_dailyavg_bysens$date[pm2.5_dailyavg_bysens$good==1])
+good_dates <- setdiff(gooddates, moddates)
+length(good_dates)#103 days with good air quality at ALL sensorsaverage over 24 hours during sept-feb
+unique(pm2.5_dailyavg_bysens$sensor[pm2.5_dailyavg_bysens$good==1])#34 sensors
 
 unique(pm2.5_dailyavg_bysens$sensor)
 
+#Make pie chart of days
+# Sample data
+values <- c(103,76,1,1,0)
+labels <- c("Good", "Moderate", "Unhealthy for Sensitive Groups", "Unhealthy", "Very Unhealthy/Hazardous")
+labels_with_counts <- paste(labels, "(", values, ") days", sep = "")
+# Create pie chart
+pdf("AQdays_pie_chart.pdf", width = 8, height = 6)
 
+pie(values, labels = labels_with_counts, main = "Air quality, 1 Sept 2025 - 1 Mar 2026", col = c("springgreen4","gold","darkorange","darkred","thistle3"))
+
+legend("topright",
+       legend = labels,
+       fill = c("springgreen4","gold","darkorange","darkred","thistle3"))
+
+dev.off()
+#calculate the average across the whole 6 month time period for each sensor- are any above the epa stnadard of 9
+pm2.5_sensavg<-aggregate(palocs$pm2.5_corrected, by=list(palocs$Purple.Air.Name), mean, na.rm=TRUE)
+pm2.5_sensavg[which(pm2.5_sensavg$x>9),]#GRIT 32 exceeded 
+length(which(is.na(palocs$pm2.5_corrected[palocs$Purple.Air.Name=="GRIT32"])))
+             
 #what time of day was worst?
 septhrmmod<-lmer(pm2.5_corrected~hour + (1|Purple.Air.Name),data=palocs_sept)
 Anova(septhrmmod)
@@ -428,4 +540,15 @@ monplot<-ggplot(pa, aes(factor(month), pm2.5_corrected)) +
     x = "Month", y = "PM2.5 (µg/m³)"
   ) +
   theme_minimal(base_size = 12)
+
+
+nique(worst10$sensor)
+[1] "GRIT03"                         "GRIT25"                        
+[3] "GRIT12"                         "GRIT19"                        
+[5] "GRIT22"                         "Manitou Park Elementary School"
+[7] "GRIT15"                         "GRIT10"                        
+[9] "GRIT13"                        
+> best10<-tail(dailyavg_hrsabove25[order(dailyavg_hrsabove25$pm2.5_avg_day, decreasing=TRUE),], n=10)#highest/worst values= 61.71485 58.41759 57.16004 39.46606 38.01056 36.50640
+> unique(best10$sensor)
+[1] "GRIT20" "GRIT13" "GRIT15" "GRIT24" "GRIT19" "GRIT17" "GRIT34" "GRIT35" "GRIT07"
 

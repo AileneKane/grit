@@ -229,7 +229,7 @@ ggsave("PurpleAir figs/tree_height_jan_plot.pdf", p_treeht,
 
 ggsave("PurpleAir figs/pm25vstotaltrees_jan_plot.png", p_totaltrees,
        width = 18, height = 4, dpi = 300)
-ggsave("PurpleAir figs/pm25vstotaltrees_jan_plot.pdf", p_totaltrees,
+ggsave("PurpleAir figs/pm25vsconifers_jan_plot.pdf", p_conif,
        width = 18, height = 4)
 ggsave("PurpleAir figs/pm25vscancov_jan_plot.png", p_cancov,
        width = 18, height = 4, dpi = 300)
@@ -257,11 +257,14 @@ ggsave("PurpleAir figs/pm25vstotaltrees_sept_plot.png", p_totaltrees,
        width = 18, height = 4, dpi = 300)
 ggsave("PurpleAir figs/pm25vstotaltrees_sept_plot.pdf", p_totaltrees,
        width = 18, height = 4)
+ggsave("PurpleAir figs/pm25vsconifers_sept_plot.png", p_conif,
+       width = 18, height = 4, dpi = 300)
+ggsave("PurpleAir figs/pm25vsconifers_sept_plot.pdf", p_conif,
+       width = 18, height = 4)
 ggsave("PurpleAir figs/pm25vscancov_sept_plot.png", p_cancov,
        width = 18, height = 4, dpi = 300)
 ggsave("PurpleAir figs/pm25vscancov_sept_plot.pdf", p_cancov,
        width = 18, height = 4)
-
 
 
 
