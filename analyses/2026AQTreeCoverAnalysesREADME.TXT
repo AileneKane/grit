@@ -56,7 +56,7 @@
     -"purpleair_TPCH_Aug2025_to_Feb2026.csv"
     
 2. merge_sdcarddat.R
-    formats sd card dR to match the format of data
+    formats sd card data to match the format of data
     downloaded from the datadownload tool & puts files 
     all together in one large csv called:
     "ALLPASDCARD_combined_2026March.csv"
@@ -71,7 +71,7 @@
     a csv file called "output/purpleair_all.csv"
     
 5. plot_and_fit_models.R 
-    makes presliminary plots of air quality data over time
+    makes preliminary plots of air quality data over time
     and space, also fits some basic models (without tree canopy data)
 
 6. grit_lidar2024_aq2025_analyses.R
@@ -83,6 +83,7 @@
   plots and fits models to analyze relationships between 
   number of trees, tree height and identity (conifer vs 
   angiosperm) on air quality
+  makes maps?
   
 
 
