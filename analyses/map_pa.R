@@ -7,6 +7,9 @@ library(sf)
 library(ggplot2)
 library(ggspatial)
 library(ggrepel)
+library(dplyr)
+library(maptiles)
+
 
 #read in csv file with lat long and other info about locations of GRIT sensors
 locpm2.5hrs<-read.csv("output/purpleairloc_wpmhrs.csv", header=TRUE)                                          
@@ -79,10 +82,7 @@ p
 ggsave("gritpa_pm25_sept_simpler_nolabels.png", p, width = 12, height = 8, dpi = 300)
 ggsave("gritpa_pm25_sept_simpler_nolabels.pdf", p, width = 12, height = 8)
 
-
-
-library(maptiles)
-
+#Using Maptile package
 
 # Convert to Web Mercator (required!)
 bb_3857 <- st_transform(st_as_sfc(bb), 3857)
@@ -158,7 +158,7 @@ p <- ggplot() +
   geom_sf(data = pts, aes(color = pm2.5est_jan), size = 4) +
   scale_color_gradientn(
     colors = c("#2ECC71", "#F1C40F", "#E67E22", "#E74C3C"),
-    name = "PM2.5 (Sept)"
+    name = "PM2.5 (Jan)"
   ) +
   
   coord_sf(
@@ -235,4 +235,173 @@ p2
 ggsave("gritpas.png", p2, width = 12, height = 8, dpi = 300)
 ggsave("gritpas.pdf", p2, width = 12, height = 8)
 
+#Make a map on top of the equity index or livability index
 
+# Load Equity Index shape file
+equity.shp <- st_read("../data/tacoma_equity_index/Equity_Index_2024_(Tacoma)_-_Data.shp")
+
+pts_equity_sf <- st_transform(pts, st_crs(equity.shp))
+
+#Plot Livability
+p3<-ggplot() +
+  geom_sf(
+    data = equity.shp, 
+    aes(fill =livabili_1),   #
+    color = "grey50",
+    size = 0.2
+  ) +
+  geom_sf(data = pts_equity_sf, aes(color = pm2.5est_sept), size = 4) +
+  scale_color_gradientn(
+    colors = c("#2ECC71", "#F1C40F"),
+    name = "PM2.5 (Sept)",
+  ) +
+  
+  scale_fill_gradient(
+    low = "white",
+    high = "darkblue",
+    name = "Livability Index"
+  ) +
+  theme_minimal() +
+  labs(
+    title = "PM2.5 with Livability Index Map",
+    subtitle = "GRIT PurpleAir sensors with Tacoma Livability Index",
+    x = "Longitude",
+    y = "Latitude"
+  )
+# Save high-res
+ggsave("gritpas_livability_sept.png", p3, width = 12, height = 8, dpi = 300)
+ggsave("gritpas_livability_sept.pdf", p3, width = 12, height = 8)
+
+#Plot Equity
+p4<-ggplot() +
+  geom_sf(
+    data = equity.shp, 
+    aes(fill =equityin_1),   #
+    color = "grey50",
+    size = 0.2
+  ) +
+  geom_sf(data = pts_equity_sf, aes(color = pm2.5est_sept), size = 4) +
+  scale_color_gradientn(
+    colors = c("#2ECC71", "#F1C40F"),
+    name = "PM2.5 (Sept)",
+  ) +
+  
+  scale_fill_gradient(
+    low = "white",
+    high = "purple3",
+    name = "Equity Index"
+  ) +
+  theme_minimal() +
+  labs(
+    title = "PM2.5 with Equity Index Map",
+    subtitle = "GRIT PurpleAir sensors with Tacoma Equity Index",
+    x = "Longitude",
+    y = "Latitude"
+  )
+# Save high-res
+ggsave("gritpas_equity_sept.png", p4, width = 12, height = 8, dpi = 300)
+ggsave("gritpas_equity_sept.pdf", p4, width = 12, height = 8)
+
+#Plot Equity with no AQ
+p4np<-ggplot() +
+  geom_sf(
+    data = equity.shp, 
+    aes(fill =equityin_1),   #
+    color = "grey50",
+    size = 0.2
+  ) +
+  
+  scale_fill_gradient(
+    low = "white",
+    high = "purple3",
+    name = "Equity Index"
+  ) +
+  theme_minimal() +
+  labs(
+    title = "Tacoma Equity Index Map",
+    x = "Longitude",
+    y = "Latitude"
+  )
+# Save high-res
+ggsave("tacomaequity.png", p4np, width = 12, height = 8, dpi = 300)
+ggsave("tacomaequity.pdf", p4np, width = 12, height = 8)
+
+#now join points with polygons to make a plot
+# Join points to polygons
+pts_with_equity <- st_join(
+  pts_equity_sf,
+  equity.shp,
+  join = st_within   # ensures point falls inside polygon
+)
+#inspect reults
+#names(pts_with_equity)
+#any points without an equity index?
+pts_with_equity |> filter(is.na(equityinde))# yes 4: GRIT04, GRIT19, GRIT20, GRIT24
+
+# plot
+p6<-ggplot(pts_with_equity, aes(x = equityin_1, y = pm2.5est_jan)) +
+  geom_point(
+    color = "black",
+    alpha = 0.6,
+    size = 2
+  ) +
+  geom_smooth(
+    method = "lm",
+    color = "blue",
+    se = TRUE
+  ) +
+  theme_minimal() +
+  labs(
+    title = "January PM2.5 vs Equity Index",
+    x = "Equity Index",
+    y = "PM2.5 (Jan)"
+  )
+
+# Save high-res
+ggsave("janpm2.5vsequity.png", p6, width = 12, height = 8, dpi = 300)
+ggsave("janpm2.5vsequity.pdf", p6, width = 12, height = 8)
+
+# plot
+p6<-ggplot(pts_with_equity, aes(x = livabili_1, y = pm2.5est_jan)) +
+  geom_point(
+    color = "black",
+    alpha = 0.6,
+    size = 2
+  ) +
+  geom_smooth(
+    method = "lm",
+    color = "blue",
+    se = TRUE
+  ) +
+  theme_minimal() +
+  labs(
+    title = "January PM2.5 vs Livability Index",
+    x = "Livability Index",
+    y = "PM2.5 (Jan)"
+  )
+
+# Save high-res
+ggsave("janpm2.5vslivibility.png", p6, width = 12, height = 8, dpi = 300)
+ggsave("janpm2.5vslivibility.pdf", p6, width = 12, height = 8)
+summary(lm(pm2.5est_jan~equityin_1, data=pts_with_equity))
+
+p6<-ggplot(pts_with_equity, aes(x = equityin_1, y = pm2.5est_jan)) +
+  geom_point(
+    color = "black",
+    alpha = 0.6,
+    size = 2
+  ) +
+  geom_smooth(
+    method = "lm",
+    color = "blue",
+    se = TRUE
+  ) +
+  theme_minimal() +
+  labs(
+    title = "January PM2.5 vs Equity Index",
+    x = "Equity Index",
+    y = "PM2.5 (Jan)"
+  )
+
+# Save high-res
+ggsave("janpm2.5vsequity.png", p6, width = 12, height = 8, dpi = 300)

@@ -172,7 +172,37 @@ ggsave("PurpleAir figs/dailyavg_allsensors.png", width = 6, height = 4, units = 
 
 
 #make a plot with the sensors with worst data and no trees within 25m
-# then make a plot with the sensor with lots of trees
+#worst: GRIT03, 13%canopy cover within 25 m
+
+#APCC GRIT- 59%canopy cover within 25m
+# Convert datetime to Date and calculate daily mean
+apccgrit26 <- palocs[palocs$Purple.Air.Name=="GRIT26",]
+apcc_dailyavg<-apccgrit26%>%
+  mutate(date = as.Date(datetime)) %>%
+  group_by(date) %>%
+  summarise(avg_pm25 = mean(pm2.5_corrected, na.rm = TRUE)) %>%
+  ungroup()
+apcc_dailyavg<-apcc_dailyavg[which(apcc_dailyavg$date>"2025-08-31"),]
+apcc_dailyavg<-apcc_dailyavg[which(apcc_dailyavg$date<"2026-03-01"),]
+ggplot(apcc_dailyavg, aes(x = date, y = avg_pm25)) +
+  geom_line(color = "black", lwd=.8) +
+  geom_hline(yintercept = 25, linetype = 2, col="gold", linewidth = 1)+
+  geom_hline(yintercept = 9, linetype = 2, col="darkgreen", linewidth = 1)+
+  scale_x_datetime(date_breaks = "1 month", 
+                   date_minor_breaks = "1 week",
+                   date_labels = "%B",
+                   limits =  as.POSIXct(c("2025-09-01", "2026-03-01")))+
+  
+  labs(
+    title = "Daily Average PM2.5 at APCC",
+    x = "Date",
+    y = "PM2.5 (µg/m³)"
+  ) +
+  theme_minimal()
+#+ geom_smooth(se = FALSE, color = "red")
+ggsave("PurpleAir figs/dailyavg_APCC(GRIT26).png", width = 6, height = 4, units = "in")
+
+
 #what do average daily pm2.5 values suggest?
 dailyavg<-aggregate(palocs$pm2.5_corrected, by=list(palocs$date,palocs$Purple.Air.Name), mean, na.rm=TRUE)
 colnames(dailyavg)<-c("date","sensor","pm2.5_avg_day")
@@ -509,6 +539,31 @@ plotjan<-ggplot(palocs_jan, aes(hour + minute(datetime)/60, pm2.5_corrected, col
   ) +
   theme_minimal(base_size = 12)
 ggsave("PurpleAir figs/pm2.5_byhour_jan.png", plot = plotjan, width = 8, height = 6, units = "in")
+
+
+#try plotting just APCC sensor, in Sept and JAn
+apccgrit26_jan<- palocs_jan[palocs_jan$Purple.Air.Name=="GRIT26",]
+apccgrit26_sept<- palocs_sept[palocs_sept$Purple.Air.Name=="GRIT26",]
+
+plotjanapcc<-ggplot(apccgrit26_jan, aes(hour + minute(datetime)/60, pm2.5_corrected)) + geom_smooth(se = TRUE, method = "loess", span = 0.3, size = 0.8) +
+  scale_x_continuous(breaks = 0:23, limits = c(0, 24)) +
+  labs(
+    title = "PM2.5 at APCC by time of day (January)",
+    x = "Hour of day", y = "PM2.5 (µg/m³)"
+  ) +
+  theme_minimal(base_size = 12)
+ggsave("PurpleAir figs/apccpm2.5_byhour_jan.png", plot = plotjanapcc, width = 8, height = 6, units = "in")
+
+plotseptapcc<-ggplot(apccgrit26_sept, aes(hour + minute(datetime)/60, pm2.5_corrected)) + geom_smooth(se = TRUE, method = "loess", span = 0.3, size = 0.8) +
+  scale_x_continuous(breaks = 0:23, limits = c(0, 24)) +
+  labs(
+    title = "PM2.5 at APCC by time of day (September)",
+    x = "Hour of day", y = "PM2.5 (µg/m³)"
+  ) +
+  theme_minimal(base_size = 12)
+ggsave("PurpleAir figs/apccpm2.5_byhour_sept.png", plot = plotseptapcc, width = 8, height = 6, units = "in")
+
+
 
 
 #averages (rather than model estimates)
