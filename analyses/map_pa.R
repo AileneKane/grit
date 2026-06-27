@@ -326,6 +326,38 @@ p4np<-ggplot() +
 ggsave("tacomaequity.png", p4np, width = 12, height = 8, dpi = 300)
 ggsave("tacomaequity.pdf", p4np, width = 12, height = 8)
 
+#Plot urban tree cover
+p5<-ggplot() +
+  geom_sf(
+    data = equity.shp, 
+    aes(fill =urbantreec),   #
+    color = "grey50",
+    size = 0.2
+  ) +
+  geom_sf(data = pts_equity_sf, aes(color = pm2.5est_jan), size = 4) +
+  scale_color_gradientn(
+    colors = c("#2ECC71", "#F1C40F"),
+    name = "PM2.5 (Jan)",
+  ) +
+  
+  scale_fill_gradient(
+    low = "white",
+    high = "darkgreen",
+    name = "Tree Cover"
+  ) +
+  theme_minimal() +
+  labs(
+    title = "PM2.5 with Tree Cover",
+    subtitle = "GRIT PurpleAir sensors with Tree Cover",
+    x = "Longitude",
+    y = "Latitude"
+  )
+# Save high-res
+ggsave("gritpas_treec_jan.png", p5, width = 12, height = 8, dpi = 300)
+ggsave("gritpas_treec_jan.pdf", p5, width = 12, height = 8)
+
+
+
 #now join points with polygons to make a plot
 # Join points to polygons
 pts_with_equity <- st_join(
@@ -379,6 +411,7 @@ p6<-ggplot(pts_with_equity, aes(x = livabili_1, y = pm2.5est_jan)) +
     x = "Livability Index",
     y = "PM2.5 (Jan)"
   )
+summary(lm(pm2.5est_jan~livabili_1, data=pts_with_equity))
 
 # Save high-res
 ggsave("janpm2.5vslivibility.png", p6, width = 12, height = 8, dpi = 300)
@@ -405,3 +438,26 @@ p6<-ggplot(pts_with_equity, aes(x = equityin_1, y = pm2.5est_jan)) +
 
 # Save high-res
 ggsave("janpm2.5vsequity.png", p6, width = 12, height = 8, dpi = 300)
+
+#Tree cover
+p7<-ggplot(pts_with_equity, aes(x = urbantreec, y = pm2.5est_jan)) +
+  geom_point(
+    color = "black",
+    alpha = 0.6,
+    size = 2
+  ) +
+  geom_smooth(
+    method = "lm",
+    color = "blue",
+    se = TRUE
+  ) +
+  theme_minimal() +
+  labs(
+    title = "January PM2.5 vs Tree Cover",
+    x = "Tree Cover",
+    y = "PM2.5 (Jan)"
+  )
+
+# Save high-res
+ggsave("janpm2.5vstreecov.png", p7, width = 12, height = 8, dpi = 300)
+summary(lm(pm2.5est_jan~urbantreec, data=pts_with_equity))
